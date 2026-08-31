@@ -5,7 +5,7 @@
     $color = '#'.$_GET['primary_color'];
     }
     else {
-    $color = '#FF6A00';
+    $color = '#10b981';
     }
 ?>
 

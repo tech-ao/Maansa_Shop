@@ -2,7 +2,7 @@
     <tr>
         <td style="min-width: 180px;">
             <div class="font-weight-bold text-dark d-flex align-items-center" style="font-size: 13.5px;">
-                <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 32px; height: 32px; min-width: 32px; background: #eef2ff; color: #4f46e5; font-size: 13px;">
+                <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 32px; height: 32px; min-width: 32px; background: #f0fdf4; color: #059669; font-size: 13px;">
                     <i class="fa-solid fa-location-dot"></i>
                 </div>
                 <span>{{ $data->name }}</span>

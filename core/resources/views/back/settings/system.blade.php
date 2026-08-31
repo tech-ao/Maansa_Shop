@@ -546,7 +546,7 @@
                                             <div class="integration-card">
                                                 <div class="integration-card-header">
                                                     <div class="integration-title-group">
-                                                        <div class="integration-icon-wrap" style="background: #eef2ff; color: #4f46e5;">
+                                                        <div class="integration-icon-wrap" style="background: #f0fdf4; color: #059669;">
                                                             <i class="fa-brands fa-google"></i>
                                                         </div>
                                                         <div>
@@ -663,7 +663,7 @@
                                             <div class="integration-card">
                                                 <div class="integration-card-header">
                                                     <div class="integration-title-group">
-                                                        <div class="integration-icon-wrap" style="background: #e0e7ff; color: #4338ca;">
+                                                        <div class="integration-icon-wrap" style="background: #e0e7ff; color: #059669;">
                                                             <i class="fa-brands fa-facebook-messenger"></i>
                                                         </div>
                                                         <div>

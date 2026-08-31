@@ -129,7 +129,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <button class="btn btn-primary px-4 py-2" type="submit" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
+                                    <button class="btn btn-primary px-4 py-2" type="submit" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                                         <i class="fa-solid fa-paper-plane mr-1"></i> {{ __('Send Reply') }}
                                     </button>
                                 </div>

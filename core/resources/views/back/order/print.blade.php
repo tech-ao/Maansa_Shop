@@ -113,7 +113,7 @@
       <div class="text-right">
         <h2 class="font-weight-bold text-primary mb-1" style="letter-spacing: -0.02em;">{{ __('INVOICE') }}</h2>
         <div class="mb-2">
-          <span style="font-family: monospace; font-size: 13px; font-weight: 700; background: #eef2ff; color: #4f46e5; padding: 3px 8px; border-radius: 6px;">#{{ $order->transaction_number }}</span>
+          <span style="font-family: monospace; font-size: 13px; font-weight: 700; background: #f0fdf4; color: #059669; padding: 3px 8px; border-radius: 6px;">#{{ $order->transaction_number }}</span>
         </div>
         <p class="text-muted mb-0" style="font-size: 13px;">
           <strong>{{ __('Transaction ID:') }}</strong> <span style="font-family: monospace;">{{ $order->txnid }}</span><br>
@@ -274,7 +274,7 @@
 
           <div class="print-summary-row total">
             <span>{{ __('Grand Total Due') }}</span>
-            <span style="color: #4f46e5;">
+            <span style="color: #059669;">
               @if ($setting->currency_direction == 1)
                 {{ $order->currency_sign }}{{ PriceHelper::OrderTotal($order) }}
               @else

@@ -68,7 +68,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block w-100 py-2" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
+                        <button type="submit" class="btn btn-primary btn-block w-100 py-2" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                             <i class="fa-solid fa-floppy-disk mr-1"></i> {{ __('Save All Changes') }}
                         </button>
                     </div>
@@ -123,7 +123,7 @@
                             <button type="button" class="btn btn-sm font-weight-bold px-3 py-2" id="add_more_language_bottom" onclick="$('#add_more_language').click()" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 8px; font-size: 13px;">
                                 <i class="fa-solid fa-plus mr-1"></i> {{ __('Add More Key') }}
                             </button>
-                            <button type="submit" class="btn btn-primary px-4 py-2" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
+                            <button type="submit" class="btn btn-primary px-4 py-2" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                                 <i class="fa-solid fa-floppy-disk mr-1"></i> {{ __('Update Translations') }}
                             </button>
                         </div>

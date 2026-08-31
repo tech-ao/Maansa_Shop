@@ -68,7 +68,7 @@
 			<div class="card-modern">
 				<div class="card-modern-body">
                     <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 36px; height: 36px; background: #eef2ff; color: #4f46e5;">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 36px; height: 36px; background: #f0fdf4; color: #059669;">
                             <i class="fa-solid fa-cloud-arrow-up font-size-15"></i>
                         </div>
                         <div>
@@ -83,13 +83,13 @@
 
                         <!-- Drag & Drop Upload Container -->
                         <div class="text-center p-4 p-md-5 mb-4" style="background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 16px; transition: all 0.2s ease;">
-                            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 70px; height: 70px; background: #eef2ff; color: #4f46e5; font-size: 28px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);">
+                            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 70px; height: 70px; background: #f0fdf4; color: #059669; font-size: 28px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);">
                                 <i class="fa-solid fa-file-csv"></i>
                             </div>
                             <h5 class="font-weight-bold text-dark mb-1">{{ __('Select or Drop Your CSV File Here') }}</h5>
                             <p class="text-muted small mb-3">{{ __('Supported format: .csv (Comma Separated Values) max size 10MB.') }}</p>
                             
-                            <label class="btn btn-primary px-4 py-2 cursor-pointer font-weight-bold" style="border-radius: 10px; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);">
+                            <label class="btn btn-primary px-4 py-2 cursor-pointer font-weight-bold" style="border-radius: 10px; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);">
                                 <i class="fa-solid fa-folder-open mr-1"></i> {{ __('Browse CSV File') }}
                                 <input type="file" accept=".csv, text/csv, application/vnd.ms-excel" class="d-none" name="csv" id="csv-file-input" required>
                             </label>
@@ -113,7 +113,7 @@
 
 						<div class="d-flex justify-content-end gap-2 pt-3 border-top">
                             <a href="{{ route('back.item.index') }}" class="btn btn-secondary px-4 mr-2" style="border-radius: 10px; font-weight: 700;">{{ __('Cancel') }}</a>
-							<button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
+							<button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                                 <i class="fa-solid fa-file-import mr-1"></i> {{ __('Start Bulk Import') }}
                             </button>
 						</div>

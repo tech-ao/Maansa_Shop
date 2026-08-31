@@ -2,7 +2,7 @@
     <tr>
         <td style="min-width: 180px;">
             <div class="d-flex align-items-center" style="gap: 10px;">
-                <div class="ticket-user-avatar" style="width: 36px; height: 36px; min-width: 36px; font-size: 14px; background: #eef2ff; color: #4f46e5; border-radius: 10px;">
+                <div class="ticket-user-avatar" style="width: 36px; height: 36px; min-width: 36px; font-size: 14px; background: #f0fdf4; color: #059669; border-radius: 10px;">
                     <i class="fa-solid fa-file-lines"></i>
                 </div>
                 <div>

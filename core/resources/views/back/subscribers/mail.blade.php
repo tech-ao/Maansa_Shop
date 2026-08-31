@@ -28,7 +28,7 @@
                         @csrf
                         @include('alerts.alerts')
 
-                        <div class="feature-toggle-card mb-4" style="background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 14px; padding: 16px 20px;">
+                        <div class="feature-toggle-card mb-4" style="background: #f0fdf4; border: 1px solid #c7d2fe; border-radius: 14px; padding: 16px 20px;">
                             <div class="d-flex align-items-center" style="gap: 12px;">
                                 <i class="fa-solid fa-circle-info text-primary" style="font-size: 18px;"></i>
                                 <span style="font-size: 13.5px; color: #3730a3; font-weight: 600;">
@@ -54,7 +54,7 @@
 
                         <div class="d-flex justify-content-end gap-2">
                             <a href="{{ route('back.subscribers.index') }}" class="btn btn-secondary px-4 mr-2" style="border-radius: 10px; font-weight: 700;">{{ __('Cancel') }}</a>
-                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
+                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                                 <i class="fa-solid fa-paper-plane mr-1"></i> {{ __('Send Broadcast Email') }}
                             </button>
                         </div>

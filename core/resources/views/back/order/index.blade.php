@@ -33,7 +33,7 @@
     <div class="card-modern mb-4">
         <div class="card-modern-body">
             <div class="d-flex align-items-center mb-3">
-                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-2" style="width: 34px; height: 34px; background: #eef2ff; color: #4f46e5;">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-2" style="width: 34px; height: 34px; background: #f0fdf4; color: #059669;">
                     <i class="fa-solid fa-filter" style="font-size: 14px;"></i>
                 </div>
                 <div>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-2 col-sm-12">
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary flex-grow-1 mr-1" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none;">
+                            <button type="submit" class="btn btn-primary flex-grow-1 mr-1" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #10b981, #059669); border: none;">
                                 <i class="fa-solid fa-filter mr-1"></i> {{ __('Filter') }}
                             </button>
                             <a href="{{ route('back.order.index') }}" class="btn btn-light border flex-grow-1" style="border-radius: 10px; font-weight: 700; height: 38px; display: inline-flex; align-items: center; justify-content: center;">
@@ -123,7 +123,7 @@
             </div>
             <div class="modal-body p-4 text-center">
                 <div class="mb-3">
-                    <div class="d-inline-flex align-items-center justify-content-center bg-primary-light text-primary rounded-circle" style="width: 60px; height: 60px; font-size: 24px; background: #eef2ff; color: #4f46e5;">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-primary-light text-primary rounded-circle" style="width: 60px; height: 60px; font-size: 24px; background: #f0fdf4; color: #059669;">
                         <i class="fa-solid fa-rotate text-primary"></i>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
             </div>
             <div class="modal-footer bg-light border-0 py-3 d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary px-4" style="border-radius: 10px; font-weight: 700;" data-dismiss="modal">{{ __('Cancel') }}</button>
-                <a href="" class="btn btn-ok btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none;">{{ __('Confirm Update') }}</a>
+                <a href="" class="btn btn-ok btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none;">{{ __('Confirm Update') }}</a>
             </div>
         </div>
     </div>

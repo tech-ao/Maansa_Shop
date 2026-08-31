@@ -55,7 +55,7 @@
 
     <td class="text-center" style="min-width: 110px;">
         @if($data->is_type == 'feature')
-            <span class="badge" style="background: #e0e7ff; color: #4338ca; font-weight: 700; font-size: 11px; padding: 4px 9px; border-radius: 8px;">
+            <span class="badge" style="background: #e0e7ff; color: #059669; font-weight: 700; font-size: 11px; padding: 4px 9px; border-radius: 8px;">
                 {{ __('Featured') }}
             </span>
         @elseif($data->is_type == 'best')

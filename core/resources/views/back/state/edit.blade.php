@@ -26,7 +26,7 @@
 					@include('alerts.alerts')
 
                     <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-3" style="width: 44px; height: 44px; background: #eef2ff; color: #4f46e5; font-size: 18px;">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-3" style="width: 44px; height: 44px; background: #f0fdf4; color: #059669; font-size: 18px;">
                             <i class="fa-solid fa-location-dot"></i>
                         </div>
                         <div>
@@ -67,7 +67,7 @@
 
                         <div class="d-flex justify-content-end gap-2 pt-3 border-top">
                             <a href="{{ route('back.state.index') }}" class="btn btn-secondary px-4 mr-2" style="border-radius: 10px; font-weight: 700;">{{ __('Cancel') }}</a>
-                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
+                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                                 <i class="fa-solid fa-floppy-disk mr-1"></i> {{ __('Save Changes') }}
                             </button>
                         </div>

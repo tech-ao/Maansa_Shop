@@ -85,7 +85,7 @@
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="feature-toggle-card p-3" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;">
                                             <div class="d-flex align-items-center">
-                                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(79, 70, 229, 0.08); color: #4f46e5; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 15px;">
+                                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(79, 70, 229, 0.08); color: #059669; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 15px;">
                                                     <i class="fa-solid {{ $sec['icon'] }}"></i>
                                                 </div>
                                                 <span class="font-weight-bold" style="color: #1e293b; font-size: 13.5px;">{{ $sec['title'] }}</span>
@@ -130,7 +130,7 @@
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="feature-toggle-card p-3" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;">
                                             <div class="d-flex align-items-center">
-                                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(79, 70, 229, 0.08); color: #4f46e5; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 15px;">
+                                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(79, 70, 229, 0.08); color: #059669; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 15px;">
                                                     <i class="fa-solid {{ $sec['icon'] }}"></i>
                                                 </div>
                                                 <span class="font-weight-bold" style="color: #1e293b; font-size: 13.5px;">{{ $sec['title'] }}</span>
@@ -173,7 +173,7 @@
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="feature-toggle-card p-3" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;">
                                             <div class="d-flex align-items-center">
-                                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(79, 70, 229, 0.08); color: #4f46e5; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 15px;">
+                                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(79, 70, 229, 0.08); color: #059669; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 15px;">
                                                     <i class="fa-solid {{ $sec['icon'] }}"></i>
                                                 </div>
                                                 <span class="font-weight-bold" style="color: #1e293b; font-size: 13.5px;">{{ $sec['title'] }}</span>
@@ -216,7 +216,7 @@
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="feature-toggle-card p-3" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;">
                                             <div class="d-flex align-items-center">
-                                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(79, 70, 229, 0.08); color: #4f46e5; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 15px;">
+                                                <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(79, 70, 229, 0.08); color: #059669; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 15px;">
                                                     <i class="fa-solid {{ $sec['icon'] }}"></i>
                                                 </div>
                                                 <span class="font-weight-bold" style="color: #1e293b; font-size: 13.5px;">{{ $sec['title'] }}</span>
@@ -234,7 +234,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end mt-4">
-                            <button type="submit" class="btn btn-primary px-4 py-2" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
+                            <button type="submit" class="btn btn-primary px-4 py-2" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                                 <i class="fa-solid fa-floppy-disk mr-1"></i> {{ __('Save Section Visibility') }}
                             </button>
                         </div>

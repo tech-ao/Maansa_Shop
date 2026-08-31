@@ -28,7 +28,7 @@
 		<div class="card-modern-body">
             @include('alerts.alerts')
             <div class="d-flex align-items-center mb-3">
-                <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 36px; height: 36px; background: #eef2ff; color: #4f46e5;">
+                <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 36px; height: 36px; background: #f0fdf4; color: #059669;">
                     <i class="fa-solid fa-clock" style="font-size: 15px;"></i>
                 </div>
                 <div>
@@ -65,7 +65,7 @@
                                 <option value="1" {{ $setting->campaign_status == 1 ? 'selected' : '' }}>{{ __('Publish') }}</option>
                                 <option value="2" {{ $setting->campaign_status == 2 ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
                             </select>
-                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; height: 42px; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); white-space: nowrap;">
+                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; height: 42px; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); white-space: nowrap;">
                                 <i class="fa-solid fa-floppy-disk mr-1"></i> {{ __('Save') }}
                             </button>
                         </div>
@@ -81,7 +81,7 @@
             <div class="row align-items-center mb-4 pb-3 border-bottom">
                 <div class="col-lg-6 col-md-5 mb-3 mb-md-0">
                     <div class="d-flex align-items-center">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 36px; height: 36px; min-width: 36px; background: #eef2ff; color: #4f46e5;">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 36px; height: 36px; min-width: 36px; background: #f0fdf4; color: #059669;">
                             <i class="fa-solid fa-cart-plus" style="font-size: 15px;"></i>
                         </div>
                         <div>
@@ -106,7 +106,7 @@
                                     <p class="text-danger small mb-0 mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary ml-2" style="border-radius: 10px; font-weight: 700; height: 38px; padding: 0 14px; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);">
+                            <button type="submit" class="btn btn-primary ml-2" style="border-radius: 10px; font-weight: 700; height: 38px; padding: 0 14px; background: linear-gradient(135deg, #10b981, #059669); border: none; white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);">
                                 <i class="fa-solid fa-plus mr-1"></i> {{ __('Add') }}
                             </button>
                         </div>

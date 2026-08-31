@@ -462,9 +462,9 @@
                     labels: [{!! $order_days !!}],
                     datasets: [{
                         label: "Product Sales",
-                        borderColor: "#4f46e5",
+                        borderColor: "#10b981",
                         pointBorderColor: "#FFF",
-                        pointBackgroundColor: "#4f46e5",
+                        pointBackgroundColor: "#10b981",
                         pointBorderWidth: 2,
                         pointHoverRadius: 5,
                         pointHoverBorderWidth: 2,

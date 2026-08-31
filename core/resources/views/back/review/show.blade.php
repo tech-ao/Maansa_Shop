@@ -26,7 +26,7 @@
 			<div class="card-modern h-100">
 				<div class="card-modern-body">
                     <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-3" style="width: 46px; height: 46px; background: #eef2ff; color: #4f46e5; font-size: 20px;">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-3" style="width: 46px; height: 46px; background: #f0fdf4; color: #059669; font-size: 20px;">
                             <i class="fa-solid fa-user"></i>
                         </div>
                         <div>

@@ -90,7 +90,7 @@
                             </select>
                         </div>
                         <div class="col-lg-1 col-md-12">
-                            <button type="submit" class="btn btn-primary btn-block" style="border-radius: 10px; height: 42px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none;">
+                            <button type="submit" class="btn btn-primary btn-block" style="border-radius: 10px; height: 42px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none;">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>

@@ -35,14 +35,14 @@
             width: 68px;
             height: 68px;
             border-radius: 20px;
-            background: linear-gradient(135deg, #7952FC 0%, #4f46e5 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: #ffffff;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 25px -5px rgba(121, 82, 252, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
             animation: pulseGlow 2s infinite ease-in-out;
         }
         @keyframes pulseGlow {
@@ -66,18 +66,19 @@
             align-items: center;
             gap: 8px;
             padding: 8px 18px;
-            background: #f1f5f9;
+            background: #f0fdf4;
             border-radius: 9999px;
             font-size: 14px;
             font-weight: 700;
             color: #1e293b;
+            border: 1px solid #dcfce7;
             margin-bottom: 28px;
         }
         .spinner {
             width: 32px;
             height: 32px;
             border: 3.5px solid #e2e8f0;
-            border-top: 3.5px solid #7952FC;
+            border-top: 3.5px solid #10b981;
             border-radius: 50%;
             margin: 0 auto 16px;
             animation: spin 0.8s linear infinite;
@@ -92,10 +93,11 @@
             gap: 6px;
             font-size: 11.5px;
             font-weight: 600;
-            color: #10b981;
+            color: #059669;
             background: #ecfdf5;
             padding: 4px 12px;
             border-radius: 999px;
+            border: 1px solid #a7f3d0;
         }
     </style>
 </head>
@@ -110,7 +112,7 @@
 
         <div class="amount-pill">
             <span>Order Total:</span>
-            <span style="color: #4f46e5;">₹{{ number_format($total_amount, 2) }}</span>
+            <span style="color: #059669;">₹{{ number_format($total_amount, 2) }}</span>
         </div>
 
         <div class="spinner"></div>

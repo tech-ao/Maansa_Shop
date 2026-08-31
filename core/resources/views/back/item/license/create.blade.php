@@ -279,7 +279,7 @@
                     <div class="card-modern-body p-3">
                         <input type="hidden" class="check_button" name="is_button" value="0">
                         <div class="d-flex align-items-center" style="gap: 10px;">
-                            <button type="submit" class="btn btn-primary flex-grow-1 font-weight-bold d-flex align-items-center justify-content-center" style="border-radius: 10px; background: linear-gradient(135deg, #4f46e5, #3b82f6); border: none; padding: 10px 12px; font-size: 13.5px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); height: 42px;">
+                            <button type="submit" class="btn btn-primary flex-grow-1 font-weight-bold d-flex align-items-center justify-content-center" style="border-radius: 10px; background: linear-gradient(135deg, #10b981, #059669); border: none; padding: 10px 12px; font-size: 13.5px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); height: 42px;">
                                 <i class="fa-solid fa-floppy-disk mr-1"></i> {{ __('Save') }}
                             </button>
                             <button type="submit" class="btn btn-info flex-grow-1 save__edit font-weight-bold d-flex align-items-center justify-content-center" style="border-radius: 10px; background: linear-gradient(135deg, #06b6d4, #0ea5e9); border: none; color: #ffffff; padding: 10px 12px; font-size: 13.5px; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25); height: 42px;">

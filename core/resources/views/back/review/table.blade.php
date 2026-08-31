@@ -3,7 +3,7 @@
 <tr>
     <td style="min-width: 160px;">
         <div class="d-flex align-items-center">
-            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-2 font-weight-bold" style="width: 36px; height: 36px; min-width: 36px; background: #eef2ff; color: #4f46e5; font-size: 13px;">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-2 font-weight-bold" style="width: 36px; height: 36px; min-width: 36px; background: #f0fdf4; color: #059669; font-size: 13px;">
                 {{ substr($data->user ? $data->user->first_name : 'U', 0, 1) }}
             </div>
             <div>
