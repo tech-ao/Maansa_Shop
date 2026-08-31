@@ -1,0 +1,12 @@
+﻿/core/vendor/
+/core/node_modules/
+/core/storage/framework/cache/*
+/core/storage/framework/sessions/*
+/core/storage/framework/views/*
+/core/storage/logs/*
+!/core/storage/framework/cache/.gitkeep
+!/core/storage/framework/sessions/.gitkeep
+!/core/storage/framework/views/.gitkeep
+!/core/storage/logs/.gitkeep
+.DS_Store
+Thumbs.db
