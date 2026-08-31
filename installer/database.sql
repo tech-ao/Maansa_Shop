@@ -1672,7 +1672,8 @@ INSERT INTO `payment_settings` (`id`, `name`, `information`, `unique_keyword`, `
 (27, 'Bank Transfer', NULL, 'bank', '1638530860pngwing.com (1).png', '<p>Account Number : 434 3434 3334</p><p>Pay With Bank Transfer.</p><p>Account Name : Jhon Due</p><p>Account Email : demo@gmail.com</p>', 1, NULL, NULL),
 (28, 'Razorpay', '{\"key\":\"rzp_test_placeholder_key\",\"secret\":\"razorpay_secret_placeholder\"}', 'razorpay', '1637992878download.jpeg', 'Rezorpay is the faster & safer way to send money. Make an online payment via Rezorpay.', 1, NULL, NULL),
 (29, 'Flutter Wave', '{\"public_key\":\"FLWPUBK_TEST-placeholder-key\",\"secret_key\":\"FLWSECK_TEST-placeholder-secret\",\"text\":\"Pay via your Flutter Wave account.\"}', 'flutterwave', '1637998096download.png', 'Flutterwave is the faster & safer way to send money. Make an online payment via Flutterwave.', 1, NULL, NULL),
-(30, 'Paytabs', '{\"profile_id\":\"159330\",\"client_secret\":\"paytabs_secret_placeholder\",\"check_sandbox\":1}', 'paytabs', NULL, 'Paytabs is the faster & safer way to send money. Make an online payment via Paytabs.', 0, NULL, NULL);
+(30, 'Paytabs', '{\"profile_id\":\"159330\",\"client_secret\":\"paytabs_secret_placeholder\",\"check_sandbox\":1}', 'paytabs', NULL, 'Paytabs is the faster & safer way to send money. Make an online payment via Paytabs.', 0, NULL, NULL),
+(31, 'Cashfree', '{\"app_id\":\"\",\"secret_key\":\"\",\"check_sandbox\":1}', 'cashfree', 'cashfree.png', 'Pay securely using UPI (Google Pay, PhonePe, Paytm, BHIM), Credit/Debit Cards, Net Banking, and Wallets via Cashfree.', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 

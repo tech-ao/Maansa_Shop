@@ -50,4 +50,21 @@ class PaymentSettingController extends Controller
         return redirect()->back()->withSuccess(__('Payment Information Updated Successfully.'));
     }
 
+    /**
+     * Test Cashfree API connectivity.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function testCashfree(Request $request)
+    {
+        $app_id = $request->get('app_id', '');
+        $secret_key = $request->get('secret_key', '');
+        $is_sandbox = (int)$request->get('check_sandbox', 1);
+
+        $res = \App\Http\Controllers\Payment\CashfreeController::testApiConnectivity($app_id, $secret_key, $is_sandbox);
+
+        return response()->json($res);
+    }
+
 }

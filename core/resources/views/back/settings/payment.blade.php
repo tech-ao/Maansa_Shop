@@ -39,6 +39,7 @@
                                     <a class="nav-link" data-toggle="pill" href="#paystack"><i class="fa-solid fa-layer-group mr-2"></i> {{ __('Paystack') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#flutterwave"><i class="fa-solid fa-wave-square mr-2"></i> {{ __('Flutterwave') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#paytabs"><i class="fa-solid fa-tags mr-2"></i> {{ __('Paytabs') }}</a>
+                                    <a class="nav-link" data-toggle="pill" href="#cashfree"><i class="fa-solid fa-bolt mr-2"></i> {{ __('Cashfree') }}</a>
                                     <a class="nav-link" data-toggle="pill" href="#bank"><i class="fa-solid fa-building-columns mr-2"></i> {{ __('Bank Transfer') }}</a>
 
                                 </div>
@@ -1431,8 +1432,129 @@
                                                                             value="paytabs">
                                                                     </div>
                                                                     <div>
-                                                                        <div
+                                                                         <div
                                                                             class="form-group d-flex justify-content-center">
+                                                                            <button type="submit"
+                                                                                class="btn btn-secondary btn-block w-50">{{ __('Submit') }}</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    {{-- CASHFREE TAB PANE --}}
+                                                    <div id="cashfree" class="container tab-pane"><br>
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-lg-8">
+                                                                <form action="{{ route('back.setting.payment.update') }}"
+                                                                    method="POST" enctype="multipart/form-data">
+                                                                    @csrf
+
+                                                                    <div class="form-group">
+                                                                        <label class="switch-primary">
+                                                                            <input type="checkbox"
+                                                                                class="switch switch-bootstrap"
+                                                                                name="status" value="1"
+                                                                                {{ $cashfree->status == 1 ? 'checked' : '' }}>
+                                                                            <span class="switch-body"></span>
+                                                                            <span class="switch-text">{{ __('Display Cashfree') }}</span>
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="image-show {{ $cashfree->status == 1 ? '' : 'd-none' }}">
+                                                                        <div class="form-group col-xl-12">
+                                                                            <label for="cashfree_name">{{ __('Current Image') }}</label>
+                                                                            <div class="col-lg-12 pb-1">
+                                                                                <img class="admin-setting-img"
+                                                                                    src="{{ $cashfree->photo ? url('/core/public/storage/images/' . $cashfree->photo) : url('/core/public/storage/images/placeholder.png') }}"
+                                                                                    alt="Cashfree Image">
+                                                                            </div>
+                                                                            <span>{{ __('Image Size Should Be 52 x 35.') }}</span>
+                                                                        </div>
+
+                                                                        <div class="form-group position-relative col-xl-12">
+                                                                            <label class="file">
+                                                                                <input type="file" class="upload-photo"
+                                                                                    name="photo" id="cashfree_photo"
+                                                                                    aria-label="File browser example">
+                                                                                <span class="file-custom text-left">{{ __('Upload Image...') }}</span>
+                                                                            </label>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label for="cashfree_display_name">{{ __('Enter Name') }} *</label>
+                                                                            <input type="text" class="form-control"
+                                                                                name="name" id="cashfree_display_name"
+                                                                                value="{{ $cashfree->name }}" required>
+                                                                        </div>
+
+                                                                        <div class="form-group col-xl-12">
+                                                                            <label for="cashfree_app_id">{{ __('Cashfree App ID (Client ID)') }} *</label>
+                                                                            <input type="text"
+                                                                                class="form-control"
+                                                                                id="cashfree_app_id"
+                                                                                name="pkey[app_id]"
+                                                                                placeholder="Enter your Cashfree App ID / Client ID"
+                                                                                value="{{ $cashfreeData['app_id'] ?? '' }}"
+                                                                                required>
+                                                                        </div>
+
+                                                                        <div class="form-group col-xl-12">
+                                                                            <label for="cashfree_secret_key">{{ __('Cashfree Secret Key') }} *</label>
+                                                                            <input type="text"
+                                                                                class="form-control"
+                                                                                id="cashfree_secret_key"
+                                                                                name="pkey[secret_key]"
+                                                                                placeholder="Enter your Cashfree Secret Key"
+                                                                                value="{{ $cashfreeData['secret_key'] ?? '' }}"
+                                                                                required>
+                                                                        </div>
+
+                                                                        <div class="form-group col-xl-12">
+                                                                            <div class="custom-control custom-checkbox">
+                                                                                <input type="checkbox"
+                                                                                    name="pkey[check_sandbox]"
+                                                                                    class="custom-control-input"
+                                                                                    value="1"
+                                                                                    {{ (!isset($cashfreeData['check_sandbox']) || $cashfreeData['check_sandbox'] == 1) ? 'checked' : '' }}
+                                                                                    id="cashfree_sandbox">
+                                                                                <label class="custom-control-label font-weight-bold"
+                                                                                    for="cashfree_sandbox">
+                                                                                    {{ __('Enable Sandbox / Test Mode') }}
+                                                                                </label>
+                                                                            </div>
+                                                                            <small class="text-muted d-block mt-1">Uncheck when you are ready to process real transactions using Production API keys.</small>
+                                                                        </div>
+
+                                                                        <!-- API Connectivity Tester Widget -->
+                                                                        <div class="col-xl-12 mb-3">
+                                                                            <div class="p-3 border rounded-3 bg-light d-flex flex-column gap-2">
+                                                                                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                                                                    <div>
+                                                                                        <h6 class="mb-0 font-weight-bold text-dark"><i class="fa-solid fa-satellite-dish text-primary mr-1"></i> {{ __('Verify API Connectivity') }}</h6>
+                                                                                        <small class="text-muted">{{ __('Test if your App ID and Secret Key connect successfully to Cashfree servers.') }}</small>
+                                                                                    </div>
+                                                                                    <button type="button" class="btn btn-sm btn-outline-primary" id="btn_test_cashfree">
+                                                                                        <i class="fa-solid fa-plug mr-1"></i> <span id="test_btn_text">{{ __('Test Connection') }}</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div id="cashfree_test_result" class="d-none mt-2"></div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label for="cashfree_text">{{ __('Enter Text') }} *</label>
+                                                                            <textarea name="text" id="cashfree_text" class="form-control" rows="4"
+                                                                                placeholder="{{ __('Enter Text') }}">{{ $cashfree->text }}</textarea>
+                                                                        </div>
+
+                                                                        <input type="hidden" name="unique_keyword" value="cashfree">
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <div class="form-group d-flex justify-content-center">
                                                                             <button type="submit"
                                                                                 class="btn btn-secondary btn-block w-50">{{ __('Submit') }}</button>
                                                                         </div>
@@ -1457,4 +1579,53 @@
             </div>
 
         </div>
+    @endsection
+
+    @section('scripts')
+    <script>
+        $(document).on('click', '#btn_test_cashfree', function(e) {
+            e.preventDefault();
+            var $btn = $(this);
+            var $btnText = $('#test_btn_text');
+            var $resultBox = $('#cashfree_test_result');
+
+            var appId = $('#cashfree_app_id').val();
+            var secretKey = $('#cashfree_secret_key').val();
+            var isSandbox = $('#cashfree_sandbox').is(':checked') ? 1 : 0;
+
+            if (!appId || !secretKey) {
+                $resultBox.removeClass('d-none alert-success').addClass('alert alert-warning').html('<i class="fa-solid fa-triangle-exclamation mr-1"></i> Please fill in both Cashfree App ID and Secret Key above before testing.');
+                return;
+            }
+
+            $btn.prop('disabled', true);
+            $btnText.text('Testing...');
+            $resultBox.removeClass('d-none alert-success alert-danger alert-warning').addClass('alert alert-info').html('<i class="fa-solid fa-spinner fa-spin mr-1"></i> Connecting to Cashfree ' + (isSandbox ? 'Sandbox' : 'Production') + ' API...');
+
+            $.ajax({
+                url: "{{ route('back.setting.payment.cashfree.test') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    app_id: appId,
+                    secret_key: secretKey,
+                    check_sandbox: isSandbox
+                },
+                success: function(response) {
+                    $btn.prop('disabled', false);
+                    $btnText.text('Test Connection');
+                    if (response.status) {
+                        $resultBox.removeClass('alert-info alert-danger alert-warning').addClass('alert alert-success').html('<i class="fa-solid fa-circle-check mr-1"></i> ' + response.message);
+                    } else {
+                        $resultBox.removeClass('alert-info alert-success alert-warning').addClass('alert alert-danger').html('<i class="fa-solid fa-circle-xmark mr-1"></i> ' + response.message);
+                    }
+                },
+                error: function(xhr) {
+                    $btn.prop('disabled', false);
+                    $btnText.text('Test Connection');
+                    $resultBox.removeClass('alert-info alert-success alert-warning').addClass('alert alert-danger').html('<i class="fa-solid fa-triangle-exclamation mr-1"></i> Request failed with status ' + xhr.status + ': ' + (xhr.responseJSON ? xhr.responseJSON.message : xhr.statusText));
+                }
+            });
+        });
+    </script>
     @endsection

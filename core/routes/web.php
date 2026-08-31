@@ -156,6 +156,7 @@ Route::group(['middleware' => ['adminlocalize', 'demo']], function () {
             //------------ PAYMENT SETTING ------------
             Route::get('/setting/payment', 'Back\PaymentSettingController@payment')->name('back.setting.payment');
             Route::post('/setting/payment/update', 'Back\PaymentSettingController@update')->name('back.setting.payment.update');
+            Route::post('/setting/payment/cashfree/test', 'Back\PaymentSettingController@testCashfree')->name('back.setting.payment.cashfree.test');
         });
 
         Route::group(['middleware' => 'permissions:System Backup'], function () {
@@ -448,6 +449,9 @@ Route::group(['middleware' => 'maintainance'], function () {
         Route::post('/sslcommerz/submit', 'Payment\SslCommerzController@store')->name('front.sslcommerz.submit');
         Route::post('/paytab/submit', 'Payment\PaytabsCheckout@store')->name('front.paytab.submit');
         Route::post('/paytab/callback', 'Payment\PaytabsCheckout@paytabCallback')->name('paytab.callback');
+        Route::post('/cashfree/submit', 'Payment\CashfreeController@store')->name('front.cashfree.submit');
+        Route::get('/cashfree/notify', 'Payment\CashfreeController@notify')->name('front.cashfree.notify');
+        Route::post('/cashfree/notify', 'Payment\CashfreeController@notify');
         
         // ----------- TRACK ORDER ----------//
         Route::get('/track/order', 'Front\FrontendController@trackOrder')->name('front.order.track');

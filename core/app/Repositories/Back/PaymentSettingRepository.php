@@ -63,8 +63,12 @@ class PaymentSettingRepository
 
         $paytabs = PaymentSetting::whereUniqueKeyword('paytabs')->first();
         
-        $data['paytabsData'] = $paytabs->convertJsonData();
+        $data['paytabsData'] = $paytabs ? $paytabs->convertJsonData() : [];
         $data['paytabs'] = $paytabs;
+
+        $cashfree = PaymentSetting::whereUniqueKeyword('cashfree')->first();
+        $data['cashfreeData'] = $cashfree ? $cashfree->convertJsonData() : [];
+        $data['cashfree'] = $cashfree;
      
         $cod = PaymentSetting::whereUniqueKeyword('cod')->first();
         $data['cod'] = $cod;
