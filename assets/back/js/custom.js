@@ -91,10 +91,13 @@
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
     });
 
-    $('.radio-check').on('change', function () {
-        var target = $(this).closest('.settings-section-card, .form-group').next('.radio-show');
+    $(document).on('change', 'input.switch, input.switch-bootstrap, .radio-check', function () {
+        var target = $(this).closest('.settings-section-card, .form-group').next('.image-show, .radio-show');
         if (!target.length) {
-            target = $(this).parent().parent().next('.radio-show');
+            target = $(this).closest('form').find('.image-show, .radio-show');
+        }
+        if (!target.length) {
+            target = $(this).parent().parent().next('.image-show, .radio-show');
         }
         if (!target.length) {
             target = $(this).parent().parent().next();
