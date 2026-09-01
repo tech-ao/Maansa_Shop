@@ -5332,3 +5332,167 @@ a.text-primary {
   background: #ef4444 !important;
   color: #ffffff !important;
 }
+
+/* ==========================================================================
+   Floating Toast Notifications (Top-Right under Profile Section)
+   ========================================================================== */
+.toast-floating-container {
+  position: fixed !important;
+  top: 74px !important;
+  right: 24px !important;
+  z-index: 999999 !important;
+  max-width: 420px;
+  min-width: 320px;
+  width: calc(100vw - 48px);
+  pointer-events: auto !important;
+  animation: toastSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.toast-floating-container.toast-hiding {
+  animation: toastFadeOut 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+}
+
+@keyframes toastFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+  }
+}
+
+.toast-floating-card {
+  background: #ffffff !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.12), 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+  padding: 14px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  border: 1px solid #e2e8f0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.toast-floating-card.toast-success {
+  border-left: 4px solid #10b981 !important;
+}
+
+.toast-floating-card.toast-danger {
+  border-left: 4px solid #ef4444 !important;
+}
+
+.toast-icon-badge {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.toast-success .toast-icon-badge {
+  background: #ecfdf5 !important;
+  color: #10b981 !important;
+}
+
+.toast-danger .toast-icon-badge {
+  background: #fef2f2 !important;
+  color: #ef4444 !important;
+}
+
+.toast-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast-title {
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  line-height: 1.25 !important;
+  display: block;
+}
+
+.toast-message {
+  font-size: 13px !important;
+  color: #475569 !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  margin-top: 2px !important;
+  display: block;
+  word-break: break-word;
+}
+
+.toast-error-list {
+  font-size: 12.5px;
+  color: #ef4444;
+  margin-top: 4px;
+  margin-bottom: 0;
+  padding-left: 16px;
+}
+
+.toast-close-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer !important;
+  padding: 0 !important;
+  transition: all 0.15s ease !important;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.toast-close-btn:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+.toast-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  animation: toastProgressBarAnim 2s linear forwards;
+}
+
+.toast-progress-bar.bg-success-bar {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.toast-progress-bar.bg-danger-bar {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+@keyframes toastProgressBarAnim {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
