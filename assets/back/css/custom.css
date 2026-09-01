@@ -488,6 +488,9 @@ img.admin-setting-img {
   cursor: pointer;
   float: left;
   margin-right: 10px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .switch+.switch-body:before {
@@ -495,7 +498,7 @@ img.admin-setting-img {
   cursor: pointer;
   display: inline-block;
   position: relative;
-  border-radius: 100px;
+  border-radius: 999px;
   top: auto;
 }
 
@@ -505,57 +508,63 @@ img.admin-setting-img {
 }
 
 .switch.switch-bootstrap+.switch-body:before {
-  background-color: #d2d9e1;
-  width: 50px;
-  height: 30px;
-  -webkit-transition: background 0.1s ease;
-  -o-transition: background 0.1s ease;
-  transition: background 0.1s ease;
+  background-color: #cbd5e1;
+  width: 48px;
+  height: 26px;
+  border-radius: 999px;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  display: block;
 }
 
 .switch.switch-bootstrap+.switch-body:after {
   content: '';
   position: absolute;
-  top: 1px;
-  left: 1px;
+  top: 2px;
+  left: 2px;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  background-color: #fff;
-  border: 4px solid #fff;
-  -webkit-transition: left 0.2s ease;
-  -o-transition: left 0.2s ease;
-  transition: left 0.2s ease;
+  width: 22px;
+  height: 22px;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  -webkit-transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switch.switch-bootstrap:checked+.switch-body:before {
+  background-color: #10b981 !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
 }
 
 .switch.switch-bootstrap:checked+.switch-body:after {
-  left: 21px;
-  background-color: #FFF;
-  border: 4px solid #FFF;
-  text-shadow: 0 -1px 0 rgba(0, 200, 0, 0.25);
+  left: 24px;
+  background-color: #ffffff;
+  border: none;
 }
 
 /* CSS3 on/off switches */
 .switch-primary>.switch.switch-bootstrap:checked+.switch-body::before {
-  background-color: #716aca;
+  background-color: #10b981 !important;
 }
 
 .switch-success>.switch.switch-bootstrap:checked+.switch-body::before {
-  background-color: #5cb85c;
+  background-color: #10b981 !important;
 }
 
 .switch-danger>.switch.switch-bootstrap:checked+.switch-body::before {
-  background-color: #d9534f;
+  background-color: #ef4444 !important;
 }
 
 .switch-info>.switch.switch-bootstrap:checked+.switch-body::before {
-  background-color: #5bc0de;
+  background-color: #06b6d4 !important;
 }
 
 .switch-warning>.switch.switch-bootstrap:checked+.switch-body::before {
-  background-color: #f0ad4e;
+  background-color: #f59e0b !important;
 }
-
 
 /* Switch Slider Ends */
 
@@ -5111,9 +5120,15 @@ input[type="search"]:focus {
 }
 
 /* Toggle Switches */
-.switch-primary input:checked + .switch-body,
-.switch-bootstrap:checked + .switch-body,
-.switch:checked + .switch-body,
+.switch-body {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.switch-primary input:checked + .switch-body:before,
+.switch-bootstrap:checked + .switch-body:before,
+.switch:checked + .switch-body:before,
 .custom-switch-input:checked ~ .custom-switch-indicator {
   background-color: #10b981 !important;
   border-color: #10b981 !important;

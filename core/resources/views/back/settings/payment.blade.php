@@ -253,6 +253,18 @@
 
     .gateway-toggle-box .switch-primary {
         margin-bottom: 0;
+        display: inline-flex;
+        align-items: center;
+        height: 26px;
+        position: relative;
+    }
+
+    .gateway-toggle-box .switch-primary .switch-body {
+        margin: 0 !important;
+        float: none !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 
     .gateway-toggle-label {
@@ -1003,6 +1015,17 @@
         $(document).on('change', '.upload-photo', function(e) {
             var fileName = e.target.files[0] ? e.target.files[0].name : 'Choose New Image...';
             $(this).siblings('.file-custom').text(fileName);
+        });
+
+        // Live Toggle Switch visibility
+        $(document).on('change', '.gateway-toggle-box input[name="status"]', function() {
+            var $tabPane = $(this).closest('.tab-pane');
+            var $imageShow = $tabPane.find('.image-show');
+            if ($(this).is(':checked')) {
+                $imageShow.removeClass('d-none');
+            } else {
+                $imageShow.addClass('d-none');
+            }
         });
 
         // Cashfree API Connectivity Tester AJAX
