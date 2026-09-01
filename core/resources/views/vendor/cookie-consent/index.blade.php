@@ -22,7 +22,12 @@
                 const dialogs = document.getElementsByClassName('js-cookie-consent');
 
                 for (let i = 0; i < dialogs.length; ++i) {
-                    dialogs[i].style.display = 'none';
+                    dialogs[i].style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                    dialogs[i].style.opacity = '0';
+                    dialogs[i].style.transform = 'translateY(24px) scale(0.95)';
+                    setTimeout((function(el) {
+                        return function() { el.style.display = 'none'; };
+                    })(dialogs[i]), 300);
                 }
             }
 
