@@ -73,31 +73,33 @@
                                  @if (PriceHelper::CheckDigital() == true)
                                     @php
                                         $free_shipping = DB::table('shipping_services')->whereStatus(1)->whereIsCondition(1)->first();
+                                        $is_free_eligible = ($free_shipping && $cart_total >= $free_shipping->minimum_price);
+                                        $selected_shipping_id = isset($shipping) && $shipping ? $shipping->id : ($is_free_eligible ? ($free_shipping ? $free_shipping->id : 1) : (DB::table('shipping_services')->whereStatus(1)->where('id', '!=', 1)->first() ? DB::table('shipping_services')->whereStatus(1)->where('id', '!=', 1)->first()->id : null));
                                     @endphp
 
                                     <select name="shipping_id" class="form-control" id="shipping_id_select" required>
-                                        <option value="" selected disabled>{{ __('Select Shipping Method') }}</option>
-                                        @foreach (DB::table('shipping_services')->whereStatus(1)->get() as $shipping)
-                                            @if ($shipping->id == 1 && isset($free_shipping) &&  $free_shipping->minimum_price <= $cart_total)
-                                                <option value="{{ $shipping->id }}"
-                                                    data-href="{{ route('front.shipping.setup') }}">{{ $shipping->title }}
+                                        @foreach (DB::table('shipping_services')->whereStatus(1)->get() as $service)
+                                            @if ($service->id == 1 && $free_shipping && $free_shipping->minimum_price <= $cart_total)
+                                                <option value="{{ $service->id }}"
+                                                    {{ $selected_shipping_id == $service->id ? 'selected' : '' }}
+                                                    data-href="{{ route('front.shipping.setup') }}">{{ $service->title }} ({{ __('Free') }})
                                                 </option>
-                                            @else
-                                                @if ($shipping->id != 1)
-                                                    <option value="{{ $shipping->id }}"
-                                                        data-href="{{ route('front.shipping.setup') }}">{{ $shipping->title }}
-                                                        ({{ PriceHelper::setCurrencyPrice($shipping->price) }})
-                                                    </option>
-                                                @endif
+                                            @elseif ($service->id != 1)
+                                                <option value="{{ $service->id }}"
+                                                    {{ $selected_shipping_id == $service->id ? 'selected' : '' }}
+                                                    data-href="{{ route('front.shipping.setup') }}">{{ $service->title }}
+                                                    ({{ PriceHelper::setCurrencyPrice($service->price) }})
+                                                </option>
                                             @endif
                                         @endforeach
                                     </select>
 
-                                    <small class="text-primary shipping_message">{{ __('Please select shipping method') }}</small>
+                                    @if ($is_free_eligible)
+                                        <small class="text-success font-weight-bold d-block mt-1"><i class="fa fa-check-circle mr-1"></i> {{ __('Eligible for Free Delivery!') }}</small>
+                                    @endif
                                     @error('shipping_id')
                                         <p class="text-danger shipping_message">{{ $message }}</p>
                                     @enderror
-
                                 @endif
                             </div>
                             <div class="col-sm-6 mb-3">

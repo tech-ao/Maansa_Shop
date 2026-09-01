@@ -1173,6 +1173,16 @@ $(document).on('change', '#shipping_id_select', function () {
     })
 })
 
+$(document).ready(function () {
+    if ($('#shipping_id_select').length) {
+        var initial_shipping_id = $('#shipping_id_select').val();
+        if (initial_shipping_id) {
+            $('.shipping_id_setup').val(initial_shipping_id);
+            $(".shipping_message").addClass('d-none');
+        }
+    }
+});
+
 
 
 

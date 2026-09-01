@@ -324,22 +324,26 @@ class CheckoutController extends Controller
                 $total_tax += $item::taxCalculate($item);
             }
         }
-        $shipping = [];
+        $shipping = null;
+        if (PriceHelper::CheckDigital()) {
+            $free_shipping = ShippingService::whereStatus(1)->whereIsCondition(1)->first();
+            if ($free_shipping && $cart_total >= $free_shipping->minimum_price) {
+                $shipping = $free_shipping;
+            } else {
+                $shipping = ShippingService::whereStatus(1)->where('id', '!=', 1)->first();
+            }
+        }
 
         $discount = [];
         if (Session::has('coupon')) {
             $discount = Session::get('coupon');
         }
 
-        if (!PriceHelper::Digital()) {
-            $shipping = null;
-        }
-
-        $grand_total = ($cart_total  + $total_tax);
+        $shipping_price = $shipping ? $shipping->price : 0;
+        $grand_total = ($cart_total + $shipping_price + $total_tax);
         $grand_total = $grand_total - ($discount ? $discount['discount'] : 0);
         $state_tax = Auth::check() && Auth::user()->state_id ? ($cart_total * Auth::user()->state->price) / 100 : 0;
         $grand_total = $grand_total + $state_tax;
-
 
         $total_amount = $grand_total;
 
@@ -801,7 +805,7 @@ class CheckoutController extends Controller
         $total_amount = $grand_total + $state_price;
 
         $data['state_price'] = PriceHelper::setCurrencyPrice($state_price);
-        $data['shipping_price'] = PriceHelper::setCurrencyPrice($shipping->price);
+        $data['shipping_price'] = $shipping->price == 0 ? '<span class="text-success font-weight-bold">' . __('Free') . '</span>' : PriceHelper::setCurrencyPrice($shipping->price);
         $data['grand_total'] = PriceHelper::setCurrencyPrice($total_amount);
 
         return response()->json($data);

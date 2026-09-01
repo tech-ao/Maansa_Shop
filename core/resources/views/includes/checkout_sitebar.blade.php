@@ -46,13 +46,16 @@
                 </tr>
             @endif
 
-            @if ($shipping)
-                <tr class="d-none set__shipping_price_tr">
-                    <td>{{ __('Shipping') }}:</td>
-                    <td class="text-gray-dark set__shipping_price">
-                        {{ PriceHelper::setCurrencyPrice($shipping ? $shipping->price : 0) }}</td>
-                </tr>
-            @endif
+            <tr class="{{ isset($shipping) && $shipping ? '' : 'd-none' }} set__shipping_price_tr">
+                <td>{{ __('Shipping') }}:</td>
+                <td class="text-gray-dark set__shipping_price">
+                    @if (isset($shipping) && $shipping && $shipping->price == 0)
+                        <span class="text-success font-weight-bold">{{ __('Free') }}</span>
+                    @else
+                        {{ PriceHelper::setCurrencyPrice(isset($shipping) && $shipping ? $shipping->price : 0) }}
+                    @endif
+                </td>
+            </tr>
             <tr>
                 <td class="text-lg text-primary">{{ __('Order total') }}</td>
                 <td class="text-lg text-primary grand_total_set">{{ PriceHelper::setCurrencyPrice($grand_total) }}
