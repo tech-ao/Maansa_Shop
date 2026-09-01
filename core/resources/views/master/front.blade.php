@@ -1698,6 +1698,111 @@ body_theme4 @endif
             font-size: 11px !important;
         }
     }
+
+    /* Modern Checkout Sidebar: Order Summary & Cart Items */
+    .checkout-summary-card,
+    .checkout-cart-items-card {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 16px !important;
+        padding: 20px !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
+    }
+
+    .summary-header-icon,
+    .cart-items-header-icon {
+        width: 34px !important;
+        height: 34px !important;
+        border-radius: 10px !important;
+        background: #ecfdf5 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 15px !important;
+    }
+
+    .order-total-highlight-card {
+        background: #f0fdf4 !important;
+        border: 1.5px solid #bbf7d0 !important;
+    }
+
+    .checkout-item-thumb-wrapper {
+        position: relative !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 12px !important;
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .checkout-item-thumb {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        border-radius: 11px !important;
+    }
+
+    .checkout-item-qty-badge {
+        position: absolute !important;
+        top: -6px !important;
+        right: -6px !important;
+        background: #10b981 !important;
+        color: #ffffff !important;
+        font-size: 10.5px !important;
+        font-weight: 700 !important;
+        padding: 1px 6px !important;
+        border-radius: 999px !important;
+        box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4) !important;
+        line-height: 1.3 !important;
+    }
+
+    .checkout-item-name {
+        font-size: 13.5px !important;
+        line-height: 1.35 !important;
+        margin: 0 0 4px !important;
+    }
+
+    .checkout-item-name a {
+        color: #0f172a !important;
+        text-decoration: none !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    .checkout-item-name a:hover {
+        color: #10b981 !important;
+    }
+
+    .variant-pill-tag {
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: #475569 !important;
+        background: #f1f5f9 !important;
+        border: 1px solid #e2e8f0 !important;
+        padding: 1px 7px !important;
+        border-radius: 6px !important;
+        display: inline-block !important;
+        margin-right: 4px !important;
+        margin-bottom: 2px !important;
+    }
+
+    @media (max-width: 767.98px) {
+        .checkout-summary-card,
+        .checkout-cart-items-card {
+            padding: 16px !important;
+            border-radius: 14px !important;
+            margin-bottom: 16px !important;
+        }
+        .checkout-item-thumb-wrapper {
+            width: 52px !important;
+            height: 52px !important;
+        }
+    }
     </style>
     <!-- Backdrop-->
     <div class="site-backdrop"></div>
