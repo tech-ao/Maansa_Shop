@@ -27,36 +27,351 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shop-top-filter-wrapper">
-                    <div class="row">
-                        <div class="col-md-10 gd-text-sm-center">
-                            <div class="sptfl">
-                                <div class="quickFilter">
-                                    <h4 class="quickFilter-title"><i class="fas fa-filter"></i>{{__('Quick filter')}}</h4>
-                                    <ul id="quick_filter">
+                    <div class="catalog-toolbar-flex">
+                        <!-- Left / Filter Group: Quick Filter & Sort By -->
+                        <div class="catalog-toolbar-left">
+                            <div class="sptfl-modern">
+                                <!-- Quick Filter Dropdown -->
+                                <div class="quickFilter modern-quick-filter">
+                                    <h4 class="quickFilter-title">
+                                        <i class="fas fa-filter"></i> <span>{{__('Quick filter')}}</span> <i class="icon-chevron-down filter-arrow ml-1"></i>
+                                    </h4>
+                                    <ul id="quick_filter" class="quick-filter-dropdown">
                                         <li><a datahref=""><i class="icon-chevron-right pr-2"></i>{{__('All products')}} </a></li>
-                                        <li class=""><a href="javascript:;" data-href="feature"><i class="icon-chevron-right pr-2"></i>{{__('Featured products')}} </a></li>
-                                        <li class=""><a href="javascript:;" data-href="best"><i class="icon-chevron-right pr-2"></i>{{__('Best sellers')}} </a></li>
-                                        <li class=""><a href="javascript:;" data-href="top"><i class="icon-chevron-right pr-2"></i>{{__('Top rated')}} </a></li>
-                                        <li class=""><a href="javascript:;" data-href="new"><i class="icon-chevron-right pr-2"></i>{{__('New Arrival')}} </a></li>
+                                        <li><a href="javascript:;" data-href="feature"><i class="icon-chevron-right pr-2"></i>{{__('Featured products')}} </a></li>
+                                        <li><a href="javascript:;" data-href="best"><i class="icon-chevron-right pr-2"></i>{{__('Best sellers')}} </a></li>
+                                        <li><a href="javascript:;" data-href="top"><i class="icon-chevron-right pr-2"></i>{{__('Top rated')}} </a></li>
+                                        <li><a href="javascript:;" data-href="new"><i class="icon-chevron-right pr-2"></i>{{__('New Arrival')}} </a></li>
                                     </ul>
                                 </div>
-                                <div class="shop-sorting">
-                                    <label for="sorting">{{__('Sort by')}}:</label>
-                                    <select class="form-control" id="sorting">
-                                    <option value="">{{__('All Products')}}</option>
-                                    <option value="low_to_high" {{request()->input('low_to_high') ? 'selected' : ''}}>{{__('Low - High Price')}}</option>
-                                    <option value="high_to_low" {{request()->input('high_to_low') ? 'selected' : ''}}>{{__('High - Low Price')}}</option>
-                                    </select><span class="text-muted">{{__('Showing')}}:</span><span>1 - {{$setting->view_product}} {{__('items')}}</span>
+
+                                <!-- Sort By Select -->
+                                <div class="shop-sorting modern-sort-group">
+                                    <div class="sort-select-wrapper">
+                                        <i class="fas fa-arrow-down-short-wide sort-icon"></i>
+                                        <select class="form-control" id="sorting">
+                                            <option value="">{{__('All Products')}}</option>
+                                            <option value="low_to_high" {{request()->input('low_to_high') ? 'selected' : ''}}>{{__('Low - High Price')}}</option>
+                                            <option value="high_to_low" {{request()->input('high_to_low') ? 'selected' : ''}}>{{__('High - Low Price')}}</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2 gd-text-sm-center">
-                            <div class="shop-view"><a class="list-view {{Session::has('view_catalog') && Session::get('view_catalog') == 'grid' ? 'active' : ''}} " data-step="grid" href="javascript:;" data-href="{{route('front.catalog').'?view_check=grid'}}"><i class="fas fa-th-large"></i></a>
-                                <a class="list-view {{Session::has('view_catalog') && Session::get('view_catalog') == 'list' ? 'active' : ''}}" href="javascript:;" data-step="list" data-href="{{route('front.catalog').'?view_check=list'}}"><i class="fas fa-list"></i></a>
+
+                        <!-- Right: Item Counter & Grid/List View Toggle -->
+                        <div class="catalog-toolbar-right">
+                            <div class="catalog-items-count d-none d-md-inline-block">
+                                <span class="text-muted">{{__('Showing')}}:</span> <strong class="text-dark">1 - {{$setting->view_product}} {{__('items')}}</strong>
+                            </div>
+                            
+                            <div class="shop-view modern-view-switch">
+                                <a class="list-view {{Session::has('view_catalog') && Session::get('view_catalog') == 'grid' ? 'active' : (!Session::has('view_catalog') ? 'active' : '')}}" data-step="grid" href="javascript:;" data-href="{{route('front.catalog').'?view_check=grid'}}" title="{{__('Grid View')}}">
+                                    <i class="fas fa-th-large"></i>
+                                </a>
+                                <a class="list-view {{Session::has('view_catalog') && Session::get('view_catalog') == 'list' ? 'active' : ''}}" href="javascript:;" data-step="list" data-href="{{route('front.catalog').'?view_check=list'}}" title="{{__('List View')}}">
+                                    <i class="fas fa-list"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <style>
+                .shop-top-filter-wrapper {
+                    background: #ffffff !important;
+                    border: 1px solid #e2e8f0 !important;
+                    border-radius: 14px !important;
+                    padding: 12px 18px !important;
+                    margin-bottom: 24px !important;
+                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
+                }
+
+                .catalog-toolbar-flex {
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: space-between !important;
+                    flex-wrap: wrap !important;
+                    gap: 12px !important;
+                    width: 100% !important;
+                }
+
+                .catalog-toolbar-left {
+                    display: flex !important;
+                    align-items: center !important;
+                    flex: 1 !important;
+                }
+
+                .sptfl-modern {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 12px !important;
+                    flex-wrap: wrap !important;
+                    width: 100% !important;
+                }
+
+                /* Quick Filter Button */
+                .modern-quick-filter {
+                    position: relative !important;
+                    display: inline-block !important;
+                }
+
+                .modern-quick-filter .quickFilter-title {
+                    margin: 0 !important;
+                    padding: 8px 16px !important;
+                    border-radius: 10px !important;
+                    background: #f8fafc !important;
+                    border: 1px solid #e2e8f0 !important;
+                    color: #334155 !important;
+                    font-size: 13.5px !important;
+                    font-weight: 600 !important;
+                    cursor: pointer !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    gap: 8px !important;
+                    transition: all 0.2s ease !important;
+                    user-select: none !important;
+                }
+
+                .modern-quick-filter .quickFilter-title:hover {
+                    background: #ecfdf5 !important;
+                    border-color: #a7f3d0 !important;
+                    color: #059669 !important;
+                }
+
+                .modern-quick-filter .quickFilter-title i {
+                    color: #10b981 !important;
+                    font-size: 13px !important;
+                }
+
+                .modern-quick-filter .quick-filter-dropdown {
+                    position: absolute !important;
+                    top: calc(100% + 8px) !important;
+                    left: 0 !important;
+                    min-width: 190px !important;
+                    background: #ffffff !important;
+                    border: 1px solid #e2e8f0 !important;
+                    border-radius: 12px !important;
+                    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+                    padding: 6px 0 !important;
+                    list-style: none !important;
+                    z-index: 9999 !important;
+                    margin: 0 !important;
+                    display: none;
+                }
+
+                .modern-quick-filter:hover .quick-filter-dropdown,
+                .modern-quick-filter.active .quick-filter-dropdown {
+                    display: block !important;
+                }
+
+                .modern-quick-filter .quick-filter-dropdown li a {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 8px !important;
+                    padding: 8px 16px !important;
+                    color: #475569 !important;
+                    font-size: 13px !important;
+                    font-weight: 500 !important;
+                    text-decoration: none !important;
+                    transition: all 0.15s ease !important;
+                }
+
+                .modern-quick-filter .quick-filter-dropdown li a:hover {
+                    background: #ecfdf5 !important;
+                    color: #059669 !important;
+                }
+
+                /* Sort Select */
+                .modern-sort-group {
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    margin: 0 !important;
+                }
+
+                .sort-select-wrapper {
+                    position: relative !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                }
+
+                .sort-select-wrapper .sort-icon {
+                    position: absolute !important;
+                    left: 12px !important;
+                    color: #10b981 !important;
+                    font-size: 13px !important;
+                    pointer-events: none !important;
+                    z-index: 2 !important;
+                }
+
+                .modern-sort-group select.form-control {
+                    padding: 8px 14px 8px 32px !important;
+                    border-radius: 10px !important;
+                    background: #f8fafc !important;
+                    border: 1px solid #e2e8f0 !important;
+                    color: #334155 !important;
+                    font-size: 13px !important;
+                    font-weight: 600 !important;
+                    height: 38px !important;
+                    cursor: pointer !important;
+                    transition: all 0.2s ease !important;
+                }
+
+                .modern-sort-group select.form-control:focus,
+                .modern-sort-group select.form-control:hover {
+                    background: #ffffff !important;
+                    border-color: #10b981 !important;
+                    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12) !important;
+                }
+
+                /* Right Side: Items count & Grid/List Switch */
+                .catalog-toolbar-right {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 16px !important;
+                }
+
+                .catalog-items-count {
+                    font-size: 13px !important;
+                    color: #64748b !important;
+                }
+
+                .modern-view-switch {
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    background: #f1f5f9 !important;
+                    padding: 3px !important;
+                    border-radius: 10px !important;
+                    border: 1px solid #e2e8f0 !important;
+                    gap: 2px !important;
+                }
+
+                .modern-view-switch .list-view {
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    width: 32px !important;
+                    height: 32px !important;
+                    border-radius: 8px !important;
+                    color: #64748b !important;
+                    background: transparent !important;
+                    text-decoration: none !important;
+                    font-size: 14px !important;
+                    transition: all 0.2s ease !important;
+                }
+
+                .modern-view-switch .list-view:hover {
+                    color: #0f172a !important;
+                    background: rgba(255, 255, 255, 0.6) !important;
+                }
+
+                .modern-view-switch .list-view.active {
+                    background: #10b981 !important;
+                    color: #ffffff !important;
+                    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35) !important;
+                }
+
+                /* Mobile Responsiveness (<= 768px) */
+                @media (max-width: 768px) {
+                    .shop-top-filter-wrapper {
+                        padding: 10px 12px !important;
+                        margin-bottom: 16px !important;
+                    }
+
+                    .catalog-toolbar-flex {
+                        flex-direction: row !important;
+                        justify-content: space-between !important;
+                        align-items: center !important;
+                        gap: 8px !important;
+                    }
+
+                    .catalog-toolbar-left {
+                        flex: 1 !important;
+                        min-width: 0 !important;
+                    }
+
+                    .sptfl-modern {
+                        display: flex !important;
+                        flex-direction: row !important;
+                        gap: 6px !important;
+                        width: 100% !important;
+                        flex-wrap: nowrap !important;
+                    }
+
+                    .modern-quick-filter {
+                        flex: 1 !important;
+                        min-width: 0 !important;
+                    }
+
+                    .modern-quick-filter .quickFilter-title {
+                        width: 100% !important;
+                        padding: 7px 8px !important;
+                        font-size: 12px !important;
+                        justify-content: center !important;
+                        gap: 4px !important;
+                        height: 36px !important;
+                        white-space: nowrap !important;
+                        overflow: hidden !important;
+                        text-overflow: ellipsis !important;
+                    }
+
+                    .modern-quick-filter .quickFilter-title span {
+                        font-size: 12px !important;
+                    }
+
+                    .modern-sort-group {
+                        flex: 1.2 !important;
+                        min-width: 0 !important;
+                    }
+
+                    .sort-select-wrapper {
+                        width: 100% !important;
+                    }
+
+                    .modern-sort-group select.form-control {
+                        width: 100% !important;
+                        padding: 6px 8px 6px 26px !important;
+                        font-size: 12px !important;
+                        height: 36px !important;
+                        min-width: 0 !important;
+                    }
+
+                    .sort-select-wrapper .sort-icon {
+                        left: 8px !important;
+                        font-size: 12px !important;
+                    }
+
+                    .catalog-toolbar-right {
+                        gap: 6px !important;
+                        flex-shrink: 0 !important;
+                    }
+
+                    .modern-view-switch {
+                        padding: 2px !important;
+                    }
+
+                    .modern-view-switch .list-view {
+                        width: 30px !important;
+                        height: 30px !important;
+                        font-size: 12px !important;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .modern-quick-filter .quickFilter-title {
+                        padding: 6px 4px !important;
+                        font-size: 11px !important;
+                    }
+                    .modern-sort-group select.form-control {
+                        padding: 6px 4px 6px 22px !important;
+                        font-size: 11px !important;
+                    }
+                    .sort-select-wrapper .sort-icon {
+                        left: 5px !important;
+                        font-size: 10.5px !important;
+                    }
+                }
+                </style>
             </div>
         </div>
         <div class="row g-3">
