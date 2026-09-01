@@ -130,7 +130,8 @@
         <div class="row">
             <div class="col-sm-12">
                 @php
-                    $gateways = DB::table('payment_settings')->whereStatus(1)->get();
+                    $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
+                    $gateways = DB::table('payment_settings')->whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
                 @endphp
                 <select class="form-control payment_gateway" required>
                     <option value="" selected disabled>{{ __('Select a payment method') }}</option>

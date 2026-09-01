@@ -101,7 +101,8 @@ class CheckoutController extends Controller
         $data['discount'] = $discount;
         $data['shipping'] = $shipping;
         $data['tax'] = $total_tax;
-        $data['payments'] = PaymentSetting::whereStatus(1)->get();
+        $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
+        $data['payments'] = PaymentSetting::whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
 
         return view('front.checkout.index', $data);
     }
@@ -163,7 +164,8 @@ class CheckoutController extends Controller
         $data['discount'] = $discount;
         $data['shipping'] = $shipping;
         $data['tax'] = $total_tax;
-        $data['payments'] = PaymentSetting::whereStatus(1)->get();
+        $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
+        $data['payments'] = PaymentSetting::whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
 
         return view('front.checkout.billing', $data);
     }
@@ -270,7 +272,8 @@ class CheckoutController extends Controller
         $data['discount'] = $discount;
         $data['shipping'] = $shipping;
         $data['tax'] = $total_tax;
-        $data['payments'] = PaymentSetting::whereStatus(1)->get();
+        $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
+        $data['payments'] = PaymentSetting::whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
         return view('front.checkout.shipping', $data);
     }
 
@@ -284,8 +287,8 @@ class CheckoutController extends Controller
             'ship_email' => 'required|email',
             'ship_phone' => 'required',
             'ship_address1' => 'required',
-            'ship_zip' => 'required',
             'ship_city' => 'required',
+            'ship_zip' => 'required',
         ]);
 
         Session::put('shipping_address', $request->all());
@@ -301,7 +304,7 @@ class CheckoutController extends Controller
         }
 
         if (!Session::has('shipping_address')) {
-            return redirect(route('front.checkout.shipping'));
+            return redirect(route('front.checkout.billing'));
         }
 
 
@@ -353,7 +356,8 @@ class CheckoutController extends Controller
         $data['discount'] = $discount;
         $data['shipping'] = $shipping;
         $data['tax'] = $total_tax;
-        $data['payments'] = PaymentSetting::whereStatus(1)->get();
+        $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
+        $data['payments'] = PaymentSetting::whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
         return view('front.checkout.payment', $data);
     }
 

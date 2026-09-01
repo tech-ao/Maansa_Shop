@@ -134,7 +134,8 @@
                             <div class="col-12">
                                 <div class="payment-methods-grid">
                                     @php
-                                        $gateways = DB::table('payment_settings')->whereStatus(1)->get();
+                                        $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
+                                        $gateways = DB::table('payment_settings')->whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
                                     @endphp
                                     @foreach ($gateways as $gateway)
                                         @if (PriceHelper::CheckDigitalPaymentGateway())
