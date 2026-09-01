@@ -167,22 +167,30 @@ class RazorpayController extends Controller
                         $checkout = $_GET['checkout'];
                     }
                     
+                    $bill = Session::get('billing_address', []);
+                    $prefill_name = $request->name ?? ($user ? $user->first_name . ' ' . $user->last_name : (($bill['bill_first_name'] ?? '') . ' ' . ($bill['bill_last_name'] ?? '')));
+                    $prefill_email = $request->email ?? ($user ? $user->email : ($bill['bill_email'] ?? ''));
+                    $prefill_phone = $request->phone ?? ($user ? $user->phone : ($bill['bill_phone'] ?? ''));
+                    $prefill_address = $request->address ?? ($user ? $user->bill_address1 : ($bill['bill_address1'] ?? ''));
+
+                    $themeColor = $setting->primary_color ? (str_starts_with($setting->primary_color, '#') ? $setting->primary_color : '#' . $setting->primary_color) : '#10b981';
+
                     $data = [
                         "key"               => $this->keyId,
                         "amount"            => $amount,
                         "name"              => $item_name,
                         "description"       => $item_name,
                         "prefill"           => [
-							"name"              => $request->name,
-							"email"             => $request->email,
-							"contact"           => $request->phone,
+							"name"              => trim($prefill_name) ?: 'Customer',
+							"email"             => trim($prefill_email) ?: 'customer@example.com',
+							"contact"           => trim($prefill_phone) ?: '9999999999',
                         ],
                         "notes"             => [
-							"address"           => $request->address,
+							"address"           => $prefill_address,
 							"merchant_order_id" => $item_number,
                         ],
                         "theme"             => [
-							"color"             => "{{$setting->primary_color}}"
+							"color"             => $themeColor
                         ],
                         "order_id"          => $razorpayOrderId,
                     ];

@@ -150,29 +150,66 @@
                                         $gateways = DB::table('payment_settings')->whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
                                     @endphp
                                     @foreach ($gateways as $gateway)
+                                        @php
+                                            $action_route = route('front.checkout.submit');
+                                            $pay_method = ucfirst($gateway->unique_keyword);
+
+                                            if ($gateway->unique_keyword == 'razorpay') {
+                                                $action_route = route('front.razorpay.submit');
+                                                $pay_method = 'Rezorpay';
+                                            } elseif ($gateway->unique_keyword == 'cashfree') {
+                                                $action_route = route('front.cashfree.submit');
+                                                $pay_method = 'Cashfree';
+                                            } elseif ($gateway->unique_keyword == 'paytm') {
+                                                $action_route = route('front.paytm.submit');
+                                                $pay_method = 'Paytm';
+                                            } elseif ($gateway->unique_keyword == 'cod') {
+                                                $action_route = route('front.checkout.submit');
+                                                $pay_method = 'Cash On Delivery';
+                                            } elseif ($gateway->unique_keyword == 'stripe') {
+                                                $action_route = route('front.checkout.submit');
+                                                $pay_method = 'Stripe';
+                                            } elseif ($gateway->unique_keyword == 'paypal') {
+                                                $action_route = route('front.checkout.submit');
+                                                $pay_method = 'Paypal';
+                                            }
+                                        @endphp
+
                                         @if (PriceHelper::CheckDigitalPaymentGateway())
                                             @if ($gateway->unique_keyword != 'cod')
                                                 <div class="payment-method-tile">
-                                                    <a class="payment-method-btn direct-pay-trigger" href="javascript:;"
-                                                        data-gateway="{{ $gateway->unique_keyword }}">
-                                                        <div class="gateway-icon-box">
-                                                            <img src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
-                                                                alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
-                                                        </div>
-                                                        <p class="gateway-title">{{ $gateway->name }}</p>
-                                                    </a>
+                                                    <form action="{{ $action_route }}" method="POST" class="w-100 h-100 m-0 p-0 direct-pay-form">
+                                                        @csrf
+                                                        <input type="hidden" name="payment_method" value="{{ $pay_method }}">
+                                                        <input type="hidden" name="shipping_id" value="{{ $selected_shipping_id }}" class="shipping_id_setup">
+                                                        <input type="hidden" name="state_id" value="{{ auth()->check() && auth()->user()->state_id ? auth()->user()->state_id : '' }}" class="state_id_setup">
+                                                        
+                                                        <button type="submit" class="payment-method-btn w-100 border-0 bg-transparent text-center p-3" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; text-decoration: none;" onclick="this.classList.add('disabled'); this.style.pointerEvents='none'; var t = this.querySelector('.gateway-title'); if(t) t.innerHTML='<i class=\'fa fa-spinner fa-spin mr-1\'></i> {{ __('Processing...') }}';">
+                                                            <div class="gateway-icon-box">
+                                                                <img src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
+                                                                    alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
+                                                            </div>
+                                                            <p class="gateway-title mb-0">{{ $gateway->name }}</p>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             @endif
                                         @else
                                             <div class="payment-method-tile">
-                                                <a class="payment-method-btn direct-pay-trigger" href="javascript:;"
-                                                    data-gateway="{{ $gateway->unique_keyword }}">
-                                                    <div class="gateway-icon-box">
-                                                        <img src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
-                                                            alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
-                                                    </div>
-                                                    <p class="gateway-title">{{ $gateway->name }}</p>
-                                                </a>
+                                                <form action="{{ $action_route }}" method="POST" class="w-100 h-100 m-0 p-0 direct-pay-form">
+                                                    @csrf
+                                                    <input type="hidden" name="payment_method" value="{{ $pay_method }}">
+                                                    <input type="hidden" name="shipping_id" value="{{ $selected_shipping_id }}" class="shipping_id_setup">
+                                                    <input type="hidden" name="state_id" value="{{ auth()->check() && auth()->user()->state_id ? auth()->user()->state_id : '' }}" class="state_id_setup">
+                                                    
+                                                    <button type="submit" class="payment-method-btn w-100 border-0 bg-transparent text-center p-3" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; text-decoration: none;" onclick="this.classList.add('disabled'); this.style.pointerEvents='none'; var t = this.querySelector('.gateway-title'); if(t) t.innerHTML='<i class=\'fa fa-spinner fa-spin mr-1\'></i> {{ __('Processing...') }}';">
+                                                        <div class="gateway-icon-box">
+                                                            <img src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
+                                                                alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
+                                                        </div>
+                                                        <p class="gateway-title mb-0">{{ $gateway->name }}</p>
+                                                    </button>
+                                                </form>
                                             </div>
                                         @endif
                                     @endforeach
@@ -196,32 +233,10 @@
 
 @section('script')
 <script>
-    $(document).on('click', '.direct-pay-trigger', function (e) {
-        e.preventDefault();
-        var gateway = $(this).data('gateway');
-        var btn = $(this);
-
-        if (gateway === 'bank') {
-            var modalEl = document.getElementById('bank');
-            if (modalEl) {
-                var modal = new bootstrap.Modal(modalEl);
-                modal.show();
-            }
-            return;
-        }
-
-        var form = $('#' + gateway).find('form');
-        if (form.length) {
-            var state_id = $('#state_id_select').val() || $('.state_id_setup').first().val() || '';
-            var shipping_id = $('#shipping_id_select').val() || $('.shipping_id_setup').first().val() || '';
-
-            if (state_id) form.find('.state_id_setup').val(state_id);
-            if (shipping_id) form.find('.shipping_id_setup').val(shipping_id);
-
-            btn.addClass('disabled processing').css('pointer-events', 'none');
-            btn.find('.gateway-title').html('<i class="fa fa-spinner fa-spin mr-1"></i> {{ __("Processing...") }}');
-            form.submit();
-        }
+    // Sync state changes across all forms on the page
+    $(document).on('change', '#state_id_select', function() {
+        var stateId = $(this).val();
+        $('.state_id_setup').val(stateId);
     });
 </script>
 @endsection
