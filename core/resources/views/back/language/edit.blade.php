@@ -56,7 +56,7 @@
                         <div class="settings-section-card mb-4">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="text-muted" style="font-size: 13px;">{{ __('Type') }}</span>
-                                <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px;">
+                                <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px;">
                                     {{ $data->type }}
                                 </span>
                             </div>
@@ -83,7 +83,7 @@
                             <div>
                                 <i class="fa-solid fa-file-code text-primary mr-1"></i> {{ __('Phrases & Translations') }}
                             </div>
-                            <button type="button" class="btn btn-sm font-weight-bold px-3 py-1" id="add_more_language" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 8px; font-size: 12.5px;">
+                            <button type="button" class="btn btn-sm font-weight-bold px-3 py-1" id="add_more_language" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 8px; font-size: 12.5px;">
                                 <i class="fa-solid fa-plus mr-1"></i> {{ __('Add More Key') }}
                             </button>
                         </div>
@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
-                            <button type="button" class="btn btn-sm font-weight-bold px-3 py-2" id="add_more_language_bottom" onclick="$('#add_more_language').click()" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 8px; font-size: 13px;">
+                            <button type="button" class="btn btn-sm font-weight-bold px-3 py-2" id="add_more_language_bottom" onclick="$('#add_more_language').click()" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 8px; font-size: 13px;">
                                 <i class="fa-solid fa-plus mr-1"></i> {{ __('Add More Key') }}
                             </button>
                             <button type="submit" class="btn btn-primary px-4 py-2" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">

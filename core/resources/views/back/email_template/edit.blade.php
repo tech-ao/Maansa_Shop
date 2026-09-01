@@ -44,25 +44,25 @@
                             <tbody>
                                 <tr>
                                     <td class="py-2">
-                                        <code class="px-2 py-1 user-select-all" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 13px;">{user_name}</code>
+                                        <code class="px-2 py-1 user-select-all" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 13px;">{user_name}</code>
                                     </td>
                                     <td class="py-2 text-muted" style="font-size: 13px;">{{ __('Customer Name') }}</td>
                                 </tr>
                                 <tr>
                                     <td class="py-2">
-                                        <code class="px-2 py-1 user-select-all" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 13px;">{order_cost}</code>
+                                        <code class="px-2 py-1 user-select-all" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 13px;">{order_cost}</code>
                                     </td>
                                     <td class="py-2 text-muted" style="font-size: 13px;">{{ __('Order Total Cost') }}</td>
                                 </tr>
                                 <tr>
                                     <td class="py-2">
-                                        <code class="px-2 py-1 user-select-all" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 13px;">{site_title}</code>
+                                        <code class="px-2 py-1 user-select-all" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 13px;">{site_title}</code>
                                     </td>
                                     <td class="py-2 text-muted" style="font-size: 13px;">{{ __('Website Title') }}</td>
                                 </tr>
                                 <tr>
                                     <td class="py-2">
-                                        <code class="px-2 py-1 user-select-all" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 13px;">{transaction_number}</code>
+                                        <code class="px-2 py-1 user-select-all" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 13px;">{transaction_number}</code>
                                     </td>
                                     <td class="py-2 text-muted" style="font-size: 13px;">{{ __('Transaction ID') }}</td>
                                 </tr>

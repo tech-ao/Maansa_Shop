@@ -42,7 +42,7 @@
                                 $theme = strtolower($slider->home_page ?? 'theme1');
                             @endphp
                             @if($theme == 'theme1')
-                                <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 999px;">
+                                <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 999px;">
                                     <i class="fa-solid fa-store mr-1"></i> {{ __('Home 1 Theme') }}
                                 </span>
                             @elseif($theme == 'theme2')

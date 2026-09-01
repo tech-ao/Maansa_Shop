@@ -21,9 +21,9 @@
     </div>
 
     <!-- Info Notice Box -->
-    <div class="card-modern mb-4" style="background: linear-gradient(135deg, #eff6ff, #f8fafc); border-left: 4px solid #3b82f6;">
+    <div class="card-modern mb-4" style="background: linear-gradient(135deg, #ecfdf5, #f8fafc); border-left: 4px solid #10b981;">
         <div class="card-modern-body py-3 d-flex align-items-center">
-            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-3" style="width: 40px; height: 40px; min-width: 40px; background: #dbeafe; color: #1d4ed8; font-size: 16px;">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-3" style="width: 40px; height: 40px; min-width: 40px; background: #d1fae5; color: #065f46; font-size: 16px;">
                 <i class="fa-solid fa-circle-info"></i>
             </div>
             <div>

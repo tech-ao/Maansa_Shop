@@ -52,7 +52,7 @@
                                     <i class="fa-solid fa-sliders text-primary mr-2" style="font-size: 18px;"></i>
                                     <span>{{ __('Twilio SMS Gateway Setup') }}</span>
                                 </div>
-                                <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
+                                <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
                                     <i class="fa-solid fa-signal mr-1"></i> {{ __('Twilio API') }}
                                 </span>
                             </div>
@@ -173,13 +173,13 @@
                                 <!-- Tag Helper Alert -->
                                 <div class="alert alert-light border mb-4" style="border-radius: 12px; background: #f8fafc; border-color: #e2e8f0 !important;">
                                     <div class="d-flex align-items-center">
-                                        <div style="width: 36px; height: 36px; border-radius: 8px; background: #eff6ff; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-right: 12px;">
+                                        <div style="width: 36px; height: 36px; border-radius: 8px; background: #ecfdf5; color: #059669; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-right: 12px;">
                                             <i class="fa-solid fa-code"></i>
                                         </div>
                                         <div>
                                             <span class="font-weight-bold text-dark" style="font-size: 13.5px;">{{ __('Available Shortcode Placeholder:') }}</span>
                                             <div class="mt-1">
-                                                <code class="px-2 py-1 user-select-all" style="background: #ffffff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 6px; font-size: 13px;">{order_number}</code>
+                                                <code class="px-2 py-1 user-select-all" style="background: #ffffff; color: #065f46; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 13px;">{order_number}</code>
                                                 <span class="text-muted ml-2" style="font-size: 12.5px;">— {{ __('Replaced dynamically with the actual customer order ID number.') }}</span>
                                             </div>
                                         </div>

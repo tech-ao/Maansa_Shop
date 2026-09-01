@@ -55,7 +55,7 @@
                                         <i class="fa-brands fa-facebook-f text-primary mr-2" style="font-size: 18px;"></i>
                                         <span>{{ __('Facebook OAuth Credentials') }}</span>
                                     </div>
-                                    <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
+                                    <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
                                         <i class="fa-solid fa-shield-halved mr-1"></i> {{ __('OAuth 2.0') }}
                                     </span>
                                 </div>

@@ -34,7 +34,7 @@
                     <i class="fa-solid fa-file-code text-primary mr-2" style="font-size: 18px;"></i>
                     <span>{{ __('Generated Sitemaps') }}</span>
                 </div>
-                <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
+                <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
                     <i class="fa-solid fa-layer-group mr-1"></i> {{ count($sitemaps) }} {{ __('Files') }}
                 </span>
             </div>
@@ -75,7 +75,7 @@
                                         <form class="d-inline-block mr-2 mb-0" action="{{ route('admin.sitemap.download', $sitemap->id) }}" method="post">
                                             @csrf
                                             <input type="hidden" name="filename" value="{{ $sitemap->filename }}">
-                                            <button type="submit" class="btn btn-sm px-3 py-1 font-weight-bold" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 8px; font-size: 12.5px; transition: all 0.2s;">
+                                            <button type="submit" class="btn btn-sm px-3 py-1 font-weight-bold" style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; border-radius: 8px; font-size: 12.5px; transition: all 0.2s;">
                                                 <i class="fa-solid fa-download mr-1"></i> {{ __('Download') }}
                                             </button>
                                         </form>

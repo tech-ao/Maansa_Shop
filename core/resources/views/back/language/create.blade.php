@@ -35,7 +35,7 @@
                         <div>
                             <i class="fa-solid fa-earth-americas text-primary mr-1"></i> {{ __('Language Information') }}
                         </div>
-                        <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
+                        <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
                             <i class="fa-solid fa-globe mr-1"></i> {{ __('Storefront') }}
                         </span>
                     </div>

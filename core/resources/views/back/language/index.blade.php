@@ -33,7 +33,7 @@
         <div class="card-modern-body p-4">
             <div class="settings-tab-pane-title mb-4 pb-3 border-bottom d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                    <div style="width: 36px; height: 36px; border-radius: 8px; background: #eff6ff; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-right: 12px;">
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: #ecfdf5; color: #059669; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-right: 12px;">
                         <i class="fa-solid fa-store"></i>
                     </div>
                     <div>
@@ -41,7 +41,7 @@
                         <small class="text-muted d-block" style="font-size: 12px;">{{ __('Languages available to customers browsing the public storefront.') }}</small>
                     </div>
                 </div>
-                <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
+                <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
                     <i class="fa-solid fa-globe mr-1"></i> {{ __('Storefront') }}
                 </span>
             </div>
@@ -104,7 +104,7 @@
                                     <td class="text-center align-middle">
                                         <div class="d-inline-flex align-items-center gap-2">
                                             <a class="btn btn-sm px-3 py-1 mr-2" 
-                                               style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; font-weight: 600; border-radius: 8px; font-size: 12.5px; transition: all 0.2s;"
+                                               style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-weight: 600; border-radius: 8px; font-size: 12.5px; transition: all 0.2s;"
                                                href="{{ route('back.language.edit', $data->id) }}">
                                                 <i class="fa-solid fa-pen-to-square mr-1"></i> {{ __('Edit') }}
                                             </a>
@@ -204,7 +204,7 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         <a class="btn btn-sm px-3 py-1" 
-                                           style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; font-weight: 600; border-radius: 8px; font-size: 12.5px; transition: all 0.2s;"
+                                           style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-weight: 600; border-radius: 8px; font-size: 12.5px; transition: all 0.2s;"
                                            href="{{ route('back.language.edit', $data->id) }}">
                                             <i class="fa-solid fa-pen-to-square mr-1"></i> {{ __('Edit') }}
                                         </a>

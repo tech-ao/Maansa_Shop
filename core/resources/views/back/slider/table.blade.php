@@ -29,7 +29,7 @@
                 $theme = strtolower($data->home_page ?? 'theme1');
             @endphp
             @if($theme == 'theme1')
-                <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 11.5px; font-weight: 700; padding: 5px 10px; border-radius: 999px;">
+                <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 11.5px; font-weight: 700; padding: 5px 10px; border-radius: 999px;">
                     <i class="fa-solid fa-store mr-1"></i> {{ __('Home 1') }}
                 </span>
             @elseif($theme == 'theme2')

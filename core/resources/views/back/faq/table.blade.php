@@ -9,7 +9,7 @@
         </div>
     </td>
     <td class="align-middle">
-        <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px;">
+        <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px;">
             <i class="fa-solid fa-folder mr-1"></i> {{ $data->category->name ?? __('Uncategorized') }}
         </span>
     </td>

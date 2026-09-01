@@ -52,7 +52,7 @@
                                     <i class="fa-solid fa-sliders text-primary mr-2" style="font-size: 18px;"></i>
                                     <span>{{ __('Email System Configuration') }}</span>
                                 </div>
-                                <span class="badge" style="background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
+                                <span class="badge" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px;">
                                     <i class="fa-solid fa-paper-plane mr-1"></i> {{ __('SMTP / Mail') }}
                                 </span>
                             </div>
@@ -285,7 +285,7 @@
                                                 </td>
                                                 <td class="text-center align-middle">
                                                     <a class="btn btn-sm px-3 py-1" 
-                                                       style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; font-weight: 600; border-radius: 8px; font-size: 12.5px; transition: all 0.2s;"
+                                                       style="background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; font-weight: 600; border-radius: 8px; font-size: 12.5px; transition: all 0.2s;"
                                                        href="{{ route('back.template.edit', $data->id) }}">
                                                         <i class="fa-solid fa-pen-to-square mr-1"></i> {{ __('Edit Template') }}
                                                     </a>
