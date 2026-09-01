@@ -41,7 +41,7 @@
                                     <label for="text" class="form-label font-weight-bold">{{ __('Menu Label / Text') }} *</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text bg-light"><i class="fa-solid fa-font text-muted"></i></span>
+                                            <span class="input-group-text"><i class="fa-solid fa-font"></i></span>
                                         </div>
                                         <input type="text" class="form-control item-menu" name="text" id="text" placeholder="{{ __('e.g. Special Offers') }}">
                                     </div>
@@ -51,7 +51,7 @@
                                     <label for="href" class="form-label font-weight-bold">{{ __('Destination URL') }} *</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                            <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                         </div>
                                         <input type="text" class="form-control item-menu" name="href" id="href" placeholder="{{ __('https://yourstore.com/page or #') }}">
                                     </div>
@@ -61,7 +61,7 @@
                                     <label for="target" class="form-label font-weight-bold">{{ __('Link Target') }} *</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text bg-light"><i class="fa-solid fa-arrow-up-right-from-square text-muted"></i></span>
+                                            <span class="input-group-text"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
                                         </div>
                                         <select name="target" id="target" class="form-control item-menu">
                                             <option value="_self">{{ __('Same Window (_self)') }}</option>

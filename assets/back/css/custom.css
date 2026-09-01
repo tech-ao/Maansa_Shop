@@ -5140,13 +5140,88 @@ input[type="search"]:focus {
   color: #1e293b !important;
 }
 
-/* Input Groups */
+/* Input Groups & Seamless Connected Borders */
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
 .input-group-text {
   background-color: #f0fdf4 !important;
   border: 1px solid #cbd5e1 !important;
   color: #059669 !important;
   font-weight: 600 !important;
-  border-radius: 10px !important;
+  padding: 0.45rem 0.85rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease !important;
+}
+
+/* Ensure all input-group prepended/appended icons are always emerald green */
+.input-group-text i,
+.input-group-text i::before,
+.input-group-prepend i,
+.input-group-prepend i::before,
+.input-group-append i,
+.input-group-append i::before,
+.input-group-text .text-muted,
+.input-group-prepend .text-muted,
+.input-group-append .text-muted {
+  color: #10b981 !important;
+  -webkit-text-fill-color: #10b981 !important;
+  font-size: 14.5px !important;
+}
+
+/* Seamless Connected Corners */
+.input-group > .input-group-prepend > .input-group-text,
+.input-group > .input-group-prepend > .btn {
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right: 1px solid #cbd5e1 !important;
+}
+
+.input-group > .input-group-append > .input-group-text,
+.input-group > .input-group-append > .btn {
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-left: 1px solid #cbd5e1 !important;
+}
+
+.input-group > .form-control:not(:first-child) {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+
+.input-group > .form-control:not(:last-child) {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.input-group > .input-group-prepend + .form-control:not(:last-child) {
+  border-radius: 0 !important;
+}
+
+/* Input Group Active Focus Coordination */
+.input-group:focus-within > .input-group-prepend > .input-group-text {
+  border-color: #10b981 !important;
+  background-color: #ecfdf5 !important;
+}
+
+.input-group:focus-within > .input-group-append > .input-group-text {
+  border-color: #10b981 !important;
+  background-color: #ecfdf5 !important;
 }
 
 /* Horizontal & Vertical Tabs */

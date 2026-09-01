@@ -44,7 +44,7 @@
                         <label class="form-label font-weight-bold text-dark">{{ __('Campaign Title') }} *</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light"><i class="fa-solid fa-heading text-muted"></i></span>
+                                <span class="input-group-text"><i class="fa-solid fa-heading"></i></span>
                             </div>
                             <input type="text" required class="form-control" name="campaign_title" value="{{ $setting->campaign_title }}" placeholder="{{ __('e.g., Deals Of The Week') }}">
                         </div>
@@ -53,7 +53,7 @@
                         <label class="form-label font-weight-bold text-dark">{{ __('Campaign End Date & Time') }} *</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light"><i class="fa-solid fa-calendar-day text-muted"></i></span>
+                                <span class="input-group-text"><i class="fa-solid fa-calendar-day"></i></span>
                             </div>
                             <input type="text" required class="form-control" name="campaign_end_date" value="{{ $setting->campaign_end_date }}" placeholder="{{ __('MM/DD/YYYY') }}" id="datepicker">
                         </div>

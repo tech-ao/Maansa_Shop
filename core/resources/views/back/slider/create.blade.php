@@ -100,7 +100,7 @@
                                             <label for="link_1" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="link" class="form-control" id="link_1" placeholder="{{ __('e.g. https://... or /products') }}" value="{{ old('link') }}" required>
                                             </div>
@@ -183,7 +183,7 @@
                                             <label for="link_2" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="link" class="form-control" id="link_2" placeholder="{{ __('e.g. https://... or /products') }}" value="{{ old('link') }}" required>
                                             </div>
@@ -266,7 +266,7 @@
                                             <label for="link_3" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="link" class="form-control" id="link_3" placeholder="{{ __('e.g. https://... or /products') }}" value="{{ old('link') }}" required>
                                             </div>
@@ -325,7 +325,7 @@
                                         <label for="link_4" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                             </div>
                                             <input type="text" name="link" class="form-control" id="link_4" placeholder="{{ __('e.g. https://... or /products') }}" value="{{ old('link') }}" required>
                                         </div>

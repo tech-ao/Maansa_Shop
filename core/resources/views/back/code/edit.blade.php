@@ -43,7 +43,7 @@
                             <label for="title" class="form-label font-weight-bold text-dark">{{ __('Coupon Title') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-heading text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-heading"></i></span>
                                 </div>
                                 <input type="text" name="title" class="form-control" id="title"
                                     placeholder="{{ __('Enter Title') }}" value="{{ $code->title }}" required>
@@ -55,7 +55,7 @@
                                 <label for="code" class="form-label font-weight-bold text-dark">{{ __('Promo Code') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-ticket text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-ticket"></i></span>
                                     </div>
                                     <input type="text" name="code_name" class="form-control" id="code"
                                         placeholder="{{ __('Enter Code') }}" value="{{ $code->code_name }}" required style="font-family: monospace; font-weight: 700; text-transform: uppercase;">
@@ -65,7 +65,7 @@
                                 <label for="no_of_times" class="form-label font-weight-bold text-dark">{{ __('Usage Limit (Number Of Times)') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-users text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-users"></i></span>
                                     </div>
                                     <input type="number" name="no_of_times" class="form-control" id="no_of_times"
                                         placeholder="{{ __('Enter Number Of Times') }}" value="{{ $code->no_of_times }}" min="1" required>

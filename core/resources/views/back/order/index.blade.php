@@ -48,7 +48,7 @@
                         <label class="form-label font-weight-bold text-dark small">{{ __('Start Date') }} *</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light"><i class="fa-solid fa-calendar-day text-muted"></i></span>
+                                <span class="input-group-text"><i class="fa-solid fa-calendar-day"></i></span>
                             </div>
                             <input type="text" name="start_date" id="datepicker" class="form-control datepicker"
                                 placeholder="{{ __('Start Date') }}" value="{{ request()->input('start_date') }}">
@@ -58,7 +58,7 @@
                         <label class="form-label font-weight-bold text-dark small">{{ __('End Date') }} *</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light"><i class="fa-solid fa-calendar-check text-muted"></i></span>
+                                <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
                             </div>
                             <input type="text" name="end_date" id="datepicker1" class="form-control datepicker"
                                 placeholder="{{ __('End Date') }}" value="{{ request()->input('end_date') }}">

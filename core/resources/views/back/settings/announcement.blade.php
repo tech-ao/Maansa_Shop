@@ -71,7 +71,7 @@
                                         <label for="announcement_type" class="form-label font-weight-bold">{{ __('Popup Type') }} *</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light"><i class="fa-solid fa-layer-group text-muted"></i></span>
+                                                <span class="input-group-text"><i class="fa-solid fa-layer-group"></i></span>
                                             </div>
                                             <select name="announcement_type" id="announcement_type" class="form-control" required>
                                                 <option value="banner" {{ $setting->announcement_type == 'banner' ? 'selected' : '' }}>{{ __('Announcement Banner Popup') }}</option>
@@ -84,7 +84,7 @@
                                         <label for="announcement_delay" class="form-label font-weight-bold">{{ __('Popup Delay (Seconds)') }} *</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light"><i class="fa-solid fa-clock text-muted"></i></span>
+                                                <span class="input-group-text"><i class="fa-solid fa-clock"></i></span>
                                             </div>
                                             <input type="number" min="0" step="1" name="announcement_delay" class="form-control" id="announcement_delay" placeholder="{{ __('e.g. 3') }}" value="{{ $setting->announcement_delay }}" required>
                                         </div>
@@ -145,7 +145,7 @@
                                     <label for="announcement_link" class="form-label font-weight-bold">{{ __('Action / Banner Target Link') }} *</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                            <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                         </div>
                                         <input type="text" name="announcement_link" class="form-control" id="announcement_link" placeholder="{{ __('e.g. https://... or /shop') }}" value="{{ $setting->announcement_link }}">
                                     </div>

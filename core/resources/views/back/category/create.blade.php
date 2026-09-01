@@ -55,7 +55,7 @@
                                 <label for="name" class="form-label font-weight-bold">{{ __('Category Name') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-tag text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
                                     </div>
                                     <input type="text" name="name" class="form-control item-name" id="name" placeholder="{{ __('e.g. Electronics, Fashion, Home Decor') }}" value="{{ old('name') }}" required>
                                 </div>
@@ -65,7 +65,7 @@
                                 <label for="slug" class="form-label font-weight-bold">{{ __('Category Slug') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                     </div>
                                     <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('e.g. electronics, fashion') }}" value="{{ old('slug') }}" required>
                                 </div>
@@ -76,7 +76,7 @@
                             <label for="serial" class="form-label font-weight-bold">{{ __('Display Sorting Serial Number') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-arrow-down-1-9 text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-arrow-down-1-9"></i></span>
                                 </div>
                                 <input type="number" name="serial" class="form-control" id="serial" placeholder="{{ __('0') }}" value="0" style="max-width: 250px;">
                             </div>

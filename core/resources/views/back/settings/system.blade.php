@@ -615,7 +615,7 @@
                                                         <label for="google_recaptcha_site_key" class="form-label font-weight-bold">{{ __('reCAPTCHA Site Key') }} *</label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text bg-light"><i class="fa-solid fa-key text-muted"></i></span>
+                                                                <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
                                                             </div>
                                                             <input type="text" name="google_recaptcha_site_key" class="form-control" id="google_recaptcha_site_key"
                                                                 placeholder="{{ __('Site Key') }}" value="{{ $setting->google_recaptcha_site_key }}">
@@ -625,7 +625,7 @@
                                                         <label for="google_recaptcha_secret_key" class="form-label font-weight-bold">{{ __('reCAPTCHA Secret Key') }}</label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                                                                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                                                             </div>
                                                             <input type="text" name="google_recaptcha_secret_key" class="form-control" id="google_recaptcha_secret_key"
                                                                 placeholder="{{ __('Secret Key') }}" value="{{ $setting->google_recaptcha_secret_key }}">
@@ -681,7 +681,7 @@
                                                     <label class="form-label font-weight-bold">{{ __('Facebook Page ID') }} *</label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text bg-light"><i class="fa-brands fa-facebook-messenger text-muted"></i></span>
+                                                            <span class="input-group-text"><i class="fa-brands fa-facebook-messenger"></i></span>
                                                         </div>
                                                         <input type="text" name="facebook_messenger" class="form-control"
                                                             placeholder="{{ __('Enter Facebook Page ID') }}" value="{{ $setting->facebook_messenger }}">
@@ -786,7 +786,7 @@
                                                     <label for="view_product" class="form-label font-weight-bold">{{ __('Products Per Page') }} *</label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text bg-light"><i class="fa-solid fa-list-ol text-muted"></i></span>
+                                                            <span class="input-group-text"><i class="fa-solid fa-list-ol"></i></span>
                                                         </div>
                                                         <input type="number" name="view_product" class="form-control" id="view_product"
                                                             placeholder="16" value="{{ $setting->view_product }}">
@@ -797,7 +797,7 @@
                                                     <label for="max_price" class="form-label font-weight-bold">{{ __('Maximum Price Filter Range') }} *</label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text bg-light"><i class="fa-solid fa-money-bill-wave text-muted"></i></span>
+                                                            <span class="input-group-text"><i class="fa-solid fa-money-bill-wave"></i></span>
                                                         </div>
                                                         <input type="number" name="max_price" class="form-control" id="max_price"
                                                             placeholder="10000" value="{{ $setting->max_price }}">
@@ -861,7 +861,7 @@
                                                     <label for="policy_link" class="form-label font-weight-bold">{{ __('Privacy Policy URL') }} *</label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text bg-light"><i class="fa-solid fa-shield-halved text-muted"></i></span>
+                                                            <span class="input-group-text"><i class="fa-solid fa-shield-halved"></i></span>
                                                         </div>
                                                         <input type="text" name="policy_link" class="form-control" id="policy_link"
                                                             placeholder="{{ __('https://yourstore.com/privacy-policy') }}" value="{{ $setting->policy_link }}">
@@ -872,7 +872,7 @@
                                                     <label for="terms_link" class="form-label font-weight-bold">{{ __('Terms of Service URL') }} *</label>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                            <span class="input-group-text bg-light"><i class="fa-solid fa-file-contract text-muted"></i></span>
+                                                            <span class="input-group-text"><i class="fa-solid fa-file-contract"></i></span>
                                                         </div>
                                                         <input type="text" name="terms_link" class="form-control" id="terms_link"
                                                             placeholder="{{ __('https://yourstore.com/terms-and-conditions') }}" value="{{ $setting->terms_link }}">
@@ -966,7 +966,7 @@
                                                             <label for="copy_right" class="form-label font-weight-bold">{{ __('Footer Copyright Text') }} *</label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text bg-light"><i class="fa-regular fa-copyright text-muted"></i></span>
+                                                                    <span class="input-group-text"><i class="fa-regular fa-copyright"></i></span>
                                                                 </div>
                                                                 <textarea name="copy_right" id="copy_right" class="form-control" rows="2"
                                                                     placeholder="{{ __('© 2026 OmniMart. All Rights Reserved.') }}">{{ $setting->copy_right }}</textarea>

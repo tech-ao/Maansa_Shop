@@ -55,7 +55,7 @@
                                 <label for="sitemap_url" class="form-label font-weight-bold">{{ __('Website URL to Crawl') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-globe text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-globe"></i></span>
                                     </div>
                                     <input type="url" name="sitemap_url" class="form-control" id="sitemap_url" placeholder="{{ __('e.g. https://yourdomain.com') }}" value="{{ old('sitemap_url', url('/')) }}" required>
                                 </div>

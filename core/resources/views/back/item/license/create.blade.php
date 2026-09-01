@@ -45,7 +45,7 @@
                             <label for="name" class="form-label font-weight-bold text-dark">{{ __('Product Name') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-heading text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-heading"></i></span>
                                 </div>
                                 <input type="text" name="name" class="form-control item-name" id="name" placeholder="{{ __('Enter Product Name') }}" value="{{ old('name') }}" required>
                             </div>
@@ -54,7 +54,7 @@
                             <label for="slug" class="form-label font-weight-bold text-dark">{{ __('Product Slug') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                 </div>
                                 <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('Enter URL Slug') }}" value="{{ old('slug') }}" required>
                             </div>
@@ -124,7 +124,7 @@
                             <label for="file_type" class="form-label font-weight-bold text-dark">{{ __('Deliverable Delivery Method') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-boxes-packing text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-boxes-packing"></i></span>
                                 </div>
                                 <select class="form-control font-weight-bold" id="file_type" name="file_type">
                                     <option value="file">{{ __('Upload File (.ZIP)') }}</option>
@@ -145,7 +145,7 @@
                             <label for="link" class="form-label font-weight-bold text-dark">{{ __('External Download Link URL') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-globe text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-globe"></i></span>
                                 </div>
                                 <input type="text" id="link" name="link" class="form-control" placeholder="https://example.com/download/software.zip">
                             </div>
@@ -386,7 +386,7 @@
                             <label for="sku" class="form-label font-weight-bold text-dark">{{ __('SKU / Product Code') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-fingerprint text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-fingerprint"></i></span>
                                 </div>
                                 <input type="text" name="sku" class="form-control font-weight-bold" id="sku" placeholder="{{ __('Enter SKU') }}" value="{{Str::random(10)}}" required style="font-family: monospace;">
                             </div>

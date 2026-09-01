@@ -33,7 +33,7 @@
                                 <label for="email" class="form-label font-weight-bold">{{ __('Customer Email') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-envelope text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
                                     </div>
                                     <input type="email" name="email" class="form-control" id="email" placeholder="{{ __('customer@example.com') }}" value="{{ old('email') }}" required>
                                 </div>
@@ -43,7 +43,7 @@
                                 <label for="subject" class="form-label font-weight-bold">{{ __('Subject') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-heading text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-heading"></i></span>
                                     </div>
                                     <input type="text" name="subject" class="form-control" id="subject" placeholder="{{ __('Ticket topic / summary') }}" value="{{ old('subject') }}" required>
                                 </div>

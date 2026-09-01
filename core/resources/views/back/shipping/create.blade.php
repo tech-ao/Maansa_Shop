@@ -43,7 +43,7 @@
                             <label for="title" class="form-label font-weight-bold text-dark">{{ __('Shipping Method Title') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-truck-fast text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-truck-fast"></i></span>
                                 </div>
                                 <input type="text" name="title" class="form-control" id="title"
                                     placeholder="{{ __('e.g., Express Courier Delivery, Standard Ground Shipping') }}" value="{{ old('title') }}" required>

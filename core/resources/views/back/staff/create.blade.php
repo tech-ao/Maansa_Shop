@@ -50,7 +50,7 @@
                                 <label for="name" class="form-label font-weight-bold">{{ __('User Name') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-user text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
                                     </div>
                                     <input type="text" name="name" class="form-control" id="name"
                                         placeholder="{{ __('Enter Full Name') }}" value="{{ old('name') }}" required>
@@ -62,7 +62,7 @@
                                 <label for="email" class="form-label font-weight-bold">{{ __('Email Address') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-envelope text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
                                     </div>
                                     <input type="email" name="email" class="form-control" id="email"
                                         placeholder="{{ __('Enter Email Address') }}" value="{{ old('email') }}" required>
@@ -74,7 +74,7 @@
                                 <label for="phone" class="form-label font-weight-bold">{{ __('Phone Number') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-phone text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
                                     </div>
                                     <input type="text" name="phone" class="form-control" id="phone"
                                         placeholder="{{ __('Enter Phone Number') }}" value="{{ old('phone') }}" required>
@@ -86,7 +86,7 @@
                                 <label for="password" class="form-label font-weight-bold">{{ __('Password') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                                     </div>
                                     <input type="password" name="password" class="form-control" id="password"
                                         placeholder="{{ __('Enter secure password') }}" required>
@@ -98,7 +98,7 @@
                                 <label for="role_id" class="form-label font-weight-bold">{{ __('Select Role') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-shield-halved text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-shield-halved"></i></span>
                                     </div>
                                     <select name="role_id" id="role_id" class="form-control" required>
                                         <option value="" disabled selected>{{ __('Select Role...') }}</option>

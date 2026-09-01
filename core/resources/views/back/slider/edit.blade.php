@@ -110,7 +110,7 @@
                                         <label for="slider-link" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                             </div>
                                             <input type="text" name="link" class="form-control" id="slider-link" placeholder="{{ __('e.g. https://... or /products') }}" value="{{ $slider->link }}" required>
                                         </div>
@@ -168,7 +168,7 @@
                                     <label for="slider-link" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                            <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                         </div>
                                         <input type="text" name="link" class="form-control" id="slider-link" placeholder="{{ __('e.g. https://... or /products') }}" value="{{ $slider->link }}" required>
                                     </div>

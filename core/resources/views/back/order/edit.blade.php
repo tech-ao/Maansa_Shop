@@ -42,7 +42,7 @@
                             <label for="transaction_number" class="form-label font-weight-bold text-dark">{{ __('Order Transaction Code / ID') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-barcode text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-barcode"></i></span>
                                 </div>
                                 <input type="text" name="transaction_number" class="form-control"
                                     id="transaction_number" placeholder="{{ __('Enter Order ID') }}"

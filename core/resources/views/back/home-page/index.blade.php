@@ -119,7 +119,7 @@
                                             <label for="url1" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="url1" class="form-control" id="url1" placeholder="{{ __('e.g. https://... or /products') }}" value="{{isset($hero_banner['url1']) ? $hero_banner['url1'] : ''}}">
                                             </div>
@@ -162,7 +162,7 @@
                                             <label for="url2" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="url2" class="form-control" id="url2" placeholder="{{ __('e.g. https://... or /products') }}" value="{{isset($hero_banner['url2']) ? $hero_banner['url2'] : ''}}">
                                             </div>
@@ -221,7 +221,7 @@
                                             <label for="firsturl{{ $i }}" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="firsturl{{ $i }}" class="form-control" id="firsturl{{ $i }}" placeholder="{{ __('Enter Banner Url') }}" value="{{isset($first_banner['firsturl'.$i]) ? $first_banner['firsturl'.$i] : ''}}">
                                             </div>
@@ -346,7 +346,7 @@
                                             <label for="url_s{{ $i }}" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="url{{ $i }}" class="form-control" id="url_s{{ $i }}" placeholder="{{ __('Enter Banner Url') }}" value="{{isset($secend_banner['url'.$i]) ? $secend_banner['url'.$i] : ''}}">
                                             </div>
@@ -530,7 +530,7 @@
                                             <label for="url_tb{{ $i }}" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="url{{ $i }}" class="form-control" id="url_tb{{ $i }}" placeholder="{{ __('Enter Banner Url') }}" value="{{isset($third_banner['url'.$i]) ? $third_banner['url'.$i] : ''}}">
                                             </div>
@@ -586,7 +586,7 @@
                                             <label for="url_h4_{{ $i }}" class="form-label font-weight-bold">{{ __('Target URL / Link') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" name="url{{ $i }}" class="form-control" id="url_h4_{{ $i }}" placeholder="{{ __('Enter Target Url') }}" value="{{isset($home4_banner['url'.$i]) ? $home4_banner['url'.$i] : ''}}">
                                             </div>

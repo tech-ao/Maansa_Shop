@@ -43,7 +43,7 @@
                             <label for="name" class="form-label font-weight-bold text-dark">{{ __('Currency Code / Name') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-globe text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-globe"></i></span>
                                 </div>
                                 <input type="text" name="name" class="form-control" id="name"
                                     placeholder="{{ __('Currency Name') }}" value="{{ $currency->name }}" required style="font-family: monospace; font-weight: 700; text-transform: uppercase;">
@@ -54,7 +54,7 @@
                             <label for="sign" class="form-label font-weight-bold text-dark">{{ __('Currency Sign / Symbol') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-dollar-sign text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-dollar-sign"></i></span>
                                 </div>
                                 <input type="text" name="sign" class="form-control" id="sign"
                                     placeholder="{{ __('Currency Sign') }}" value="{{ $currency->sign }}" required style="font-weight: 700;">
@@ -65,7 +65,7 @@
                             <label for="value" class="form-label font-weight-bold text-dark">{{ __('Exchange Rate Value') }} *</label>
                             <div class="input-group mb-1">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-arrow-trend-up text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-arrow-trend-up"></i></span>
                                 </div>
                                 <input type="text" name="value" class="form-control" id="value"
                                     placeholder="{{ __('Currency Value') }}" value="{{ $currency->value }}" required style="font-weight: 700;">

@@ -95,7 +95,7 @@
                                                 <label for="twilio_sid" class="form-label font-weight-bold">{{ __('Twilio SID') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-id-card text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
                                                     </div>
                                                     <input type="text" class="form-control font-monospace" id="twilio_sid" name="twilio_sid" placeholder="{{ __('e.g. AC73e54518487ad4e26da8b465a7614f1f0') }}" value="{{ $setting->twilio_sid }}" required>
                                                 </div>
@@ -105,7 +105,7 @@
                                                 <label for="twilio_token" class="form-label font-weight-bold">{{ __('Twilio Auth Token') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                                                     </div>
                                                     <input type="password" class="form-control" id="twilio_token" name="twilio_token" placeholder="{{ __('Enter Twilio Auth Token') }}" value="{{ $setting->twilio_token }}" required>
                                                 </div>
@@ -115,7 +115,7 @@
                                                 <label for="twilio_form_number" class="form-label font-weight-bold">{{ __('Twilio Sender Phone Number (From)') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-phone text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-phone"></i></span>
                                                     </div>
                                                     <input type="text" class="form-control" id="twilio_form_number" name="twilio_form_number" placeholder="{{ __('e.g. +15612793758') }}" value="{{ $setting->twilio_form_number }}" required>
                                                 </div>
@@ -128,7 +128,7 @@
                                                 <label for="twilio_country_code" class="form-label font-weight-bold">{{ __('Default Country Calling Code') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-earth-americas text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-earth-americas"></i></span>
                                                     </div>
                                                     <input type="text" class="form-control" id="twilio_country_code" name="twilio_country_code" placeholder="{{ __('e.g. +1 or +880') }}" value="{{ $setting->twilio_country_code }}" required>
                                                 </div>

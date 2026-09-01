@@ -69,7 +69,7 @@
                                 <label for="title" class="form-label font-weight-bold">{{ __('Blog Title') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-heading text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-heading"></i></span>
                                     </div>
                                     <input type="text" name="title" class="form-control item-name" id="title"
                                         placeholder="{{ __('Enter Title') }}" value="{{ $post->title }}" required>
@@ -80,7 +80,7 @@
                                 <label for="category_id" class="form-label font-weight-bold">{{ __('Select Category') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-folder-open text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-folder-open"></i></span>
                                     </div>
                                     <select name="category_id" id="category_id" class="form-control" required>
                                         <option value="" disabled>{{ __('Select Category...') }}</option>

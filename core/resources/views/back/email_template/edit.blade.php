@@ -97,7 +97,7 @@
                                 <label for="subject" class="form-label font-weight-bold">{{ __('Email Subject') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-heading text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-heading"></i></span>
                                     </div>
                                     <input type="text" name="subject" class="form-control" id="subject" placeholder="{{ __('Enter Subject Line') }}" value="{{ $template->subject }}" required>
                                 </div>

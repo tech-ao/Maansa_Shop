@@ -32,7 +32,7 @@
                             <label for="category_id" class="form-label font-weight-bold">{{ __('Select Parent Category') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-layer-group text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-layer-group"></i></span>
                                 </div>
                                 <select name="category_id" id="category_id" class="form-control" required>
                                     <option value="" disabled selected>{{ __('Select Parent Category...') }}</option>
@@ -48,7 +48,7 @@
                                 <label for="name" class="form-label font-weight-bold">{{ __('Sub Category Name') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-tag text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
                                     </div>
                                     <input type="text" name="name" class="form-control item-name" id="name" placeholder="{{ __('e.g. Laptops, Smartphones, Shoes') }}" value="{{ old('name') }}" required>
                                 </div>
@@ -58,7 +58,7 @@
                                 <label for="slug" class="form-label font-weight-bold">{{ __('Sub Category Slug') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                     </div>
                                     <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('e.g. laptops, smartphones') }}" value="{{ old('slug') }}" required>
                                 </div>

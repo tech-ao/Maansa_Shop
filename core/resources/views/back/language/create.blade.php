@@ -50,7 +50,7 @@
                                 <label for="language_name" class="form-label font-weight-bold">{{ __('Language Display Name') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-language text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-language"></i></span>
                                     </div>
                                     <input type="text" class="form-control" name="language" id="language_name" placeholder="{{ __('e.g. Spanish, French, German, Japanese') }}" value="{{ old('language') }}" required>
                                 </div>

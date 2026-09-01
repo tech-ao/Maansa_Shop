@@ -94,7 +94,7 @@
                                             <label for="facebook_client_id" class="form-label font-weight-bold">{{ __('App ID') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-id-card text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control" id="facebook_client_id" name="facebook_client_id" placeholder="{{ __('e.g. 643929170080071') }}" value="{{ $setting->facebook_client_id }}">
                                             </div>
@@ -104,7 +104,7 @@
                                             <label for="facebook_client_secret" class="form-label font-weight-bold">{{ __('App Secret') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control" id="facebook_client_secret" name="facebook_client_secret" placeholder="{{ __('e.g. 038b2100dff9a2a684c85959c0accf66') }}" value="{{ $setting->facebook_client_secret }}">
                                             </div>
@@ -114,7 +114,7 @@
                                             <label for="facebook_redirect" class="form-label font-weight-bold">{{ __('Valid OAuth Redirect URI') }}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control font-monospace" id="facebook_redirect" name="facebook_redirect" value="{{ $facebook_url }}" readonly style="background: #f8fafc; font-size: 13px;">
                                                 <div class="input-group-append">
@@ -177,7 +177,7 @@
                                             <label for="google_client_id" class="form-label font-weight-bold">{{ __('Client ID') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-id-card text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control" id="google_client_id" name="google_client_id" placeholder="{{ __('Enter Client ID') }}" value="{{ $setting->google_client_id }}">
                                             </div>
@@ -187,7 +187,7 @@
                                             <label for="google_client_secret" class="form-label font-weight-bold">{{ __('Client Secret') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control" id="google_client_secret" name="google_client_secret" placeholder="{{ __('Enter Client Secret') }}" value="{{ $setting->google_client_secret }}">
                                             </div>
@@ -197,7 +197,7 @@
                                             <label for="google_redirect" class="form-label font-weight-bold">{{ __('Authorized Redirect URI') }}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control font-monospace" id="google_redirect" name="google_redirect" value="{{ $google_url }}" readonly style="background: #f8fafc; font-size: 13px;">
                                                 <div class="input-group-append">

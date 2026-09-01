@@ -32,7 +32,7 @@
 							<label for="name" class="form-label font-weight-bold">{{ __('Role Name') }} *</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text bg-light"><i class="fa-solid fa-shield text-muted"></i></span>
+                                    <span class="input-group-text"><i class="fa-solid fa-shield"></i></span>
                                 </div>
                                 <input type="text" name="name" class="form-control" id="name"
                                     placeholder="{{ __('e.g., Store Manager, Support Agent, Content Editor') }}" value="{{ old('name') }}" required>

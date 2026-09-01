@@ -51,7 +51,7 @@
 								<label for="name" class="form-label font-weight-bold">{{ __('Brand Name') }} *</label>
 								<div class="input-group">
 									<div class="input-group-prepend">
-										<span class="input-group-text bg-light"><i class="fa-solid fa-tag text-muted"></i></span>
+										<span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
 									</div>
 									<input type="text" name="name" class="form-control item-name" id="name"
 										placeholder="{{ __('e.g., Nike, Apple, Sony') }}" value="{{ old('name') }}" required>
@@ -62,7 +62,7 @@
 								<label for="slug" class="form-label font-weight-bold">{{ __('Brand Slug') }} *</label>
 								<div class="input-group">
 									<div class="input-group-prepend">
-										<span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+										<span class="input-group-text"><i class="fa-solid fa-link"></i></span>
 									</div>
 									<input type="text" name="slug" class="form-control" id="slug"
 										placeholder="{{ __('e.g., nike, apple, sony') }}" value="{{ old('slug') }}" required>

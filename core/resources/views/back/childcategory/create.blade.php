@@ -33,7 +33,7 @@
                                 <label for="category_id" class="form-label font-weight-bold">{{ __('Select Primary Category') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-layer-group text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-layer-group"></i></span>
                                     </div>
                                     <select name="category_id" id="category_id" data-href="{{ route('back.get.subcategory') }}" class="form-control" required>
                                         <option value="" selected disabled>{{ __('Select Category First...') }}</option>
@@ -48,7 +48,7 @@
                                 <label for="subcategory_id" class="form-label font-weight-bold">{{ __('Select Subcategory') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-sitemap text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-sitemap"></i></span>
                                     </div>
                                     <select name="subcategory_id" id="subcategory_id" class="form-control" required>
                                         <option value="">{{ __('Select Subcategory...') }}</option>
@@ -62,7 +62,7 @@
                                 <label for="name" class="form-label font-weight-bold">{{ __('Child Category Name') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-tag text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
                                     </div>
                                     <input type="text" name="name" class="form-control item-name" id="name" placeholder="{{ __('e.g. Screen Protectors, Running Shoes') }}" value="{{ old('name') }}" required>
                                 </div>
@@ -72,7 +72,7 @@
                                 <label for="slug" class="form-label font-weight-bold">{{ __('Child Category Slug') }} *</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text bg-light"><i class="fa-solid fa-link text-muted"></i></span>
+                                        <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
                                     </div>
                                     <input type="text" name="slug" class="form-control" id="slug" placeholder="{{ __('e.g. screen-protectors, running-shoes') }}" value="{{ old('slug') }}" required>
                                 </div>

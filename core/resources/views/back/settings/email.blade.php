@@ -149,7 +149,7 @@
                                                 <label for="email_host" class="form-label font-weight-bold">{{ __('SMTP Host') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-network-wired text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-network-wired"></i></span>
                                                     </div>
                                                     <input type="text" class="form-control" id="email_host" name="email_host" placeholder="{{ __('e.g. smtp.mailtrap.io') }}" value="{{ $setting->email_host }}">
                                                 </div>
@@ -159,7 +159,7 @@
                                                 <label for="email_port" class="form-label font-weight-bold">{{ __('SMTP Port') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-hashtag text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></span>
                                                     </div>
                                                     <input type="text" class="form-control" id="email_port" name="email_port" placeholder="{{ __('e.g. 587') }}" value="{{ $setting->email_port }}">
                                                 </div>
@@ -169,7 +169,7 @@
                                                 <label for="email_encryption" class="form-label font-weight-bold">{{ __('Encryption') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-shield-halved text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-shield-halved"></i></span>
                                                     </div>
                                                     <input type="text" class="form-control" id="email_encryption" name="email_encryption" placeholder="{{ __('e.g. tls or ssl') }}" value="{{ $setting->email_encryption }}">
                                                 </div>
@@ -179,7 +179,7 @@
                                                 <label for="email_user" class="form-label font-weight-bold">{{ __('SMTP Username') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-user text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
                                                     </div>
                                                     <input type="text" class="form-control" id="email_user" name="email_user" placeholder="{{ __('Enter SMTP Username') }}" value="{{ $setting->email_user }}">
                                                 </div>
@@ -189,7 +189,7 @@
                                                 <label for="email_pass" class="form-label font-weight-bold">{{ __('SMTP Password') }} *</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                                                        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
                                                     </div>
                                                     <input type="password" class="form-control" id="email_pass" name="email_pass" placeholder="{{ __('Enter SMTP Password') }}" value="{{ $setting->email_pass }}">
                                                 </div>
@@ -209,7 +209,7 @@
                                             <label for="email_from" class="form-label font-weight-bold">{{ __('Email From (Sender Address)') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-at text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control" id="email_from" name="email_from" placeholder="{{ __('e.g. noreply@domain.com') }}" value="{{ $setting->email_from }}">
                                             </div>
@@ -219,7 +219,7 @@
                                             <label for="email_from_name" class="form-label font-weight-bold">{{ __('Email From Name (Sender Name)') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-user-tag text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-user-tag"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control" id="email_from_name" name="email_from_name" placeholder="{{ __('e.g. Store Notifications') }}" value="{{ $setting->email_from_name }}">
                                             </div>
@@ -229,7 +229,7 @@
                                             <label for="contact_email" class="form-label font-weight-bold">{{ __('Public Contact Email') }} *</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-envelope-open-text text-muted"></i></span>
+                                                    <span class="input-group-text"><i class="fa-solid fa-envelope-open-text"></i></span>
                                                 </div>
                                                 <input type="text" class="form-control" id="contact_email" name="contact_email" placeholder="{{ __('e.g. support@domain.com') }}" value="{{ $setting->contact_email }}">
                                             </div>
