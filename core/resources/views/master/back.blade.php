@@ -104,7 +104,8 @@
                             <a class="dropdown-toggle profile-pic topbar-profile-btn" data-toggle="dropdown"
                                 href="{{ route('back.dashboard') }}" aria-expanded="false">
                                 <div class="user-avatar-badge">
-                                    <img src="{{ (Auth::guard('admin')->check() && Auth::guard('admin')->user()->photo) ? url('/core/public/storage/images/' . Auth::guard('admin')->user()->photo) : url('/core/public/storage/images/noimage.png') }}"
+                                    <img src="{{ (Auth::guard('admin')->check() && Auth::guard('admin')->user()->photo) ? url('/core/public/storage/images/' . Auth::guard('admin')->user()->photo) : url('/core/public/storage/images/placeholder.png') }}"
+                                        onerror="this.onerror=null; this.src='{{ url('/core/public/storage/images/placeholder.png') }}';"
                                         alt="Avatar" class="user-avatar-img">
                                     <span class="user-status-dot"></span>
                                 </div>
@@ -118,7 +119,8 @@
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg"><img
-                                                src="{{ (Auth::guard('admin')->check() && Auth::guard('admin')->user()->photo) ? url('/core/public/storage/images/' . Auth::guard('admin')->user()->photo) : url('/core/public/storage/images/noimage.png') }}"
+                                                src="{{ (Auth::guard('admin')->check() && Auth::guard('admin')->user()->photo) ? url('/core/public/storage/images/' . Auth::guard('admin')->user()->photo) : url('/core/public/storage/images/placeholder.png') }}"
+                                                onerror="this.onerror=null; this.src='{{ url('/core/public/storage/images/placeholder.png') }}';"
                                                 alt="image profile" class="avatar-img rounded-circle"></div>
 
                                         <div class="u-text">
@@ -157,6 +159,7 @@
                     <div class="sidebar-mobile-header d-flex d-lg-none align-items-center justify-content-between">
                         <div class="mobile-brand-wrapper">
                             <img src="{{ $setting->logo ? url('/core/public/storage/images/' . $setting->logo) : url('/core/public/storage/images/placeholder.png') }}"
+                                onerror="this.onerror=null; this.src='{{ url('/core/public/storage/images/placeholder.png') }}';"
                                 alt="logo" class="mobile-drawer-logo">
                         </div>
                         <button type="button" class="sidebar-mobile-close" onclick="$('html').removeClass('nav_open'); $('body').removeClass('nav_open'); $('.sidenav-toggler').removeClass('toggled');" title="Close Menu">
@@ -166,7 +169,8 @@
 
                     <div class="user">
                         <div class="avatar-sm">
-                            <img src="{{ (Auth::guard('admin')->check() && Auth::guard('admin')->user()->photo) ? url('/core/public/storage/images/' . Auth::guard('admin')->user()->photo) : url('/core/public/storage/images/noimage.png') }}"
+                            <img src="{{ (Auth::guard('admin')->check() && Auth::guard('admin')->user()->photo) ? url('/core/public/storage/images/' . Auth::guard('admin')->user()->photo) : url('/core/public/storage/images/placeholder.png') }}"
+                                onerror="this.onerror=null; this.src='{{ url('/core/public/storage/images/placeholder.png') }}';"
                                 alt="..." class="avatar-img">
                         </div>
                         <div class="info">

@@ -35,6 +35,7 @@
                             <div class="avatar-preview-container">
                                 <img class="avatar-preview-img" id="avatarPreview"
                                     src="{{ $data->photo ? url('/core/public/storage/images/'.$data->photo) : url('/core/public/storage/images/placeholder.png') }}"
+                                    onerror="this.onerror=null; this.src='{{ url('/core/public/storage/images/placeholder.png') }}';"
                                     alt="{{ $data->name }}">
                                 
                                 <label for="profilePhotoInput" class="avatar-upload-trigger" title="{{ __('Click to change avatar') }}">
