@@ -33,9 +33,9 @@
                             <div class="sptfl-modern">
                                 <!-- Quick Filter Dropdown -->
                                 <div class="quickFilter modern-quick-filter">
-                                    <h4 class="quickFilter-title">
-                                        <i class="fas fa-filter"></i> <span>{{__('Quick filter')}}</span> <i class="icon-chevron-down filter-arrow ml-1"></i>
-                                    </h4>
+                                    <div class="quickFilter-title">
+                                        <i class="fas fa-filter"></i> <span>{{__('Quick filter')}}</span> <i class="icon-chevron-down filter-arrow"></i>
+                                    </div>
                                     <ul id="quick_filter" class="quick-filter-dropdown">
                                         <li><a datahref=""><i class="icon-chevron-right pr-2"></i>{{__('All products')}} </a></li>
                                         <li><a href="javascript:;" data-href="feature"><i class="icon-chevron-right pr-2"></i>{{__('Featured products')}} </a></li>
@@ -82,7 +82,7 @@
                     background: #ffffff !important;
                     border: 1px solid #e2e8f0 !important;
                     border-radius: 14px !important;
-                    padding: 12px 18px !important;
+                    padding: 10px 16px !important;
                     margin-bottom: 24px !important;
                     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
                 }
@@ -91,7 +91,6 @@
                     display: flex !important;
                     align-items: center !important;
                     justify-content: space-between !important;
-                    flex-wrap: wrap !important;
                     gap: 12px !important;
                     width: 100% !important;
                 }
@@ -105,70 +104,116 @@
                 .sptfl-modern {
                     display: flex !important;
                     align-items: center !important;
-                    gap: 12px !important;
-                    flex-wrap: wrap !important;
+                    gap: 10px !important;
                     width: 100% !important;
                 }
 
                 /* Quick Filter Button */
+                .quickFilter,
                 .modern-quick-filter {
                     position: relative !important;
-                    display: inline-block !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                    width: auto !important;
+                    height: auto !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
                 }
 
+                .quickFilter .quickFilter-title,
                 .modern-quick-filter .quickFilter-title {
+                    position: relative !important;
+                    top: auto !important;
+                    left: auto !important;
+                    right: auto !important;
+                    bottom: auto !important;
+                    width: auto !important;
+                    height: 38px !important;
+                    line-height: 1 !important;
                     margin: 0 !important;
-                    padding: 8px 16px !important;
+                    padding: 0 14px !important;
                     border-radius: 10px !important;
                     background: #f8fafc !important;
                     border: 1px solid #e2e8f0 !important;
                     color: #334155 !important;
-                    font-size: 13.5px !important;
+                    font-size: 13px !important;
                     font-weight: 600 !important;
                     cursor: pointer !important;
                     display: inline-flex !important;
                     align-items: center !important;
-                    gap: 8px !important;
+                    justify-content: center !important;
+                    gap: 6px !important;
                     transition: all 0.2s ease !important;
                     user-select: none !important;
+                    white-space: nowrap !important;
+                    overflow: visible !important;
                 }
 
+                .quickFilter .quickFilter-title:hover,
                 .modern-quick-filter .quickFilter-title:hover {
                     background: #ecfdf5 !important;
                     border-color: #a7f3d0 !important;
                     color: #059669 !important;
                 }
 
+                .quickFilter .quickFilter-title i,
                 .modern-quick-filter .quickFilter-title i {
                     color: #10b981 !important;
                     font-size: 13px !important;
+                    line-height: 1 !important;
+                    margin: 0 !important;
+                    display: inline-block !important;
                 }
 
+                .quickFilter .quickFilter-title span,
+                .modern-quick-filter .quickFilter-title span {
+                    display: inline-block !important;
+                    line-height: 1 !important;
+                    font-size: 13px !important;
+                    color: inherit !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    white-space: nowrap !important;
+                }
+
+                .quickFilter .quickFilter-title .filter-arrow,
+                .modern-quick-filter .quickFilter-title .filter-arrow {
+                    font-size: 10px !important;
+                    color: #94a3b8 !important;
+                    margin-left: 2px !important;
+                }
+
+                #quick_filter,
                 .modern-quick-filter .quick-filter-dropdown {
                     position: absolute !important;
-                    top: calc(100% + 8px) !important;
+                    top: calc(100% + 6px) !important;
                     left: 0 !important;
-                    min-width: 190px !important;
+                    min-width: 180px !important;
                     background: #ffffff !important;
                     border: 1px solid #e2e8f0 !important;
                     border-radius: 12px !important;
                     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
                     padding: 6px 0 !important;
                     list-style: none !important;
-                    z-index: 9999 !important;
+                    z-index: 99999 !important;
                     margin: 0 !important;
                     display: none;
+                    border-top: 1px solid #e2e8f0 !important;
                 }
 
+                .modern-quick-filter:hover #quick_filter,
                 .modern-quick-filter:hover .quick-filter-dropdown,
-                .modern-quick-filter.active .quick-filter-dropdown {
+                .quickFilter:hover #quick_filter {
                     display: block !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
                 }
 
+                #quick_filter li a,
                 .modern-quick-filter .quick-filter-dropdown li a {
                     display: flex !important;
                     align-items: center !important;
-                    gap: 8px !important;
+                    gap: 6px !important;
                     padding: 8px 16px !important;
                     color: #475569 !important;
                     font-size: 13px !important;
@@ -177,22 +222,26 @@
                     transition: all 0.15s ease !important;
                 }
 
+                #quick_filter li a:hover,
                 .modern-quick-filter .quick-filter-dropdown li a:hover {
                     background: #ecfdf5 !important;
                     color: #059669 !important;
                 }
 
                 /* Sort Select */
+                .shop-sorting,
                 .modern-sort-group {
                     display: inline-flex !important;
                     align-items: center !important;
                     margin: 0 !important;
+                    flex: 1 !important;
                 }
 
                 .sort-select-wrapper {
                     position: relative !important;
                     display: inline-flex !important;
                     align-items: center !important;
+                    width: 100% !important;
                 }
 
                 .sort-select-wrapper .sort-icon {
@@ -204,8 +253,10 @@
                     z-index: 2 !important;
                 }
 
+                .shop-sorting select.form-control,
                 .modern-sort-group select.form-control {
-                    padding: 8px 14px 8px 32px !important;
+                    width: 100% !important;
+                    padding: 0 14px 0 32px !important;
                     border-radius: 10px !important;
                     background: #f8fafc !important;
                     border: 1px solid #e2e8f0 !important;
@@ -213,12 +264,14 @@
                     font-size: 13px !important;
                     font-weight: 600 !important;
                     height: 38px !important;
+                    line-height: 38px !important;
                     cursor: pointer !important;
                     transition: all 0.2s ease !important;
+                    margin: 0 !important;
                 }
 
-                .modern-sort-group select.form-control:focus,
-                .modern-sort-group select.form-control:hover {
+                .shop-sorting select.form-control:focus,
+                .modern-sort-group select.form-control:focus {
                     background: #ffffff !important;
                     border-color: #10b981 !important;
                     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12) !important;
@@ -228,15 +281,18 @@
                 .catalog-toolbar-right {
                     display: flex !important;
                     align-items: center !important;
-                    gap: 16px !important;
+                    gap: 12px !important;
+                    flex-shrink: 0 !important;
                 }
 
                 .catalog-items-count {
                     font-size: 13px !important;
                     color: #64748b !important;
+                    white-space: nowrap !important;
                 }
 
-                .modern-view-switch {
+                .modern-view-switch,
+                .shop-view {
                     display: inline-flex !important;
                     align-items: center !important;
                     background: #f1f5f9 !important;
@@ -244,9 +300,12 @@
                     border-radius: 10px !important;
                     border: 1px solid #e2e8f0 !important;
                     gap: 2px !important;
+                    float: none !important;
+                    text-align: center !important;
                 }
 
-                .modern-view-switch .list-view {
+                .modern-view-switch .list-view,
+                .shop-view .list-view {
                     display: inline-flex !important;
                     align-items: center !important;
                     justify-content: center !important;
@@ -256,16 +315,18 @@
                     color: #64748b !important;
                     background: transparent !important;
                     text-decoration: none !important;
-                    font-size: 14px !important;
+                    font-size: 13px !important;
                     transition: all 0.2s ease !important;
                 }
 
-                .modern-view-switch .list-view:hover {
+                .modern-view-switch .list-view:hover,
+                .shop-view .list-view:hover {
                     color: #0f172a !important;
                     background: rgba(255, 255, 255, 0.6) !important;
                 }
 
-                .modern-view-switch .list-view.active {
+                .modern-view-switch .list-view.active,
+                .shop-view .list-view.active {
                     background: #10b981 !important;
                     color: #ffffff !important;
                     box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35) !important;
@@ -274,7 +335,7 @@
                 /* Mobile Responsiveness (<= 768px) */
                 @media (max-width: 768px) {
                     .shop-top-filter-wrapper {
-                        padding: 10px 12px !important;
+                        padding: 8px 10px !important;
                         margin-bottom: 16px !important;
                     }
 
@@ -282,7 +343,8 @@
                         flex-direction: row !important;
                         justify-content: space-between !important;
                         align-items: center !important;
-                        gap: 8px !important;
+                        gap: 6px !important;
+                        flex-wrap: nowrap !important;
                     }
 
                     .catalog-toolbar-left {
@@ -303,72 +365,59 @@
                         min-width: 0 !important;
                     }
 
+                    .quickFilter .quickFilter-title,
                     .modern-quick-filter .quickFilter-title {
                         width: 100% !important;
-                        padding: 7px 8px !important;
-                        font-size: 12px !important;
-                        justify-content: center !important;
-                        gap: 4px !important;
                         height: 36px !important;
-                        white-space: nowrap !important;
-                        overflow: hidden !important;
-                        text-overflow: ellipsis !important;
+                        line-height: 1 !important;
+                        padding: 0 6px !important;
+                        gap: 4px !important;
                     }
 
+                    .quickFilter .quickFilter-title span,
                     .modern-quick-filter .quickFilter-title span {
-                        font-size: 12px !important;
+                        font-size: 11.5px !important;
+                    }
+
+                    .quickFilter .quickFilter-title i,
+                    .modern-quick-filter .quickFilter-title i {
+                        font-size: 11.5px !important;
                     }
 
                     .modern-sort-group {
-                        flex: 1.2 !important;
+                        flex: 1.15 !important;
                         min-width: 0 !important;
                     }
 
-                    .sort-select-wrapper {
-                        width: 100% !important;
-                    }
-
+                    .shop-sorting select.form-control,
                     .modern-sort-group select.form-control {
                         width: 100% !important;
-                        padding: 6px 8px 6px 26px !important;
-                        font-size: 12px !important;
                         height: 36px !important;
-                        min-width: 0 !important;
+                        line-height: 36px !important;
+                        padding: 0 6px 0 26px !important;
+                        font-size: 11.5px !important;
                     }
 
                     .sort-select-wrapper .sort-icon {
                         left: 8px !important;
-                        font-size: 12px !important;
+                        font-size: 11px !important;
                     }
 
                     .catalog-toolbar-right {
-                        gap: 6px !important;
+                        gap: 4px !important;
                         flex-shrink: 0 !important;
                     }
 
-                    .modern-view-switch {
+                    .modern-view-switch,
+                    .shop-view {
                         padding: 2px !important;
                     }
 
-                    .modern-view-switch .list-view {
-                        width: 30px !important;
-                        height: 30px !important;
-                        font-size: 12px !important;
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .modern-quick-filter .quickFilter-title {
-                        padding: 6px 4px !important;
-                        font-size: 11px !important;
-                    }
-                    .modern-sort-group select.form-control {
-                        padding: 6px 4px 6px 22px !important;
-                        font-size: 11px !important;
-                    }
-                    .sort-select-wrapper .sort-icon {
-                        left: 5px !important;
-                        font-size: 10.5px !important;
+                    .modern-view-switch .list-view,
+                    .shop-view .list-view {
+                        width: 28px !important;
+                        height: 28px !important;
+                        font-size: 11.5px !important;
                     }
                 }
                 </style>
