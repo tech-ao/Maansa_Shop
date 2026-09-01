@@ -21,18 +21,18 @@
         <div class="row">
             <!-- Shipping Adress-->
             <div class="col-xl-9 col-lg-8">
-                <div class="steps flex-sm-nowrap mb-5">
-                    <a class="step" href="{{ route('front.checkout.billing') }}">
-                        <h4 class="step-title">1. {{ __('Billing Address') }}:</h4>
+                <div class="checkout-steps-bar mb-4">
+                    <a class="checkout-step-item" href="{{ route('front.checkout.billing') }}">
+                        <i class="icon-check-circle mr-1"></i> <span>1. {{ __('Billing') }}</span>
                     </a>
-                    <a class="step active" href="javascript:;">
-                        <h4 class="step-title">2. {{ __('Shipping Address') }}:</h4>
+                    <a class="checkout-step-item active" href="javascript:;">
+                        <span>2. {{ __('Shipping') }}</span>
                     </a>
-                    <a class="step" href="{{ route('front.checkout.payment') }}">
-                        <h4 class="step-title">3. {{ __('Review and pay') }}</h4>
+                    <a class="checkout-step-item" href="{{ route('front.checkout.payment') }}">
+                        <span>3. {{ __('Review & Pay') }}</span>
                     </a>
                 </div>
-                <div class="card">
+                <div class="card border-0 shadow-sm checkout-card">
                     <div class="card-body">
                         <h6>{{ __('Shipping Address') }}</h6>
 

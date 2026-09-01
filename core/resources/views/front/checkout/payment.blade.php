@@ -20,62 +20,57 @@
         <div class="row">
             <!-- Payment Methode-->
             <div class="col-xl-9 col-lg-8">
-                <div class="steps flex-sm-nowrap mb-5"> <a class="step" href="{{ route('front.checkout.billing') }}">
-                        <h4 class="step-title"><i class="icon-check-circle"></i>1. {{ __('Invoice to') }}:</h4>
-                    </a> <a class="step" href="{{ route('front.checkout.shipping') }}">
-                        <h4 class="step-title"><i class="icon-check-circle"></i>2. {{ __('Ship to') }}:</h4>
-                    </a> <a class="step active" href="{{ route('front.checkout.payment') }}">
-                        <h4 class="step-title">3. {{ __('Review and pay') }}</h4>
+                <div class="checkout-steps-bar mb-4">
+                    <a class="checkout-step-item" href="{{ route('front.checkout.billing') }}">
+                        <i class="icon-check-circle mr-1"></i> <span>1. {{ __('Billing') }}</span>
+                    </a>
+                    <a class="checkout-step-item" href="{{ route('front.checkout.shipping') }}">
+                        <i class="icon-check-circle mr-1"></i> <span>2. {{ __('Shipping') }}</span>
+                    </a>
+                    <a class="checkout-step-item active" href="{{ route('front.checkout.payment') }}">
+                        <span>3. {{ __('Review & Pay') }}</span>
                     </a>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h6 class="pb-2 widget-title2">{{ __('Review Your Order') }} :</h6>
+                <div class="card border-0 shadow-sm checkout-card">
+                    <div class="card-body p-3 p-md-4">
+                        <h6 class="pb-2 widget-title2 mb-3">{{ __('Review Your Order') }}</h6>
                         
-                        <div class="row">
-                            <div class="col-sm-6 mb-4">
-                                <h6 class="fz-16-bold">{{ __('Invoice address') }} :</h6>
-                                @php
-
-                                    $ship = Session::get('shipping_address');
-                                    $bill = Session::get('billing_address');
-                                @endphp
-                                <ul class="list-unstyled">
-                                    <li><span class="text-muted pay-label">{{ __('Name') }}:
-                                        </span>{{ $ship['ship_first_name'] }} {{ $ship['ship_last_name'] }}</li>
-                                    @if (PriceHelper::CheckDigital())
-                                        <li><span class="text-muted pay-label">{{ __('Address') }}:
-                                            </span>{{ $ship['ship_address1'] }} {{ @$ship['ship_address2'] }}</li>
-                                    @endif
-                                    <li><span class="text-muted pay-label">{{ __('Phone') }}: </span>{{ $ship['ship_phone'] }}
-                                    </li>
-                                </ul>
+                        <div class="row g-3 mb-3">
+                            <div class="col-sm-6 mb-3">
+                                <div class="checkout-address-card p-3">
+                                    <h6 class="address-card-title mb-2"><i class="icon-file-text mr-1 text-success"></i> {{ __('Invoice address') }}</h6>
+                                    @php
+                                        $ship = Session::get('shipping_address');
+                                        $bill = Session::get('billing_address');
+                                    @endphp
+                                    <ul class="list-unstyled mb-0">
+                                        <li><span class="text-muted">{{ __('Name') }}: </span><strong>{{ $bill['bill_first_name'] ?? '' }} {{ $bill['bill_last_name'] ?? '' }}</strong></li>
+                                        @if (PriceHelper::CheckDigital())
+                                            <li><span class="text-muted">{{ __('Address') }}: </span>{{ $bill['bill_address1'] ?? '' }} {{ @$bill['bill_address2'] }}</li>
+                                        @endif
+                                        <li><span class="text-muted">{{ __('Phone') }}: </span>{{ $bill['bill_phone'] ?? '' }}</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="col-sm-6  mb-4">
-                                <h6 class="fz-16-bold">{{ __('Shipping address') }} :</h6>
-                                <ul class="list-unstyled">
-                                    <li><span class="text-muted pay-label">{{ __('Name') }}:
-                                        </span>{{ $bill['bill_first_name'] }} {{ $bill['bill_last_name'] }}</li>
-                                    @if (PriceHelper::CheckDigital())
-                                        <li><span class="text-muted pay-label">{{ __('Address') }}:
-                                            </span>{{ $ship['ship_address1'] }} {{ @$ship['ship_address2'] }}</li>
-                                    @endif
-                                    <li><span class="text-muted pay-label">{{ __('Phone') }}: </span>{{ $bill['bill_phone'] }}
-                                    </li>
-                                </ul>
-
-                              
-                               
+                            <div class="col-sm-6 mb-3">
+                                <div class="checkout-address-card p-3">
+                                    <h6 class="address-card-title mb-2"><i class="icon-map-pin mr-1 text-success"></i> {{ __('Shipping address') }}</h6>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><span class="text-muted">{{ __('Name') }}: </span><strong>{{ $ship['ship_first_name'] ?? '' }} {{ $ship['ship_last_name'] ?? '' }}</strong></li>
+                                        @if (PriceHelper::CheckDigital())
+                                            <li><span class="text-muted">{{ __('Address') }}: </span>{{ $ship['ship_address1'] ?? '' }} {{ @$ship['ship_address2'] }}</li>
+                                        @endif
+                                        <li><span class="text-muted">{{ __('Phone') }}: </span>{{ $ship['ship_phone'] ?? '' }}</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         @if (PriceHelper::CheckDigital() == true)
-                        <h6 class="pb-2 widget-title2">{{ __('Shipping Options') }} :</h6>
+                        <h6 class="pb-2 widget-title2 mt-2">{{ __('Shipping Options') }}</h6>
                         @endif
                         <div class="row">
-                            <div class="col-sm-6  mb-4">
+                            <div class="col-sm-6 mb-3">
                                  @if (PriceHelper::CheckDigital() == true)
-                                    
-                            
                                     @php
                                         $free_shipping = DB::table('shipping_services')->whereStatus(1)->whereIsCondition(1)->first();
                                     @endphp
@@ -105,10 +100,8 @@
 
                                 @endif
                             </div>
-                            <div class="col-sm-6  mb-4">
+                            <div class="col-sm-6 mb-3">
                                 @if (PriceHelper::CheckDigital() == true)
-                                    
-                                
                                 @if (DB::table('states')->whereStatus(1)->count() > 0)
                                     <select name="state_id" class="form-control" id="state_id_select" required>
                                         <option value="" selected disabled>{{ __('Select Shipping State') }}</option>
@@ -134,34 +127,36 @@
                             @endif
                             </div>
                         </div>
-                        <h6 class="pb-2 widget-title2">{{ __('Pay With') }} :</h6>
-                        <div class="row mt-4">
+                        <h6 class="pb-2 widget-title2 mt-3">{{ __('Pay With') }}</h6>
+                        <div class="row mt-2">
                             <div class="col-12">
-                                <div class="payment-methods">
+                                <div class="payment-methods-grid">
                                     @php
                                         $gateways = DB::table('payment_settings')->whereStatus(1)->get();
                                     @endphp
                                     @foreach ($gateways as $gateway)
                                         @if (PriceHelper::CheckDigitalPaymentGateway())
                                             @if ($gateway->unique_keyword != 'cod')
-                                                <div class="single-payment-method">
-                                                    <a class="text-decoration-none " href="#" data-bs-toggle="modal"
+                                                <div class="payment-method-tile">
+                                                    <a class="payment-method-btn" href="#" data-bs-toggle="modal"
                                                         data-bs-target="#{{ $gateway->unique_keyword }}">
-                                                        <img class=""
-                                                            src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
-                                                            alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
-                                                        <p>{{ $gateway->name }}</p>
+                                                        <div class="gateway-icon-box">
+                                                            <img src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
+                                                                alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
+                                                        </div>
+                                                        <p class="gateway-title">{{ $gateway->name }}</p>
                                                     </a>
                                                 </div>
                                             @endif
                                         @else
-                                            <div class="single-payment-method">
-                                                <a class="text-decoration-none" href="#" data-bs-toggle="modal"
+                                            <div class="payment-method-tile">
+                                                <a class="payment-method-btn" href="#" data-bs-toggle="modal"
                                                     data-bs-target="#{{ $gateway->unique_keyword }}">
-                                                    <img class=""
-                                                        src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
-                                                        alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
-                                                    <p>{{ $gateway->name }}</p>
+                                                    <div class="gateway-icon-box">
+                                                        <img src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
+                                                            alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
+                                                    </div>
+                                                    <p class="gateway-title">{{ $gateway->name }}</p>
                                                 </a>
                                             </div>
                                         @endif

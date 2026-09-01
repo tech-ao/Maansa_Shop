@@ -1554,6 +1554,150 @@ body_theme4 @endif
             height: 44px !important;
         }
     }
+
+    /* Modern Checkout Steps Indicator Bar */
+    .checkout-steps-bar {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        padding: 5px !important;
+        gap: 6px !important;
+    }
+
+    .checkout-step-item {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 1 !important;
+        padding: 10px 8px !important;
+        border-radius: 8px !important;
+        text-decoration: none !important;
+        color: #64748b !important;
+        font-size: 13.5px !important;
+        font-weight: 600 !important;
+        gap: 6px !important;
+        text-align: center !important;
+        transition: all 0.2s ease !important;
+        white-space: nowrap !important;
+    }
+
+    .checkout-step-item.active {
+        background: #ecfdf5 !important;
+        color: #059669 !important;
+        border: 1px solid #a7f3d0 !important;
+        font-weight: 700 !important;
+    }
+
+    .checkout-step-item:hover:not(.active) {
+        color: #0f172a !important;
+        background: #f8fafc !important;
+    }
+
+    /* Checkout Address Cards */
+    .checkout-address-card {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        height: 100% !important;
+    }
+
+    .address-card-title {
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        padding-bottom: 6px !important;
+        border-bottom: 1px dashed #cbd5e1 !important;
+    }
+
+    .checkout-address-card ul li {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        color: #334155 !important;
+    }
+
+    /* Payment Gateways Grid */
+    .payment-methods-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .payment-method-tile {
+        width: 100% !important;
+    }
+
+    .payment-method-btn {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        padding: 14px 10px !important;
+        min-height: 95px !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+    }
+
+    .payment-method-btn:hover {
+        border-color: #10b981 !important;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2) !important;
+        transform: translateY(-2px) !important;
+    }
+
+    .gateway-icon-box {
+        height: 38px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-bottom: 6px !important;
+    }
+
+    .gateway-icon-box img {
+        max-height: 34px !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    .gateway-title {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+    }
+
+    @media (max-width: 576px) {
+        .checkout-step-item {
+            font-size: 11px !important;
+            padding: 7px 4px !important;
+            gap: 3px !important;
+        }
+        .payment-methods-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+        }
+        .payment-method-btn {
+            min-height: 85px !important;
+            padding: 10px 6px !important;
+        }
+        .gateway-icon-box {
+            height: 32px !important;
+        }
+        .gateway-icon-box img {
+            max-height: 28px !important;
+        }
+        .gateway-title {
+            font-size: 11px !important;
+        }
+    }
     </style>
     <!-- Backdrop-->
     <div class="site-backdrop"></div>
