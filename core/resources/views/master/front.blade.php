@@ -604,11 +604,11 @@ body_theme4 @endif
                         <ul>
                             @if ($setting->is_faq == 1)
                                 <li>
-                                    <a class="" href="{{ route('front.faq') }}">{{ __('Faq') }}</a>
+                                    <a class="" href="{{ route('front.faq') }}"><i class="icon-chevron-right pr-2"></i>{{ __('Faq') }}</a>
                                 </li>
                             @endif
                             @foreach (DB::table('pages')->wherePos(2)->orwhere('pos', 1)->get() as $page)
-                                <li><a href="{{ route('front.page', $page->slug) }}">{{ $page->title }}</a></li>
+                                <li><a href="{{ route('front.page', $page->slug) }}"><i class="icon-chevron-right pr-2"></i>{{ $page->title }}</a></li>
                             @endforeach
 
                         </ul>
@@ -659,6 +659,207 @@ body_theme4 @endif
     <a class="scroll-to-top-btn" href="#">
         <i class="icon-chevron-up"></i>
     </a>
+
+    <style>
+    /* Floating Catalog Filter Button */
+    .sidebar-toggle {
+        position: fixed !important;
+        bottom: 80px !important;
+        left: 16px !important;
+        top: auto !important;
+        margin-top: 0 !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        background: #ffffff !important;
+        color: #059669 !important;
+        border: 2px solid #10b981 !important;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 99999 !important;
+        cursor: pointer !important;
+        transition: all 0.25s ease !important;
+    }
+    .sidebar-toggle:hover {
+        background: #10b981 !important;
+        color: #ffffff !important;
+        transform: scale(1.05) !important;
+    }
+    .sidebar-toggle.sidebar-open {
+        left: -50px !important;
+    }
+
+    /* Scroll To Top Button */
+    .scroll-to-top-btn {
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, #10b981, #059669) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.38) !important;
+        border: none !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 99998 !important;
+        right: 18px !important;
+        bottom: -70px !important;
+        transition: bottom 0.35s ease, opacity 0.3s ease, transform 0.2s ease !important;
+        text-decoration: none !important;
+    }
+    .scroll-to-top-btn.visible {
+        bottom: 24px !important;
+        opacity: 1 !important;
+    }
+    .scroll-to-top-btn:hover {
+        background: linear-gradient(135deg, #059669, #047857) !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+    }
+    .scroll-to-top-btn > i {
+        line-height: 1 !important;
+        font-size: 16px !important;
+        color: #ffffff !important;
+    }
+
+    /* Footer Modern Styling */
+    .site-footer {
+        background: #ffffff !important;
+        border-top: 1px solid #e2e8f0 !important;
+        padding-top: 48px !important;
+        padding-bottom: 24px !important;
+    }
+    .site-footer .widget-title {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        margin-bottom: 16px !important;
+        position: relative !important;
+        padding-bottom: 8px !important;
+    }
+    .site-footer .widget-title::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 32px !important;
+        height: 3px !important;
+        background: #10b981 !important;
+        border-radius: 2px !important;
+    }
+    .site-footer p {
+        color: #64748b !important;
+        font-size: 13.5px !important;
+        line-height: 1.6 !important;
+    }
+    .site-footer p strong {
+        color: #334155 !important;
+    }
+    .footer-social-links {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin-top: 16px !important;
+        flex-wrap: wrap !important;
+    }
+    .footer-social-links a {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 10px !important;
+        background: #ecfdf5 !important;
+        color: #059669 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 14px !important;
+        transition: all 0.2s ease !important;
+        text-decoration: none !important;
+        border: 1px solid #a7f3d0 !important;
+    }
+    .footer-social-links a:hover {
+        background: #10b981 !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) !important;
+    }
+    .footer-social-links a i {
+        color: inherit !important;
+    }
+    .widget-links ul {
+        list-style: none !important;
+        padding-left: 0 !important;
+        margin: 0 !important;
+    }
+    .widget-links ul li {
+        margin-bottom: 10px !important;
+    }
+    .widget-links ul li a {
+        color: #64748b !important;
+        font-size: 13.5px !important;
+        text-decoration: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        transition: all 0.2s ease !important;
+    }
+    .widget-links ul li a:hover {
+        color: #059669 !important;
+        padding-left: 4px !important;
+    }
+    .site-footer .subscriber-form .form-control {
+        height: 44px !important;
+        border-radius: 10px !important;
+        border: 1px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        font-size: 13.5px !important;
+        padding-left: 14px !important;
+    }
+    .site-footer .subscriber-form .form-control:focus {
+        border-color: #10b981 !important;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+    }
+    .site-footer .subscriber-form .btn-primary {
+        height: 44px !important;
+        border-radius: 10px !important;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+        color: #ffffff !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        border: none !important;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
+        transition: all 0.2s ease !important;
+    }
+    .site-footer .subscriber-form .btn-primary:hover {
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45) !important;
+        transform: translateY(-1px) !important;
+    }
+    .site-footer .footer-copyright {
+        border-top: 1px solid #f1f5f9 !important;
+        padding-top: 20px !important;
+        margin-top: 32px !important;
+        color: #94a3b8 !important;
+        font-size: 13px !important;
+        text-align: center !important;
+    }
+
+    @media (max-width: 768px) {
+        .site-footer {
+            padding-top: 32px !important;
+            padding-bottom: 20px !important;
+        }
+        .site-footer .widget {
+            margin-bottom: 28px !important;
+            padding-bottom: 20px !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+        }
+        .site-footer .col-lg-4:last-child .widget {
+            border-bottom: none !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+        }
+    }
+    </style>
     <!-- Backdrop-->
     <div class="site-backdrop"></div>
 
