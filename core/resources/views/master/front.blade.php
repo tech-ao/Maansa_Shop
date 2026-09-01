@@ -908,6 +908,160 @@ body_theme4 @endif
             padding-bottom: 0 !important;
         }
     }
+
+    /* Modern Deals of the Week & Countdown Banner */
+    .deal-of-day-section .section-title {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: wrap !important;
+        gap: 16px !important;
+        margin-bottom: 24px !important;
+        border-bottom: 2px solid #f1f5f9 !important;
+        padding-bottom: 14px !important;
+    }
+
+    .deal-of-day-section .section-title h2 {
+        font-size: 22px !important;
+        font-weight: 800 !important;
+        color: #0f172a !important;
+        margin: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+
+    .deal-of-day-section .section-title .right-area {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 16px !important;
+        flex-wrap: wrap !important;
+    }
+
+    /* Modern Digital Countdown Tiles */
+    .deal-of-day-section .countdown,
+    .campaign-section .countdown,
+    .countdown.countdown-alt {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .deal-of-day-section .countdown span,
+    .campaign-section .countdown span,
+    .countdown.countdown-alt span {
+        display: inline-flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 48px !important;
+        height: 46px !important;
+        padding: 4px 6px !important;
+        border-radius: 10px !important;
+        background: linear-gradient(135deg, #064e3b 0%, #047857 55%, #059669 100%) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(4, 120, 87, 0.28) !important;
+        font-size: 16px !important;
+        font-weight: 800 !important;
+        line-height: 1.1 !important;
+        margin: 0 !important;
+        text-align: center !important;
+    }
+
+    .deal-of-day-section .countdown span small,
+    .campaign-section .countdown span small,
+    .countdown.countdown-alt span small {
+        display: block !important;
+        font-size: 9.5px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        color: #a7f3d0 !important;
+        letter-spacing: 0.5px !important;
+        margin-top: 2px !important;
+        line-height: 1 !important;
+        background: transparent !important;
+        padding: 0 !important;
+    }
+
+    /* Deals View All Pill Button */
+    .deal-of-day-section .right_link {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 7px 18px !important;
+        border-radius: 20px !important;
+        background: #ecfdf5 !important;
+        color: #059669 !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        border: 1px solid #a7f3d0 !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .deal-of-day-section .right_link:hover {
+        background: #10b981 !important;
+        color: #ffffff !important;
+        border-color: #10b981 !important;
+        transform: translateY(-1px) !important;
+    }
+
+    /* Deals Header on Mobile (<= 768px) */
+    @media (max-width: 768px) {
+        .deal-of-day-section .section-title {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 12px !important;
+            text-align: center !important;
+            padding-bottom: 16px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .deal-of-day-section .section-title h2 {
+            font-size: 18px !important;
+            text-align: center !important;
+        }
+
+        .deal-of-day-section .section-title .right-area {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 10px !important;
+            width: 100% !important;
+        }
+
+        .deal-of-day-section .countdown,
+        .countdown.countdown-alt {
+            display: flex !important;
+            justify-content: center !important;
+            gap: 6px !important;
+            width: 100% !important;
+        }
+
+        .deal-of-day-section .countdown span,
+        .countdown.countdown-alt span {
+            min-width: 44px !important;
+            height: 42px !important;
+            font-size: 14.5px !important;
+            border-radius: 8px !important;
+        }
+
+        .deal-of-day-section .countdown span small,
+        .countdown.countdown-alt span small {
+            font-size: 9px !important;
+        }
+
+        .deal-of-day-section .right_link {
+            font-size: 12px !important;
+            padding: 5px 14px !important;
+        }
+    }
     </style>
     <!-- Backdrop-->
     <div class="site-backdrop"></div>
