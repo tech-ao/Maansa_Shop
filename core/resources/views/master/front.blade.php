@@ -1222,6 +1222,93 @@ body_theme4 @endif
             font-size: 9px !important;
         }
     }
+
+    /* Checkout Page Navigation Buttons & Form Controls */
+    .checkout-nav-buttons {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .checkout-prev-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        height: 42px !important;
+        padding: 0 16px !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #475569 !important;
+        font-size: 13.5px !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+        transition: all 0.2s ease !important;
+        white-space: nowrap !important;
+    }
+
+    .checkout-prev-btn:hover {
+        background: #f1f5f9 !important;
+        color: #0f172a !important;
+        border-color: #94a3b8 !important;
+    }
+
+    .checkout-next-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        height: 42px !important;
+        padding: 0 20px !important;
+        border-radius: 10px !important;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+        border: none !important;
+        color: #ffffff !important;
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+        transition: all 0.2s ease !important;
+        cursor: pointer !important;
+        white-space: nowrap !important;
+    }
+
+    .checkout-next-btn:hover:not(:disabled) {
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45) !important;
+        transform: translateY(-1px) !important;
+        color: #ffffff !important;
+    }
+
+    .checkout-next-btn:disabled {
+        opacity: 0.55 !important;
+        cursor: not-allowed !important;
+        box-shadow: none !important;
+    }
+
+    /* Custom Checkbox Emerald Theme */
+    .custom-control-input:checked ~ .custom-control-label::before {
+        border-color: #10b981 !important;
+        background-color: #10b981 !important;
+    }
+
+    .custom-control-input:focus ~ .custom-control-label::before {
+        box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
+    }
+
+    @media (max-width: 480px) {
+        .checkout-prev-btn {
+            height: 38px !important;
+            padding: 0 12px !important;
+            font-size: 12.5px !important;
+        }
+        .checkout-next-btn {
+            height: 38px !important;
+            padding: 0 14px !important;
+            font-size: 12.5px !important;
+        }
+    }
     </style>
     <!-- Backdrop-->
     <div class="site-backdrop"></div>

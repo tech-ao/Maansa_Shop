@@ -141,18 +141,17 @@
                                 </div>
                             @endif
 
-                            <div class="d-flex justify-content-between paddin-top-1x mt-4">
-                                <a class="btn btn-primary btn-sm" href="{{ route('front.cart') }}"><span
-                                        class="hidden-xs-down"><i
-                                            class="icon-arrow-left"></i>{{ __('Back To Cart') }}</span></a>
+                            <div class="d-flex justify-content-between align-items-center checkout-nav-buttons mt-4 pt-2">
+                                <a class="btn btn-outline-secondary checkout-prev-btn" href="{{ route('front.cart') }}">
+                                    <i class="icon-arrow-left mr-1"></i> <span>{{ __('Back To Cart') }}</span>
+                                </a>
                                 @if ($setting->is_privacy_trams == 1)
-                                    <button disabled id="continue__button" class="btn btn-primary  btn-sm"
-                                        type="button"><span class="hidden-xs-down">{{ __('Continue') }}</span><i
-                                            class="icon-arrow-right"></i></button>
+                                    <button disabled id="continue__button" class="btn btn-primary checkout-next-btn"
+                                        type="button"><span>{{ __('Continue') }}</span> <i
+                                            class="icon-arrow-right ml-1"></i></button>
                                 @else
-                                    <button class="btn btn-primary btn-sm" type="submit"><span
-                                            class="hidden-xs-down">{{ __('Continue') }}</span><i
-                                            class="icon-arrow-right"></i></button>
+                                    <button class="btn btn-primary checkout-next-btn" type="submit"><span>{{ __('Continue') }}</span> <i
+                                            class="icon-arrow-right ml-1"></i></button>
                                 @endif
                             </div>
                         </form>
