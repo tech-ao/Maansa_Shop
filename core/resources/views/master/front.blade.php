@@ -1803,6 +1803,251 @@ body_theme4 @endif
             height: 52px !important;
         }
     }
+
+    /* Track Order Search Card */
+    .track-order-search-card {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 18px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    .track-icon-badge {
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
+        background: #ecfdf5;
+        color: #059669;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
+    }
+
+    .track-search-title {
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+    }
+
+    .track-search-subtitle {
+        font-size: 13.5px !important;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .track-input-group {
+        display: flex !important;
+        align-items: center !important;
+        background: #f8fafc !important;
+        border: 1.5px solid #cbd5e1 !important;
+        border-radius: 14px !important;
+        padding: 5px 6px 5px 14px !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .track-input-group:focus-within {
+        border-color: #10b981 !important;
+        background: #ffffff !important;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+    }
+
+    .track-input-icon {
+        font-size: 16px !important;
+        margin-right: 10px !important;
+        color: #94a3b8 !important;
+    }
+
+    .track-input-field {
+        border: none !important;
+        background: transparent !important;
+        height: 44px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #0f172a !important;
+        padding: 0 !important;
+        outline: none !important;
+        box-shadow: none !important;
+        flex: 1 !important;
+    }
+
+    .track-input-field:focus {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .track-submit-btn {
+        border-radius: 10px !important;
+        height: 44px !important;
+        padding: 0 22px !important;
+        font-weight: 600 !important;
+        font-size: 13.5px !important;
+        white-space: nowrap !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Track Results Card */
+    .order-tracking-result-card,
+    .order-not-found-card {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 18px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+        overflow: hidden !important;
+    }
+
+    .not-found-icon-box {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .canceled-order-alert {
+        background: #fef2f2 !important;
+        border: 1px solid #fecaca !important;
+    }
+
+    /* Vertical Timeline */
+    .tracking-vertical-timeline {
+        position: relative;
+        padding: 10px 0;
+    }
+
+    .timeline-step {
+        display: flex;
+        position: relative;
+        padding-bottom: 26px;
+    }
+
+    .timeline-step:last-child {
+        padding-bottom: 0;
+    }
+
+    .step-indicator {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 18px;
+        flex-shrink: 0;
+    }
+
+    .step-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        z-index: 2;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+
+    .timeline-step.step-completed .step-icon {
+        background: #10b981 !important;
+        color: #ffffff !important;
+        border-color: #10b981 !important;
+        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35) !important;
+    }
+
+    .timeline-step.step-active .step-icon {
+        background: #3b82f6 !important;
+        color: #ffffff !important;
+        border-color: #bfdbfe !important;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2) !important;
+    }
+
+    .step-line {
+        position: absolute;
+        top: 38px;
+        bottom: 0;
+        width: 2px;
+        background: #e2e8f0;
+        z-index: 1;
+    }
+
+    .timeline-step.step-completed .step-line {
+        background: #10b981 !important;
+    }
+
+    .step-content {
+        flex-grow: 1;
+        padding-top: 6px;
+    }
+
+    .step-title {
+        font-size: 14.5px !important;
+        color: #0f172a !important;
+    }
+
+    .step-time {
+        font-size: 12px !important;
+        font-weight: 500 !important;
+    }
+
+    .step-desc {
+        font-size: 12.5px !important;
+        line-height: 1.4 !important;
+    }
+
+    @media (max-width: 576px) {
+        .track-order-search-card {
+            padding: 20px 16px !important;
+            border-radius: 14px !important;
+        }
+        .track-search-title {
+            font-size: 18px !important;
+        }
+        .track-icon-badge {
+            width: 48px;
+            height: 48px;
+            font-size: 20px;
+        }
+        .track-input-group {
+            flex-direction: column !important;
+            padding: 10px !important;
+            border-radius: 12px !important;
+            gap: 8px !important;
+        }
+        .track-input-icon {
+            display: none !important;
+        }
+        .track-input-field {
+            width: 100% !important;
+            text-align: center !important;
+            height: 38px !important;
+        }
+        .track-submit-btn {
+            width: 100% !important;
+            height: 42px !important;
+        }
+        .step-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 12px;
+        }
+        .step-line {
+            top: 32px;
+        }
+        .step-indicator {
+            margin-right: 12px;
+        }
+        .step-title {
+            font-size: 13.5px !important;
+        }
+    }
     </style>
     <!-- Backdrop-->
     <div class="site-backdrop"></div>
