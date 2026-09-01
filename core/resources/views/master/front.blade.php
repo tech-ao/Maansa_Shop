@@ -604,11 +604,11 @@ body_theme4 @endif
                         <ul>
                             @if ($setting->is_faq == 1)
                                 <li>
-                                    <a class="" href="{{ route('front.faq') }}"><i class="icon-chevron-right pr-2"></i>{{ __('Faq') }}</a>
+                                    <a class="" href="{{ route('front.faq') }}">{{ __('Faq') }}</a>
                                 </li>
                             @endif
                             @foreach (DB::table('pages')->wherePos(2)->orwhere('pos', 1)->get() as $page)
-                                <li><a href="{{ route('front.page', $page->slug) }}"><i class="icon-chevron-right pr-2"></i>{{ $page->title }}</a></li>
+                                <li><a href="{{ route('front.page', $page->slug) }}">{{ $page->title }}</a></li>
                             @endforeach
 
                         </ul>
@@ -622,10 +622,10 @@ body_theme4 @endif
                             method="post">
                             @csrf
                             <div class="col-sm-12">
-                                <div class="input-group">
+                                <div class="newsletter-input-wrapper">
+                                    <i class="icon-mail newsletter-mail-icon"></i>
                                     <input class="form-control" type="email" name="email"
-                                        placeholder="{{ __('Your e-mail') }}">
-                                    <span class="input-group-addon"><i class="icon-mail"></i></span>
+                                        placeholder="{{ __('Your e-mail') }}" required>
                                 </div>
                                 <div aria-hidden="true">
                                     <input type="hidden" name="b_c7103e2c981361a6639545bd5_1194bb7544"
@@ -661,34 +661,43 @@ body_theme4 @endif
     </a>
 
     <style>
-    /* Floating Catalog Filter Button */
-    .sidebar-toggle {
-        position: fixed !important;
-        bottom: 80px !important;
-        left: 16px !important;
-        top: auto !important;
-        margin-top: 0 !important;
-        width: 44px !important;
-        height: 44px !important;
-        border-radius: 50% !important;
-        background: #ffffff !important;
-        color: #059669 !important;
-        border: 2px solid #10b981 !important;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        z-index: 99999 !important;
-        cursor: pointer !important;
-        transition: all 0.25s ease !important;
+    /* Hide Sidebar Toggle on Desktop (>= 992px) */
+    @media (min-width: 992px) {
+        .sidebar-toggle {
+            display: none !important;
+        }
     }
-    .sidebar-toggle:hover {
-        background: #10b981 !important;
-        color: #ffffff !important;
-        transform: scale(1.05) !important;
-    }
-    .sidebar-toggle.sidebar-open {
-        left: -50px !important;
+
+    /* Floating Catalog Filter Button - ONLY on Mobile & Tablet (< 992px) */
+    @media (max-width: 991.98px) {
+        .sidebar-toggle {
+            position: fixed !important;
+            bottom: 80px !important;
+            left: 16px !important;
+            top: auto !important;
+            margin-top: 0 !important;
+            width: 44px !important;
+            height: 44px !important;
+            border-radius: 50% !important;
+            background: #ffffff !important;
+            color: #059669 !important;
+            border: 2px solid #10b981 !important;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 99999 !important;
+            cursor: pointer !important;
+            transition: all 0.25s ease !important;
+        }
+        .sidebar-toggle:hover {
+            background: #10b981 !important;
+            color: #ffffff !important;
+            transform: scale(1.05) !important;
+        }
+        .sidebar-toggle.sidebar-open {
+            left: -50px !important;
+        }
     }
 
     /* Scroll To Top Button */
@@ -793,6 +802,11 @@ body_theme4 @endif
     }
     .widget-links ul li {
         margin-bottom: 10px !important;
+        padding-left: 0 !important;
+    }
+    .widget-links ul li::before {
+        display: none !important;
+        content: '' !important;
     }
     .widget-links ul li a {
         color: #64748b !important;
@@ -800,20 +814,54 @@ body_theme4 @endif
         text-decoration: none !important;
         display: inline-flex !important;
         align-items: center !important;
-        gap: 6px !important;
+        gap: 8px !important;
         transition: all 0.2s ease !important;
+    }
+    .widget-links ul li a::before {
+        content: '\e92e' !important;
+        font-family: feather !important;
+        font-size: 13px !important;
+        color: #10b981 !important;
+        display: inline-block !important;
+        transition: transform 0.2s ease !important;
     }
     .widget-links ul li a:hover {
         color: #059669 !important;
-        padding-left: 4px !important;
+        padding-left: 3px !important;
+    }
+    .widget-links ul li a:hover::before {
+        transform: translateX(3px) !important;
+    }
+
+    /* Newsletter Form Clean Input */
+    .newsletter-input-wrapper {
+        position: relative !important;
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    .newsletter-mail-icon {
+        position: absolute !important;
+        left: 14px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        font-size: 15px !important;
+        color: #94a3b8 !important;
+        pointer-events: none !important;
+        z-index: 5 !important;
     }
     .site-footer .subscriber-form .form-control {
-        height: 44px !important;
+        width: 100% !important;
+        height: 46px !important;
         border-radius: 10px !important;
         border: 1px solid #cbd5e1 !important;
         background: #ffffff !important;
         font-size: 13.5px !important;
-        padding-left: 14px !important;
+        padding-left: 40px !important;
+        padding-right: 14px !important;
+        color: #1e293b !important;
+        box-shadow: none !important;
+        transition: all 0.2s ease !important;
     }
     .site-footer .subscriber-form .form-control:focus {
         border-color: #10b981 !important;
@@ -829,6 +877,7 @@ body_theme4 @endif
         border: none !important;
         box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
         transition: all 0.2s ease !important;
+        cursor: pointer !important;
     }
     .site-footer .subscriber-form .btn-primary:hover {
         box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45) !important;
