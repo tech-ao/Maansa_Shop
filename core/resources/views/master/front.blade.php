@@ -109,72 +109,204 @@ body_theme4 @endif
     <header class="site-header navbar-sticky">
         <div class="menu-top-area">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="t-m-s-a">
-                            <a class="track-order-link" href="{{ route('front.order.track') }}"><i
-                                    class="icon-map-pin"></i>{{ __('Track Order') }}</a>
-                            <a class="track-order-link compare-mobile d-lg-none"
-                                href="{{ route('fornt.compare.index') }}">{{ __('Compare') }}</a>
-                        </div>
+                <div class="top-nav-flex-wrapper">
+                    <!-- Left: Track Order & Compare -->
+                    <div class="top-nav-left">
+                        <a class="top-nav-link" href="{{ route('front.order.track') }}">
+                            <i class="icon-map-pin"></i> <span>{{ __('Track Order') }}</span>
+                        </a>
+                        <a class="top-nav-link compare-mobile d-none d-sm-inline-flex" href="{{ route('fornt.compare.index') }}">
+                            <i class="icon-repeat"></i> <span>{{ __('Compare') }}</span>
+                        </a>
                     </div>
-                    <div class="col-md-8">
-                        <div class="right-area">
 
-                            <a class="track-order-link wishlist-mobile d-inline-block d-lg-none"
-                                href="{{ route('user.wishlist.index') }}"><i
-                                    class="icon-heart"></i>{{ __('Wishlist') }}</a>
+                    <!-- Right: Wishlist, Currency & User Login -->
+                    <div class="top-nav-right">
+                        <a class="top-nav-link wishlist-mobile d-none d-md-inline-flex" href="{{ route('user.wishlist.index') }}">
+                            <i class="icon-heart"></i> <span>{{ __('Wishlist') }}</span>
+                        </a>
 
-                            {{-- <div class="t-h-dropdown ">
-                                <a class="main-link" href="#">{{ __('Language') }}<i
-                                        class="icon-chevron-down"></i></a>
-                                <div class="t-h-dropdown-menu">
-                                    @foreach (DB::table('languages')->whereType('Website')->get() as $language)
-                                        <a class="{{ Session::get('language') == $language->id ? 'active' : ($language->is_default == 1 && !Session::has('language') ? 'active' : '') }}"
-                                            href="{{ route('front.language.setup', $language->id) }}"><i
-                                                class="icon-chevron-right pr-2"></i>{{ $language->language }}</a>
-                                    @endforeach
-                                </div>
-                            </div> --}}
-
-
-                            <div class="t-h-dropdown ">
-                                <a class="main-link" href="#">{{ __('Currency') }}<i
-                                        class="icon-chevron-down"></i></a>
-                                <div class="t-h-dropdown-menu">
-                                    @foreach (DB::table('currencies')->get() as $currency)
-                                        <a class="{{ Session::get('currency') == $currency->id ? 'active' : ($currency->is_default == 1 && !Session::has('currency') ? 'active' : '') }}"
-                                            href="{{ route('front.currency.setup', $currency->id) }}"><i
-                                                class="icon-chevron-right pr-2"></i>{{ $currency->name }}</a>
-                                    @endforeach
-                                </div>
+                        <div class="t-h-dropdown">
+                            <a class="main-link top-nav-link" href="#">
+                                <span>{{ __('Currency') }}</span> <i class="icon-chevron-down ml-1"></i>
+                            </a>
+                            <div class="t-h-dropdown-menu">
+                                @foreach (DB::table('currencies')->get() as $currency)
+                                    <a class="{{ Session::get('currency') == $currency->id ? 'active' : ($currency->is_default == 1 && !Session::has('currency') ? 'active' : '') }}"
+                                        href="{{ route('front.currency.setup', $currency->id) }}"><i
+                                            class="icon-chevron-right pr-2"></i>{{ $currency->name }}</a>
+                                @endforeach
                             </div>
+                        </div>
 
-                            <div class="login-register ">
-                                @if (!Auth::user())
-                                    <a class="track-order-link mr-0" href="{{ route('user.login') }}">
-                                        {{ __('Login') }}
-                                    </a>
-                                @else
-                                    <div class="t-h-dropdown">
-                                        <div class="main-link">
-                                            <i class="icon-user pr-2"></i> <span
-                                                class="text-label">{{ Auth::user()->first_name }}</span>
-                                        </div>
-                                        <div class="t-h-dropdown-menu">
-                                            <a href="{{ route('user.dashboard') }}"><i
-                                                    class="icon-chevron-right pr-2"></i>{{ __('Dashboard') }}</a>
-                                            <a href="{{ route('user.logout') }}"><i
-                                                    class="icon-chevron-right pr-2"></i>{{ __('Logout') }}</a>
-                                        </div>
+                        <div class="login-register">
+                            @if (!Auth::user())
+                                <a class="top-nav-link top-nav-login-pill" href="{{ route('user.login') }}">
+                                    <i class="icon-user"></i> <span>{{ __('Login') }}</span>
+                                </a>
+                            @else
+                                <div class="t-h-dropdown">
+                                    <div class="main-link top-nav-link top-nav-login-pill">
+                                        <i class="icon-user"></i> <span class="text-label">{{ Auth::user()->first_name }}</span> <i class="icon-chevron-down ml-1"></i>
                                     </div>
-                                @endif
-                            </div>
+                                    <div class="t-h-dropdown-menu">
+                                        <a href="{{ route('user.dashboard') }}"><i class="icon-chevron-right pr-2"></i>{{ __('Dashboard') }}</a>
+                                        <a href="{{ route('user.logout') }}"><i class="icon-chevron-right pr-2"></i>{{ __('Logout') }}</a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <style>
+        .menu-top-area {
+            background: linear-gradient(135deg, #064e3b 0%, #047857 60%, #059669 100%) !important;
+            padding: 6px 0 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+
+        .top-nav-flex-wrapper {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            width: 100% !important;
+        }
+
+        .top-nav-left,
+        .top-nav-right {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+        }
+
+        .top-nav-link,
+        .menu-top-area .main-link,
+        .menu-top-area a {
+            color: rgba(255, 255, 255, 0.95) !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            text-decoration: none !important;
+            transition: all 0.2s ease !important;
+            padding: 4px 8px !important;
+            border-radius: 6px !important;
+            line-height: 1.2 !important;
+        }
+
+        .top-nav-link:hover,
+        .menu-top-area .main-link:hover,
+        .menu-top-area a:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.18) !important;
+        }
+
+        .top-nav-link i,
+        .menu-top-area i {
+            font-size: 13px !important;
+            color: #a7f3d0 !important;
+        }
+
+        .top-nav-login-pill {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.35) !important;
+            padding: 4px 14px !important;
+            border-radius: 999px !important;
+            font-size: 12.5px !important;
+            font-weight: 700 !important;
+        }
+
+        .top-nav-login-pill:hover {
+            background: #ffffff !important;
+            color: #065f46 !important;
+        }
+
+        .top-nav-login-pill:hover i {
+            color: #065f46 !important;
+        }
+
+        .menu-top-area .t-h-dropdown {
+            position: relative !important;
+            display: inline-block !important;
+        }
+
+        .menu-top-area .t-h-dropdown-menu {
+            border-radius: 12px !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
+            padding: 6px 0 !important;
+            min-width: 140px !important;
+            background: #ffffff !important;
+            top: 100% !important;
+            z-index: 9999 !important;
+        }
+
+        .menu-top-area .t-h-dropdown-menu a {
+            color: #334155 !important;
+            font-size: 13px !important;
+            padding: 8px 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            border-radius: 0 !important;
+        }
+
+        .menu-top-area .t-h-dropdown-menu a:hover,
+        .menu-top-area .t-h-dropdown-menu a.active {
+            background: #ecfdf5 !important;
+            color: #059669 !important;
+        }
+
+        @media (max-width: 767px) {
+            .menu-top-area {
+                padding: 5px 0 !important;
+            }
+            .top-nav-flex-wrapper {
+                justify-content: space-between !important;
+                gap: 6px !important;
+            }
+            .top-nav-left,
+            .top-nav-right {
+                gap: 8px !important;
+            }
+            .top-nav-link,
+            .menu-top-area .main-link,
+            .menu-top-area a {
+                font-size: 11.5px !important;
+                padding: 3px 6px !important;
+                gap: 4px !important;
+            }
+            .top-nav-login-pill {
+                padding: 3px 10px !important;
+                font-size: 11.5px !important;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .top-nav-flex-wrapper {
+                gap: 4px !important;
+            }
+            .top-nav-left,
+            .top-nav-right {
+                gap: 4px !important;
+            }
+            .top-nav-link,
+            .menu-top-area .main-link,
+            .menu-top-area a {
+                font-size: 11px !important;
+                padding: 2px 4px !important;
+            }
+            .top-nav-login-pill {
+                padding: 2px 8px !important;
+                font-size: 11px !important;
+            }
+        }
+        </style>
         <!-- Topbar-->
         <div class="topbar">
             <div class="container">
