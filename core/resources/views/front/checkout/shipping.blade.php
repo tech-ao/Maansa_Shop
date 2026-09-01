@@ -36,6 +36,11 @@
                     <div class="card-body">
                         <h6>{{ __('Shipping Address') }}</h6>
 
+                        @php
+                            $saved_ship = Session::get('shipping_address', []);
+                            $current_ship_country = old('ship_country', $saved_ship['ship_country'] ?? (isset($user) && $user ? $user->ship_country : ''));
+                        @endphp
+
                         <form id="checkoutShipping" action="{{ route('front.checkout.shipping.store') }}" method="POST">
                             @csrf
                             <div class="row">
@@ -43,14 +48,14 @@
                                     <div class="form-group">
                                         <label for="checkout-fn">{{ __('First Name') }}*</label>
                                         <input class="form-control {{ $errors->has('ship_first_name') ? 'requireInput' : '' }}" name="ship_first_name" type="text" id="checkout-fn"
-                                            value="{{ isset($user) ? $user->first_name : '' }}">
+                                            value="{{ old('ship_first_name', $saved_ship['ship_first_name'] ?? (isset($user) && $user ? $user->first_name : '')) }}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="checkout-ln">{{ __('Last Name') }}*</label>
                                         <input class="form-control {{ $errors->has('ship_last_name') ? 'requireInput' : '' }}" name="ship_last_name" type="text" id="checkout-ln"
-                                            value="{{ isset($user) ? $user->last_name : '' }}">
+                                            value="{{ old('ship_last_name', $saved_ship['ship_last_name'] ?? (isset($user) && $user ? $user->last_name : '')) }}">
                                     </div>
                                 </div>
                             </div>
@@ -59,14 +64,14 @@
                                     <div class="form-group">
                                         <label for="checkout-email">{{ __('E-mail Address') }}*</label>
                                         <input class="form-control {{ $errors->has('ship_email') ? 'requireInput' : '' }}" name="ship_email" type="email" id="checkout-email"
-                                            value="{{ isset($user) ? $user->email : '' }}">
+                                            value="{{ old('ship_email', $saved_ship['ship_email'] ?? (isset($user) && $user ? $user->email : '')) }}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="checkout-phone">{{ __('Phone Number') }}*</label>
                                         <input class="form-control {{ $errors->has('ship_phone') ? 'requireInput' : '' }}" name="ship_phone" type="text" id="checkout-phone"
-                                            value="{{ isset($user) ? $user->phone : '' }}">
+                                            value="{{ old('ship_phone', $saved_ship['ship_phone'] ?? (isset($user) && $user ? $user->phone : '')) }}">
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +81,7 @@
                                     <div class="form-group">
                                         <label for="checkout-address1">{{ __('Address') }} *</label>
                                         <input class="form-control {{ $errors->has('ship_address1') ? 'requireInput' : '' }}" name="ship_address1"  type="text"
-                                            id="checkout-address1" value="{{ isset($user) ? $user->ship_address1 : '' }}">
+                                            id="checkout-address1" value="{{ old('ship_address1', $saved_ship['ship_address1'] ?? (isset($user) && $user ? $user->ship_address1 : '')) }}">
                                     </div>
                                 </div>
                             </div>
@@ -85,14 +90,14 @@
                                     <div class="form-group">
                                         <label for="checkout-zip">{{ __('Zip Code') }} *</label>
                                         <input class="form-control {{ $errors->has('ship_zip') ? 'requireInput' : '' }}" name="ship_zip" type="text" id="checkout-zip"
-                                            value="{{ isset($user) ? $user->ship_zip : '' }}">
+                                            value="{{ old('ship_zip', $saved_ship['ship_zip'] ?? (isset($user) && $user ? $user->ship_zip : '')) }}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="checkout-city">{{ __('City') }} *</label>
                                         <input class="form-control {{ $errors->has('ship_city') ? 'requireInput' : '' }}" name="ship_city" type="text"
-                                            id="checkout-city" value="{{ isset($user) ? $user->ship_city : '' }}">
+                                            id="checkout-city" value="{{ old('ship_city', $saved_ship['ship_city'] ?? (isset($user) && $user ? $user->ship_city : '')) }}">
                                     </div>
                                 </div>
                             </div>
@@ -101,10 +106,10 @@
                                     <div class="form-group">
                                         <label for="checkout-country">{{ __('Country') }}</label>
                                         <select class="form-control" name="ship_country"  id="billing-country">
-                                            <option selected>{{ __('Choose Country') }}</option>
+                                            <option disabled {{ empty($current_ship_country) ? 'selected' : '' }}>{{ __('Choose Country') }}</option>
                                             @foreach (DB::table('countries')->get() as $country)
                                                 <option value="{{ $country->name }}"
-                                                    {{ isset($user) && $user->ship_country == $country->name ? 'selected' : '' }}>
+                                                    {{ $current_ship_country == $country->name ? 'selected' : '' }}>
                                                     {{ $country->name }}</option>
                                             @endforeach
                                         </select>

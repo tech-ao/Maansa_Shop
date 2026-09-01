@@ -1181,6 +1181,69 @@ $(document).ready(function () {
             $(".shipping_message").addClass('d-none');
         }
     }
+
+    // Auto-save and auto-restore billing form inputs to persist on browser back/forward
+    var billingForm = $('#checkoutBilling');
+    if (billingForm.length) {
+        billingForm.on('input change', 'input, select', function () {
+            var draft = {};
+            billingForm.find('input[name], select[name]').each(function () {
+                var name = $(this).attr('name');
+                if (!name || name === '_token') return;
+                if ($(this).is(':checkbox')) {
+                    draft[name] = $(this).is(':checked');
+                } else {
+                    draft[name] = $(this).val();
+                }
+            });
+            sessionStorage.setItem('maansa_billing_draft', JSON.stringify(draft));
+        });
+
+        // Restore if form inputs are empty
+        var savedDraft = sessionStorage.getItem('maansa_billing_draft');
+        if (savedDraft) {
+            try {
+                var draftObj = JSON.parse(savedDraft);
+                $.each(draftObj, function (key, val) {
+                    var field = billingForm.find('[name="' + key + '"]');
+                    if (field.length) {
+                        if (field.is(':checkbox')) {
+                            field.prop('checked', !!val);
+                        } else if (!field.val() && val) {
+                            field.val(val);
+                        }
+                    }
+                });
+            } catch (e) {}
+        }
+    }
+
+    // Auto-save and auto-restore shipping form inputs
+    var shippingForm = $('#checkoutShipping');
+    if (shippingForm.length) {
+        shippingForm.on('input change', 'input, select', function () {
+            var draft = {};
+            shippingForm.find('input[name], select[name]').each(function () {
+                var name = $(this).attr('name');
+                if (!name || name === '_token') return;
+                draft[name] = $(this).val();
+            });
+            sessionStorage.setItem('maansa_shipping_draft', JSON.stringify(draft));
+        });
+
+        var savedShipDraft = sessionStorage.getItem('maansa_shipping_draft');
+        if (savedShipDraft) {
+            try {
+                var draftObj = JSON.parse(savedShipDraft);
+                $.each(draftObj, function (key, val) {
+                    var field = shippingForm.find('[name="' + key + '"]');
+                    if (field.length && !field.val() && val) {
+                        field.val(val);
+                    }
+                });
+            } catch (e) {}
+        }
+    }
 });
 
 

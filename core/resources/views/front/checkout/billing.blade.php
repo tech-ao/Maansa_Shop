@@ -38,6 +38,12 @@
                     <div class="card-body">
                         <h6>{{ __('Billing Address') }}</h6>
 
+                        @php
+                            $saved_bill = Session::get('billing_address', []);
+                            $current_country = old('bill_country', $saved_bill['bill_country'] ?? (isset($user) && $user ? $user->bill_country : ''));
+                            $same_checked = Session::has('billing_address') ? (!empty($saved_bill['same_ship_address'])) : true;
+                        @endphp
+
                         <form id="checkoutBilling" action="{{ route('front.checkout.store') }}" method="POST">
                             @csrf
                             <div class="row">
@@ -45,14 +51,14 @@
                                     <div class="form-group">
                                         <label for="checkout-fn">{{ __('First Name') }}*</label>
                                         <input class="form-control {{ $errors->has('bill_first_name') ? 'requireInput' : '' }}" name="bill_first_name" type="text" 
-                                            id="checkout-fn" value="{{ isset($user) ? $user->first_name : '' }}">
+                                            id="checkout-fn" value="{{ old('bill_first_name', $saved_bill['bill_first_name'] ?? (isset($user) && $user ? $user->first_name : '')) }}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="checkout-ln">{{ __('Last Name') }}*</label>
                                         <input class="form-control {{ $errors->has('bill_last_name') ? 'requireInput' : '' }}" name="bill_last_name" type="text" 
-                                            id="checkout-ln" value="{{ isset($user) ? $user->last_name : '' }}">
+                                            id="checkout-ln" value="{{ old('bill_last_name', $saved_bill['bill_last_name'] ?? (isset($user) && $user ? $user->last_name : '')) }}">
                                     </div>
                                 </div>
                             </div>
@@ -61,14 +67,14 @@
                                     <div class="form-group">
                                         <label for="checkout_email_billing">{{ __('E-mail Address') }}*</label>
                                         <input class="form-control {{ $errors->has('bill_email') ? 'requireInput' : '' }}" name="bill_email" type="email" 
-                                            id="checkout_email_billing" value="{{ isset($user) ? $user->email : '' }}">
+                                            id="checkout_email_billing" value="{{ old('bill_email', $saved_bill['bill_email'] ?? (isset($user) && $user ? $user->email : '')) }}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="checkout-phone">{{ __('Phone Number') }}*</label>
                                         <input class="form-control {{ $errors->has('bill_phone') ? 'requireInput' : '' }}" name="bill_phone" type="text" id="checkout-phone"
-                                             value="{{ isset($user) ? $user->phone : '' }}">
+                                             value="{{ old('bill_phone', $saved_bill['bill_phone'] ?? (isset($user) && $user ? $user->phone : '')) }}">
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +86,7 @@
                                             <label for="checkout-address1">{{ __('Address') }}*</label>
                                             <input class="form-control {{ $errors->has('bill_address1') ? 'requireInput' : '' }}" name="bill_address1"  type="text"
                                                 id="checkout-address1"
-                                                value="{{ isset($user) ? $user->bill_address1 : '' }}">
+                                                value="{{ old('bill_address1', $saved_bill['bill_address1'] ?? (isset($user) && $user ? $user->bill_address1 : '')) }}">
                                         </div>
                                     </div>
                                     
@@ -90,14 +96,14 @@
                                         <div class="form-group">
                                             <label for="checkout-zip">{{ __('Zip Code') }}*</label>
                                             <input class="form-control {{ $errors->has('bill_zip') ? 'requireInput' : '' }}" name="bill_zip" type="text" id="checkout-zip"
-                                                value="{{ isset($user) ? $user->bill_zip : '' }}">
+                                                value="{{ old('bill_zip', $saved_bill['bill_zip'] ?? (isset($user) && $user ? $user->bill_zip : '')) }}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="checkout-city">{{ __('City') }}*</label>
                                             <input class="form-control {{ $errors->has('bill_city') ? 'requireInput' : '' }}" name="bill_city" type="text" 
-                                                id="checkout-city" value="{{ isset($user) ? $user->bill_city : '' }}">
+                                                id="checkout-city" value="{{ old('bill_city', $saved_bill['bill_city'] ?? (isset($user) && $user ? $user->bill_city : '')) }}">
                                         </div>
                                     </div>
                                 </div>
@@ -107,10 +113,10 @@
                                             <label for="checkout-country">{{ __('Country') }}</label>
                                             <select class="form-control {{ $errors->has('bill_country') ? 'requireInput' : '' }}"  name="bill_country"
                                                 id="billing-country">
-                                                <option selected>{{ __('Choose Country') }}</option>
+                                                <option disabled {{ empty($current_country) ? 'selected' : '' }}>{{ __('Choose Country') }}</option>
                                                 @foreach (DB::table('countries')->get() as $country)
                                                     <option value="{{ $country->name }}"
-                                                        {{ isset($user) && $user->bill_country == $country->name ? 'selected' : '' }}>
+                                                        {{ $current_country == $country->name ? 'selected' : '' }}>
                                                         {{ $country->name }}</option>
                                                 @endforeach
                                             </select>
@@ -122,8 +128,8 @@
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" id="same_address"
-                                        name="same_ship_address" {{ Session::has('shipping_address') ? 'checked' : '' }}>
-                                    <label class="custom-control-label"
+                                        name="same_ship_address" {{ $same_checked ? 'checked' : '' }}>
+                                    <label class="custom-control-label font-weight-500"
                                         for="same_address">{{ __('Same as billing address') }}</label>
                                 </div>
                             </div>
