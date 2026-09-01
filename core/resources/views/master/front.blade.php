@@ -1117,6 +1117,111 @@ body_theme4 @endif
             padding: 3px 6px !important;
         }
     }
+
+    /* Modern Service Badges Section (2x2 on Mobile) */
+    .service-section {
+        padding: 24px 0 10px !important;
+    }
+
+    .single-service.single-service2 {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 14px !important;
+        padding: 16px 18px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 14px !important;
+        height: 100% !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+        transition: all 0.25s ease !important;
+    }
+
+    .single-service.single-service2:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+        border-color: #a7f3d0 !important;
+    }
+
+    .single-service.single-service2 img {
+        width: 44px !important;
+        height: 44px !important;
+        object-fit: contain !important;
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .single-service.single-service2 .content {
+        flex: 1 !important;
+        text-align: left !important;
+        min-width: 0 !important;
+    }
+
+    .single-service.single-service2 .content h6 {
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        margin-bottom: 4px !important;
+        line-height: 1.3 !important;
+    }
+
+    .single-service.single-service2 .content p {
+        font-size: 12px !important;
+        color: #64748b !important;
+        line-height: 1.35 !important;
+        margin: 0 !important;
+    }
+
+    /* Mobile 2x2 Grid Styling (<= 768px) */
+    @media (max-width: 768px) {
+        .service-section {
+            padding: 14px 0 4px !important;
+        }
+
+        .single-service.single-service2 {
+            padding: 12px 10px !important;
+            border-radius: 12px !important;
+            gap: 10px !important;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .single-service.single-service2 img {
+            width: 32px !important;
+            height: 32px !important;
+        }
+
+        .single-service.single-service2 .content h6 {
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            margin-bottom: 2px !important;
+            line-height: 1.25 !important;
+        }
+
+        .single-service.single-service2 .content p {
+            font-size: 10px !important;
+            line-height: 1.3 !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .single-service.single-service2 {
+            padding: 10px 8px !important;
+            gap: 8px !important;
+        }
+        .single-service.single-service2 img {
+            width: 26px !important;
+            height: 26px !important;
+        }
+        .single-service.single-service2 .content h6 {
+            font-size: 11px !important;
+        }
+        .single-service.single-service2 .content p {
+            font-size: 9px !important;
+        }
+    }
     </style>
     <!-- Backdrop-->
     <div class="site-backdrop"></div>

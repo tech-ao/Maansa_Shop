@@ -78,13 +78,13 @@
     @if ($setting->is_service == 1)
         <section class="service-section">
             <div class="container">
-                <div class="row">
+                <div class="row g-2 g-md-3">
                     @foreach ($services as $service)
-                        <div class="col-lg-3 col-sm-6 text-center mb-30">
+                        <div class="col-6 col-lg-3 col-sm-6 text-center mb-3">
                             <div class="single-service single-service2">
                                 <img src="{{ url('/core/public/storage/images/' . $service->photo) }}" alt="Shipping">
                                 <div class="content">
-                                    <h6 class="mb-2">{{ $service->title }}</h6>
+                                    <h6 class="mb-1">{{ $service->title }}</h6>
                                     <p class="text-sm text-muted mb-0">{{ $service->details }}</p>
                                 </div>
                             </div>
