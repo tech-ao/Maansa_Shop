@@ -39,6 +39,25 @@ class RazorpayController extends Controller
 
     public function store(Request $request)
     {
+        if (PriceHelper::CheckDigital() && !$request->shipping_id) {
+            $cart_total = 0;
+            if (Session::has('cart')) {
+                foreach (Session::get('cart') as $key => $item) {
+                    $cart_total += ($item['main_price'] + $item['attribute_price']) * $item['qty'];
+                }
+            }
+            $free_shipping = ShippingService::whereStatus(1)->whereIsCondition(1)->first();
+            if ($free_shipping && $cart_total >= $free_shipping->minimum_price) {
+                $shipping_id = $free_shipping->id;
+            } else {
+                $paid = ShippingService::whereStatus(1)->where('id', '!=', 1)->first();
+                $shipping_id = $paid ? $paid->id : ($free_shipping ? $free_shipping->id : 1);
+            }
+            if ($shipping_id) {
+                $request->merge(['shipping_id' => $shipping_id]);
+            }
+        }
+
         $state = State::whereStatus(1)->count() != 0  ? 'required' : '';
         $shipping = ShippingService::whereStatus(1)->count() == 0 || PriceHelper::CheckDigital() == true? 'required' : '';
 

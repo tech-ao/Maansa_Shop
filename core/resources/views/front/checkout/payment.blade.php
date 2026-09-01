@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         @if (PriceHelper::CheckDigital() == true)
-                        <h6 class="pb-2 widget-title2 mt-2">{{ __('Shipping Options') }}</h6>
+                        <h6 class="pb-2 widget-title2 mt-2">{{ __('Shipping & Delivery') }}</h6>
                         @endif
                         <div class="row">
                             <div class="col-sm-6 mb-3">
@@ -74,31 +74,43 @@
                                     @php
                                         $free_shipping = DB::table('shipping_services')->whereStatus(1)->whereIsCondition(1)->first();
                                         $is_free_eligible = ($free_shipping && $cart_total >= $free_shipping->minimum_price);
-                                        $selected_shipping_id = isset($shipping) && $shipping ? $shipping->id : ($is_free_eligible ? ($free_shipping ? $free_shipping->id : 1) : (DB::table('shipping_services')->whereStatus(1)->where('id', '!=', 1)->first() ? DB::table('shipping_services')->whereStatus(1)->where('id', '!=', 1)->first()->id : null));
+                                        $selected_shipping_id = isset($shipping) && $shipping ? $shipping->id : ($is_free_eligible ? ($free_shipping ? $free_shipping->id : 1) : (DB::table('shipping_services')->whereStatus(1)->where('id', '!=', 1)->first() ? DB::table('shipping_services')->whereStatus(1)->where('id', '!=', 1)->first()->id : 1));
+                                        $selected_service = DB::table('shipping_services')->where('id', $selected_shipping_id)->first();
                                     @endphp
 
-                                    <select name="shipping_id" class="form-control" id="shipping_id_select" required>
-                                        @foreach (DB::table('shipping_services')->whereStatus(1)->get() as $service)
-                                            @if ($service->id == 1 && $free_shipping && $free_shipping->minimum_price <= $cart_total)
-                                                <option value="{{ $service->id }}"
-                                                    {{ $selected_shipping_id == $service->id ? 'selected' : '' }}
-                                                    data-href="{{ route('front.shipping.setup') }}">{{ $service->title }} ({{ __('Free') }})
-                                                </option>
-                                            @elseif ($service->id != 1)
-                                                <option value="{{ $service->id }}"
-                                                    {{ $selected_shipping_id == $service->id ? 'selected' : '' }}
-                                                    data-href="{{ route('front.shipping.setup') }}">{{ $service->title }}
-                                                    ({{ PriceHelper::setCurrencyPrice($service->price) }})
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                    <input type="hidden" name="shipping_id" id="shipping_id_select" value="{{ $selected_shipping_id }}" data-href="{{ route('front.shipping.setup') }}">
 
-                                    @if ($is_free_eligible)
-                                        <small class="text-success font-weight-bold d-block mt-1"><i class="fa fa-check-circle mr-1"></i> {{ __('Eligible for Free Delivery!') }}</small>
-                                    @endif
+                                    <div class="auto-shipping-card p-3 rounded border bg-white shadow-sm d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="shipping-icon-circle mr-2" style="width: 38px; height: 38px; border-radius: 50%; background: #ecfdf5; color: #10b981; display: inline-flex; align-items: center; justify-content: center; font-size: 16px;">
+                                                <i class="fa fa-truck"></i>
+                                            </div>
+                                            <div>
+                                                <span class="d-block font-weight-bold text-dark" style="font-size: 14.5px; line-height: 1.2;">
+                                                    {{ $selected_service ? $selected_service->title : __('Delivery') }}
+                                                </span>
+                                                @if ($is_free_eligible)
+                                                    <small class="text-success font-weight-bold d-block mt-1">
+                                                        <i class="fa fa-check-circle mr-1"></i> {{ __('Eligible for Free Delivery!') }}
+                                                    </small>
+                                                @else
+                                                    <small class="text-muted d-block mt-1">
+                                                        {{ __('Standard shipping charge applied') }}
+                                                    </small>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div>
+                                            @if ($is_free_eligible || ($selected_service && $selected_service->price == 0))
+                                                <span class="badge badge-success px-3 py-1.5 font-weight-bold" style="font-size: 13px; border-radius: 8px;">{{ __('Free') }}</span>
+                                            @elseif ($selected_service)
+                                                <span class="badge badge-secondary px-3 py-1.5 font-weight-bold" style="font-size: 13px; border-radius: 8px;">{{ PriceHelper::setCurrencyPrice($selected_service->price) }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+
                                     @error('shipping_id')
-                                        <p class="text-danger shipping_message">{{ $message }}</p>
+                                        <p class="text-danger shipping_message mt-1">{{ $message }}</p>
                                     @enderror
                                 @endif
                             </div>
@@ -141,8 +153,8 @@
                                         @if (PriceHelper::CheckDigitalPaymentGateway())
                                             @if ($gateway->unique_keyword != 'cod')
                                                 <div class="payment-method-tile">
-                                                    <a class="payment-method-btn" href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#{{ $gateway->unique_keyword }}">
+                                                    <a class="payment-method-btn direct-pay-trigger" href="javascript:;"
+                                                        data-gateway="{{ $gateway->unique_keyword }}">
                                                         <div class="gateway-icon-box">
                                                             <img src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
                                                                 alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
@@ -153,8 +165,8 @@
                                             @endif
                                         @else
                                             <div class="payment-method-tile">
-                                                <a class="payment-method-btn" href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#{{ $gateway->unique_keyword }}">
+                                                <a class="payment-method-btn direct-pay-trigger" href="javascript:;"
+                                                    data-gateway="{{ $gateway->unique_keyword }}">
                                                     <div class="gateway-icon-box">
                                                         <img src="{{ url('/core/public/storage/images/' . $gateway->photo) }}"
                                                             alt="{{ $gateway->name }}" title="{{ $gateway->name }}">
@@ -180,4 +192,36 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).on('click', '.direct-pay-trigger', function (e) {
+        e.preventDefault();
+        var gateway = $(this).data('gateway');
+        var btn = $(this);
+
+        if (gateway === 'bank') {
+            var modalEl = document.getElementById('bank');
+            if (modalEl) {
+                var modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            }
+            return;
+        }
+
+        var form = $('#' + gateway).find('form');
+        if (form.length) {
+            var state_id = $('#state_id_select').val() || $('.state_id_setup').first().val() || '';
+            var shipping_id = $('#shipping_id_select').val() || $('.shipping_id_setup').first().val() || '';
+
+            if (state_id) form.find('.state_id_setup').val(state_id);
+            if (shipping_id) form.find('.shipping_id_setup').val(shipping_id);
+
+            btn.addClass('disabled processing').css('pointer-events', 'none');
+            btn.find('.gateway-title').html('<i class="fa fa-spinner fa-spin mr-1"></i> {{ __("Processing...") }}');
+            form.submit();
+        }
+    });
+</script>
 @endsection
