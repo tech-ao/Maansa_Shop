@@ -1614,15 +1614,15 @@ body_theme4 @endif
 
     .checkout-address-card ul li {
         font-size: 13px !important;
-        line-height: 1.5 !important;
         color: #334155 !important;
+        line-height: 1.6 !important;
     }
 
     /* Payment Gateways Grid */
     .payment-methods-grid {
         display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 12px !important;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+        gap: 14px !important;
         width: 100% !important;
     }
 
@@ -1637,44 +1637,46 @@ body_theme4 @endif
         justify-content: center !important;
         background: #ffffff !important;
         border: 1.5px solid #e2e8f0 !important;
-        border-radius: 12px !important;
-        padding: 14px 10px !important;
-        min-height: 95px !important;
+        border-radius: 14px !important;
+        padding: 16px 12px !important;
+        min-height: 105px !important;
         text-decoration: none !important;
-        transition: all 0.2s ease !important;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02) !important;
+        cursor: pointer !important;
     }
 
     .payment-method-btn:hover {
         border-color: #10b981 !important;
-        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2) !important;
-        transform: translateY(-2px) !important;
+        background: #f0fdf4 !important;
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.18) !important;
+        transform: translateY(-3px) !important;
     }
 
     .gateway-icon-box {
-        height: 38px !important;
+        height: 42px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 8px !important;
     }
 
     .gateway-icon-box img {
-        max-height: 34px !important;
+        max-height: 38px !important;
         max-width: 100% !important;
         object-fit: contain !important;
     }
 
     .gateway-title {
-        font-size: 12px !important;
-        font-weight: 600 !important;
-        color: #334155 !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
         margin: 0 !important;
         text-align: center !important;
-        line-height: 1.2 !important;
+        line-height: 1.25 !important;
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: 767.98px) {
         .checkout-step-item {
             font-size: 11px !important;
             padding: 7px 4px !important;
@@ -1685,7 +1687,7 @@ body_theme4 @endif
             gap: 10px !important;
         }
         .payment-method-btn {
-            min-height: 85px !important;
+            min-height: 88px !important;
             padding: 10px 6px !important;
         }
         .gateway-icon-box {
@@ -1695,7 +1697,16 @@ body_theme4 @endif
             max-height: 28px !important;
         }
         .gateway-title {
-            font-size: 11px !important;
+            font-size: 11.5px !important;
+        }
+    }
+
+    /* Sticky Desktop Sidebar */
+    @media (min-width: 992px) {
+        .checkout-sidebar-wrapper {
+            position: sticky !important;
+            top: 24px !important;
+            z-index: 10 !important;
         }
     }
 
@@ -1705,25 +1716,28 @@ body_theme4 @endif
         background: #ffffff !important;
         border: 1px solid #e2e8f0 !important;
         border-radius: 16px !important;
-        padding: 20px !important;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
+        padding: 22px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03) !important;
+        margin-bottom: 20px !important;
     }
 
     .summary-header-icon,
     .cart-items-header-icon {
-        width: 34px !important;
-        height: 34px !important;
+        width: 36px !important;
+        height: 36px !important;
         border-radius: 10px !important;
         background: #ecfdf5 !important;
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        font-size: 15px !important;
+        font-size: 16px !important;
     }
 
     .order-total-highlight-card {
         background: #f0fdf4 !important;
         border: 1.5px solid #bbf7d0 !important;
+        border-radius: 12px !important;
+        padding: 14px 16px !important;
     }
 
     .checkout-item-thumb-wrapper {

@@ -21,8 +21,8 @@
     <!-- Page Content-->
     <div class="container padding-bottom-3x mb-1 checkut-page">
         <div class="row">
-            <!-- Billing Adress-->
-            <div class="col-xl-9 col-lg-8">
+            <!-- Billing Address-->
+            <div class="col-xl-8 col-lg-8 mb-4 mb-lg-0">
                 <div class="checkout-steps-bar mb-4">
                     <a class="checkout-step-item active" href="{{ route('front.checkout.billing') }}">
                         <span>1. {{ __('Billing') }}</span>
@@ -195,7 +195,7 @@
                 </div>
             </div>
             <!-- Sidebar  -->
-            <div class="col-xl-3 col-lg-4">
+            <div class="col-xl-4 col-lg-4">
                 @include('includes.checkout_sitebar', $cart)
             </div>
         </div>
