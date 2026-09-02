@@ -77,6 +77,22 @@
                                 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px; opacity: 0.75;"></i>
                             </a>
                         </li>
+                        <!-- Nav Item - Support Tickets -->
+                        <li class="nav-item no-arrow mr-2">
+                            @php
+                                $ticketPendingCount = 0;
+                                try {
+                                    $ticketPendingCount = \App\Models\Ticket::whereIn('status', ['Pending', 'Open'])->count();
+                                } catch (\Throwable $e) {}
+                            @endphp
+                            <a class="nav-link-notif" href="{{ route('back.ticket.index') }}" title="{{ __('Support Tickets') }} ({{ $ticketPendingCount }} {{ __('Open/Pending') }})">
+                                <i class="fa-solid fa-headset"></i>
+                                @if($ticketPendingCount > 0)
+                                    <span class="topbar-notif-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 2px 5px rgba(245, 158, 11, 0.45);">{{ $ticketPendingCount }}</span>
+                                @endif
+                            </a>
+                        </li>
+
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mr-3">
                             <a class="nav-link-notif" href="#" id="alertsDropdown" role="button"

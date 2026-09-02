@@ -55,11 +55,6 @@ class UserController extends Controller
     {
         GuestUser::ensureTableExists();
 
-        // If guest table is empty, auto-sync from any previous guest orders
-        if (GuestUser::count() == 0) {
-            GuestUser::syncFromExistingOrders();
-        }
-
         $totalGuestCount = GuestUser::count();
         $totalGuestOrders = \App\Models\Order::where(function($q) {
             $q->where('user_id', 0)->orWhereNull('user_id');
@@ -97,6 +92,15 @@ class UserController extends Controller
     {
         GuestUser::ensureTableExists();
         $guest = GuestUser::findOrFail($id);
+
+        // Delete associated guest orders to prevent orphan records
+        $orders = $guest->getOrders();
+        foreach ($orders as $order) {
+            $order->tracks()->delete();
+            $order->notifications()->delete();
+            $order->delete();
+        }
+
         $guest->delete();
         return redirect()->route('back.user.guest')->withSuccess(__('Guest Customer Deleted Successfully.'));
     }
@@ -132,7 +136,18 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        ImageHelper::handleDeletedImage($user,'photo','images');
+        ImageHelper::handleDeletedImage($user, 'photo', 'images');
+
+        // Delete user's notifications, tickets, reviews, and orders
+        $user->notifications()->delete();
+        \App\Models\Ticket::where('user_id', $user->id)->delete();
+        \App\Models\Review::where('user_id', $user->id)->delete();
+        foreach ($user->orders as $order) {
+            $order->tracks()->delete();
+            $order->notifications()->delete();
+            $order->delete();
+        }
+
         $user->delete();
         return redirect()->route('back.user.index')->withSuccess(__('Customer Deleted Successfully.'));
     }

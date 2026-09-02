@@ -212,11 +212,39 @@
         </div>
     </li>
 
-    <li class="nav-item {{ request()->routeIs('back.ticket.*') ? 'active' : '' }}">
-        <a href="{{ route('back.ticket.index') }}">
+    @php
+        $isTicketActive = request()->routeIs('back.ticket.*');
+    @endphp
+    <li class="nav-item {{ $isTicketActive ? 'active submenu' : '' }}">
+        <a data-toggle="collapse" href="#tickets" aria-expanded="{{ $isTicketActive ? 'true' : 'false' }}">
             <i class="fa-solid fa-headset"></i>
             <p>{{ __('Manage Tickets') }}</p>
+            <span class="caret"></span>
         </a>
+        <div class="collapse {{ $isTicketActive ? 'show' : '' }}" id="tickets">
+            <ul class="nav nav-collapse">
+                <li class="{{ !request()->input('type') && request()->routeIs('back.ticket.index') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.ticket.index') }}">
+                        <span class="sub-item">{{ __('All Tickets') }}</span>
+                    </a>
+                </li>
+                <li class="{{ request()->input('type') == 'Pending' ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.ticket.index').'?type=Pending' }}">
+                        <span class="sub-item">{{ __('Pending Tickets') }}</span>
+                    </a>
+                </li>
+                <li class="{{ request()->input('type') == 'Open' ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.ticket.index').'?type=Open' }}">
+                        <span class="sub-item">{{ __('Open Tickets') }}</span>
+                    </a>
+                </li>
+                <li class="{{ request()->input('type') == 'Closed' ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.ticket.index').'?type=Closed' }}">
+                        <span class="sub-item">{{ __('Closed Tickets') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </li>
 
     <li class="nav-item {{ request()->routeIs('back.subscribers.*') ? 'active' : '' }}">

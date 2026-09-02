@@ -73,9 +73,7 @@ class EmailHelper
 
     public function sendCustomMail(array $emailData)
     {
-
         try {
-
             $this->mail->setFrom($this->setting->email_from, $this->setting->email_from_name);
             $this->mail->addAddress($emailData['to']);
             $this->mail->isHTML(true);
@@ -83,11 +81,11 @@ class EmailHelper
             $this->mail->Body = $emailData['body'];
 
             $this->mail->send();
+            return true;
         } catch (Exception $e) {
-            dd($e->getMessage());
+            \Illuminate\Support\Facades\Log::error('SMTP Mail Error in sendCustomMail: ' . $e->getMessage());
+            return false;
         }
-
-        return true;
     }
 
 
