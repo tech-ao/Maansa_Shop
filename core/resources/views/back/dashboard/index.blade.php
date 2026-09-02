@@ -312,7 +312,12 @@
                         <i class="fa-solid fa-headset text-info compact-metric-icon"></i>
                         <span class="compact-metric-name">{{ __('Support Tickets') }}</span>
                     </div>
-                    <span class="compact-metric-count">{{ $totalTicket }} ({{ $totalPendingTicket }} pending)</span>
+                    <span class="compact-metric-count">
+                        {{ $totalTicket }}
+                        @if($totalPendingTicket > 0)
+                            <span class="badge badge-warning" style="font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 999px; margin-left: 4px;">{{ $totalPendingTicket }} pending</span>
+                        @endif
+                    </span>
                 </div>
             </a>
         </div>
