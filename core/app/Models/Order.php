@@ -53,4 +53,19 @@ class Order extends Model
     	return $this->hasMany('App\Models\Notification','order_id');
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($order) {
+            if (empty($order->user_id) || $order->user_id == 0) {
+                if (!empty($order->billing_info)) {
+                    $billing = is_array($order->billing_info) ? $order->billing_info : json_decode($order->billing_info, true);
+                    if ($billing && is_array($billing)) {
+                        \App\Models\GuestUser::storeOrUpdateGuest($billing, $order);
+                    }
+                }
+            }
+        });
+    }
 }

@@ -215,6 +215,10 @@ class CheckoutController extends Controller
             Session::forget('shipping_address');
         }
 
+        if (!Auth::check()) {
+            \App\Models\GuestUser::storeOrUpdateGuest($request->all());
+        }
+
         if (Session::has('shipping_address')) {
             return redirect()->route('front.checkout.payment');
         } else {

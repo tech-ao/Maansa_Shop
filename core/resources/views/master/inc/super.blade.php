@@ -187,11 +187,29 @@
     <li class="nav-section-title">
         <span>{{ __('Customers & Support') }}</span>
     </li>
-    <li class="nav-item {{ request()->routeIs('back.user.*') ? 'active' : '' }}">
-        <a href="{{ route('back.user.index') }}">
+    @php
+        $isCustomerActive = request()->routeIs('back.user.*');
+    @endphp
+    <li class="nav-item {{ $isCustomerActive ? 'active submenu' : '' }}">
+        <a data-toggle="collapse" href="#customers_nav" aria-expanded="{{ $isCustomerActive ? 'true' : 'false' }}">
             <i class="fa-solid fa-users"></i>
-            <p>{{ __('Customer List') }}</p>
+            <p>{{ __('Manage Customers') }}</p>
+            <span class="caret"></span>
         </a>
+        <div class="collapse {{ $isCustomerActive ? 'show' : '' }}" id="customers_nav">
+            <ul class="nav nav-collapse">
+                <li class="{{ request()->routeIs('back.user.index') || request()->routeIs('back.user.show') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.user.index') }}">
+                        <span class="sub-item">{{ __('Registered Customers') }}</span>
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('back.user.guest*') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.user.guest') }}">
+                        <span class="sub-item">{{ __('Guest Customers') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </li>
 
     <li class="nav-item {{ request()->routeIs('back.ticket.*') ? 'active' : '' }}">

@@ -129,7 +129,10 @@ Route::group(['middleware' => ['adminlocalize', 'demo']], function () {
 
 
         Route::group(['middleware' => 'permissions:Customer List'], function () {
-            //------------ USER ------------
+            //------------ USER & GUEST CUSTOMERS ------------
+            Route::get('user/guest', 'Back\UserController@guest')->name('back.user.guest');
+            Route::get('user/guest/{id}', 'Back\UserController@guestShow')->name('back.user.guest.show');
+            Route::delete('user/guest/{id}', 'Back\UserController@guestDestroy')->name('back.user.guest.destroy');
             Route::resource('user', 'Back\UserController', ['as' => 'back', 'except' => ['create', 'store', 'edit']]);
         });
 

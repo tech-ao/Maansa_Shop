@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Back;
 
 use App\{
     Models\User,
+    Models\GuestUser,
     Http\Controllers\Controller
 };
 use App\Helpers\ImageHelper;
@@ -43,6 +44,61 @@ class UserController extends Controller
         return view('back.user.index',[
             'datas' => User::latest()->get()
         ]);
+    }
+
+    /**
+     * Display a listing of guest customers.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function guest()
+    {
+        GuestUser::ensureTableExists();
+
+        // If guest table is empty, auto-sync from any previous guest orders
+        if (GuestUser::count() == 0) {
+            GuestUser::syncFromExistingOrders();
+        }
+
+        $totalGuestCount = GuestUser::count();
+        $totalGuestOrders = \App\Models\Order::where(function($q) {
+            $q->where('user_id', 0)->orWhereNull('user_id');
+        })->count();
+
+        return view('back.user.guest', [
+            'datas' => GuestUser::latest()->get(),
+            'totalGuestCount' => $totalGuestCount,
+            'totalGuestOrders' => $totalGuestOrders
+        ]);
+    }
+
+    /**
+     * Display the specified guest customer.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function guestShow($id)
+    {
+        GuestUser::ensureTableExists();
+        $guest = GuestUser::findOrFail($id);
+        $orders = $guest->getOrders();
+
+        return view('back.user.guest_show', compact('guest', 'orders'));
+    }
+
+    /**
+     * Remove the specified guest customer.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function guestDestroy($id)
+    {
+        GuestUser::ensureTableExists();
+        $guest = GuestUser::findOrFail($id);
+        $guest->delete();
+        return redirect()->route('back.user.guest')->withSuccess(__('Guest Customer Deleted Successfully.'));
     }
 
     /**
