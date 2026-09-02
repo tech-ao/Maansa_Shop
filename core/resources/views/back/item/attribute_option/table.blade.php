@@ -49,18 +49,16 @@
             @endif
         </td>
         <td class="text-center">
-            <div class="action-list d-inline-flex align-items-center gap-1">
-                <a class="btn btn-action-edit btn-sm"
+            <div class="action-btn-group">
+                <a class="btn-action-icon btn-action-edit"
                     href="{{ route('back.option.edit', [$item->id, $data->id]) }}"
-                    title="{{ __('Edit Option') }}"
-                    style="width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe;">
+                    title="{{ __('Edit Option') }}">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
-                <a class="btn btn-action-delete btn-sm" data-toggle="modal"
+                <a class="btn-action-icon btn-action-delete" data-toggle="modal"
                     data-target="#confirm-delete" href="javascript:;"
                     data-href="{{ route('back.option.destroy', [$item->id, $data->id]) }}"
-                    title="{{ __('Delete Option') }}"
-                    style="width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca;">
+                    title="{{ __('Delete Option') }}">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
             </div>

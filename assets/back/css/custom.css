@@ -2472,57 +2472,76 @@ table.dataTable thead th.no-sort::after {
   color: #ffffff;
 }
 
-/* Action Button Icons */
-.action-btn-group {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
+/* Action Button Icons & Group */
+.action-btn-group,
+.action-list {
+  display: inline-flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.action-btn-group .btn-action-icon,
+.action-btn-group .btn,
+.action-list .btn-action-icon,
+.action-list .btn {
+  margin: 0 3px !important;
 }
 
 .btn-action-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 9px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
   text-decoration: none !important;
-  transition: all 0.15s ease;
-  border: 1px solid transparent;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid transparent !important;
+  flex-shrink: 0 !important;
 }
 
 .btn-action-view {
-  background: #e0f2fe;
-  color: #0284c7;
+  background: #f0fdf4 !important;
+  color: #059669 !important;
+  border-color: #dcfce7 !important;
 }
 
 .btn-action-view:hover {
-  background: #0284c7;
-  color: #ffffff;
-  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+  background: #059669 !important;
+  color: #ffffff !important;
+  border-color: #059669 !important;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3) !important;
+  transform: translateY(-1px) !important;
 }
 
 .btn-action-edit {
-  background: #eef2ff;
-  color: #059669;
+  background: #eff6ff !important;
+  color: #2563eb !important;
+  border-color: #dbeafe !important;
 }
 
 .btn-action-edit:hover {
-  background: #059669;
-  color: #ffffff;
-  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+  transform: translateY(-1px) !important;
 }
 
 .btn-action-delete {
-  background: #fee2e2;
-  color: #ef4444;
+  background: #fef2f2 !important;
+  color: #ef4444 !important;
+  border-color: #fee2e2 !important;
 }
 
 .btn-action-delete:hover {
-  background: #ef4444;
-  color: #ffffff;
-  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+  background: #ef4444 !important;
+  color: #ffffff !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+  transform: translateY(-1px) !important;
 }
 
 /* Ticket Chat Conversation (Edit View) */
