@@ -221,25 +221,28 @@
             <p>{{ __('Manage Tickets') }}</p>
             <span class="caret"></span>
         </a>
+        @php
+            $currentTicketType = request()->input('type');
+        @endphp
         <div class="collapse {{ $isTicketActive ? 'show' : '' }}" id="tickets">
             <ul class="nav nav-collapse">
-                <li class="{{ !request()->input('type') && request()->routeIs('back.ticket.index') ? 'active' : '' }}">
+                <li class="{{ empty($currentTicketType) && request()->routeIs('back.ticket.index') ? 'active' : '' }}">
                     <a class="sub-link" href="{{ route('back.ticket.index') }}">
                         <span class="sub-item">{{ __('All Tickets') }}</span>
                     </a>
                 </li>
-                <li class="{{ request()->input('type') == 'Pending' ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.ticket.index').'?type=Pending' }}">
+                <li class="{{ $currentTicketType === 'Pending' ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.ticket.index', ['type' => 'Pending']) }}">
                         <span class="sub-item">{{ __('Pending Tickets') }}</span>
                     </a>
                 </li>
-                <li class="{{ request()->input('type') == 'Open' ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.ticket.index').'?type=Open' }}">
+                <li class="{{ $currentTicketType === 'Open' ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.ticket.index', ['type' => 'Open']) }}">
                         <span class="sub-item">{{ __('Open Tickets') }}</span>
                     </a>
                 </li>
-                <li class="{{ request()->input('type') == 'Closed' ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.ticket.index').'?type=Closed' }}">
+                <li class="{{ $currentTicketType === 'Closed' ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.ticket.index', ['type' => 'Closed']) }}">
                         <span class="sub-item">{{ __('Closed Tickets') }}</span>
                     </a>
                 </li>
