@@ -101,6 +101,7 @@ class CheckoutController extends Controller
         $data['discount'] = $discount;
         $data['shipping'] = $shipping;
         $data['tax'] = $total_tax;
+        $data['detected_country'] = $this->detectCountry();
         $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
         $data['payments'] = PaymentSetting::whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
 
@@ -119,8 +120,6 @@ class CheckoutController extends Controller
         if (Session::has('shipping_address')) {
             return redirect(route('front.checkout.payment'));
         }
-
-
 
         if (!Session::has('cart')) {
             return redirect(route('front.cart'));
@@ -164,6 +163,7 @@ class CheckoutController extends Controller
         $data['discount'] = $discount;
         $data['shipping'] = $shipping;
         $data['tax'] = $total_tax;
+        $data['detected_country'] = $this->detectCountry();
         $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
         $data['payments'] = PaymentSetting::whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
 
@@ -174,15 +174,30 @@ class CheckoutController extends Controller
 
     public function billingStore(Request $request)
     {
-        // laravel validation
+        // laravel validation with strict checks
         $request->validate([
-            'bill_first_name' => 'required',
-            'bill_last_name' => 'required',
-            'bill_email' => 'required|email',
-            'bill_phone' => 'required',
-            'bill_address1' => 'required',
-            'bill_city' => 'required',
-            'bill_zip' => 'required',
+            'bill_first_name' => 'required|max:100',
+            'bill_last_name' => 'required|max:100',
+            'bill_email' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'bill_phone' => [
+                'required',
+                'regex:/^[0-9]{10,15}$/'
+            ],
+            'bill_address1' => 'required|max:255',
+            'bill_city' => 'required|max:100',
+            'bill_zip' => [
+                'required',
+                'regex:/^[0-9]{5,10}$/'
+            ],
+        ], [
+            'bill_email.regex' => __('Please enter a valid e-mail address (e.g. name@example.com).'),
+            'bill_phone.regex' => __('Please enter a valid mobile number (10 to 15 digits, numbers only).'),
+            'bill_zip.regex' => __('Please enter a valid postal / zip code (numbers only).'),
         ]);
 
         if ($request->same_ship_address) {
@@ -276,6 +291,7 @@ class CheckoutController extends Controller
         $data['discount'] = $discount;
         $data['shipping'] = $shipping;
         $data['tax'] = $total_tax;
+        $data['detected_country'] = $this->detectCountry();
         $allowed_gateways = ['cod', 'stripe', 'razorpay', 'paypal', 'paytm', 'cashfree'];
         $data['payments'] = PaymentSetting::whereStatus(1)->whereIn('unique_keyword', $allowed_gateways)->get();
         return view('front.checkout.shipping', $data);
@@ -284,19 +300,88 @@ class CheckoutController extends Controller
     public function shippingStore(Request $request)
     {
 
-        // laravel validation
+        // laravel validation with strict checks
         $request->validate([
-            'ship_first_name' => 'required',
-            'ship_last_name' => 'required',
-            'ship_email' => 'required|email',
-            'ship_phone' => 'required',
-            'ship_address1' => 'required',
-            'ship_city' => 'required',
-            'ship_zip' => 'required',
+            'ship_first_name' => 'required|max:100',
+            'ship_last_name' => 'required|max:100',
+            'ship_email' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'ship_phone' => [
+                'required',
+                'regex:/^[0-9]{10,15}$/'
+            ],
+            'ship_address1' => 'required|max:255',
+            'ship_city' => 'required|max:100',
+            'ship_zip' => [
+                'required',
+                'regex:/^[0-9]{5,10}$/'
+            ],
+        ], [
+            'ship_email.regex' => __('Please enter a valid e-mail address (e.g. name@example.com).'),
+            'ship_phone.regex' => __('Please enter a valid mobile number (10 to 15 digits, numbers only).'),
+            'ship_zip.regex' => __('Please enter a valid postal / zip code (numbers only).'),
         ]);
 
         Session::put('shipping_address', $request->all());
         return redirect(route('front.checkout.payment'));
+    }
+
+    /**
+     * Auto-detect customer country by IP/Cloudflare header.
+     */
+    private function detectCountry(Request $request = null)
+    {
+        if (Session::has('user_geo_country')) {
+            return Session::get('user_geo_country');
+        }
+
+        // 1. Cloudflare header
+        $cfCountryCode = $_SERVER['HTTP_CF_IPCOUNTRY'] ?? null;
+        if ($cfCountryCode && strlen($cfCountryCode) === 2 && strtoupper($cfCountryCode) !== 'XX') {
+            $code = strtoupper($cfCountryCode);
+            $countryMap = [
+                'IN' => 'India', 'US' => 'United States', 'GB' => 'United Kingdom', 'CA' => 'Canada',
+                'AU' => 'Australia', 'AE' => 'United Arab Emirates', 'SA' => 'Saudi Arabia',
+                'SG' => 'Singapore', 'MY' => 'Malaysia', 'BD' => 'Bangladesh', 'LK' => 'Sri Lanka',
+                'NP' => 'Nepal', 'DE' => 'Germany', 'FR' => 'France', 'IT' => 'Italy',
+                'ES' => 'Spain', 'NZ' => 'New Zealand', 'ZA' => 'South Africa', 'PK' => 'Pakistan'
+            ];
+            if (isset($countryMap[$code])) {
+                Session::put('user_geo_country', $countryMap[$code]);
+                return $countryMap[$code];
+            }
+        }
+
+        // 2. IP lookup
+        $ip = $request ? $request->ip() : null;
+        if (!$ip || $ip === '127.0.0.1' || $ip === '::1') {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? ($_SERVER['REMOTE_ADDR'] ?? null);
+            if ($ip && strpos($ip, ',') !== false) {
+                $ip = trim(explode(',', $ip)[0]);
+            }
+        }
+
+        if ($ip && filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+            try {
+                $ctx = stream_context_create(['http' => ['timeout' => 1.5]]);
+                $res = @file_get_contents("http://ip-api.com/json/{$ip}?fields=country", false, $ctx);
+                if ($res) {
+                    $json = json_decode($res, true);
+                    if (!empty($json['country'])) {
+                        $country = $json['country'];
+                        Session::put('user_geo_country', $country);
+                        return $country;
+                    }
+                }
+            } catch (\Exception $e) {}
+        }
+
+        Session::put('user_geo_country', 'India');
+        return 'India';
     }
 
 

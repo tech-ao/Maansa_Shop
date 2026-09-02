@@ -61,13 +61,24 @@ class PaymentRequest extends FormRequest
             return [
                 'state_id' => $state,
                 "shipping_id" => $shipping,
-                'bill_first_name' => 'required',
-                'bill_last_name' => 'required',
-                'bill_email' => 'required',
-                'bill_phone' => 'required',
-                'bill_address' => 'required',
-                'bill_city' => 'required',
-                'bill_zip' => 'required',
+                'bill_first_name' => 'required|max:100',
+                'bill_last_name' => 'required|max:100',
+                'bill_email' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+                ],
+                'bill_phone' => [
+                    'required',
+                    'regex:/^[0-9]{10,15}$/'
+                ],
+                'bill_address' => 'required|max:255',
+                'bill_city' => 'required|max:100',
+                'bill_zip' => [
+                    'required',
+                    'regex:/^[0-9]{5,10}$/'
+                ],
             ];
         }else{
             return [
@@ -87,6 +98,9 @@ class PaymentRequest extends FormRequest
         return [
             'state_id.required'   => __('Please select your shipping state.'),
             'shipping_id.required'   => __('Please select your shipping method.'),
+            'bill_email.regex' => __('Please enter a valid e-mail address (e.g. name@example.com).'),
+            'bill_phone.regex' => __('Please enter a valid mobile number (10 to 15 digits, numbers only).'),
+            'bill_zip.regex' => __('Please enter a valid postal / zip code (numbers only).'),
         ];
     }
 
