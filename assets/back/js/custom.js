@@ -916,6 +916,54 @@
         }
     }
 
+    // Mobile Hamburger (Sidenav) & Three-dot (Topbar) Toggle Event Handlers
+    $(document).on('click', '.sidenav-toggler', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $html = $('html');
+        var $btn = $(this);
+        if ($html.hasClass('nav_open')) {
+            $html.removeClass('nav_open');
+            $('body').removeClass('nav_open');
+            $btn.removeClass('toggled');
+        } else {
+            $html.addClass('nav_open');
+            $('body').addClass('nav_open');
+            $btn.addClass('toggled');
+            // Close topbar if open
+            $html.removeClass('topbar_open');
+            $('body').removeClass('topbar_open');
+            $('.topbar-toggler').removeClass('toggled');
+        }
+    });
+
+    $(document).on('click', '.sidebar-mobile-close, .sidenav-overlay', function (e) {
+        e.preventDefault();
+        $('html').removeClass('nav_open');
+        $('body').removeClass('nav_open');
+        $('.sidenav-toggler').removeClass('toggled');
+    });
+
+    $(document).on('click', '.topbar-toggler', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $html = $('html');
+        var $btn = $(this);
+        if ($html.hasClass('topbar_open')) {
+            $html.removeClass('topbar_open');
+            $('body').removeClass('topbar_open');
+            $btn.removeClass('toggled');
+        } else {
+            $html.addClass('topbar_open');
+            $('body').addClass('topbar_open');
+            $btn.addClass('toggled');
+            // Close sidenav if open
+            $html.removeClass('nav_open');
+            $('body').removeClass('nav_open');
+            $('.sidenav-toggler').removeClass('toggled');
+        }
+    });
+
     $(document).ready(function () {
         initCustomSelects();
     });

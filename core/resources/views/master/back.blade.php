@@ -281,11 +281,11 @@
     <!-- Magnific Popup -->
     <script src="{{ asset('assets/back/js/jquery.magnific-popup.min.js') }}"></script>
 
-    <!-- Sortable -->
-    <script src="{{ asset('assets/back/js/sortable.js') }}"></script>
-
     <!-- Icon Picker -->
     <script src="{{ asset('assets/back/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
+
+    <!-- Azzara JS -->
+    <script src="{{ asset('assets/back/js/ready.min.js') }}"></script>
 
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
