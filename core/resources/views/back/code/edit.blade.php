@@ -73,18 +73,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group mb-4">
-                            <label for="discount" class="form-label font-weight-bold text-dark">{{ __('Discount Type & Value') }} *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend" style="width: 40%;">
-                                    <select name="type" class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; font-weight: 600;">
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="discount_type" class="form-label font-weight-bold text-dark">{{ __('Discount Type') }} *</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa-solid fa-sliders"></i></span>
+                                    </div>
+                                    <select name="type" id="discount_type" class="form-control" style="font-weight: 600;">
                                         <option value="percentage" {{ $code->type == 'percentage' ? 'selected' : '' }}>{{ __('Percentage') }} (%)</option>
                                         <option value="amount" {{ $code->type == 'amount' ? 'selected' : '' }}>{{ __('Fixed Amount') }} ({{ PriceHelper::adminCurrency() }})</option>
                                     </select>
                                 </div>
-                                <input type="number" id="discount" name="discount" class="form-control"
-                                    placeholder="{{ __('Enter Discount Value') }}" min="0" step="0.1"
-                                    value="{{ $code->type == 'amount' ? round($code->discount / $curr->value, 2) : $code->discount }}" required style="font-weight: 700;">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="discount" class="form-label font-weight-bold text-dark">{{ __('Discount Value') }} *</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text discount-symbol font-weight-bold">{{ $code->type == 'percentage' ? '%' : PriceHelper::adminCurrency() }}</span>
+                                    </div>
+                                    <input type="number" id="discount" name="discount" class="form-control"
+                                        placeholder="{{ __('Enter Discount Value') }}" min="0" step="0.01"
+                                        value="{{ $code->type == 'amount' ? round($code->discount / $curr->value, 2) : $code->discount }}" required style="font-weight: 700;">
+                                </div>
                             </div>
                         </div>
 
@@ -101,4 +112,21 @@
 	</div>
 
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        function updateDiscountSymbol() {
+            var type = $('#discount_type').val();
+            if (type === 'percentage') {
+                $('.discount-symbol').text('%');
+            } else {
+                $('.discount-symbol').text('{{ PriceHelper::adminCurrency() }}');
+            }
+        }
+        $('#discount_type').on('change', updateDiscountSymbol);
+        updateDiscountSymbol();
+    });
+</script>
 @endsection
