@@ -964,6 +964,46 @@
         }
     });
 
+    // Sidebar Single-Open Accordion Behavior (closes other open sub-menus when one is opened)
+    $(document).on('show.bs.collapse', '.sidebar .collapse', function () {
+        var $currentCollapse = $(this);
+        // Find all other open dropdowns in the sidebar and collapse them
+        $('.sidebar .collapse.show').not($currentCollapse).each(function () {
+            var $other = $(this);
+            $other.collapse('hide');
+            var $parentItem = $other.closest('.nav-item');
+            $parentItem.removeClass('submenu');
+            $parentItem.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'false').addClass('collapsed');
+        });
+
+        var $parent = $currentCollapse.closest('.nav-item');
+        $parent.addClass('submenu');
+        $parent.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'true').removeClass('collapsed');
+    });
+
+    $(document).on('hide.bs.collapse', '.sidebar .collapse', function () {
+        var $parent = $(this).closest('.nav-item');
+        $parent.removeClass('submenu');
+        $parent.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'false').addClass('collapsed');
+    });
+
+    // Delegated click handler as backup for instant responsive closing
+    $(document).on('click', '.sidebar .nav-item > a[data-toggle="collapse"]', function () {
+        var targetId = $(this).attr('href') || $(this).data('target');
+        if (targetId && targetId.charAt(0) === '#') {
+            var $targetCollapse = $(targetId);
+            if ($targetCollapse.length && !$targetCollapse.hasClass('show')) {
+                $('.sidebar .collapse.show').not($targetCollapse).each(function () {
+                    var $other = $(this);
+                    $other.collapse('hide');
+                    var $parentItem = $other.closest('.nav-item');
+                    $parentItem.removeClass('submenu');
+                    $parentItem.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'false').addClass('collapsed');
+                });
+            }
+        }
+    });
+
     $(document).ready(function () {
         initCustomSelects();
     });
