@@ -4,8 +4,8 @@
     <!-- 1. Modern Order Summary Card -->
     <section class="checkout-summary-card mb-4">
         <div class="summary-card-header d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom">
-            <div class="d-flex align-items-center">
-                <div class="summary-header-icon mr-2">
+            <div class="d-flex align-items-center" style="gap: 12px;">
+                <div class="summary-header-icon flex-shrink-0">
                     <i class="fa fa-receipt text-primary"></i>
                 </div>
                 <h3 class="summary-card-title mb-0 font-weight-bold" style="font-size: 16px; color: #0f172a;">
@@ -95,16 +95,16 @@
     <!-- 2. Modern Items In Cart Card -->
     <section class="checkout-cart-items-card">
         <div class="cart-items-card-header d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom">
-            <div class="d-flex align-items-center">
-                <div class="cart-items-header-icon mr-2">
+            <div class="d-flex align-items-center" style="gap: 12px;">
+                <div class="cart-items-header-icon flex-shrink-0">
                     <i class="fa fa-shopping-bag text-primary"></i>
                 </div>
                 <h3 class="cart-items-card-title mb-0 font-weight-bold" style="font-size: 16px; color: #0f172a;">
                     {{ __('Items In Your Cart') }}
                 </h3>
             </div>
-            <a href="{{ route('front.cart') }}" class="text-primary font-weight-600" style="font-size: 12.5px; text-decoration: none;">
-                <i class="fa fa-pencil mr-1"></i>{{ __('Edit') }}
+            <a href="{{ route('front.cart') }}" class="text-primary font-weight-600 ml-auto" style="font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                <i class="fa fa-pencil"></i> {{ __('Edit') }}
             </a>
         </div>
 
@@ -114,20 +114,20 @@
                     $item_single_price = $item['main_price'] + $item['attribute_price'];
                     $item_total_price = $item_single_price * $item['qty'];
                 @endphp
-                <div class="checkout-item-card d-flex align-items-center py-3 {{ !$loop->last ? 'border-bottom' : '' }}">
+                <div class="checkout-item-card d-flex align-items-start py-3 {{ !$loop->last ? 'border-bottom' : '' }}" style="gap: 14px;">
                     <!-- Thumbnail with Badge -->
-                    <div class="checkout-item-thumb-wrapper position-relative mr-3 flex-shrink-0">
-                        <a href="{{ route('front.product', $item['slug']) }}" class="d-block">
+                    <div class="checkout-item-thumb-wrapper position-relative flex-shrink-0" style="width: 58px; height: 58px; min-width: 58px;">
+                        <a href="{{ route('front.product', $item['slug']) }}" class="d-block w-100 h-100">
                             <img src="{{ url('/core/public/storage/images/' . $item['photo']) }}" alt="{{ $item['name'] }}" class="checkout-item-thumb">
                         </a>
-                        <span class="checkout-item-qty-badge">×{{ $item['qty'] }}</span>
+                        <span class="checkout-item-qty-badge" style="top: -5px; right: -5px;">×{{ $item['qty'] }}</span>
                     </div>
 
                     <!-- Details -->
-                    <div class="checkout-item-info flex-grow-1 min-w-0">
+                    <div class="checkout-item-info flex-grow-1 min-w-0" style="padding-top: 2px;">
                         <h4 class="checkout-item-name mb-1">
-                            <a href="{{ route('front.product', $item['slug']) }}" class="text-dark font-weight-600" title="{{ $item['name'] }}">
-                                {{ Str::limit($item['name'], 48) }}
+                            <a href="{{ route('front.product', $item['slug']) }}" class="text-dark font-weight-600" title="{{ $item['name'] }}" style="font-size: 13.5px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                {{ $item['name'] }}
                             </a>
                         </h4>
 

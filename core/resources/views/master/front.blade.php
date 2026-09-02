@@ -1724,6 +1724,7 @@ body_theme4 @endif
     .summary-header-icon,
     .cart-items-header-icon {
         width: 36px !important;
+        min-width: 36px !important;
         height: 36px !important;
         border-radius: 10px !important;
         background: #ecfdf5 !important;
@@ -1731,6 +1732,7 @@ body_theme4 @endif
         align-items: center !important;
         justify-content: center !important;
         font-size: 16px !important;
+        margin-right: 12px !important;
     }
 
     .order-total-highlight-card {
@@ -1740,16 +1742,24 @@ body_theme4 @endif
         padding: 14px 16px !important;
     }
 
+    .checkout-item-card {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 14px !important;
+    }
+
     .checkout-item-thumb-wrapper {
         position: relative !important;
-        width: 60px !important;
-        height: 60px !important;
+        width: 58px !important;
+        min-width: 58px !important;
+        height: 58px !important;
         border-radius: 12px !important;
         background: #f8fafc !important;
         border: 1px solid #e2e8f0 !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
+        margin-right: 14px !important;
     }
 
     .checkout-item-thumb {
@@ -1761,8 +1771,8 @@ body_theme4 @endif
 
     .checkout-item-qty-badge {
         position: absolute !important;
-        top: -6px !important;
-        right: -6px !important;
+        top: -5px !important;
+        right: -5px !important;
         background: #10b981 !important;
         color: #ffffff !important;
         font-size: 10.5px !important;
@@ -1771,6 +1781,13 @@ body_theme4 @endif
         border-radius: 999px !important;
         box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4) !important;
         line-height: 1.3 !important;
+        z-index: 2 !important;
+    }
+
+    .checkout-item-info {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        padding-top: 2px !important;
     }
 
     .checkout-item-name {
