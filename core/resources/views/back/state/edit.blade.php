@@ -50,18 +50,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group mb-4">
-                            <label for="price" class="form-label font-weight-bold text-dark">{{ __('Tax / Surcharge Rate') }} *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend" style="width: 35%;">
-                                    <select name="type" class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; font-weight: 600;">
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="rate_type" class="form-label font-weight-bold text-dark">{{ __('Tax / Surcharge Type') }} *</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa-solid fa-sliders"></i></span>
+                                    </div>
+                                    <select name="type" id="rate_type" class="form-control" style="font-weight: 600;">
                                         <option value="percentage" {{ $state->type == 'percentage' ? 'selected' : '' }}>{{ __('Percentage') }} (%)</option>
                                         <option value="fixed" {{ $state->type == 'fixed' ? 'selected' : '' }}>{{ __('Fixed') }} ({{ PriceHelper::adminCurrency() }})</option>
                                     </select>
                                 </div>
-                                <input type="number" id="price" name="price" class="form-control"
-                                    placeholder="{{ __('Enter Price') }}" min="0" step="0.01"
-                                    value="{{ $state->price }}" required style="font-weight: 700;">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="price" class="form-label font-weight-bold text-dark">{{ __('Rate / Surcharge Value') }} *</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text rate-symbol font-weight-bold">{{ $state->type == 'percentage' ? '%' : PriceHelper::adminCurrency() }}</span>
+                                    </div>
+                                    <input type="number" id="price" name="price" class="form-control"
+                                        placeholder="{{ __('Enter Price') }}" min="0" step="0.01"
+                                        value="{{ $state->price }}" required style="font-weight: 700;">
+                                </div>
                             </div>
                         </div>
 
@@ -78,4 +89,21 @@
 	</div>
 
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        function updateRateSymbol() {
+            var type = $('#rate_type').val();
+            if (type === 'percentage') {
+                $('.rate-symbol').text('%');
+            } else {
+                $('.rate-symbol').text('{{ PriceHelper::adminCurrency() }}');
+            }
+        }
+        $('#rate_type').on('change', updateRateSymbol);
+        updateRateSymbol();
+    });
+</script>
 @endsection

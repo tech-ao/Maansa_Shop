@@ -50,20 +50,33 @@
                             </div>
                         </div>
 
-                        <div class="form-group mb-4">
-                            <label for="price" class="form-label font-weight-bold text-dark">{{ __('Tax / Surcharge Rate') }} *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend" style="width: 35%;">
-                                    <select name="type" class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; font-weight: 600;">
-                                        <option value="percentage">{{ __('Percentage') }} (%)</option>
-                                        <option value="fixed">{{ __('Fixed') }} ({{ PriceHelper::adminCurrency() }})</option>
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="rate_type" class="form-label font-weight-bold text-dark">{{ __('Tax / Surcharge Type') }} *</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa-solid fa-sliders"></i></span>
+                                    </div>
+                                    <select name="type" id="rate_type" class="form-control" style="font-weight: 600;">
+                                        <option value="percentage" {{ old('type') == 'percentage' ? 'selected' : '' }}>{{ __('Percentage') }} (%)</option>
+                                        <option value="fixed" {{ old('type') == 'fixed' ? 'selected' : '' }}>{{ __('Fixed') }} ({{ PriceHelper::adminCurrency() }})</option>
                                     </select>
                                 </div>
-                                <input type="number" id="price" name="price" class="form-control"
-                                    placeholder="{{ __('Enter Tax/Charge Value (e.g. 5)') }}" min="0" step="0.01"
-                                    value="{{ old('price', 0) }}" required style="font-weight: 700;">
                             </div>
-                            <small class="text-muted">{{ __('Choose percentage rate (%) or fixed monetary surcharge applied to orders in this region.') }}</small>
+                            <div class="col-md-6">
+                                <label for="price" class="form-label font-weight-bold text-dark">{{ __('Rate / Surcharge Value') }} *</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text rate-symbol font-weight-bold">%</span>
+                                    </div>
+                                    <input type="number" id="price" name="price" class="form-control"
+                                        placeholder="{{ __('Enter Value (e.g. 5)') }}" min="0" step="0.01"
+                                        value="{{ old('price', 0) }}" required style="font-weight: 700;">
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <small class="text-muted">{{ __('Choose percentage rate (%) or fixed monetary surcharge applied to orders in this region.') }}</small>
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-end gap-2 pt-3 border-top">
@@ -80,4 +93,21 @@
 
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        function updateRateSymbol() {
+            var type = $('#rate_type').val();
+            if (type === 'percentage') {
+                $('.rate-symbol').text('%');
+            } else {
+                $('.rate-symbol').text('{{ PriceHelper::adminCurrency() }}');
+            }
+        }
+        $('#rate_type').on('change', updateRateSymbol);
+        updateRateSymbol();
+    });
+</script>
 @endsection
