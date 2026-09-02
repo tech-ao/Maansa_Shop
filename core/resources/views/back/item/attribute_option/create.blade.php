@@ -4,93 +4,137 @@
 
 <div class="container-fluid">
 
-	<!-- Option Heading -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <div class="d-sm-flex align-items-center justify-content-between">
-                <h3 class="mb-0 bc-title"><b>{{ __('Create  Options') }}</b></h3>
-                <a class="btn btn-primary   btn-sm" href="{{route('back.option.index',$item->id)}}"><i class="fas fa-chevron-left"></i> {{ __('Back') }}</a>
-                </div>
+	<!-- Hero Banner -->
+    <div class="dash-hero-banner mb-4">
+        <div class="dash-hero-content">
+            <div class="dash-hero-text">
+                <h2>
+                    <i class="fa-solid fa-plus-circle mr-2" style="font-size: 22px;"></i> {{ __('Create Attribute Option') }}
+                </h2>
+                <p>
+                    {{ __('Add variation option details, pricing delta, and stock allocation for ') }}
+                    <span class="badge badge-light text-dark font-weight-bold ml-1 px-2.5 py-1" style="font-size: 12.5px; border-radius: 6px;">{{ $item->name }}</span>
+                </p>
+            </div>
+            <div class="dash-hero-actions">
+                <a class="btn btn-hero-action btn-hero-primary" href="{{ route('back.option.index', $item->id) }}" style="font-size: 13.5px; font-weight: 700; padding: 10px 20px;">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> {{ __('Back to Options') }}
+                </a>
+            </div>
         </div>
     </div>
 
-	<!-- Form -->
-	<div class="row">
+	<!-- Form Card -->
+	<div class="row justify-content-center">
+		<div class="col-lg-8 col-md-10">
+			<div class="card-modern shadow-sm">
+				<div class="card-modern-body p-4">
+					@include('alerts.alerts')
 
-		<div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-3" style="width: 44px; height: 44px; background: #f0fdf4; color: #059669; font-size: 18px;">
+                            <i class="fa-solid fa-shapes"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-weight-bold text-dark mb-0">{{ __('Option Information') }}</h5>
+                            <p class="text-muted small mb-0">{{ __('Define attribute category, option name, inventory, and surcharge price') }}</p>
+                        </div>
+                    </div>
 
-			<div class="card o-hidden border-0 shadow-lg">
-				<div class="card-body ">
-					<!-- Nested Row within Card Body -->
-					<div class="row justify-content-center">
-						<div class="col-lg-12">
-								<form class="admin-form" action="{{ route('back.option.store',$item->id) }}" method="POST"
-									enctype="multipart/form-data">
+					<form class="admin-form" action="{{ route('back.option.store', $item->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-                                    @csrf
+                        <div class="form-group mb-3">
+                            <label for="attribute_id" class="form-label font-weight-bold text-dark">{{ __('Attribute Type') }} *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa-solid fa-sliders"></i></span>
+                                </div>
+                                <select name="attribute_id" class="form-control" id="attribute_id" required>
+                                    <option value="" disabled selected>{{ __('Select Attribute (e.g. Size, Color, Storage)...') }}</option>
+                                    @foreach($attributes as $attribute)
+                                        <option value="{{ $attribute->id }}" {{ $attribute->id == old('attribute_id') ? 'selected' : '' }}>{{ $attribute->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
-									@include('alerts.alerts')
+                        <div class="form-group mb-3">
+                            <label for="attr_name" class="form-label font-weight-bold text-dark">{{ __('Option Name / Value') }} *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa-solid fa-tag"></i></span>
+                                </div>
+                                <input type="text" name="name" class="form-control" id="attr_name"
+                                    placeholder="{{ __('e.g., XXL, 128GB, Midnight Blue') }}" value="{{ old('name') }}" required>
+                            </div>
+                        </div>
 
-									<div class="form-group">
-                                        <label for="attribute_id">{{ __('Attribute') }} *</label>
-                                        <select name="attribute_id" class="form-control" id="attribute_id" >
-                                            <option value="">{{ __('Select Attribute') }}</option>
-                                            @foreach($attributes as $attribute)
-                                            <option value="{{ $attribute->id }}" {{ $attribute->id == old('attribute_id') ? 'selected' : '' }}>{{ $attribute->name }}</option>
-                                            @endforeach
-                                        </select>
-									</div>
-
-									<div class="form-group">
-										<label for="attr_name">{{ __('Name') }} *</label>
-										<input type="text" name="name" class="form-control" id="attr_name"
-											placeholder="{{ __('Enter Name') }}" value="{{ old('name') }}" >
-									</div>
-
-									<div class="form-group">
-										<label for="stock">{{ __('Stock') }} *</label>
-										<input type="text" name="stock" class="form-control" id="stock"
-											placeholder="{{ __('Enter Stock') }}" value="{{ old('stock') }}" >
-                                            <label for="unlimited">
-                                                <input type="checkbox" class="my-2" id="unlimited">
-                                            {{__('Unlimited Stock')}}
-                                            </label>
-									</div>
-                                    
-
-                                    <div class="form-group">
-                                        <label for="price">{{ __('+ Price') }} *</label>
-                                        <small>({{ __('Set 0 to make it free') }})</small>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span
-                                                    class="input-group-text">{{ $curr->sign }}
-                                                </span>
-                                            </div>
-                                            <input type="text" id="price"
-                                                name="price" class="form-control"
-                                                placeholder="{{ __('Enter Price') }}"
-                                                value="{{ old('price') }}" >
-                                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="stock" class="form-label font-weight-bold text-dark">{{ __('Stock Quantity') }} *</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa-solid fa-boxes-stacked"></i></span>
                                     </div>
+                                    <input type="text" name="stock" class="form-control" id="stock"
+                                        placeholder="{{ __('Enter Stock or type unlimited') }}" value="{{ old('stock', 'unlimited') }}" required>
+                                </div>
+                                <div class="custom-control custom-checkbox mt-2">
+                                    <input type="checkbox" class="custom-control-input" id="unlimited" checked>
+                                    <label class="custom-control-label font-weight-600 text-dark" for="unlimited" style="cursor: pointer;">
+                                        <i class="fa-solid fa-infinity text-primary mr-1"></i> {{ __('Unlimited Stock Available') }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="price" class="form-label font-weight-bold text-dark">{{ __('Price Delta (+ Price)') }} *</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text font-weight-bold">{{ PriceHelper::adminCurrency() }}</span>
+                                    </div>
+                                    <input type="number" id="price" name="price" class="form-control"
+                                        placeholder="{{ __('0 for no price change') }}" min="0" step="0.01"
+                                        value="{{ old('price', '0') }}" required style="font-weight: 700;">
+                                </div>
+                                <small class="text-muted d-block mt-2">{{ __('Set 0 to make it free or match base product price.') }}</small>
+                            </div>
+                        </div>
 
-                                    <input type="hidden" id="attr_keyword" name="keyword" value="{{ old('keyword') }}">
+                        <input type="hidden" id="attr_keyword" name="keyword" value="{{ old('keyword') }}">
 
-									<div class="form-group">
-										<button type="submit" class="btn btn-secondary">{{ __('Submit') }}</button>
-									</div>
-
-									<div>
-								</form>
-						</div>
-					</div>
+                        <div class="d-flex justify-content-end gap-2 pt-3 border-top mt-4">
+                            <a href="{{ route('back.option.index', $item->id) }}" class="btn btn-secondary px-4 mr-2" style="border-radius: 10px; font-weight: 700;">{{ __('Cancel') }}</a>
+                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                                <i class="fa-solid fa-plus mr-1"></i> {{ __('Create Option') }}
+                            </button>
+                        </div>
+                    </form>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
 
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#unlimited').on('change', function() {
+            if ($(this).is(':checked')) {
+                $('#stock').val('unlimited').prop('readonly', true);
+            } else {
+                $('#stock').val('10').prop('readonly', false).focus();
+            }
+        });
+        if ($('#stock').val() === 'unlimited') {
+            $('#unlimited').prop('checked', true);
+            $('#stock').prop('readonly', true);
+        } else {
+            $('#unlimited').prop('checked', false);
+        }
+    });
+</script>
 @endsection

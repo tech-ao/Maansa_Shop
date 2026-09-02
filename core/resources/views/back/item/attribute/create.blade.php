@@ -4,56 +4,71 @@
 
 <div class="container-fluid">
 
-	<!-- Attribute Heading -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <div class="d-sm-flex align-items-center justify-content-between">
-                <h3 class="mb-0 bc-title"><b>{{ __('Create Attribute') }}</b> </h3>
-                <a class="btn btn-primary   btn-sm" href="{{route('back.attribute.index',$item->id)}}"><i class="fas fa-chevron-left"></i> {{ __('Back') }}</a>
-                </div>
+	<!-- Hero Banner -->
+    <div class="dash-hero-banner mb-4">
+        <div class="dash-hero-content">
+            <div class="dash-hero-text">
+                <h2>
+                    <i class="fa-solid fa-plus-circle mr-2" style="font-size: 22px;"></i> {{ __('Create Attribute Group') }}
+                </h2>
+                <p>
+                    {{ __('Define a new variation attribute category for ') }}
+                    <span class="badge badge-light text-dark font-weight-bold ml-1 px-2.5 py-1" style="font-size: 12.5px; border-radius: 6px;">{{ $item->name }}</span>
+                </p>
+            </div>
+            <div class="dash-hero-actions">
+                <a class="btn btn-hero-action btn-hero-primary" href="{{ route('back.attribute.index', $item->id) }}" style="font-size: 13.5px; font-weight: 700; padding: 10px 20px;">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> {{ __('Back to Attributes') }}
+                </a>
+            </div>
         </div>
     </div>
 
-	<!-- Form -->
-	<div class="row">
+	<!-- Form Card -->
+	<div class="row justify-content-center">
+		<div class="col-lg-7 col-md-10">
+			<div class="card-modern shadow-sm">
+				<div class="card-modern-body p-4">
+					@include('alerts.alerts')
 
-		<div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-3" style="width: 44px; height: 44px; background: #f0fdf4; color: #059669; font-size: 18px;">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-weight-bold text-dark mb-0">{{ __('Attribute Information') }}</h5>
+                            <p class="text-muted small mb-0">{{ __('e.g., Size, Color, Storage, Shoe Size, Material') }}</p>
+                        </div>
+                    </div>
 
-			<div class="card o-hidden border-0 shadow-lg">
-				<div class="card-body ">
-					<!-- Nested Row within Card Body -->
-					<div class="row justify-content-center">
-						<div class="col-lg-12">
-								<form class="admin-form" action="{{ route('back.attribute.store',$item->id) }}" method="POST"
-									enctype="multipart/form-data">
+					<form class="admin-form" action="{{ route('back.attribute.store', $item->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-                                    @csrf
+                        <div class="form-group mb-4">
+                            <label for="attr_name" class="form-label font-weight-bold text-dark">{{ __('Attribute Group Name') }} *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa-solid fa-sliders"></i></span>
+                                </div>
+                                <input type="text" name="name" class="form-control" id="attr_name"
+                                    placeholder="{{ __('e.g., Size, Color, Capacity') }}" value="{{ old('name') }}" required>
+                            </div>
+                            <small class="text-muted mt-2 d-block">{{ __('After creating this attribute group, you can add specific options (e.g. S, M, L, XL or Red, Blue) inside it.') }}</small>
+                        </div>
 
-									@include('alerts.alerts')
+                        <input type="hidden" id="attr_keyword" name="keyword" value="{{ old('keyword') }}">
+                        <input type="hidden" name="item_id" value="{{ $item->id }}">
 
-									<div class="form-group">
-										<label for="attr_name">{{ __('Name') }} *</label>
-										<input type="text" name="name" class="form-control" id="attr_name"
-											placeholder="{{ __('Enter Name') }}" value="{{ old('name') }}" >
-									</div>
-
-                                    <input type="hidden" id="attr_keyword" name="keyword" value="{{ old('keyword') }}">
-                                    <input type="hidden" name="item_id" value="{{ $item->id }}">
-
-									<div class="form-group">
-										<button type="submit" class="btn btn-secondary ">{{ __('Submit') }}</button>
-									</div>
-
-									<div>
-								</form>
-
-						</div>
-					</div>
+                        <div class="d-flex justify-content-end gap-2 pt-3 border-top">
+                            <a href="{{ route('back.attribute.index', $item->id) }}" class="btn btn-secondary px-4 mr-2" style="border-radius: 10px; font-weight: 700;">{{ __('Cancel') }}</a>
+                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                                <i class="fa-solid fa-plus mr-1"></i> {{ __('Create Attribute') }}
+                            </button>
+                        </div>
+                    </form>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
 
 </div>
