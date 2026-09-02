@@ -568,10 +568,7 @@ img.admin-setting-img {
 
 /* Switch Slider Ends */
 
-.logo img.navbar-brand {
-  height: 60%;
-  width: auto;
-}
+
 
 
 
@@ -3646,13 +3643,37 @@ table.dataTable thead th.no-sort::after {
   border-right: 1px solid #f1f5f9 !important;
   display: flex !important;
   align-items: center !important;
+  justify-content: center !important;
   padding: 0 16px !important;
-  height: 62px !important;
+  height: 68px !important;
+  position: relative !important;
+}
+
+.logo-header .logo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  text-decoration: none !important;
 }
 
 .logo-header .navbar-brand {
-  max-height: 38px !important;
+  max-height: 48px !important;
+  height: auto !important;
   width: auto !important;
+  max-width: 175px !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+  transition: all 0.2s ease !important;
+}
+
+.logo-header .navbar-minimize {
+  position: absolute !important;
+  right: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
 }
 
 .btn-minimize,
@@ -3782,8 +3803,8 @@ table.dataTable thead th.no-sort::after {
   .sidebar-mobile-header {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    padding: 14px 14px !important;
+    justify-content: center !important;
+    padding: 16px 14px !important;
     margin: 0 -14px 14px -14px !important;
     border-bottom: 1px solid #f1f5f9 !important;
     background: #ffffff !important;
@@ -3796,17 +3817,27 @@ table.dataTable thead th.no-sort::after {
   .mobile-brand-wrapper {
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+    text-align: center !important;
   }
 
   .mobile-drawer-logo {
-    max-height: 32px !important;
-    max-width: 140px !important;
+    max-height: 46px !important;
+    height: auto !important;
+    max-width: 170px !important;
     object-fit: contain !important;
     width: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
   }
 
   /* Mobile Close Button in Sidebar Header */
   .sidebar-mobile-close {
+    position: absolute !important;
+    right: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
