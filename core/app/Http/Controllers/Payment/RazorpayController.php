@@ -307,36 +307,44 @@ class RazorpayController extends Controller
                     'order_id' => $order->id
                 ]);
         
-                $emailData = [
-                    'to' => EmailHelper::getEmail(),
-                    'type' => "Order",
-                    'user_name' => isset($user) ? $user->displayName() : Session::get('billing_address')['bill_first_name'],
-                    'order_cost' => $total_amount,
-                    'transaction_number' => $order->transaction_number,
-                    'site_title' => Setting::first()->title,
-                ];
-        
-                $setting = Setting::first();
-                if ($setting->is_queue_enabled == 1) {
-                    dispatch(new EmailSendJob($emailData, "template"));
-                } else {
-                    $email = new EmailHelper();
-                    $email->sendTemplateMail($emailData, "template");
-                }
-                if($discount){
-                    $coupon_id = $discount['code']['id'];
-                    $get_coupon = PromoCode::findOrFail($coupon_id);
-                    $get_coupon->no_of_times -= 1;
-                    $get_coupon->update();
-                }
-        
-                if($setting->is_twilio == 1){
-                    // message
-                    $sms = new SmsHelper();
-                    $user_number = json_decode($order->billing_info,true)['bill_phone'];
-                    if($user_number){
-                        $sms->SendSms($user_number,"'purchase'",$order->transaction_number);
+                try {
+                    $emailData = [
+                        'to' => EmailHelper::getEmail(),
+                        'type' => "Order",
+                        'user_name' => isset($user) ? $user->displayName() : (Session::get('billing_address')['bill_first_name'] ?? 'Customer'),
+                        'order_cost' => $total_amount,
+                        'transaction_number' => $order->transaction_number,
+                        'site_title' => Setting::first()->title ?? 'Maansa',
+                    ];
+
+                    $setting = Setting::first();
+                    if ($setting->is_queue_enabled == 1) {
+                        dispatch(new EmailSendJob($emailData, "template"));
+                    } else {
+                        $email = new EmailHelper();
+                        $email->sendTemplateMail($emailData);
                     }
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::error('Razorpay order email error: ' . $e->getMessage());
+                }
+
+                if($discount){
+                    try {
+                        $coupon_id = $discount['code']['id'];
+                        $get_coupon = PromoCode::findOrFail($coupon_id);
+                        $get_coupon->no_of_times -= 1;
+                        $get_coupon->update();
+                    } catch (\Throwable $e) {}
+                }
+        
+                if(isset($setting->is_twilio) && $setting->is_twilio == 1){
+                    try {
+                        $sms = new SmsHelper();
+                        $user_number = json_decode($order->billing_info,true)['bill_phone'] ?? null;
+                        if($user_number){
+                            $sms->SendSms($user_number,"'purchase'",$order->transaction_number);
+                        }
+                    } catch (\Throwable $e) {}
                 }
                 
                 Session::put('order_id',$order->id);
