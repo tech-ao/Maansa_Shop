@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/back/css/editor.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/back/css/bootstrap-iconpicker.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/back/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/back/css/custom.css') }}">
@@ -270,8 +271,8 @@
     <!-- Icon Picker -->
     <script src="{{ asset('assets/back/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
 
-    <!-- Azzara JS -->
-    <script src="{{ asset('assets/back/js/ready.min.js') }}"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Custom JS -->
 

@@ -898,4 +898,30 @@
         }
     });
 
+    // Modern Select2 Initialization
+    function initCustomSelects() {
+        if (typeof $.fn.select2 !== 'undefined') {
+            $('select.form-control:not(.no-select2, .custom-select-native)').each(function() {
+                var $select = $(this);
+                if (!$select.hasClass('select2-hidden-accessible')) {
+                    var placeholder = $select.find('option[disabled][selected], option[value=""]').first().text() || 'Select an option...';
+                    $select.select2({
+                        width: '100%',
+                        dropdownAutoWidth: true,
+                        placeholder: placeholder,
+                        minimumResultsForSearch: 6
+                    });
+                }
+            });
+        }
+    }
+
+    $(document).ready(function () {
+        initCustomSelects();
+    });
+
+    $(document).ajaxComplete(function () {
+        initCustomSelects();
+    });
+
 })(jQuery); // End of use strict
