@@ -3888,8 +3888,8 @@ table.dataTable thead th.no-sort::after {
     margin-left: 0 !important;
     background: #ffffff !important;
     border-bottom: 1px solid #e2e8f0 !important;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
-    padding: 10px 16px !important;
+    box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.12) !important;
+    padding: 10px 14px !important;
     z-index: 1000 !important;
     transform: translateY(-150%) !important;
     opacity: 0 !important;
@@ -3902,6 +3902,107 @@ table.dataTable thead th.no-sort::after {
     transform: translateY(0) !important;
     opacity: 1 !important;
     visibility: visible !important;
+  }
+
+  .navbar-header .container-fluid {
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .navbar-header .navbar-nav.topbar-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+  }
+
+  .navbar-header .navbar-nav.topbar-nav > .nav-item {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* View Website Button on Mobile */
+  .navbar-header .btn-topbar-store {
+    height: 38px !important;
+    padding: 0 14px !important;
+    font-size: 12.5px !important;
+    gap: 6px !important;
+    border-radius: 9999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
+  }
+
+  /* Support Tickets & Notifications Icons on Mobile */
+  .navbar-header .nav-link-notif {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    border-radius: 50% !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 15px !important;
+    color: #475569 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  /* Profile Avatar Button on Mobile (Perfect Circle, no empty whitespace) */
+  .navbar-header .topbar-profile-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background: #ffffff !important;
+    border: 2px solid #e2e8f0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+    position: relative !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .navbar-header .topbar-profile-btn .user-avatar-badge {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  .navbar-header .topbar-profile-btn .user-avatar-img {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .navbar-header .topbar-profile-btn .user-status-dot {
+    position: absolute !important;
+    bottom: -1px !important;
+    right: -1px !important;
+    width: 10px !important;
+    height: 10px !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 50% !important;
+    background: #10b981 !important;
   }
 }
 

@@ -70,7 +70,7 @@
             <nav class="navbar navbar-header navbar-expand-lg">
                 <div class="container-fluid">
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-                        <li class="nav-item mr-3">
+                        <li class="nav-item">
                             <a class="btn-topbar-store" title="Live Store" href="{{ route('front.index') }}" target="_blank">
                                 <i class="fa-solid fa-store"></i>
                                 <span>{{ __('View Website') }}</span>
@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <!-- Nav Item - Support Tickets -->
-                        <li class="nav-item no-arrow mr-2">
+                        <li class="nav-item no-arrow">
                             @php
                                 $ticketPendingCount = 0;
                                 try {
@@ -94,7 +94,7 @@
                         </li>
 
                         <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mr-3">
+                        <li class="nav-item dropdown no-arrow">
                             <a class="nav-link-notif" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Notifications">
                                 <i class="fas fa-bell"></i>
