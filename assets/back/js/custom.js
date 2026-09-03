@@ -55,9 +55,15 @@
             if ($(this).is(e.target)) {
                 var $currentNav = $(this).closest('.nav-item');
                 $currentNav.removeClass('submenu');
-                $currentNav.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'false');
+        // 5. Automatic cleanup of sidebar_minimize on small screens
+        function handleResponsiveSidebar() {
+            if ($(window).width() < 992) {
+                $('html').removeClass('sidebar_minimize');
+                $('.btn-minimize').removeClass('toggled');
             }
-        });
+        }
+        $(window).on('resize', handleResponsiveSidebar);
+        handleResponsiveSidebar();
     });
 
     $('#datepicker').datetimepicker({

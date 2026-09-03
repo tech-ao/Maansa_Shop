@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/back/css/custom.css') }}?v=1.8">
+    <link rel="stylesheet" href="{{ asset('assets/back/css/custom.css') }}?v=1.9">
 
     @php
         $dashLang = null;
@@ -293,7 +293,7 @@
     <!-- Custom JS -->
 
     @yield('scripts')
-    <script src="{{ asset('assets/back/js/custom.js') }}?v=2.0"></script>
+    <script src="{{ asset('assets/back/js/custom.js') }}?v=2.1"></script>
 
 </body>
 
