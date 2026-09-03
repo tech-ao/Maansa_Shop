@@ -265,6 +265,44 @@ class EmailHelper
         }
     }
 
+    public function sendOrderShippedMail($order, $toEmail = null)
+    {
+        try {
+            if (is_numeric($order)) {
+                $order = Order::find($order);
+            }
+            if (!$order) {
+                Log::warning("EmailHelper: order not found for sendOrderShippedMail");
+                return false;
+            }
+
+            $bill = is_array($order->billing_info) ? $order->billing_info : json_decode($order->billing_info, true);
+            $customerEmail = !empty($toEmail) ? $toEmail : ($bill['bill_email'] ?? ($order->user->email ?? null));
+            if (empty($customerEmail)) {
+                return false;
+            }
+
+            $customerHtml = view('mail.order_shipped', [
+                'order' => $order,
+                'setting' => $this->setting,
+            ])->render();
+
+            $this->mail->clearAddresses();
+            $this->mail->clearAttachments();
+            $this->mail->setFrom($this->getFromEmail(), $this->getFromName());
+            $this->mail->addAddress($customerEmail);
+            $this->mail->isHTML(true);
+            $this->mail->Subject = "📦 Your Order Has Been Shipped: #{$order->transaction_number} - " . ($this->setting->title ?: 'Maansa');
+            $this->mail->Body    = $customerHtml;
+            $this->mail->send();
+
+            return true;
+        } catch (\Throwable $e) {
+            Log::error('EmailHelper sendOrderShippedMail error: ' . $e->getMessage());
+            return false;
+        }
+    }
+
     public function sendCustomMail(array $emailData)
     {
         try {

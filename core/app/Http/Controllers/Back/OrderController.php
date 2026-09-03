@@ -8,6 +8,7 @@ use App\{
     Models\TrackOrder,
     Http\Controllers\Controller
 };
+use App\Helpers\EmailHelper;
 use App\Helpers\SmsHelper;
 use App\Models\Notification;
 use Carbon\Carbon;
@@ -37,46 +38,55 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        
-      
-        if($request->type){
-            if($request->start_date && $request->end_date){
-                $datas = $start_date = Carbon::parse($request->start_date);
-                $end_date = Carbon::parse($request->end_date);
-                $datas = Order::latest('id')->whereOrderStatus($request->type)->whereDate('created_at','>=',$start_date)->whereDate('created_at','<=',$end_date)->get();
-            }else{
-                $datas = Order::latest('id')->whereOrderStatus($request->type)->get();
-            }
-            
-        }else{
-            if($request->start_date && $request->end_date){
-                $datas = $start_date = Carbon::parse($request->start_date);
-                $end_date = Carbon::parse($request->end_date);
-                $datas = Order::latest('id')->whereDate('created_at','>=',$start_date)->whereDate('created_at','<=',$end_date)->get();
-            }else{
-                $datas = Order::latest('id')->get();
+        $query = Order::latest('id');
+
+        if ($request->type) {
+            if (in_array($request->type, ['Pending', 'In Progress', 'Shipped', 'Delivered', 'Canceled'])) {
+                $query->whereOrderStatus($request->type);
             }
         }
-        return view('back.order.index',compact('datas'));
+
+        if ($request->start_date && $request->end_date) {
+            $start_date = Carbon::parse($request->start_date);
+            $end_date = Carbon::parse($request->end_date);
+            $query->whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<=', $end_date);
+        }
+
+        $datas = $query->get();
+        return view('back.order.index', compact('datas'));
     }
 
     
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         
-        $order = Order::findOrFail($id);
-        return view('back.order.edit', compact('order'));
+        $data = Order::findOrfail($id);
+        return view('back.order.edit', compact('data'));
     }
 
     
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
         
-        // Check if order_id is available
-        if (Order::where('transaction_number', $request->transaction_number)->where('id', '!=', $id)->exists()) {
-            return redirect()->route('back.order.index')->withErrors(__('Order ID already exists.'));
+        if($request->transaction_number){
+            if (Order::where('transaction_number', $request->transaction_number)->where('id', '!=', $id)->exists()) {
+                return redirect()->back()->withErrors(__('Order Transaction number already exists.'));
+            }
         }
 
         $order->update($request->all());
@@ -140,13 +150,59 @@ class OrderController extends Controller
         }
         $this->setTrackOrder($order);
         
+        if ($field == 'order_status' && $value == 'Shipped') {
+            $email = new EmailHelper();
+            $email->sendOrderShippedMail($order);
+        }
+
         $sms = new SmsHelper();
-        $user_number = $order->user->phone;
+        $user_number = $order->user ? $order->user->phone : null;
         if($user_number){
             $sms->SendSms($user_number,"'order_status'",$order->transaction_number);
         }
        
         return redirect()->route('back.order.index')->withSuccess(__('Status Updated Successfully.'));
+    }
+
+    /**
+     * Update order to Shipped with courier details & dispatch notification.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function shippingStatus(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        $request->validate([
+            'courier_name'    => 'nullable|string|max:191',
+            'tracking_number' => 'nullable|string|max:191',
+            'tracking_link'   => 'nullable|string',
+        ]);
+
+        $order->update([
+            'order_status'    => 'Shipped',
+            'courier_name'    => $request->courier_name,
+            'tracking_number' => $request->tracking_number,
+            'tracking_link'   => $request->tracking_link,
+        ]);
+
+        $this->setTrackOrder($order);
+
+        // Send shipping notification email to customer
+        if ($request->has('send_email') && $request->send_email == '1') {
+            $email = new EmailHelper();
+            $email->sendOrderShippedMail($order);
+        }
+
+        // Send SMS if enabled
+        if ($order->user && $order->user->phone) {
+            $sms = new SmsHelper();
+            $sms->SendSms($order->user->phone, "'order_status'", $order->transaction_number);
+        }
+
+        return redirect()->back()->withSuccess(__('Order status updated to Shipped and tracking details saved successfully.'));
     }
 
     /**
@@ -163,12 +219,34 @@ class OrderController extends Controller
                 ]);
             }
         }
+
+        if($order->order_status == 'Shipped'){
+            if(!TrackOrder::whereOrderId($order->id)->whereTitle('In Progress')->exists()){
+                TrackOrder::create([
+                    'title' => 'In Progress',
+                    'order_id' => $order->id
+                ]);
+            }
+            if(!TrackOrder::whereOrderId($order->id)->whereTitle('Shipped')->exists()){
+                TrackOrder::create([
+                    'title' => 'Shipped',
+                    'order_id' => $order->id
+                ]);
+            }
+        }
+
         if($order->order_status == 'Canceled'){
             if(!TrackOrder::whereOrderId($order->id)->whereTitle('Canceled')->exists()){
 
                 if(!TrackOrder::whereOrderId($order->id)->whereTitle('In Progress')->exists()){
                     TrackOrder::create([
                         'title' => 'In Progress',
+                        'order_id' => $order->id
+                    ]);
+                }
+                if(!TrackOrder::whereOrderId($order->id)->whereTitle('Shipped')->exists()){
+                    TrackOrder::create([
+                        'title' => 'Shipped',
                         'order_id' => $order->id
                     ]);
                 }
@@ -195,6 +273,13 @@ class OrderController extends Controller
             if(!TrackOrder::whereOrderId($order->id)->whereTitle('In Progress')->exists()){
                 TrackOrder::create([
                     'title' => 'In Progress',
+                    'order_id' => $order->id
+                ]);
+            }
+
+            if(!TrackOrder::whereOrderId($order->id)->whereTitle('Shipped')->exists()){
+                TrackOrder::create([
+                    'title' => 'Shipped',
                     'order_id' => $order->id
                 ]);
             }

@@ -128,6 +128,33 @@
                     </div>
                 </div>
 
+                @if(!empty($order->courier_name) || !empty($order->tracking_number))
+                    <!-- Shipment Details Banner -->
+                    <div class="p-3 mb-4 rounded-3 d-flex flex-wrap align-items-center justify-content-between gap-3" style="background: #f0fdf4; border: 1px solid #bbf7d0;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-inline-flex align-items-center justify-content-center rounded-circle" style="width: 44px; height: 44px; background: #dcfce7; color: #15803d; font-size: 20px;">
+                                <i class="fas fa-truck-fast"></i>
+                            </div>
+                            <div>
+                                <span class="text-muted d-block small fw-bold text-uppercase" style="font-size: 11px;">{{ __('Shipment & Tracking') }}</span>
+                                <strong class="text-dark fs-6">
+                                    {{ $order->courier_name ? $order->courier_name : __('Courier Dispatched') }}
+                                    @if($order->tracking_number)
+                                        &bull; AWB: <span class="font-monospace text-primary">{{ $order->tracking_number }}</span>
+                                    @endif
+                                </strong>
+                            </div>
+                        </div>
+                        @if(!empty($order->tracking_link))
+                            <div>
+                                <a href="{{ $order->tracking_link }}" target="_blank" class="btn btn-sm btn-success rounded-pill px-4 py-2 fw-bold text-white shadow-sm" style="font-size: 13px; text-decoration: none !important;">
+                                    <i class="fas fa-external-link-alt mr-1"></i> {{ __('Track Shipment') }}
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+                @endif
+
                 <!-- Products Table -->
                 <div class="table-responsive mb-4 rounded-3 border">
                     <table class="table table-hover align-middle mb-0 custom-invoice-table">

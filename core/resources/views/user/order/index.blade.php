@@ -88,6 +88,8 @@
                                                     <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-3 py-1">{{ $order->order_status }}</span>
                                                 @elseif($order->order_status == 'In Progress')
                                                     <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-3 py-1">{{ $order->order_status }}</span>
+                                                @elseif($order->order_status == 'Shipped')
+                                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-1">{{ __('Shipped') }}</span>
                                                 @elseif($order->order_status == 'Delivered')
                                                     <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1">{{ $order->order_status }}</span>
                                                 @else
@@ -142,6 +144,8 @@
                                                 <span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill px-2 py-1 small">{{ $order->order_status }}</span>
                                             @elseif($order->order_status == 'In Progress')
                                                 <span class="badge bg-info-subtle text-info border border-info-subtle rounded-pill px-2 py-1 small">{{ $order->order_status }}</span>
+                                            @elseif($order->order_status == 'Shipped')
+                                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2 py-1 small">{{ __('Shipped') }}</span>
                                             @elseif($order->order_status == 'Delivered')
                                                 <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1 small">{{ $order->order_status }}</span>
                                             @else

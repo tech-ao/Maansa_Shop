@@ -2,6 +2,7 @@
     @php
         $pending_track = null;
         $progress_track = null;
+        $shipped_track = null;
         $delivered_track = null;
         $canceled_track = null;
 
@@ -9,6 +10,7 @@
             foreach ($track_orders as $t) {
                 if ($t['title'] == 'Pending') $pending_track = $t;
                 if ($t['title'] == 'In Progress') $progress_track = $t;
+                if ($t['title'] == 'Shipped') $shipped_track = $t;
                 if ($t['title'] == 'Delivered') $delivered_track = $t;
                 if ($t['title'] == 'Canceled') $canceled_track = $t;
             }
@@ -16,7 +18,8 @@
 
         $is_canceled = !empty($canceled_track) || (isset($order) && $order->order_status == 'Canceled');
         $is_delivered = !empty($delivered_track) || (isset($order) && $order->order_status == 'Delivered');
-        $is_in_progress = !empty($progress_track) || (isset($order) && $order->order_status == 'In Progress') || $is_delivered;
+        $is_shipped = !empty($shipped_track) || (isset($order) && in_array($order->order_status, ['Shipped', 'Delivered'])) || $is_delivered;
+        $is_in_progress = !empty($progress_track) || (isset($order) && in_array($order->order_status, ['In Progress', 'Shipped', 'Delivered'])) || $is_shipped;
         $is_pending = true;
 
         $current_status_label = 'Pending Approval';
@@ -34,11 +37,16 @@
             $status_bg = '#d1fae5';
             $status_color = '#059669';
             $status_border = '#a7f3d0';
-        } elseif ($is_in_progress) {
-            $current_status_label = 'Processing & Shipped';
+        } elseif (isset($order) && $order->order_status == 'Shipped') {
+            $current_status_label = 'Shipped / In Transit';
             $status_bg = '#e0f2fe';
             $status_color = '#0284c7';
             $status_border = '#bae6fd';
+        } elseif ($is_in_progress) {
+            $current_status_label = 'Processing & Packed';
+            $status_bg = '#f0fdf4';
+            $status_color = '#166534';
+            $status_border = '#bbf7d0';
         }
     @endphp
 
@@ -307,10 +315,10 @@
                 </div>
 
                 <!-- Step 3: Out for Delivery / Shipped -->
-                <div class="v-step {{ $is_delivered ? 'completed' : ($is_in_progress && !$is_delivered ? 'active' : '') }}">
+                <div class="v-step {{ $is_delivered ? 'completed' : ($is_shipped ? 'completed' : ($is_in_progress ? 'active' : '')) }}">
                     <div class="v-step-indicator">
                         <div class="v-step-icon">
-                            @if ($is_delivered)
+                            @if ($is_delivered || $is_shipped)
                                 <i class="fas fa-check"></i>
                             @else
                                 <i class="fas fa-shipping-fast"></i>
@@ -320,24 +328,53 @@
                     </div>
                     <div class="v-step-body">
                         <div class="v-step-head">
-                            <h5 class="v-step-title">{{ __('Out For Delivery') }}</h5>
+                            <h5 class="v-step-title">{{ __('Shipped / On The Way') }}</h5>
                             <span class="v-step-time">
-                                @if ($is_delivered)
+                                @if ($shipped_track)
+                                    {{ date('d M, Y • h:i A', strtotime($shipped_track['created_at'])) }}
+                                @elseif ($is_delivered)
                                     {{ __('Completed') }}
-                                @elseif ($is_in_progress)
-                                    {{ __('Dispatched') }}
+                                @elseif ($is_shipped)
+                                    {{ __('In Transit') }}
                                 @else
                                     {{ __('Expected Soon') }}
                                 @endif
                             </span>
                         </div>
                         <p class="v-step-desc">
-                            @if ($is_delivered || $is_in_progress)
-                                {{ __('Your parcel is on its way to your delivery address.') }}
+                            @if ($is_delivered || $is_shipped)
+                                {{ __('Your parcel has been dispatched and is on its way to your delivery address.') }}
                             @else
-                                {{ __('Courier pickup will be scheduled upon packaging.') }}
+                                {{ __('Courier pickup will be scheduled once packaging is completed.') }}
                             @endif
                         </p>
+
+                        @if(isset($order) && (!empty($order->courier_name) || !empty($order->tracking_number)))
+                            <!-- Live Courier Tracking Details Card -->
+                            <div class="courier-badge-box mt-3 p-3" style="background: #f0fdf4; border: 1.5px dashed #86efac; border-radius: 12px;">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                                    <div>
+                                        @if(!empty($order->courier_name))
+                                            <div class="text-dark font-weight-bold" style="font-size: 14px;">
+                                                <i class="fas fa-truck text-success mr-1.5"></i> {{ __('Courier Partner:') }} <span class="text-success">{{ $order->courier_name }}</span>
+                                            </div>
+                                        @endif
+                                        @if(!empty($order->tracking_number))
+                                            <div class="text-muted small mt-1" style="font-size: 12.5px;">
+                                                {{ __('AWB / Tracking Number:') }} <strong class="text-dark" style="font-family: monospace; font-size: 13.5px; background: #ffffff; padding: 2px 8px; border-radius: 6px; border: 1px solid #cbd5e1;">{{ $order->tracking_number }}</strong>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    @if(!empty($order->tracking_link))
+                                        <div class="mt-2 mt-sm-0">
+                                            <a href="{{ $order->tracking_link }}" target="_blank" class="btn btn-sm btn-success px-3 py-2 text-white" style="border-radius: 8px; font-weight: 700; font-size: 12px; box-shadow: 0 3px 8px rgba(16, 185, 129, 0.3); text-decoration: none !important;">
+                                                <i class="fas fa-external-link-alt mr-1"></i> {{ __('Track Courier') }}
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
 

@@ -71,12 +71,17 @@
                     $statusBg = '#dcfce7';
                     $statusColor = '#15803d';
                     $statusBorder = '#bbf7d0';
-                    $statusIcon = 'fa-truck-fast';
-                } elseif ($data->order_status == 'In Progress') {
+                    $statusIcon = 'fa-circle-check';
+                } elseif ($data->order_status == 'Shipped') {
                     $statusBg = '#e0f2fe';
                     $statusColor = '#0369a1';
                     $statusBorder = '#bae6fd';
-                    $statusIcon = 'fa-spinner';
+                    $statusIcon = 'fa-truck-fast';
+                } elseif ($data->order_status == 'In Progress') {
+                    $statusBg = '#f0fdf4';
+                    $statusColor = '#166534';
+                    $statusBorder = '#bbf7d0';
+                    $statusIcon = 'fa-box-open';
                 } elseif ($data->order_status == 'Canceled') {
                     $statusBg = '#fee2e2';
                     $statusColor = '#b91c1c';
@@ -96,7 +101,7 @@
                     <i class="fa-solid {{ $statusIcon }} mr-1"></i>
                     {{ $data->order_status }}
                 </button>
-                <div class="dropdown-menu animated--fade-in shadow border-0" aria-labelledby="dropdownOrder-{{ $data->id }}" style="border-radius: 12px; min-width: 160px;">
+                <div class="dropdown-menu animated--fade-in shadow border-0" aria-labelledby="dropdownOrder-{{ $data->id }}" style="border-radius: 12px; min-width: 175px;">
                     <h6 class="dropdown-header text-muted font-weight-bold" style="font-size: 11px; text-transform: uppercase;">{{ __('Fulfillment State') }}</h6>
                     <a class="dropdown-item {{ $data->order_status == 'Pending' ? 'active font-weight-bold' : '' }}" data-toggle="modal" data-target="#statusModal" href="javascript:;"
                         data-href="{{ route('back.order.status', [$data->id, 'order_status', 'Pending']) }}">
@@ -104,11 +109,21 @@
                     </a>
                     <a class="dropdown-item {{ $data->order_status == 'In Progress' ? 'active font-weight-bold' : '' }}" data-toggle="modal" data-target="#statusModal" href="javascript:;"
                         data-href="{{ route('back.order.status', [$data->id, 'order_status', 'In Progress']) }}">
-                        <i class="fa-solid fa-spinner text-info mr-2"></i> {{ __('In Progress') }}
+                        <i class="fa-solid fa-box-open text-success mr-2"></i> {{ __('In Progress') }}
+                    </a>
+                    <a class="dropdown-item open-shipping-modal {{ $data->order_status == 'Shipped' ? 'active font-weight-bold' : '' }}" href="javascript:;"
+                        data-toggle="modal" data-target="#shippingModal"
+                        data-id="{{ $data->id }}"
+                        data-txn="{{ $data->transaction_number }}"
+                        data-courier="{{ $data->courier_name }}"
+                        data-tracking="{{ $data->tracking_number }}"
+                        data-link="{{ $data->tracking_link }}"
+                        data-action="{{ route('back.order.shipping.status', $data->id) }}">
+                        <i class="fa-solid fa-truck-fast text-info mr-2"></i> {{ __('Shipped') }}
                     </a>
                     <a class="dropdown-item {{ $data->order_status == 'Delivered' ? 'active font-weight-bold' : '' }}" data-toggle="modal" data-target="#statusModal" href="javascript:;"
                         data-href="{{ route('back.order.status', [$data->id, 'order_status', 'Delivered']) }}">
-                        <i class="fa-solid fa-truck-fast text-success mr-2"></i> {{ __('Delivered') }}
+                        <i class="fa-solid fa-circle-check text-success mr-2"></i> {{ __('Delivered') }}
                     </a>
                     <a class="dropdown-item {{ $data->order_status == 'Canceled' ? 'active font-weight-bold' : '' }}" data-toggle="modal" data-target="#statusModal" href="javascript:;"
                         data-href="{{ route('back.order.status', [$data->id, 'order_status', 'Canceled']) }}">

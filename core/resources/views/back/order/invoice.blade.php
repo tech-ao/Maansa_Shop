@@ -90,8 +90,9 @@
                                 @if (isset($bill['bill_company']) && $bill['bill_company'])
                                     <span class="text-muted">{{ $bill['bill_company'] }}</span><br>
                                 @endif
-                                @if (isset($bill['bill_address1']))
-                                    <i class="fa-solid fa-location-dot mr-1 text-muted"></i> {{ $bill['bill_address1'] }}{{ isset($bill['bill_address2']) && $bill['bill_address2'] ? ', ' . $bill['bill_address2'] : '' }}<br>
+                                <i class="fa-solid fa-location-dot mr-1 text-muted"></i> {{ $bill['bill_address1'] ?? '' }}<br>
+                                @if (isset($bill['bill_address2']) && $bill['bill_address2'])
+                                    {{ $bill['bill_address2'] }}<br>
                                 @endif
                                 {{ $bill['bill_city'] ?? '' }}{{ isset($state['name']) ? ', ' . $state['name'] : '' }} {{ $bill['bill_zip'] ?? '' }}<br>
                                 {{ $bill['bill_country'] ?? 'India' }}<br>
@@ -101,6 +102,33 @@
                         </div>
                     </div>
                 </div>
+
+                @if(!empty($order->courier_name) || !empty($order->tracking_number))
+                    <!-- Shipment Details Banner -->
+                    <div class="p-3 mb-4 rounded-lg d-flex flex-wrap align-items-center justify-content-between" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px;">
+                        <div class="d-flex align-items-center mb-2 mb-md-0">
+                            <div class="mr-3 d-inline-flex align-items-center justify-content-center rounded-circle" style="width: 40px; height: 40px; background: #dcfce7; color: #15803d; font-size: 18px;">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </div>
+                            <div>
+                                <span class="text-muted d-block small font-weight-bold" style="font-size: 11px; text-transform: uppercase;">{{ __('Shipment Details') }}</span>
+                                <strong class="text-dark" style="font-size: 14px;">
+                                    {{ $order->courier_name ? $order->courier_name : __('Courier Dispatched') }}
+                                    @if($order->tracking_number)
+                                        &bull; AWB: <span class="font-family-monospace text-primary">{{ $order->tracking_number }}</span>
+                                    @endif
+                                </strong>
+                            </div>
+                        </div>
+                        @if(!empty($order->tracking_link))
+                            <div>
+                                <a href="{{ $order->tracking_link }}" target="_blank" class="btn btn-sm btn-success px-3 py-1.5 font-weight-bold text-white" style="border-radius: 8px; font-size: 12px;">
+                                    <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> {{ __('Track Shipment') }}
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+                @endif
 
                 <!-- Products Table -->
                 <div class="table-responsive">

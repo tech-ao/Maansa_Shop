@@ -39,6 +39,7 @@ Route::group(['middleware' => ['adminlocalize', 'demo']], function () {
             Route::get('/order/print/{id}', 'Back\OrderController@printOrder')->name('back.order.print');
             Route::get('/order/invoice/{id}', 'Back\OrderController@invoice')->name('back.order.invoice');
             Route::get('/order/status/{id}/{field}/{value}', 'Back\OrderController@status')->name('back.order.status');
+            Route::post('/order/shipping-status/{id}', 'Back\OrderController@shippingStatus')->name('back.order.shipping.status');
         });
 
         Route::group(['middleware' => 'permissions:Manage Products'], function () {

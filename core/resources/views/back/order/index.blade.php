@@ -174,7 +174,96 @@
             </div>
         </div>
     </div>
-</div>
-{{-- DELETE MODAL ENDS --}}
+{{-- SHIPPING / DISPATCH MODAL --}}
+<div class="modal fade" id="shippingModal" tabindex="-1" role="dialog" aria-labelledby="shippingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 16px; overflow: hidden;">
+            <div class="modal-header text-white border-0 py-3" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+                <h5 class="modal-title d-flex align-items-center font-weight-bold" id="shippingModalLabel">
+                    <i class="fa-solid fa-truck-fast mr-2"></i> {{ __('Dispatch & Shipping Details') }}
+                </h5>
+                <button class="close text-white opacity-8" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="shippingStatusForm" action="" method="POST">
+                @csrf
+                <div class="modal-body p-4">
+                    <div class="d-flex align-items-center mb-3 p-2.5 rounded-lg" style="background: #f0f9ff; border: 1px solid #e0f2fe; border-radius: 10px;">
+                        <div class="mr-2 text-info" style="font-size: 20px;">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+                        <div>
+                            <span class="text-muted d-block small font-weight-bold" style="font-size: 11px; text-transform: uppercase;">{{ __('Order Transaction') }}</span>
+                            <span class="font-weight-bold text-dark shipping-modal-txn" style="font-size: 14px;">#ORD-...</span>
+                        </div>
+                    </div>
 
+                    <div class="form-group mb-3">
+                        <label class="form-label font-weight-bold text-dark small">{{ __('Courier / Delivery Partner') }} <span class="text-danger">*</span></label>
+                        <input type="text" name="courier_name" id="modal_courier_name" class="form-control" placeholder="{{ __('e.g. Blue Dart, Delhivery, DTDC, India Post') }}" required style="border-radius: 10px; font-weight: 600;">
+                        <!-- Quick Courier Presets -->
+                        <div class="d-flex flex-wrap gap-1 mt-2">
+                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">Blue Dart</span>
+                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">Delhivery</span>
+                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">DTDC</span>
+                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">India Post</span>
+                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">FedEx</span>
+                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">Ecom Express</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label font-weight-bold text-dark small">{{ __('AWB / Tracking Number') }} <span class="text-danger">*</span></label>
+                        <input type="text" name="tracking_number" id="modal_tracking_number" class="form-control" placeholder="{{ __('e.g. AWB1234567890') }}" required style="border-radius: 10px; font-weight: 600; font-family: monospace;">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label font-weight-bold text-dark small">{{ __('Tracking URL / Link') }} <span class="text-muted font-weight-normal">({{ __('Optional') }})</span></label>
+                        <input type="url" name="tracking_link" id="modal_tracking_link" class="form-control" placeholder="{{ __('e.g. https://www.bluedart.com/track/...') }}" style="border-radius: 10px;">
+                    </div>
+
+                    <div class="custom-control custom-checkbox mt-3">
+                        <input type="checkbox" class="custom-control-input" id="send_shipping_email" name="send_email" value="1" checked>
+                        <label class="custom-control-label font-weight-bold text-dark small cursor-pointer" for="send_shipping_email">
+                            <i class="fa-solid fa-envelope text-success mr-1"></i> {{ __('Send dispatch notification email to client ("Your product has been shipped")') }}
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light border-0 py-3 d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary px-4" style="border-radius: 10px; font-weight: 700;" data-dismiss="modal">{{ __('Cancel') }}</button>
+                    <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #0284c7, #0369a1); border: none;">
+                        <i class="fa-solid fa-paper-plane mr-1"></i> {{ __('Save & Mark Shipped') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- SHIPPING MODAL ENDS --}}
+
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.open-shipping-modal', function() {
+            var formAction = $(this).data('action');
+            var txn = $(this).data('txn');
+            var courier = $(this).data('courier');
+            var tracking = $(this).data('tracking');
+            var link = $(this).data('link');
+
+            $('#shippingStatusForm').attr('action', formAction);
+            $('.shipping-modal-txn').text('#' + txn);
+            $('#modal_courier_name').val(courier || '');
+            $('#modal_tracking_number').val(tracking || '');
+            $('#modal_tracking_link').val(link || '');
+        });
+
+        $(document).on('click', '.courier-preset', function() {
+            $('#modal_courier_name').val($(this).text().trim());
+        });
+    });
+</script>
 @endsection
