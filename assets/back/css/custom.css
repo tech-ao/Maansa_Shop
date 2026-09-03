@@ -5410,43 +5410,80 @@ button.btn-success {
   padding: 8px !important;
 }
 
+/* Hide mobile togglers on desktop screens */
+@media (min-width: 992px) {
+  .logo-header .sidenav-toggler,
+  .logo-header .navbar-toggler,
+  .logo-header .topbar-toggler,
+  .logo-header .more,
+  .topbar-toggler {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+
 /* Mobile & Tablet Overrides */
 @media (max-width: 991.98px) {
   .logo-header {
     width: 100% !important;
     padding: 0 14px !important;
     height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative !important;
   }
 
   .logo-header .navbar-minimize {
     display: none !important;
   }
 
-  .logo-header .sidenav-toggler {
+  .logo-header .sidenav-toggler,
+  .logo-header .navbar-toggler,
+  .logo-header .topbar-toggler,
+  .logo-header .more {
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    margin: 0 !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     width: 38px !important;
     height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    border-radius: 10px !important;
     background: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
-    border-radius: 10px !important;
     color: #334155 !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .logo-header .sidenav-toggler:hover,
+  .logo-header .topbar-toggler:hover {
+    background: #ecfdf5 !important;
+    border-color: #a7f3d0 !important;
+    color: #059669 !important;
+  }
+
+  .logo-header .sidenav-toggler {
+    margin-left: auto !important;
+    margin-right: 8px !important;
   }
 
   .logo-header .topbar-toggler.more {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 38px !important;
-    height: 38px !important;
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 10px !important;
-    color: #334155 !important;
-    font-size: 16px !important;
-    margin-left: 8px !important;
+    margin-left: 0 !important;
   }
 
   .sidebar {
