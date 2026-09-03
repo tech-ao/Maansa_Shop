@@ -61,11 +61,11 @@
                                 <option value="affiliate" {{ request()->input('item_type') == 'affiliate' ? 'selected' : '' }}>{{ __('Affiliate Product') }}</option>
                             </select>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-3 mb-lg-0">
+                        <div class="col-lg-2 col-md-6 col-sm-6 mb-3 mb-lg-0">
                             <label class="form-label small font-weight-bold text-muted mb-1">{{ __('Highlight Tag') }}</label>
                             <select class="form-control" name="is_type" style="border-radius: 10px; font-size: 13px; height: 42px;">
                                 <option value="">{{ __('All Tags') }}</option>
-                                <option value="undefine" {{ request()->input('is_type') == 'undefine' ? 'selected' : '' }}>{{ __('Undefine / Standard') }}</option>
+                                <option value="undefine" {{ request()->input('is_type') == 'undefine' ? 'selected' : '' }}>{{ __('Standard') }}</option>
                                 <option value="new" {{ request()->input('is_type') == 'new' ? 'selected' : '' }}>{{ __('New Arrival') }}</option>
                                 <option value="flash_deal" {{ request()->input('is_type') == 'flash_deal' ? 'selected' : '' }}>{{ __('Flash Deal') }}</option>
                                 <option value="feature" {{ request()->input('is_type') == 'feature' ? 'selected' : '' }}>{{ __('Featured') }}</option>
@@ -82,7 +82,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-sm-6 mb-3 mb-lg-0">
+                        <div class="col-lg-3 col-md-6 col-sm-6 mb-3 mb-lg-0">
                             <label class="form-label small font-weight-bold text-muted mb-1">{{ __('Sort Order') }}</label>
                             <select class="form-control" name="orderby" style="border-radius: 10px; font-size: 13px; height: 42px;">
                                 <option value="asc" {{ request()->input('orderby') == 'asc' ? 'selected' : '' }}>{{ __('Ascending (A-Z)') }}</option>
