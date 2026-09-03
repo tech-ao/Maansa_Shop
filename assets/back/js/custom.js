@@ -1080,8 +1080,12 @@
     // Modern Select2 Initialization
     function initCustomSelects() {
         if (typeof $.fn.select2 !== 'undefined') {
-            $('select.form-control:not(.no-select2, .custom-select-native, #campaign_status, .campaign-select)').each(function() {
+            $('select.form-control:not(.no-select2, .custom-select-native, #campaign_status, .campaign-select, .dataTables_length select, [name$="_length"], [name*="length"])').each(function() {
                 var $select = $(this);
+                // Also skip if inside dataTables_length or dataTables_wrapper
+                if ($select.closest('.dataTables_length, .dataTables_wrapper').length) {
+                    return;
+                }
                 if (!$select.hasClass('select2-hidden-accessible')) {
                     var placeholder = $select.find('option[disabled][selected], option[value=""]').first().text() || 'Select an option...';
                     $select.select2({

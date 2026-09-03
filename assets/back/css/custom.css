@@ -5878,3 +5878,124 @@ select.form-control:not(.select2-hidden-accessible):focus {
   font-weight: 500 !important;
   background: transparent !important;
 }
+
+/* ==========================================================================
+   5. Modern DataTables Controls (Show Entries & Search Alignment)
+   ========================================================================== */
+.dataTables_wrapper {
+  padding: 0 !important;
+}
+
+.dataTables_wrapper > .row:first-child {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 16px !important;
+  padding: 4px 2px !important;
+}
+
+.dataTables_wrapper .dataTables_length {
+  display: flex !important;
+  align-items: center !important;
+  float: left !important;
+}
+
+.dataTables_wrapper .dataTables_length label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 0 !important;
+  color: #475569 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_length select.form-control,
+.dataTables_wrapper .dataTables_length select.custom-select {
+  display: inline-block !important;
+  width: auto !important;
+  min-width: 65px !important;
+  height: 38px !important;
+  padding: 4px 10px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  margin: 0 4px !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+}
+
+.dataTables_wrapper .dataTables_length select:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+  outline: none !important;
+}
+
+.dataTables_wrapper .dataTables_filter {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  text-align: right !important;
+  float: right !important;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 0 !important;
+  color: #475569 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_filter input.form-control {
+  display: inline-block !important;
+  width: 220px !important;
+  height: 38px !important;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  margin-left: 6px !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+  outline: none !important;
+}
+
+.dataTables_wrapper > .row:last-child {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-top: 16px !important;
+  padding: 4px 2px !important;
+}
+
+.dataTables_wrapper .dataTables_info {
+  color: #64748b !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding-top: 6px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  text-align: right !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .pagination {
+  margin-bottom: 0 !important;
+  justify-content: flex-end !important;
+}
