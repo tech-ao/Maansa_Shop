@@ -791,13 +791,13 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="trust-item">
-                                        <i class="fas fa-truck-fast trust-icon"></i>
+                                        <i class="fas fa-shipping-fast trust-icon"></i>
                                         <span class="trust-text">{{ __('Fast Delivery') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="trust-item">
-                                        <i class="fas fa-rotate-left trust-icon"></i>
+                                        <i class="fas fa-undo-alt trust-icon"></i>
                                         <span class="trust-text">{{ __('Easy Returns') }}</span>
                                     </div>
                                 </div>
