@@ -2,6 +2,141 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/back/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/back/css/datepicker.css') }}">
+    <style>
+        .campaign-settings-card {
+            overflow: visible !important;
+            position: relative !important;
+            z-index: 25 !important;
+        }
+        .campaign-settings-card .card-modern-body {
+            overflow: visible !important;
+        }
+        .campaign-input-group {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            align-items: stretch !important;
+            height: 46px !important;
+            width: 100% !important;
+        }
+        .campaign-input-group .input-group-prepend {
+            display: flex !important;
+            margin-right: -1px !important;
+        }
+        .campaign-input-group .input-group-text {
+            height: 46px !important;
+            background-color: #f8fafc !important;
+            border: 1.5px solid #cbd5e1 !important;
+            border-right: none !important;
+            border-top-left-radius: 10px !important;
+            border-bottom-left-radius: 10px !important;
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            color: #059669 !important;
+            padding: 0 14px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        .campaign-input-group .form-control,
+        .campaign-input-group select.form-control {
+            height: 46px !important;
+            border: 1.5px solid #cbd5e1 !important;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-top-right-radius: 10px !important;
+            border-bottom-right-radius: 10px !important;
+            font-size: 13.5px !important;
+            color: #0f172a !important;
+            font-weight: 600 !important;
+            background-color: #ffffff !important;
+            flex: 1 1 auto !important;
+            width: 1% !important;
+            min-width: 0 !important;
+            padding: 0 14px !important;
+            margin: 0 !important;
+        }
+        .campaign-input-group:focus-within .input-group-text {
+            border-color: #10b981 !important;
+            background-color: #ecfdf5 !important;
+            color: #047857 !important;
+        }
+        .campaign-input-group:focus-within .form-control {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18) !important;
+        }
+        .btn-campaign-save {
+            height: 46px !important;
+            border-radius: 10px !important;
+            font-weight: 700 !important;
+            font-size: 14px !important;
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+            border: none !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px -2px rgba(16, 185, 129, 0.45) !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            transition: all 0.2s ease !important;
+        }
+        .btn-campaign-save:hover {
+            background: linear-gradient(135deg, #059669, #047857) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 6px 18px -2px rgba(16, 185, 129, 0.55) !important;
+            color: #ffffff !important;
+        }
+
+        /* Datepicker / Calendar Popup Styling & Z-Index Fix */
+        .bootstrap-datetimepicker-widget {
+            z-index: 999999 !important;
+            background: #ffffff !important;
+            border: 1.5px solid #e2e8f0 !important;
+            border-radius: 14px !important;
+            box-shadow: 0 20px 45px -5px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+            padding: 12px 14px !important;
+            margin-top: 8px !important;
+            min-width: 280px !important;
+        }
+        .bootstrap-datetimepicker-widget table th {
+            color: #475569 !important;
+            font-weight: 700 !important;
+            font-size: 12px !important;
+            padding: 6px !important;
+        }
+        .bootstrap-datetimepicker-widget table th.picker-switch {
+            color: #0f172a !important;
+            font-size: 13.5px !important;
+            font-weight: 800 !important;
+        }
+        .bootstrap-datetimepicker-widget table th.prev,
+        .bootstrap-datetimepicker-widget table th.next {
+            color: #059669 !important;
+            font-size: 14px !important;
+        }
+        .bootstrap-datetimepicker-widget table td.day {
+            height: 32px !important;
+            line-height: 32px !important;
+            width: 32px !important;
+            font-size: 12.5px !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+            border-radius: 8px !important;
+        }
+        .bootstrap-datetimepicker-widget table td.day:hover {
+            background-color: #ecfdf5 !important;
+            color: #047857 !important;
+        }
+        .bootstrap-datetimepicker-widget table td.active,
+        .bootstrap-datetimepicker-widget table td.active:hover {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35) !important;
+        }
+        .bootstrap-datetimepicker-widget table td.today:before {
+            border-bottom-color: #10b981 !important;
+        }
+    </style>
 @endsection
 @section('content')
 
@@ -24,7 +159,7 @@
     </div>
 
 	<!-- Campaign Settings Card -->
-	<div class="card-modern mb-4">
+	<div class="card-modern campaign-settings-card mb-4">
 		<div class="card-modern-body p-4">
             @include('alerts.alerts')
             <div class="d-flex align-items-center mb-3 pb-2 border-bottom">
@@ -44,13 +179,13 @@
                         <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
                             {{ __('Campaign Title') }} <span class="text-danger">*</span>
                         </label>
-                        <div class="input-group flex-nowrap" style="height: 44px;">
+                        <div class="campaign-input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light text-success font-weight-bold px-3 d-flex align-items-center" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
-                                    <i class="fa-solid fa-heading"></i>
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-heading" style="color: #10b981; font-size: 15px;"></i>
                                 </span>
                             </div>
-                            <input type="text" required class="form-control font-weight-600" name="campaign_title" value="{{ $setting->campaign_title }}" placeholder="{{ __('e.g., Deals Of The Week') }}" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px; flex: 1 1 auto; width: 1%; min-width: 0;">
+                            <input type="text" required class="form-control" name="campaign_title" value="{{ $setting->campaign_title }}" placeholder="{{ __('e.g., Deals Of The Week') }}">
                         </div>
                     </div>
 
@@ -58,13 +193,13 @@
                         <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
                             {{ __('Campaign End Date') }} <span class="text-danger">*</span>
                         </label>
-                        <div class="input-group flex-nowrap" style="height: 44px;">
+                        <div class="campaign-input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light text-success font-weight-bold px-3 d-flex align-items-center" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
-                                    <i class="fa-solid fa-calendar-days"></i>
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-calendar-days" style="color: #10b981; font-size: 15px;"></i>
                                 </span>
                             </div>
-                            <input type="text" required class="form-control font-weight-600" name="campaign_end_date" value="{{ $setting->campaign_end_date }}" placeholder="{{ __('MM/DD/YYYY') }}" id="datepicker" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px; flex: 1 1 auto; width: 1%; min-width: 0;">
+                            <input type="text" required class="form-control" name="campaign_end_date" value="{{ $setting->campaign_end_date }}" placeholder="{{ __('MM/DD/YYYY') }}" id="datepicker">
                         </div>
                     </div>
 
@@ -72,13 +207,13 @@
                         <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
                             {{ __('Status') }} <span class="text-danger">*</span>
                         </label>
-                        <div class="input-group flex-nowrap" style="height: 44px;">
+                        <div class="campaign-input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light text-success font-weight-bold px-3 d-flex align-items-center" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
-                                    <i class="fa-solid fa-toggle-on"></i>
+                                <span class="input-group-text">
+                                    <i class="fa-solid fa-toggle-on" style="color: #10b981; font-size: 16px;"></i>
                                 </span>
                             </div>
-                            <select name="campaign_status" class="form-control font-weight-600" id="campaign_status" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px; flex: 1 1 auto; width: 1%; min-width: 0;">
+                            <select name="campaign_status" class="form-control" id="campaign_status">
                                 <option value="1" {{ $setting->campaign_status == 1 ? 'selected' : '' }}>{{ __('Publish') }}</option>
                                 <option value="2" {{ $setting->campaign_status == 2 ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
                             </select>
@@ -86,7 +221,7 @@
                     </div>
 
                     <div class="col-xl-2 col-lg-2 col-md-6 col-12">
-                        <button type="submit" class="btn btn-primary w-100 d-inline-flex align-items-center justify-content-center" style="height: 44px; border-radius: 10px; font-weight: 700; font-size: 14px; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 14px -2px rgba(16, 185, 129, 0.45); transition: all 0.2s ease;">
+                        <button type="submit" class="btn btn-campaign-save">
                             <i class="fa-solid fa-floppy-disk mr-2"></i> {{ __('Save') }}
                         </button>
                     </div>
