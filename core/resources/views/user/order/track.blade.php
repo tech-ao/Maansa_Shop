@@ -145,7 +145,7 @@
                                 @if ($is_delivered)
                                     <i class="fa fa-check"></i>
                                 @else
-                                    <i class="fa fa-truck-fast"></i>
+                                    <i class="fas fa-shipping-fast"></i>
                                 @endif
                             </div>
                             <div class="step-line"></div>
