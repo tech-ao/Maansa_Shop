@@ -510,11 +510,12 @@
 
     /* Checkout Button */
     .btn-proceed-checkout {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
+        gap: 10px;
         width: 100%;
-        padding: 14px 20px;
+        padding: 14px 22px;
         border-radius: 12px;
         background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         color: #ffffff !important;
@@ -525,11 +526,19 @@
         transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         border: none;
     }
+    .btn-proceed-checkout i {
+        margin-left: 8px;
+        font-size: 14px;
+        transition: transform 0.2s ease;
+    }
     .btn-proceed-checkout:hover {
         background: linear-gradient(135deg, #059669 0%, #047857 100%);
         transform: translateY(-2px);
         box-shadow: 0 10px 24px -2px rgba(16, 185, 129, 0.55);
         color: #ffffff !important;
+    }
+    .btn-proceed-checkout:hover i {
+        transform: translateX(4px);
     }
 
     /* Trust Box */
