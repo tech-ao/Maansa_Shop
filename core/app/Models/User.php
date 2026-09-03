@@ -49,6 +49,7 @@ class User extends Authenticatable
 
     public function orders()
     {
+        \App\Models\Order::linkGuestOrdersToUser($this);
         return $this->hasMany('App\Models\Order');
     }
 

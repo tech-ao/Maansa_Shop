@@ -51,6 +51,7 @@ class SocialLoginController extends Controller
 
         if (User::where('email', $socialUser->email)->exists()) {
             $auser = User::where('email', $socialUser->email)->first();
+            \App\Models\Order::linkGuestOrdersToUser($auser);
             Auth::login($auser);
             return redirect()->route('user.dashboard');
         } else {
@@ -61,6 +62,7 @@ class SocialLoginController extends Controller
             $user->last_name = $name[1];
             $user->save();
 
+            \App\Models\Order::linkGuestOrdersToUser($user);
 
             Notification::create([
                 'user_id' => $user->id
@@ -84,6 +86,7 @@ class SocialLoginController extends Controller
             }
         }
 
+        \App\Models\Order::linkGuestOrdersToUser($user);
         Auth::login($user);
         return redirect()->route('user.dashboard');
     }

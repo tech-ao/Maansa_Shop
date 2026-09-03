@@ -33,6 +33,8 @@ class UserRepository
         $input['email_token'] = $verify;
         $user->fill($input)->save();
 
+        // Automatically link any previous guest orders
+        \App\Models\Order::linkGuestOrdersToUser($user);
 
         Notification::create(['user_id' => $user->id]);
         $emailData = [

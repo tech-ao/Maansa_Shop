@@ -71,6 +71,9 @@ class LoginController extends Controller
       }
 
 
+      // Automatically link any previous guest orders
+      \App\Models\Order::linkGuestOrdersToUser(Auth::user());
+
       if ($request->has('modal')) {
         return redirect()->back();
       } else {
