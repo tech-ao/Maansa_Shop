@@ -9,11 +9,17 @@
     <div class="dash-hero-banner mb-4">
         <div class="dash-hero-content">
             <div class="dash-hero-text">
-                <h2><i class="fa-solid fa-receipt mr-2" style="font-size: 22px;"></i> {{ __('Payment Transactions') }}</h2>
-                <p>{{ __('Monitor customer gateway payments, transaction identifiers, invoice billing, and settlement logs.') }}</p>
+                <h2>
+                    @if(isset($activeType) && $activeType === 'failed')
+                        <i class="fa-solid fa-triangle-exclamation mr-2 text-danger" style="font-size: 22px;"></i> {{ $title ?? __('Failed Transactions') }}
+                    @else
+                        <i class="fa-solid fa-receipt mr-2" style="font-size: 22px;"></i> {{ $title ?? __('Payment Transactions') }}
+                    @endif
+                </h2>
+                <p>{{ $subtitle ?? __('Monitor customer gateway payments, transaction identifiers, invoice billing, and settlement logs.') }}</p>
             </div>
             <div class="dash-hero-actions">
-                <a href="{{ route('back.csv.transaction.export') }}" class="btn btn-hero-action btn-hero-primary" style="font-size: 13.5px; font-weight: 700; padding: 10px 20px;">
+                <a href="{{ route('back.csv.transaction.export') }}?type={{ $activeType ?? 'payment' }}" class="btn btn-hero-action btn-hero-primary" style="font-size: 13.5px; font-weight: 700; padding: 10px 20px;">
                     <i class="fa-solid fa-file-csv mr-1"></i> {{ __('CSV Export') }}
                 </a>
                 <form class="d-inline-block" action="{{ route('back.bulk.delete') }}" method="get" onsubmit="return confirm('{{ __('Are you sure you want to delete the selected transactions?') }}');">

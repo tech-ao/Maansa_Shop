@@ -183,11 +183,30 @@
     </li>
 
     {{-- 5th: Transactions --}}
-    <li class="nav-item {{ request()->routeIs('back.transaction.*') ? 'active' : '' }}">
-        <a href="{{ route('back.transaction.index') }}">
+    @php
+        $isTxnActive = request()->routeIs('back.transaction.*') || request()->is('admin/transactions*');
+        $currentTxnType = request()->input('type');
+    @endphp
+    <li class="nav-item {{ $isTxnActive ? 'active submenu' : '' }}">
+        <a data-toggle="collapse" href="#transactions_nav" aria-expanded="{{ $isTxnActive ? 'true' : 'false' }}">
             <i class="fa-solid fa-arrow-right-arrow-left"></i>
-            <p>{{ __('Transactions') }}</p>
+            <p>{{ __('Transaction') }}</p>
+            <span class="caret"></span>
         </a>
+        <div class="collapse {{ $isTxnActive ? 'show' : '' }}" id="transactions_nav">
+            <ul class="nav nav-collapse">
+                <li class="{{ ($currentTxnType !== 'failed' && (request()->routeIs('back.transaction.payment') || (request()->routeIs('back.transaction.index') && $currentTxnType !== 'failed'))) ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.transaction.index', ['type' => 'payment']) }}">
+                        <span class="sub-item">{{ __('Payment Transaction') }}</span>
+                    </a>
+                </li>
+                <li class="{{ ($currentTxnType === 'failed' || request()->routeIs('back.transaction.failed')) ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.transaction.index', ['type' => 'failed']) }}">
+                        <span class="sub-item">{{ __('Failed Transaction') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </li>
 
     <li class="nav-section-title">

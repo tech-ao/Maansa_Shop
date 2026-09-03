@@ -188,6 +188,8 @@ Route::group(['middleware' => ['adminlocalize', 'demo']], function () {
         Route::group(['middleware' => 'permissions:Transactions'], function () {
             //------------ TRANSACTION ----------------//
             Route::get('/transactions', 'Back\TranactionController@index')->name('back.transaction.index');
+            Route::get('/transactions/payment', 'Back\TranactionController@payment')->name('back.transaction.payment');
+            Route::get('/transactions/failed', 'Back\TranactionController@failed')->name('back.transaction.failed');
             Route::delete('/transaction/delete/{id}', 'Back\TranactionController@delete')->name('back.transaction.delete');
         });
 

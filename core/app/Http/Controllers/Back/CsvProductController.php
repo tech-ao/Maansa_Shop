@@ -62,24 +62,43 @@ class CsvProductController extends Controller
         return response()->stream($callback, 200, $headers);
     }
 
-    public function transactionExport()
+    public function transactionExport(Request $request)
     {
+        $type = strtolower($request->input('type', 'payment'));
+        $filename = $type === 'failed' ? 'failed_transactions_export.csv' : 'payment_transactions_export.csv';
+
         $headers = [
             'Cache-Control' => 'must-revalidate, post-check=0, pre-check=0',
             'Content-type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=transaction_export.csv',
+            'Content-Disposition' => "attachment; filename={$filename}",
             'Expires' => '0',
             'Pragma' => 'public',
         ];
 
-        $lists = Transaction::all()->toArray();
+        if ($type === 'failed') {
+            $query = Transaction::whereHas('order', function ($q) {
+                $q->where('payment_status', '!=', 'Paid');
+            })->get();
+        } else {
+            $query = Transaction::where(function ($q) {
+                $q->whereHas('order', function ($sq) {
+                    $sq->where('payment_status', 'Paid');
+                })->orWhereDoesntHave('order');
+            })->get();
+        }
+
+        $lists = $query->toArray();
         $new_list = [];
         foreach ($lists as $list) {
             $new_list[] = $list;
         }
 
-        # add headers for each column in the CSV download
-        array_unshift($new_list, array_keys($new_list[0]));
+        if (count($new_list) > 0) {
+            # add headers for each column in the CSV download
+            array_unshift($new_list, array_keys($new_list[0]));
+        } else {
+            $new_list = [['No transactions found for export']];
+        }
 
         $callback = function () use ($new_list) {
             $FH = fopen('php://output', 'w');
