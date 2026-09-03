@@ -51,6 +51,33 @@
                 sessionStorage.setItem('sidebar_scroll_pos', $container.scrollTop());
             }
         });
+
+        // 4. Sidebar Dropdown Accordion: Close other open dropdowns when opening a new one
+        $(document).on('show.bs.collapse', '.sidebar .collapse', function (e) {
+            if ($(this).is(e.target)) {
+                var $thisCollapse = $(this);
+                var $otherCollapses = $('.sidebar .collapse.show').not($thisCollapse);
+                
+                $otherCollapses.each(function () {
+                    $(this).collapse('hide');
+                    var $parentNav = $(this).closest('.nav-item');
+                    $parentNav.removeClass('submenu');
+                    $parentNav.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'false');
+                });
+                
+                var $currentNav = $thisCollapse.closest('.nav-item');
+                $currentNav.addClass('submenu');
+                $currentNav.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'true');
+            }
+        });
+
+        $(document).on('hide.bs.collapse', '.sidebar .collapse', function (e) {
+            if ($(this).is(e.target)) {
+                var $currentNav = $(this).closest('.nav-item');
+                $currentNav.removeClass('submenu');
+                $currentNav.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'false');
+            }
+        });
     });
 
     $('#datepicker').datetimepicker({
