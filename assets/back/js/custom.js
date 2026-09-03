@@ -143,6 +143,30 @@
         }
     }
 
+    function highlightActivePresetGlobal(courier) {
+        courier = (courier || '').trim().toLowerCase();
+        $('.courier-preset').each(function () {
+            var btnCourier = ($(this).data('courier') || $(this).text()).trim().toLowerCase();
+            if (courier && (btnCourier === courier || courier.includes(btnCourier))) {
+                $(this).css({
+                    'border-color': '#10b981',
+                    'background': '#f0fdf4',
+                    'color': '#047857',
+                    'box-shadow': '0 0 0 2px rgba(16, 185, 129, 0.35)',
+                    'font-weight': '700'
+                });
+            } else {
+                $(this).css({
+                    'border-color': '#cbd5e1',
+                    'background': '#ffffff',
+                    'color': '#1e293b',
+                    'box-shadow': 'none',
+                    'font-weight': '600'
+                });
+            }
+        });
+    }
+
     $(document).on('show.bs.modal', '#shippingModal', function (e) {
         var $btn = $(e.relatedTarget);
         if ($btn.length) {
@@ -161,6 +185,7 @@
             } else {
                 syncTrackingLinkGlobal();
             }
+            highlightActivePresetGlobal(courier);
         }
     });
 
@@ -169,10 +194,12 @@
         var courierName = $(this).data('courier') || $(this).text().trim();
         $('#modal_courier_name').val(courierName);
         syncTrackingLinkGlobal();
+        highlightActivePresetGlobal(courierName);
     });
 
     $(document).on('input', '#modal_tracking_number, #modal_courier_name', function () {
         syncTrackingLinkGlobal();
+        highlightActivePresetGlobal($('#modal_courier_name').val());
     });
 
     $(document).on('change', 'input.switch, input.switch-bootstrap, .radio-check', function () {

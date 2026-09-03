@@ -205,19 +205,19 @@
                     <div class="form-group mb-3">
                         <label class="form-label font-weight-bold text-dark small">{{ __('Courier / Delivery Partner') }} <span class="text-danger">*</span></label>
                         <input type="text" name="courier_name" id="modal_courier_name" class="form-control" placeholder="{{ __('e.g. BlueDart, DTDC, Indian Post, ST Courier') }}" required style="border-radius: 10px; font-weight: 600;">
-                        <!-- Quick Courier Presets -->
-                        <div class="d-flex flex-wrap gap-1 mt-2">
-                            <button type="button" class="btn btn-sm btn-outline-primary courier-preset px-3 py-1 mr-1 mb-1 font-weight-bold" style="border-radius: 8px; font-size: 12px;" data-courier="BlueDart">
-                                <i class="fa-solid fa-truck-fast mr-1"></i> BlueDart
+                        <!-- Quick Courier Presets (Single Row 4-Column Grid) -->
+                        <div class="courier-presets-grid mt-2" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+                            <button type="button" class="btn courier-preset px-1 py-1.5 font-weight-bold text-center d-flex align-items-center justify-content-center" style="border-radius: 8px; font-size: 11.5px; border: 1.5px solid #cbd5e1; background: #ffffff; color: #1e293b; transition: all 0.2s;" data-courier="BlueDart">
+                                <i class="fa-solid fa-truck-fast mr-1 text-primary" style="font-size: 11px;"></i> <span>BlueDart</span>
                             </button>
-                            <button type="button" class="btn btn-sm btn-outline-info courier-preset px-3 py-1 mr-1 mb-1 font-weight-bold" style="border-radius: 8px; font-size: 12px;" data-courier="DTDC">
-                                <i class="fa-solid fa-box mr-1"></i> DTDC
+                            <button type="button" class="btn courier-preset px-1 py-1.5 font-weight-bold text-center d-flex align-items-center justify-content-center" style="border-radius: 8px; font-size: 11.5px; border: 1.5px solid #cbd5e1; background: #ffffff; color: #1e293b; transition: all 0.2s;" data-courier="DTDC">
+                                <i class="fa-solid fa-box mr-1 text-info" style="font-size: 11px;"></i> <span>DTDC</span>
                             </button>
-                            <button type="button" class="btn btn-sm btn-outline-danger courier-preset px-3 py-1 mr-1 mb-1 font-weight-bold" style="border-radius: 8px; font-size: 12px;" data-courier="Indian Post">
-                                <i class="fa-solid fa-envelope mr-1"></i> Indian Post
+                            <button type="button" class="btn courier-preset px-1 py-1.5 font-weight-bold text-center d-flex align-items-center justify-content-center" style="border-radius: 8px; font-size: 11.5px; border: 1.5px solid #cbd5e1; background: #ffffff; color: #1e293b; transition: all 0.2s;" data-courier="Indian Post">
+                                <i class="fa-solid fa-envelope mr-1 text-danger" style="font-size: 11px;"></i> <span>Indian Post</span>
                             </button>
-                            <button type="button" class="btn btn-sm btn-outline-success courier-preset px-3 py-1 mr-1 mb-1 font-weight-bold" style="border-radius: 8px; font-size: 12px;" data-courier="ST Courier">
-                                <i class="fa-solid fa-paper-plane mr-1"></i> ST Courier
+                            <button type="button" class="btn courier-preset px-1 py-1.5 font-weight-bold text-center d-flex align-items-center justify-content-center" style="border-radius: 8px; font-size: 11.5px; border: 1.5px solid #cbd5e1; background: #ffffff; color: #1e293b; transition: all 0.2s;" data-courier="ST Courier">
+                                <i class="fa-solid fa-paper-plane mr-1 text-success" style="font-size: 11px;"></i> <span>ST Courier</span>
                             </button>
                         </div>
                     </div>
@@ -324,9 +324,21 @@
             $('.courier-preset').each(function() {
                 var btnCourier = ($(this).data('courier') || $(this).text()).trim().toLowerCase();
                 if (courier && (btnCourier === courier || courier.includes(btnCourier))) {
-                    $(this).css({'box-shadow': '0 0 0 2px #0284c7', 'font-weight': '800'});
+                    $(this).css({
+                        'border-color': '#10b981',
+                        'background': '#f0fdf4',
+                        'color': '#047857',
+                        'box-shadow': '0 0 0 2px rgba(16, 185, 129, 0.35)',
+                        'font-weight': '700'
+                    });
                 } else {
-                    $(this).css({'box-shadow': 'none', 'font-weight': '600'});
+                    $(this).css({
+                        'border-color': '#cbd5e1',
+                        'background': '#ffffff',
+                        'color': '#1e293b',
+                        'box-shadow': 'none',
+                        'font-weight': '600'
+                    });
                 }
             });
         }
