@@ -129,12 +129,12 @@ body_theme4 @endif
                         <div class="login-register">
                             @if (!Auth::user())
                                 <a class="top-nav-link top-nav-login-pill" href="{{ route('user.login') }}">
-                                    <i class="icon-user"></i> <span>{{ __('Login') }}</span>
+                                    <i class="icon-user"></i> <span class="text-label">{{ __('Login') }}</span>
                                 </a>
                             @else
                                 <div class="t-h-dropdown">
                                     <div class="main-link top-nav-link top-nav-login-pill">
-                                        <i class="icon-user"></i> <span class="text-label">{{ Auth::user()->first_name }}</span> <i class="icon-chevron-down ml-1"></i>
+                                        <i class="icon-user"></i><span class="text-label">{{ Auth::user()->first_name }}</span><i class="icon-chevron-down"></i>
                                     </div>
                                     <div class="t-h-dropdown-menu">
                                         <a href="{{ route('user.dashboard') }}"><i class="icon-chevron-right pr-2"></i>{{ __('Dashboard') }}</a>
@@ -177,12 +177,13 @@ body_theme4 @endif
             font-weight: 600 !important;
             display: inline-flex !important;
             align-items: center !important;
+            justify-content: center !important;
             gap: 6px !important;
             text-decoration: none !important;
             transition: all 0.2s ease !important;
             padding: 4px 8px !important;
             border-radius: 6px !important;
-            line-height: 1.2 !important;
+            line-height: 1 !important;
             white-space: nowrap !important;
         }
 
@@ -196,22 +197,30 @@ body_theme4 @endif
         .menu-top-area i {
             font-size: 13px !important;
             color: #a7f3d0 !important;
-            vertical-align: middle !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            line-height: 1 !important;
         }
 
         .top-nav-login-pill {
             background: rgba(255, 255, 255, 0.2) !important;
             color: #ffffff !important;
             border: 1px solid rgba(255, 255, 255, 0.35) !important;
-            padding: 5px 16px !important;
+            padding: 0 14px !important;
+            height: 30px !important;
             border-radius: 999px !important;
             font-size: 12.5px !important;
-            font-weight: 700 !important;
+            font-weight: 600 !important;
             display: inline-flex !important;
             align-items: center !important;
+            justify-content: center !important;
             gap: 6px !important;
             white-space: nowrap !important;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+            line-height: 1 !important;
+            cursor: pointer !important;
+            box-sizing: border-box !important;
         }
 
         .top-nav-login-pill:hover {
@@ -222,6 +231,36 @@ body_theme4 @endif
 
         .top-nav-login-pill:hover i {
             color: #065f46 !important;
+        }
+
+        .top-nav-login-pill .text-label,
+        .top-nav-login-pill span {
+            display: inline-flex !important;
+            align-items: center !important;
+            line-height: 1 !important;
+            font-size: 12.5px !important;
+            font-weight: 600 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .top-nav-login-pill i {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            line-height: 1 !important;
+            font-size: 13px !important;
+            height: 13px !important;
+            width: 13px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .top-nav-login-pill i.icon-chevron-down {
+            font-size: 10px !important;
+            width: 10px !important;
+            height: 10px !important;
+            opacity: 0.85 !important;
         }
 
         .menu-top-area .t-h-dropdown {
@@ -279,7 +318,7 @@ body_theme4 @endif
             .top-nav-link,
             .menu-top-area .main-link {
                 font-size: 12.5px !important;
-                padding: 4px 6px !important;
+                padding: 3px 6px !important;
                 gap: 5px !important;
             }
             .top-nav-link i,
@@ -287,7 +326,8 @@ body_theme4 @endif
                 font-size: 12.5px !important;
             }
             .top-nav-login-pill {
-                padding: 4px 13px !important;
+                padding: 0 12px !important;
+                height: 28px !important;
                 font-size: 12px !important;
             }
         }
@@ -303,11 +343,12 @@ body_theme4 @endif
             .top-nav-link,
             .menu-top-area .main-link {
                 font-size: 12px !important;
-                padding: 3px 4px !important;
+                padding: 2px 4px !important;
                 gap: 4px !important;
             }
             .top-nav-login-pill {
-                padding: 4px 11px !important;
+                padding: 0 10px !important;
+                height: 26px !important;
                 font-size: 11.5px !important;
             }
         }
