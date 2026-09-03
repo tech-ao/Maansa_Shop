@@ -1,6 +1,30 @@
 @extends('master.back')
 @section('styles')
 	<link rel="stylesheet" href="{{ asset('assets/back/css/datepicker.css') }}">
+    <style>
+        .filter-date-card {
+            overflow: visible !important;
+            position: relative !important;
+            z-index: 50 !important;
+        }
+        .filter-date-card .card-modern-body {
+            overflow: visible !important;
+        }
+        .bootstrap-datetimepicker-widget {
+            z-index: 999999 !important;
+            background: #ffffff !important;
+            border: 1.5px solid #cbd5e1 !important;
+            border-radius: 14px !important;
+            box-shadow: 0 20px 45px -5px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+            padding: 12px 14px !important;
+            margin-top: 8px !important;
+            min-width: 280px !important;
+        }
+        .bootstrap-datetimepicker-widget.dropdown-menu {
+            z-index: 999999 !important;
+            position: absolute !important;
+        }
+    </style>
 @endsection
 @section('content')
 
@@ -30,8 +54,8 @@
     </div>
 
     <!-- Date Range Filter Card -->
-    <div class="card-modern mb-4">
-        <div class="card-modern-body">
+    <div class="card-modern filter-date-card mb-4" style="position: relative; z-index: 50; overflow: visible;">
+        <div class="card-modern-body" style="overflow: visible;">
             <div class="d-flex align-items-center mb-3">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-2" style="width: 34px; height: 34px; background: #f0fdf4; color: #059669;">
                     <i class="fa-solid fa-filter" style="font-size: 14px;"></i>

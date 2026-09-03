@@ -2278,12 +2278,13 @@ input.btn.btn-primary.note-btn.note-btn-primary.note-video-btn {
   border-radius: 18px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  overflow: visible;
   margin-bottom: 24px;
 }
 
 .card-modern-body {
   padding: 24px;
+  overflow: visible;
 }
 
 /* Modern Data Table */
@@ -5998,4 +5999,89 @@ select.form-control:not(.select2-hidden-accessible):focus {
 .dataTables_wrapper .dataTables_paginate .pagination {
   margin-bottom: 0 !important;
   justify-content: flex-end !important;
+}
+
+/* ==========================================================================
+   6. Global Datepicker / Calendar Popup Styling & Z-Index
+   ========================================================================== */
+.filter-date-card {
+  position: relative !important;
+  z-index: 50 !important;
+  overflow: visible !important;
+}
+
+.filter-date-card .card-modern-body {
+  overflow: visible !important;
+}
+
+.bootstrap-datetimepicker-widget {
+  z-index: 999999 !important;
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 45px -5px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+  padding: 12px 14px !important;
+  margin-top: 8px !important;
+  min-width: 280px !important;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  z-index: 999999 !important;
+  position: absolute !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 45px -5px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+}
+
+.bootstrap-datetimepicker-widget table th {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  height: 36px !important;
+}
+
+.bootstrap-datetimepicker-widget table thead tr:first-child th {
+  background: #f8fafc !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+}
+
+.bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+  background: #e2e8f0 !important;
+}
+
+.bootstrap-datetimepicker-widget table td {
+  height: 34px !important;
+  line-height: 34px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+}
+
+.bootstrap-datetimepicker-widget table td.day:hover {
+  background: #ecfdf5 !important;
+  color: #047857 !important;
+  cursor: pointer !important;
+  font-weight: 700 !important;
+}
+
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  text-shadow: none !important;
+}
+
+.bootstrap-datetimepicker-widget table td.today:before {
+  border-bottom-color: #10b981 !important;
+}
+
+.bootstrap-datetimepicker-widget a[data-action] {
+  color: #059669 !important;
+}
+
+.bootstrap-datetimepicker-widget a[data-action]:hover {
+  color: #047857 !important;
 }
