@@ -10,38 +10,10 @@
     </li>
 
     <li class="nav-section-title">
-        <span>{{ __('Store Management') }}</span>
-    </li>
-    @php
-        $isCatActive = request()->routeIs('back.category.*') || request()->routeIs('back.subcategory.*') || request()->routeIs('back.childcategory.*');
-    @endphp
-    <li class="nav-item {{ $isCatActive ? 'active submenu' : '' }}">
-        <a data-toggle="collapse" href="#category" aria-expanded="{{ $isCatActive ? 'true' : 'false' }}">
-            <i class="fa-solid fa-layer-group"></i>
-            <p>{{ __('Manage Categories') }}</p>
-            <span class="caret"></span>
-        </a>
-        <div class="collapse {{ $isCatActive ? 'show' : '' }}" id="category">
-            <ul class="nav nav-collapse">
-                <li class="{{ request()->routeIs('back.category.*') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.category.index') }}">
-                        <span class="sub-item">{{ __('Categories') }}</span>
-                    </a>
-                </li>
-                <li class="{{ request()->routeIs('back.subcategory.*') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.subcategory.index') }}">
-                        <span class="sub-item">{{ __('Sub categories') }}</span>
-                    </a>
-                </li>
-                <li class="{{ request()->routeIs('back.childcategory.*') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.childcategory.index') }}">
-                        <span class="sub-item">{{ __('Child categories') }}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <span>{{ __('Orders and Management') }}</span>
     </li>
 
+    {{-- 1st: Manage Products --}}
     @php
         $isProductActive = request()->routeIs('back.brand.*') || request()->routeIs('back.item.*') || request()->routeIs('back.campaign.*') || request()->routeIs('back.bulk.product.*') || request()->routeIs('back.review.*');
     @endphp
@@ -92,6 +64,38 @@
         </div>
     </li>
 
+    {{-- 2nd: Manage Categories --}}
+    @php
+        $isCatActive = request()->routeIs('back.category.*') || request()->routeIs('back.subcategory.*') || request()->routeIs('back.childcategory.*');
+    @endphp
+    <li class="nav-item {{ $isCatActive ? 'active submenu' : '' }}">
+        <a data-toggle="collapse" href="#category" aria-expanded="{{ $isCatActive ? 'true' : 'false' }}">
+            <i class="fa-solid fa-layer-group"></i>
+            <p>{{ __('Manage Categories') }}</p>
+            <span class="caret"></span>
+        </a>
+        <div class="collapse {{ $isCatActive ? 'show' : '' }}" id="category">
+            <ul class="nav nav-collapse">
+                <li class="{{ request()->routeIs('back.category.*') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.category.index') }}">
+                        <span class="sub-item">{{ __('Categories') }}</span>
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('back.subcategory.*') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.subcategory.index') }}">
+                        <span class="sub-item">{{ __('Sub categories') }}</span>
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('back.childcategory.*') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.childcategory.index') }}">
+                        <span class="sub-item">{{ __('Child categories') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+    {{-- 3rd: Manage Orders --}}
     @php
         $isOrderActive = request()->is('orders/*') || request()->is('admin/orders*');
     @endphp
@@ -132,13 +136,7 @@
         </div>
     </li>
 
-    <li class="nav-item {{ request()->routeIs('back.transaction.*') ? 'active' : '' }}">
-        <a href="{{ route('back.transaction.index') }}">
-            <i class="fa-solid fa-arrow-right-arrow-left"></i>
-            <p>{{ __('Transactions') }}</p>
-        </a>
-    </li>
-
+    {{-- 4th: E-commerce --}}
     @php
         $isEcomActive = request()->routeIs('back.code.*') || request()->routeIs('back.shipping.*') || request()->routeIs('back.state.*') || request()->routeIs('back.tax.*') || request()->routeIs('back.currency.*') || request()->routeIs('back.setting.payment');
     @endphp
@@ -182,6 +180,14 @@
                 </li>
             </ul>
         </div>
+    </li>
+
+    {{-- 5th: Transactions --}}
+    <li class="nav-item {{ request()->routeIs('back.transaction.*') ? 'active' : '' }}">
+        <a href="{{ route('back.transaction.index') }}">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            <p>{{ __('Transactions') }}</p>
+        </a>
     </li>
 
     <li class="nav-section-title">
@@ -258,7 +264,7 @@
     </li>
 
     <li class="nav-section-title">
-        <span>{{ __('Content & Customization') }}</span>
+        <span>{{ __('Website and Customization') }}</span>
     </li>
     @php
         $isSiteActive = request()->routeIs('back.setting.*') || request()->routeIs('back.menu.*') || request()->routeIs('back.homePage') || request()->routeIs('back.slider.*') || request()->routeIs('back.service.*') || request()->routeIs('back.cookie.alert') || request()->routeIs('admin.sitemap.*') || request()->routeIs('back.language.*') || request()->routeIs('back.subscribers.announcement');
@@ -424,31 +430,6 @@
                 <li class="{{ request()->routeIs('back.staff.*') ? 'active' : '' }}">
                     <a class="sub-link" href="{{ route('back.staff.index') }}">
                         <span class="sub-item">{{ __('System User') }}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-
-    @php
-        $isBackupActive = request()->routeIs('back.system.backup') || request()->routeIs('back.database.backup');
-    @endphp
-    <li class="nav-item {{ $isBackupActive ? 'active submenu' : '' }}">
-        <a data-toggle="collapse" href="#backup" aria-expanded="{{ $isBackupActive ? 'true' : 'false' }}">
-            <i class="fa-solid fa-database"></i>
-            <p>{{ __('System Backup') }}</p>
-            <span class="caret"></span>
-        </a>
-        <div class="collapse {{ $isBackupActive ? 'show' : '' }}" id="backup">
-            <ul class="nav nav-collapse">
-                <li class="{{ request()->routeIs('back.system.backup') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.system.backup') }}">
-                        <span class="sub-item">{{ __('System Backup') }}</span>
-                    </a>
-                </li>
-                <li class="{{ request()->routeIs('back.database.backup') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.database.backup') }}">
-                        <span class="sub-item">{{ __('Database Backup') }}</span>
                     </a>
                 </li>
             </ul>

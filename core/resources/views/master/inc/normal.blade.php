@@ -19,42 +19,11 @@
 
     @if (in_array('Manage Categories',$section) || in_array('Manage Products',$section) || in_array('Manage Orders',$section) || in_array('Transactions',$section) || in_array('Ecommerce',$section))
     <li class="nav-section-title">
-        <span>{{ __('Store Management') }}</span>
+        <span>{{ __('Orders and Management') }}</span>
     </li>
     @endif
 
-    @if (in_array('Manage Categories',$section))
-    @php
-        $isCatActive = request()->routeIs('back.category.*') || request()->routeIs('back.subcategory.*') || request()->routeIs('back.childcategory.*');
-    @endphp
-    <li class="nav-item {{ $isCatActive ? 'active submenu' : '' }}">
-        <a data-toggle="collapse" href="#category" aria-expanded="{{ $isCatActive ? 'true' : 'false' }}">
-            <i class="fa-solid fa-layer-group"></i>
-            <p>{{ __('Manage Categories') }}</p>
-            <span class="caret"></span>
-        </a>
-        <div class="collapse {{ $isCatActive ? 'show' : '' }}" id="category">
-            <ul class="nav nav-collapse">
-                <li class="{{ request()->routeIs('back.category.*') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.category.index') }}">
-                        <span class="sub-item">{{ __('Categories') }}</span>
-                    </a>
-                </li>
-                <li class="{{ request()->routeIs('back.subcategory.*') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.subcategory.index') }}">
-                        <span class="sub-item">{{ __('Sub categories') }}</span>
-                    </a>
-                </li>
-                <li class="{{ request()->routeIs('back.childcategory.*') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.childcategory.index') }}">
-                        <span class="sub-item">{{ __('Child categories') }}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    @endif
-
+    {{-- 1st: Manage Products --}}
     @if (in_array('Manage Products',$section))
     @php
         $isProductActive = request()->routeIs('back.brand.*') || request()->routeIs('back.item.*') || request()->routeIs('back.campaign.*') || request()->routeIs('back.bulk.product.*') || request()->routeIs('back.review.*');
@@ -107,6 +76,40 @@
     </li>
     @endif
 
+    {{-- 2nd: Manage Categories --}}
+    @if (in_array('Manage Categories',$section))
+    @php
+        $isCatActive = request()->routeIs('back.category.*') || request()->routeIs('back.subcategory.*') || request()->routeIs('back.childcategory.*');
+    @endphp
+    <li class="nav-item {{ $isCatActive ? 'active submenu' : '' }}">
+        <a data-toggle="collapse" href="#category" aria-expanded="{{ $isCatActive ? 'true' : 'false' }}">
+            <i class="fa-solid fa-layer-group"></i>
+            <p>{{ __('Manage Categories') }}</p>
+            <span class="caret"></span>
+        </a>
+        <div class="collapse {{ $isCatActive ? 'show' : '' }}" id="category">
+            <ul class="nav nav-collapse">
+                <li class="{{ request()->routeIs('back.category.*') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.category.index') }}">
+                        <span class="sub-item">{{ __('Categories') }}</span>
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('back.subcategory.*') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.subcategory.index') }}">
+                        <span class="sub-item">{{ __('Sub categories') }}</span>
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('back.childcategory.*') ? 'active' : '' }}">
+                    <a class="sub-link" href="{{ route('back.childcategory.index') }}">
+                        <span class="sub-item">{{ __('Child categories') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    @endif
+
+    {{-- 3rd: Manage Orders --}}
     @if (in_array('Manage Orders',$section))
     @php
         $isOrderActive = request()->is('orders/*') || request()->is('admin/orders*');
@@ -149,15 +152,7 @@
     </li>
     @endif
 
-    @if (in_array('Transactions',$section))
-    <li class="nav-item {{ request()->routeIs('back.transaction.*') ? 'active' : '' }}">
-        <a href="{{ route('back.transaction.index') }}">
-            <i class="fa-solid fa-arrow-right-arrow-left"></i>
-            <p>{{ __('Transactions') }}</p>
-        </a>
-    </li>
-    @endif
-
+    {{-- 4th: Ecommerce --}}
     @if (in_array('Ecommerce',$section))
     @php
         $isEcomActive = request()->routeIs('back.code.*') || request()->routeIs('back.shipping.*') || request()->routeIs('back.state.*') || request()->routeIs('back.tax.*') || request()->routeIs('back.currency.*') || request()->routeIs('back.setting.payment');
@@ -202,6 +197,16 @@
                 </li>
             </ul>
         </div>
+    </li>
+    @endif
+
+    {{-- 5th: Transactions --}}
+    @if (in_array('Transactions',$section))
+    <li class="nav-item {{ request()->routeIs('back.transaction.*') ? 'active' : '' }}">
+        <a href="{{ route('back.transaction.index') }}">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            <p>{{ __('Transactions') }}</p>
+        </a>
     </li>
     @endif
 
@@ -287,7 +292,7 @@
 
     @if (in_array('Manage Site',$section) || in_array('Manage Faqs Contents',$section) || in_array('Manage Blogs',$section) || in_array('Manages Pages',$section))
     <li class="nav-section-title">
-        <span>{{ __('Content & Customization') }}</span>
+        <span>{{ __('Website and Customization') }}</span>
     </li>
     @endif
 
@@ -441,7 +446,7 @@
     </li>
     @endif
 
-    @if (in_array('Manage System User',$section) || in_array('System Backup',$section))
+    @if (in_array('Manage System User',$section))
     <li class="nav-section-title">
         <span>{{ __('System & Administration') }}</span>
     </li>
@@ -467,33 +472,6 @@
                 <li class="{{ request()->routeIs('back.staff.*') ? 'active' : '' }}">
                     <a class="sub-link" href="{{ route('back.staff.index') }}">
                         <span class="sub-item">{{ __('System User') }}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    @endif
-
-    @if (in_array('System Backup',$section))
-    @php
-        $isBackupActive = request()->routeIs('back.system.backup') || request()->routeIs('back.database.backup');
-    @endphp
-    <li class="nav-item {{ $isBackupActive ? 'active submenu' : '' }}">
-        <a data-toggle="collapse" href="#backup" aria-expanded="{{ $isBackupActive ? 'true' : 'false' }}">
-            <i class="fa-solid fa-database"></i>
-            <p>{{ __('System Backup') }}</p>
-            <span class="caret"></span>
-        </a>
-        <div class="collapse {{ $isBackupActive ? 'show' : '' }}" id="backup">
-            <ul class="nav nav-collapse">
-                <li class="{{ request()->routeIs('back.system.backup') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.system.backup') }}">
-                        <span class="sub-item">{{ __('System Backup') }}</span>
-                    </a>
-                </li>
-                <li class="{{ request()->routeIs('back.database.backup') ? 'active' : '' }}">
-                    <a class="sub-link" href="{{ route('back.database.backup') }}">
-                        <span class="sub-item">{{ __('Database Backup') }}</span>
                     </a>
                 </li>
             </ul>

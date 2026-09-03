@@ -41,19 +41,19 @@
 
                     @php
                         $permissionGroups = [
-                            'Store & Catalog Management' => [
-                                ['key' => 'Manage Categories', 'icon' => 'fa-folder-tree', 'desc' => 'Categories, subcategories & hierarchy'],
+                            'Orders & Catalog Management' => [
                                 ['key' => 'Manage Products', 'icon' => 'fa-boxes-stacked', 'desc' => 'Products inventory, variants & pricing'],
+                                ['key' => 'Manage Categories', 'icon' => 'fa-folder-tree', 'desc' => 'Categories, subcategories & hierarchy'],
                                 ['key' => 'Manage Orders', 'icon' => 'fa-bag-shopping', 'desc' => 'Order processing & tracking status'],
-                                ['key' => 'Transactions', 'icon' => 'fa-money-bill-transfer', 'desc' => 'Payment history and transactions'],
                                 ['key' => 'Ecommerce', 'icon' => 'fa-store', 'desc' => 'Coupons, shipping, tax & currency'],
+                                ['key' => 'Transactions', 'icon' => 'fa-money-bill-transfer', 'desc' => 'Payment history and transactions'],
                             ],
                             'Customers & Support Helpdesk' => [
                                 ['key' => 'Customer List', 'icon' => 'fa-users', 'desc' => 'Customer accounts and purchase history'],
                                 ['key' => 'Manages Tickets', 'icon' => 'fa-headset', 'desc' => 'Support queries and ticket responses'],
                                 ['key' => 'Subscribers List', 'icon' => 'fa-envelope-open-text', 'desc' => 'Newsletter subscribers and emails'],
                             ],
-                            'Content & Website Customization' => [
+                            'Website & Content Customization' => [
                                 ['key' => 'Manage Site', 'icon' => 'fa-sliders', 'desc' => 'General site settings, sliders & banners'],
                                 ['key' => 'Manage Faqs Contents', 'icon' => 'fa-circle-question', 'desc' => 'FAQ entries and knowledgebase'],
                                 ['key' => 'Manage Blogs', 'icon' => 'fa-newspaper', 'desc' => 'Blog articles, categories & tags'],
@@ -61,7 +61,6 @@
                             ],
                             'System & Security Administration' => [
                                 ['key' => 'Manage System User', 'icon' => 'fa-user-shield', 'desc' => 'Staff users, assignments & roles'],
-                                ['key' => 'System Backup', 'icon' => 'fa-database', 'desc' => 'Database dumps and system backups'],
                             ],
                         ];
                     @endphp
