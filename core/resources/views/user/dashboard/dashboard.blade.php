@@ -41,13 +41,13 @@
             </div>
 
             <!-- Statistics Grid (2 columns on mobile, 3 on desktop) -->
-            <div class="row g-3 u-d-d mb-4">
+            <div class="row g-3 modern-user-stats-grid mb-4">
                 <!-- All Orders -->
                 <div class="col-6 col-md-4 mb-3">
                     <a href="{{ route('user.order.index') }}" class="stat-card-link">
                         <div class="stat-card stat-all">
                             <div class="stat-icon-wrapper">
-                                <i class="fa-solid fa-boxes-stacked"></i>
+                                <i class="icon-shopping-bag"></i>
                             </div>
                             <div class="stat-content">
                                 <h3 class="stat-number">{{ $allorders }}</h3>
@@ -62,7 +62,7 @@
                     <a href="{{ route('user.order.index') }}" class="stat-card-link">
                         <div class="stat-card stat-delivered">
                             <div class="stat-icon-wrapper">
-                                <i class="fa-solid fa-circle-check"></i>
+                                <i class="icon-check-circle"></i>
                             </div>
                             <div class="stat-content">
                                 <h3 class="stat-number">{{ $delivered }}</h3>
@@ -77,7 +77,7 @@
                     <a href="{{ route('user.order.index') }}" class="stat-card-link">
                         <div class="stat-card stat-processing">
                             <div class="stat-icon-wrapper">
-                                <i class="fa-solid fa-truck-fast"></i>
+                                <i class="icon-truck"></i>
                             </div>
                             <div class="stat-content">
                                 <h3 class="stat-number">{{ $progress }}</h3>
@@ -92,7 +92,7 @@
                     <a href="{{ route('user.order.index') }}" class="stat-card-link">
                         <div class="stat-card stat-pending">
                             <div class="stat-icon-wrapper">
-                                <i class="fa-solid fa-clock"></i>
+                                <i class="icon-clock"></i>
                             </div>
                             <div class="stat-content">
                                 <h3 class="stat-number">{{ $pending }}</h3>
@@ -107,7 +107,7 @@
                     <a href="{{ route('user.order.index') }}" class="stat-card-link">
                         <div class="stat-card stat-canceled">
                             <div class="stat-icon-wrapper">
-                                <i class="fa-solid fa-ban"></i>
+                                <i class="icon-x-circle"></i>
                             </div>
                             <div class="stat-content">
                                 <h3 class="stat-number">{{ $canceled }}</h3>
@@ -122,7 +122,7 @@
                     <a href="{{ route('user.wishlist.index') }}" class="stat-card-link">
                         <div class="stat-card stat-wishlist">
                             <div class="stat-icon-wrapper">
-                                <i class="fa-solid fa-heart"></i>
+                                <i class="icon-heart"></i>
                             </div>
                             <div class="stat-content">
                                 <h3 class="stat-number">{{ Auth::user()->wishlists->count() }}</h3>
@@ -211,22 +211,22 @@
 <style>
 /* Modern User Dashboard Styles */
 .user-dashboard-hero {
-    background: linear-gradient(135deg, #064e3b 0%, #047857 60%, #059669 100%);
-    border-radius: 18px;
-    padding: 22px 24px;
-    color: #ffffff;
-    box-shadow: 0 10px 25px rgba(6, 78, 59, 0.15);
+    background: linear-gradient(135deg, #064e3b 0%, #047857 60%, #059669 100%) !important;
+    border-radius: 18px !important;
+    padding: 22px 24px !important;
+    color: #ffffff !important;
+    box-shadow: 0 10px 25px rgba(6, 78, 59, 0.15) !important;
 }
 
 .user-dashboard-hero .hero-title {
-    color: #ffffff;
-    font-size: 20px;
-    font-weight: 700;
+    color: #ffffff !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
 }
 
 .user-dashboard-hero .hero-subtitle {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 13.5px !important;
 }
 
 .hero-action-btn {
@@ -248,121 +248,133 @@
 .stat-card-link {
     text-decoration: none !important;
     color: inherit !important;
-    display: block;
+    display: block !important;
 }
 
-.stat-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 16px 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    height: 100%;
+.modern-user-stats-grid .stat-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    padding: 16px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    height: 100% !important;
 }
 
-.stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    border-color: #cbd5e1;
+.modern-user-stats-grid .stat-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+    border-color: #cbd5e1 !important;
 }
 
-.stat-icon-wrapper {
-    width: 46px;
-    height: 46px;
-    min-width: 46px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 19px;
-    transition: all 0.2s ease;
+.modern-user-stats-grid .stat-icon-wrapper {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    border-radius: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
 }
 
-.stat-content {
-    flex: 1;
-    min-width: 0;
+.modern-user-stats-grid .stat-icon-wrapper i {
+    width: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+    background: transparent !important;
+    display: inline-block !important;
+    border-radius: 0 !important;
+    font-size: 22px !important;
+    color: inherit !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.stat-number {
-    font-size: 22px;
-    font-weight: 800;
-    line-height: 1.1;
-    margin: 0 0 3px 0;
-    color: #0f172a;
+.modern-user-stats-grid .stat-content {
+    flex: 1 !important;
+    min-width: 0 !important;
 }
 
-.stat-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #64748b;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.modern-user-stats-grid .stat-number {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    margin: 0 0 3px 0 !important;
+    color: #0f172a !important;
+}
+
+.modern-user-stats-grid .stat-label {
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 /* Individual Color Accents */
-.stat-all .stat-icon-wrapper {
-    background: #ecfdf5;
-    color: #059669;
+.modern-user-stats-grid .stat-all .stat-icon-wrapper {
+    background: #ecfdf5 !important;
+    color: #059669 !important;
 }
-.stat-all:hover { border-color: #a7f3d0; }
+.modern-user-stats-grid .stat-all:hover { border-color: #a7f3d0 !important; }
 
-.stat-delivered .stat-icon-wrapper {
-    background: #f0fdf4;
-    color: #16a34a;
+.modern-user-stats-grid .stat-delivered .stat-icon-wrapper {
+    background: #f0fdf4 !important;
+    color: #16a34a !important;
 }
-.stat-delivered:hover { border-color: #bbf7d0; }
+.modern-user-stats-grid .stat-delivered:hover { border-color: #bbf7d0 !important; }
 
-.stat-processing .stat-icon-wrapper {
-    background: #eff6ff;
-    color: #2563eb;
+.modern-user-stats-grid .stat-processing .stat-icon-wrapper {
+    background: #eff6ff !important;
+    color: #2563eb !important;
 }
-.stat-processing:hover { border-color: #bfdbfe; }
+.modern-user-stats-grid .stat-processing:hover { border-color: #bfdbfe !important; }
 
-.stat-pending .stat-icon-wrapper {
-    background: #fffbeb;
-    color: #d97706;
+.modern-user-stats-grid .stat-pending .stat-icon-wrapper {
+    background: #fffbeb !important;
+    color: #d97706 !important;
 }
-.stat-pending:hover { border-color: #fde68a; }
+.modern-user-stats-grid .stat-pending:hover { border-color: #fde68a !important; }
 
-.stat-canceled .stat-icon-wrapper {
-    background: #fef2f2;
-    color: #dc2626;
+.modern-user-stats-grid .stat-canceled .stat-icon-wrapper {
+    background: #fef2f2 !important;
+    color: #dc2626 !important;
 }
-.stat-canceled:hover { border-color: #fecaca; }
+.modern-user-stats-grid .stat-canceled:hover { border-color: #fecaca !important; }
 
-.stat-wishlist .stat-icon-wrapper {
-    background: #fdf2f8;
-    color: #db2777;
+.modern-user-stats-grid .stat-wishlist .stat-icon-wrapper {
+    background: #fdf2f8 !important;
+    color: #db2777 !important;
 }
-.stat-wishlist:hover { border-color: #fbcfe8; }
+.modern-user-stats-grid .stat-wishlist:hover { border-color: #fbcfe8 !important; }
 
 /* Recent Orders Table */
 .recent-orders-card {
     border-radius: 18px !important;
-    overflow: hidden;
+    overflow: hidden !important;
     border: 1px solid #e2e8f0 !important;
 }
 
 .custom-recent-table th {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #64748b;
-    padding: 12px 14px;
-    border-bottom: 1px solid #e2e8f0;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #64748b !important;
+    padding: 12px 14px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
 }
 
 .custom-recent-table td {
-    padding: 14px;
-    font-size: 13.5px;
-    border-bottom: 1px solid #f1f5f9;
+    padding: 14px !important;
+    font-size: 13.5px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
 }
 
 .bg-success-subtle { background-color: #ecfdf5 !important; }
@@ -373,37 +385,40 @@
 /* Mobile Optimizations */
 @media (max-width: 767px) {
     .user-dashboard-hero {
-        padding: 16px 18px;
-        border-radius: 14px;
+        padding: 16px 18px !important;
+        border-radius: 14px !important;
     }
     .user-dashboard-hero .hero-title {
-        font-size: 18px;
+        font-size: 18px !important;
     }
     .user-dashboard-hero .hero-subtitle {
-        font-size: 12.5px;
+        font-size: 12.5px !important;
     }
     .hero-action-btn {
-        width: 100%;
-        text-align: center;
-        margin-top: 4px;
+        width: 100% !important;
+        text-align: center !important;
+        margin-top: 4px !important;
     }
-    .stat-card {
-        padding: 13px 10px;
-        border-radius: 14px;
-        gap: 9px;
+    .modern-user-stats-grid .stat-card {
+        padding: 12px 10px !important;
+        border-radius: 14px !important;
+        gap: 10px !important;
     }
-    .stat-icon-wrapper {
-        width: 38px;
-        height: 38px;
-        min-width: 38px;
-        font-size: 16px;
-        border-radius: 10px;
+    .modern-user-stats-grid .stat-icon-wrapper {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        font-size: 17px !important;
+        border-radius: 10px !important;
     }
-    .stat-number {
-        font-size: 19px;
+    .modern-user-stats-grid .stat-icon-wrapper i {
+        font-size: 18px !important;
     }
-    .stat-label {
-        font-size: 11px;
+    .modern-user-stats-grid .stat-number {
+        font-size: 18px !important;
+    }
+    .modern-user-stats-grid .stat-label {
+        font-size: 11px !important;
     }
 }
 </style>
