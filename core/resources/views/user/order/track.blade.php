@@ -20,45 +20,214 @@
         $is_pending = true;
 
         $current_status_label = 'Pending Approval';
-        $current_status_badge_class = 'badge-warning';
+        $status_bg = '#fef3c7';
+        $status_color = '#d97706';
+        $status_border = '#fde68a';
 
         if ($is_canceled) {
             $current_status_label = 'Order Cancelled';
-            $current_status_badge_class = 'badge-danger';
+            $status_bg = '#fee2e2';
+            $status_color = '#dc2626';
+            $status_border = '#fecaca';
         } elseif ($is_delivered) {
             $current_status_label = 'Delivered';
-            $current_status_badge_class = 'badge-success';
+            $status_bg = '#d1fae5';
+            $status_color = '#059669';
+            $status_border = '#a7f3d0';
         } elseif ($is_in_progress) {
             $current_status_label = 'Processing & Shipped';
-            $current_status_badge_class = 'badge-info';
+            $status_bg = '#e0f2fe';
+            $status_color = '#0284c7';
+            $status_border = '#bae6fd';
         }
     @endphp
 
-    <div class="order-tracking-result-card">
+    <style>
+        .tracking-result-box {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            animation: trackFadeIn 0.3s ease-out;
+        }
+        @keyframes trackFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tracking-header-bar {
+            padding: 22px 26px;
+            background: #fafbfc;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .status-pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .status-pill-dot {
+            width: 7px;
+            height: 7px;
+            min-width: 7px;
+            border-radius: 50%;
+            background-color: currentColor;
+            display: inline-block;
+        }
+        .timeline-wrapper {
+            padding: 30px 26px;
+        }
+        .v-step {
+            display: flex;
+            position: relative;
+            padding-bottom: 30px;
+        }
+        .v-step:last-child {
+            padding-bottom: 0;
+        }
+        .v-step-indicator {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+            width: 40px;
+            min-width: 40px;
+        }
+        .v-step-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            background: #f8fafc;
+            color: #94a3b8;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            z-index: 2;
+            transition: all 0.25s ease;
+        }
+        .v-step.completed .v-step-icon {
+            background: #10b981;
+            border-color: #10b981;
+            color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+        }
+        .v-step.active .v-step-icon {
+            background: #ecfdf5;
+            border-color: #10b981;
+            color: #059669;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
+        }
+        .v-step-line {
+            position: absolute;
+            top: 40px;
+            bottom: 0;
+            left: 19px;
+            width: 2px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+        .v-step.completed .v-step-line {
+            background: #10b981;
+        }
+        .v-step-body {
+            flex: 1;
+            min-width: 0;
+            padding-top: 2px;
+        }
+        .v-step-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .v-step-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+        .v-step.completed .v-step-title {
+            color: #059669;
+        }
+        .v-step-time {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #64748b;
+        }
+        .v-step-desc {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.45;
+            margin: 0;
+        }
+        .tracking-meta-grid {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 20px 24px;
+        }
+        .meta-stat-item {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            height: 100%;
+        }
+        .meta-stat-label {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .meta-stat-val {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #0f172a;
+            display: block;
+        }
+        .meta-stat-price {
+            font-size: 16px;
+            font-weight: 800;
+            color: #059669;
+        }
+    </style>
+
+    <div class="tracking-result-box">
         <!-- Card Header with Order Meta -->
-        <div class="tracking-card-header d-flex flex-wrap align-items-center justify-content-between p-3.5 p-md-4 border-bottom">
+        <div class="tracking-header-bar d-flex flex-wrap align-items-center justify-content-between gap-3">
             <div>
-                <span class="text-muted d-block" style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;">
+                <span class="text-muted d-block" style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
                     {{ __('Order Tracking Details') }}
                 </span>
-                <h4 class="mb-0 font-weight-bold tracking-order-id" style="font-size: 16.5px; color: #0f172a;">
+                <h4 class="mb-0 font-weight-bold" style="font-size: 17px; color: #0f172a;">
                     {{ isset($order) ? $order->transaction_number : request('order_number') }}
                 </h4>
             </div>
-            <div class="mt-2 mt-sm-0">
-                <span class="badge {{ $current_status_badge_class }} px-3 py-1.5" style="border-radius: 999px; font-size: 12.5px; font-weight: 700;">
-                    <i class="fa fa-circle mr-1" style="font-size: 8px; vertical-align: middle;"></i>
-                    {{ __($current_status_label) }}
-                </span>
+            <div>
+                <div class="status-pill-badge" style="background: {{ $status_bg }}; color: {{ $status_color }}; border: 1px solid {{ $status_border }};">
+                    <span class="status-pill-dot"></span>
+                    <span>{{ __($current_status_label) }}</span>
+                </div>
             </div>
         </div>
 
         @if ($is_canceled)
             <!-- Canceled State Banner -->
             <div class="p-4">
-                <div class="canceled-order-alert p-3.5 rounded d-flex align-items-center">
-                    <div class="alert-icon-box mr-3">
-                        <i class="fa fa-times-circle text-danger" style="font-size: 28px;"></i>
+                <div class="p-4 rounded-xl d-flex align-items-center" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 14px;">
+                    <div class="mr-3" style="width: 44px; height: 44px; min-width: 44px; border-radius: 50%; background: #fee2e2; color: #dc2626; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        <i class="fas fa-times-circle"></i>
                     </div>
                     <div>
                         <h5 class="mb-1 text-danger font-weight-bold" style="font-size: 15px;">{{ __('This order has been cancelled/rejected') }}</h5>
@@ -74,161 +243,167 @@
             </div>
         @else
             <!-- Modern Responsive Timeline -->
-            <div class="p-3.5 p-md-4">
-                <div class="tracking-vertical-timeline">
-                    <!-- Step 1: Order Placed / Pending -->
-                    <div class="timeline-step {{ $is_pending ? 'step-completed' : '' }}">
-                        <div class="step-indicator">
-                            <div class="step-icon">
-                                <i class="fa fa-check"></i>
-                            </div>
-                            <div class="step-line"></div>
+            <div class="timeline-wrapper">
+                <!-- Step 1: Order Placed / Pending -->
+                <div class="v-step {{ $is_pending ? 'completed' : '' }}">
+                    <div class="v-step-indicator">
+                        <div class="v-step-icon">
+                            <i class="fas fa-check"></i>
                         </div>
-                        <div class="step-content">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-1">
-                                <h5 class="step-title mb-0 font-weight-bold">{{ __('Order Placed') }}</h5>
-                                <span class="step-time text-muted">
-                                    @if ($pending_track)
-                                        {{ date('d M, Y • h:i A', strtotime($pending_track['created_at'])) }}
-                                    @elseif (isset($order))
-                                        {{ date('d M, Y • h:i A', strtotime($order->created_at)) }}
-                                    @else
-                                        {{ __('Completed') }}
-                                    @endif
-                                </span>
-                            </div>
-                            <p class="step-desc text-muted mb-0">
-                                {{ __('Your order has been received and is pending approval.') }}
-                            </p>
-                        </div>
+                        <div class="v-step-line"></div>
                     </div>
-
-                    <!-- Step 2: Processing & Packaging -->
-                    <div class="timeline-step {{ $is_in_progress ? 'step-completed' : ($is_pending && !$is_in_progress ? 'step-active' : '') }}">
-                        <div class="step-indicator">
-                            <div class="step-icon">
-                                @if ($is_in_progress)
-                                    <i class="fa fa-check"></i>
+                    <div class="v-step-body">
+                        <div class="v-step-head">
+                            <h5 class="v-step-title">{{ __('Order Placed') }}</h5>
+                            <span class="v-step-time">
+                                @if ($pending_track)
+                                    {{ date('d M, Y • h:i A', strtotime($pending_track['created_at'])) }}
+                                @elseif (isset($order))
+                                    {{ date('d M, Y • h:i A', strtotime($order->created_at)) }}
                                 @else
-                                    <i class="fa fa-box-open"></i>
+                                    {{ __('Completed') }}
                                 @endif
-                            </div>
-                            <div class="step-line"></div>
+                            </span>
                         </div>
-                        <div class="step-content">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-1">
-                                <h5 class="step-title mb-0 font-weight-bold">{{ __('Processing & Packed') }}</h5>
-                                <span class="step-time text-muted">
-                                    @if ($progress_track)
-                                        {{ date('d M, Y • h:i A', strtotime($progress_track['created_at'])) }}
-                                    @elseif ($is_in_progress)
-                                        {{ __('In Progress') }}
-                                    @else
-                                        {{ __('Expected Soon') }}
-                                    @endif
-                                </span>
-                            </div>
-                            <p class="step-desc text-muted mb-0">
-                                @if ($is_in_progress)
-                                    {{ __('Your items have been verified and packaged for delivery.') }}
-                                @else
-                                    {{ __('Items will be verified and packed by our fulfillment center.') }}
-                                @endif
-                            </p>
-                        </div>
+                        <p class="v-step-desc">
+                            {{ __('Your order has been received and is pending approval.') }}
+                        </p>
                     </div>
+                </div>
 
-                    <!-- Step 3: Out for Delivery / Shipped -->
-                    <div class="timeline-step {{ $is_delivered ? 'step-completed' : ($is_in_progress && !$is_delivered ? 'step-active' : '') }}">
-                        <div class="step-indicator">
-                            <div class="step-icon">
+                <!-- Step 2: Processing & Packaging -->
+                <div class="v-step {{ $is_in_progress ? 'completed' : ($is_pending && !$is_in_progress ? 'active' : '') }}">
+                    <div class="v-step-indicator">
+                        <div class="v-step-icon">
+                            @if ($is_in_progress)
+                                <i class="fas fa-check"></i>
+                            @else
+                                <i class="fas fa-box-open"></i>
+                            @endif
+                        </div>
+                        <div class="v-step-line"></div>
+                    </div>
+                    <div class="v-step-body">
+                        <div class="v-step-head">
+                            <h5 class="v-step-title">{{ __('Processing & Packed') }}</h5>
+                            <span class="v-step-time">
+                                @if ($progress_track)
+                                    {{ date('d M, Y • h:i A', strtotime($progress_track['created_at'])) }}
+                                @elseif ($is_in_progress)
+                                    {{ __('In Progress') }}
+                                @else
+                                    {{ __('Expected Soon') }}
+                                @endif
+                            </span>
+                        </div>
+                        <p class="v-step-desc">
+                            @if ($is_in_progress)
+                                {{ __('Your items have been verified and packaged for delivery.') }}
+                            @else
+                                {{ __('Items will be verified and packed by our fulfillment center.') }}
+                            @endif
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3: Out for Delivery / Shipped -->
+                <div class="v-step {{ $is_delivered ? 'completed' : ($is_in_progress && !$is_delivered ? 'active' : '') }}">
+                    <div class="v-step-indicator">
+                        <div class="v-step-icon">
+                            @if ($is_delivered)
+                                <i class="fas fa-check"></i>
+                            @else
+                                <i class="fas fa-shipping-fast"></i>
+                            @endif
+                        </div>
+                        <div class="v-step-line"></div>
+                    </div>
+                    <div class="v-step-body">
+                        <div class="v-step-head">
+                            <h5 class="v-step-title">{{ __('Out For Delivery') }}</h5>
+                            <span class="v-step-time">
                                 @if ($is_delivered)
-                                    <i class="fa fa-check"></i>
+                                    {{ __('Completed') }}
+                                @elseif ($is_in_progress)
+                                    {{ __('Dispatched') }}
                                 @else
-                                    <i class="fas fa-shipping-fast"></i>
+                                    {{ __('Expected Soon') }}
                                 @endif
-                            </div>
-                            <div class="step-line"></div>
+                            </span>
                         </div>
-                        <div class="step-content">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-1">
-                                <h5 class="step-title mb-0 font-weight-bold">{{ __('Out For Delivery') }}</h5>
-                                <span class="step-time text-muted">
-                                    @if ($is_delivered)
-                                        {{ __('Completed') }}
-                                    @elseif ($is_in_progress)
-                                        {{ __('Dispatched') }}
-                                    @else
-                                        {{ __('Expected Soon') }}
-                                    @endif
-                                </span>
-                            </div>
-                            <p class="step-desc text-muted mb-0">
-                                @if ($is_delivered || $is_in_progress)
-                                    {{ __('Your parcel is on its way to your delivery address.') }}
-                                @else
-                                    {{ __('Courier pickup will be scheduled upon packaging.') }}
-                                @endif
-                            </p>
+                        <p class="v-step-desc">
+                            @if ($is_delivered || $is_in_progress)
+                                {{ __('Your parcel is on its way to your delivery address.') }}
+                            @else
+                                {{ __('Courier pickup will be scheduled upon packaging.') }}
+                            @endif
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 4: Delivered -->
+                <div class="v-step {{ $is_delivered ? 'completed' : '' }}">
+                    <div class="v-step-indicator">
+                        <div class="v-step-icon">
+                            <i class="fas fa-home"></i>
                         </div>
                     </div>
-
-                    <!-- Step 4: Delivered -->
-                    <div class="timeline-step {{ $is_delivered ? 'step-completed' : '' }}">
-                        <div class="step-indicator">
-                            <div class="step-icon">
-                                <i class="fa fa-home"></i>
-                            </div>
-                        </div>
-                        <div class="step-content">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center mb-1">
-                                <h5 class="step-title mb-0 font-weight-bold">{{ __('Delivered') }}</h5>
-                                <span class="step-time text-muted">
-                                    @if ($delivered_track)
-                                        {{ date('d M, Y • h:i A', strtotime($delivered_track['created_at'])) }}
-                                    @elseif ($is_delivered)
-                                        {{ __('Delivered') }}
-                                    @else
-                                        {{ __('Pending Delivery') }}
-                                    @endif
-                                </span>
-                            </div>
-                            <p class="step-desc text-muted mb-0">
-                                @if ($is_delivered)
-                                    {{ __('Product has been successfully delivered. Enjoy your purchase!') }}
+                    <div class="v-step-body">
+                        <div class="v-step-head">
+                            <h5 class="v-step-title">{{ __('Delivered') }}</h5>
+                            <span class="v-step-time">
+                                @if ($delivered_track)
+                                    {{ date('d M, Y • h:i A', strtotime($delivered_track['created_at'])) }}
+                                @elseif ($is_delivered)
+                                    {{ __('Delivered') }}
                                 @else
-                                    {{ __('Package will be handed over to you upon arrival.') }}
+                                    {{ __('Pending Delivery') }}
                                 @endif
-                            </p>
+                            </span>
                         </div>
+                        <p class="v-step-desc">
+                            @if ($is_delivered)
+                                {{ __('Product has been successfully delivered. Enjoy your purchase!') }}
+                            @else
+                                {{ __('Package will be handed over to you upon arrival.') }}
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>
         @endif
 
         @if (isset($order))
-            <!-- Order Snapshot Summary -->
-            <div class="tracking-order-summary-box p-3.5 p-md-4 border-top bg-light" style="border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
+            <!-- Order Snapshot Summary 4-Column Responsive Grid -->
+            <div class="tracking-meta-grid">
                 <div class="row g-3">
-                    <div class="col-6 col-md-3">
-                        <span class="text-muted d-block" style="font-size: 11.5px;">{{ __('Order Date') }}</span>
-                        <strong class="text-dark" style="font-size: 13px;">{{ date('d M, Y', strtotime($order->created_at)) }}</strong>
+                    <div class="col-6 col-md-3 mb-2 mb-md-0">
+                        <div class="meta-stat-item">
+                            <span class="meta-stat-label">{{ __('Order Date') }}</span>
+                            <span class="meta-stat-val">{{ date('d M, Y', strtotime($order->created_at)) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 mb-2 mb-md-0">
+                        <div class="meta-stat-item">
+                            <span class="meta-stat-label">{{ __('Payment Method') }}</span>
+                            <span class="meta-stat-val">{{ $order->payment_method ?? 'Online' }}</span>
+                        </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <span class="text-muted d-block" style="font-size: 11.5px;">{{ __('Payment Method') }}</span>
-                        <strong class="text-dark" style="font-size: 13px;">{{ $order->payment_method ?? 'Online' }}</strong>
+                        <div class="meta-stat-item">
+                            <span class="meta-stat-label">{{ __('Payment Status') }}</span>
+                            @if ($order->payment_status == 'Paid')
+                                <span class="badge badge-success px-2.5 py-1 font-weight-bold" style="border-radius: 6px; font-size: 11.5px;">{{ __('Paid') }}</span>
+                            @else
+                                <span class="badge badge-warning px-2.5 py-1 font-weight-bold" style="border-radius: 6px; font-size: 11.5px;">{{ __('Unpaid') }}</span>
+                            @endif
+                        </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <span class="text-muted d-block" style="font-size: 11.5px;">{{ __('Payment Status') }}</span>
-                        @if ($order->payment_status == 'Paid')
-                            <span class="badge badge-success px-2 py-0.5" style="border-radius: 6px; font-size: 11px;">{{ __('Paid') }}</span>
-                        @else
-                            <span class="badge badge-warning px-2 py-0.5" style="border-radius: 6px; font-size: 11px;">{{ __('Unpaid') }}</span>
-                        @endif
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <span class="text-muted d-block" style="font-size: 11.5px;">{{ __('Total Amount') }}</span>
-                        <strong class="text-primary font-weight-bold" style="font-size: 14.5px;">{{ PriceHelper::OrderTotal($order) }}</strong>
+                        <div class="meta-stat-item">
+                            <span class="meta-stat-label">{{ __('Total Amount') }}</span>
+                            <span class="meta-stat-price">{{ PriceHelper::setCurrencyPrice($order->pay_amount) }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -238,11 +413,12 @@
     <!-- Order Not Found State -->
     <div class="order-not-found-card text-center p-5">
         <div class="not-found-icon-box mx-auto mb-3">
-            <i class="fa fa-search text-muted" style="font-size: 32px;"></i>
+            <i class="fas fa-search-minus"></i>
         </div>
-        <h4 class="font-weight-bold text-dark mb-2" style="font-size: 17px;">{{ __('Order Not Found') }}</h4>
-        <p class="text-muted mb-0 mx-auto" style="max-width: 380px; font-size: 13.5px;">
-            {{ __('We could not find any order with that ID. Please check your order number from your email/SMS and try again.') }}
+        <h4 class="font-weight-bold text-dark mb-2" style="font-size: 18px;">{{ __('Order Not Found') }}</h4>
+        <p class="text-muted mb-0 mx-auto" style="max-width: 400px; font-size: 13.5px; line-height: 1.5;">
+            {{ __('We could not find any order matching that number. Please verify the order ID from your confirmation email/SMS and try again.') }}
         </p>
     </div>
 @endif
+
