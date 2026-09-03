@@ -204,26 +204,35 @@
 
                     <div class="form-group mb-3">
                         <label class="form-label font-weight-bold text-dark small">{{ __('Courier / Delivery Partner') }} <span class="text-danger">*</span></label>
-                        <input type="text" name="courier_name" id="modal_courier_name" class="form-control" placeholder="{{ __('e.g. Blue Dart, Delhivery, DTDC, India Post') }}" required style="border-radius: 10px; font-weight: 600;">
+                        <input type="text" name="courier_name" id="modal_courier_name" class="form-control" placeholder="{{ __('e.g. BlueDart, DTDC, Indian Post, ST Courier') }}" required style="border-radius: 10px; font-weight: 600;">
                         <!-- Quick Courier Presets -->
                         <div class="d-flex flex-wrap gap-1 mt-2">
-                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">Blue Dart</span>
-                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">Delhivery</span>
-                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">DTDC</span>
-                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">India Post</span>
-                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">FedEx</span>
-                            <span class="badge badge-light border cursor-pointer courier-preset px-2 py-1 mr-1" style="font-size: 11px; cursor: pointer;">Ecom Express</span>
+                            <button type="button" class="btn btn-sm btn-outline-primary courier-preset px-3 py-1 mr-1 mb-1 font-weight-bold" style="border-radius: 8px; font-size: 12px;" data-courier="BlueDart">
+                                <i class="fa-solid fa-truck-fast mr-1"></i> BlueDart
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-info courier-preset px-3 py-1 mr-1 mb-1 font-weight-bold" style="border-radius: 8px; font-size: 12px;" data-courier="DTDC">
+                                <i class="fa-solid fa-box mr-1"></i> DTDC
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger courier-preset px-3 py-1 mr-1 mb-1 font-weight-bold" style="border-radius: 8px; font-size: 12px;" data-courier="Indian Post">
+                                <i class="fa-solid fa-envelope mr-1"></i> Indian Post
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-success courier-preset px-3 py-1 mr-1 mb-1 font-weight-bold" style="border-radius: 8px; font-size: 12px;" data-courier="ST Courier">
+                                <i class="fa-solid fa-paper-plane mr-1"></i> ST Courier
+                            </button>
                         </div>
                     </div>
 
                     <div class="form-group mb-3">
                         <label class="form-label font-weight-bold text-dark small">{{ __('AWB / Tracking Number') }} <span class="text-danger">*</span></label>
                         <input type="text" name="tracking_number" id="modal_tracking_number" class="form-control" placeholder="{{ __('e.g. AWB1234567890') }}" required style="border-radius: 10px; font-weight: 600; font-family: monospace;">
+                        <small class="form-text text-muted">{{ __('The tracking link URL will automatically update as you enter the tracking number.') }}</small>
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="form-label font-weight-bold text-dark small">{{ __('Tracking URL / Link') }} <span class="text-muted font-weight-normal">({{ __('Optional') }})</span></label>
-                        <input type="url" name="tracking_link" id="modal_tracking_link" class="form-control" placeholder="{{ __('e.g. https://www.bluedart.com/track/...') }}" style="border-radius: 10px;">
+                        <label class="form-label font-weight-bold text-dark small">{{ __('Tracking URL / Link') }} <span class="text-muted font-weight-normal">({{ __('Auto-generated based on courier') }})</span></label>
+                        <div class="input-group">
+                            <input type="url" name="tracking_link" id="modal_tracking_link" class="form-control" placeholder="{{ __('e.g. https://www.bluedart.com/tracking?numbers=...') }}" style="border-radius: 10px;">
+                        </div>
                     </div>
 
                     <div class="custom-control custom-checkbox mt-3">
@@ -249,6 +258,31 @@
 
 @section('scripts')
 <script>
+    function getCourierTrackingUrl(courier, awb) {
+        courier = (courier || '').trim().toLowerCase();
+        awb = (awb || '').trim();
+
+        if (courier.includes('bluedart') || courier.includes('blue dart')) {
+            return awb ? 'https://www.bluedart.com/tracking?numbers=' + encodeURIComponent(awb) : 'https://www.bluedart.com/tracking';
+        } else if (courier.includes('dtdc')) {
+            return awb ? 'https://track.dtdc.com/ctbs-tracking/customerInterface.tr?submitName=showTrackingDetail&strCnno=' + encodeURIComponent(awb) : 'https://www.dtdc.in/';
+        } else if (courier.includes('indian post') || courier.includes('india post') || courier.includes('speed post')) {
+            return 'https://www.indiapost.gov.in/_layouts/15/dop.portal.tracking/trackconsignment.aspx';
+        } else if (courier.includes('st courier') || courier.includes('stcourier')) {
+            return awb ? 'https://stcourier.com/track/shipment?awb=' + encodeURIComponent(awb) : 'https://stcourier.com/track';
+        }
+        return '';
+    }
+
+    function syncTrackingLink() {
+        var courier = $('#modal_courier_name').val();
+        var awb = $('#modal_tracking_number').val();
+        var generatedUrl = getCourierTrackingUrl(courier, awb);
+        if (generatedUrl) {
+            $('#modal_tracking_link').val(generatedUrl);
+        }
+    }
+
     $(document).ready(function() {
         $(document).on('click', '.open-shipping-modal', function() {
             var formAction = $(this).data('action');
@@ -261,12 +295,41 @@
             $('.shipping-modal-txn').text('#' + txn);
             $('#modal_courier_name').val(courier || '');
             $('#modal_tracking_number').val(tracking || '');
-            $('#modal_tracking_link').val(link || '');
+            
+            if (link) {
+                $('#modal_tracking_link').val(link);
+            } else {
+                syncTrackingLink();
+            }
+
+            // Highlight matching preset button
+            highlightActivePreset(courier);
         });
 
-        $(document).on('click', '.courier-preset', function() {
-            $('#modal_courier_name').val($(this).text().trim());
+        $(document).on('click', '.courier-preset', function(e) {
+            e.preventDefault();
+            var courierName = $(this).data('courier') || $(this).text().trim();
+            $('#modal_courier_name').val(courierName);
+            syncTrackingLink();
+            highlightActivePreset(courierName);
         });
+
+        $(document).on('input', '#modal_tracking_number, #modal_courier_name', function() {
+            syncTrackingLink();
+            highlightActivePreset($('#modal_courier_name').val());
+        });
+
+        function highlightActivePreset(courier) {
+            courier = (courier || '').trim().toLowerCase();
+            $('.courier-preset').each(function() {
+                var btnCourier = ($(this).data('courier') || $(this).text()).trim().toLowerCase();
+                if (courier && (btnCourier === courier || courier.includes(btnCourier))) {
+                    $(this).css({'box-shadow': '0 0 0 2px #0284c7', 'font-weight': '800'});
+                } else {
+                    $(this).css({'box-shadow': 'none', 'font-weight': '600'});
+                }
+            });
+        }
     });
 </script>
 @endsection

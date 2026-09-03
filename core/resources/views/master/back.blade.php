@@ -293,7 +293,7 @@
     <!-- Custom JS -->
 
     @yield('scripts')
-    <script src="{{ asset('assets/back/js/custom.js') }}?v=1.4"></script>
+    <script src="{{ asset('assets/back/js/custom.js') }}?v=1.5"></script>
 
 </body>
 

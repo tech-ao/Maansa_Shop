@@ -118,6 +118,31 @@
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
     });
 
+    function getCourierTrackingUrl(courier, awb) {
+        courier = (courier || '').trim().toLowerCase();
+        awb = (awb || '').trim();
+
+        if (courier.includes('bluedart') || courier.includes('blue dart')) {
+            return awb ? 'https://www.bluedart.com/tracking?numbers=' + encodeURIComponent(awb) : 'https://www.bluedart.com/tracking';
+        } else if (courier.includes('dtdc')) {
+            return awb ? 'https://track.dtdc.com/ctbs-tracking/customerInterface.tr?submitName=showTrackingDetail&strCnno=' + encodeURIComponent(awb) : 'https://www.dtdc.in/';
+        } else if (courier.includes('indian post') || courier.includes('india post') || courier.includes('speed post')) {
+            return 'https://www.indiapost.gov.in/_layouts/15/dop.portal.tracking/trackconsignment.aspx';
+        } else if (courier.includes('st courier') || courier.includes('stcourier')) {
+            return awb ? 'https://stcourier.com/track/shipment?awb=' + encodeURIComponent(awb) : 'https://stcourier.com/track';
+        }
+        return '';
+    }
+
+    function syncTrackingLinkGlobal() {
+        var courier = $('#modal_courier_name').val();
+        var awb = $('#modal_tracking_number').val();
+        var generatedUrl = getCourierTrackingUrl(courier, awb);
+        if (generatedUrl) {
+            $('#modal_tracking_link').val(generatedUrl);
+        }
+    }
+
     $(document).on('show.bs.modal', '#shippingModal', function (e) {
         var $btn = $(e.relatedTarget);
         if ($btn.length) {
@@ -131,12 +156,23 @@
             $('.shipping-modal-txn').text('#' + (txn || ''));
             $('#modal_courier_name').val(courier || '');
             $('#modal_tracking_number').val(tracking || '');
-            $('#modal_tracking_link').val(link || '');
+            if (link) {
+                $('#modal_tracking_link').val(link);
+            } else {
+                syncTrackingLinkGlobal();
+            }
         }
     });
 
-    $(document).on('click', '.courier-preset', function () {
-        $('#modal_courier_name').val($(this).text().trim());
+    $(document).on('click', '.courier-preset', function (e) {
+        e.preventDefault();
+        var courierName = $(this).data('courier') || $(this).text().trim();
+        $('#modal_courier_name').val(courierName);
+        syncTrackingLinkGlobal();
+    });
+
+    $(document).on('input', '#modal_tracking_number, #modal_courier_name', function () {
+        syncTrackingLinkGlobal();
     });
 
     $(document).on('change', 'input.switch, input.switch-bootstrap, .radio-check', function () {
