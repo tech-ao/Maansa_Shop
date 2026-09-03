@@ -44,13 +44,13 @@
                         <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
                             {{ __('Campaign Title') }} <span class="text-danger">*</span>
                         </label>
-                        <div class="input-group" style="height: 44px;">
+                        <div class="input-group flex-nowrap" style="height: 44px;">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light text-success font-weight-bold px-3" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
+                                <span class="input-group-text bg-light text-success font-weight-bold px-3 d-flex align-items-center" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
                                     <i class="fa-solid fa-heading"></i>
                                 </span>
                             </div>
-                            <input type="text" required class="form-control font-weight-600" name="campaign_title" value="{{ $setting->campaign_title }}" placeholder="{{ __('e.g., Deals Of The Week') }}" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px;">
+                            <input type="text" required class="form-control font-weight-600" name="campaign_title" value="{{ $setting->campaign_title }}" placeholder="{{ __('e.g., Deals Of The Week') }}" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px; flex: 1 1 auto; width: 1%; min-width: 0;">
                         </div>
                     </div>
 
@@ -58,13 +58,13 @@
                         <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
                             {{ __('Campaign End Date') }} <span class="text-danger">*</span>
                         </label>
-                        <div class="input-group" style="height: 44px;">
+                        <div class="input-group flex-nowrap" style="height: 44px;">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light text-success font-weight-bold px-3" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
+                                <span class="input-group-text bg-light text-success font-weight-bold px-3 d-flex align-items-center" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
                                     <i class="fa-solid fa-calendar-days"></i>
                                 </span>
                             </div>
-                            <input type="text" required class="form-control font-weight-600" name="campaign_end_date" value="{{ $setting->campaign_end_date }}" placeholder="{{ __('MM/DD/YYYY') }}" id="datepicker" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px;">
+                            <input type="text" required class="form-control font-weight-600" name="campaign_end_date" value="{{ $setting->campaign_end_date }}" placeholder="{{ __('MM/DD/YYYY') }}" id="datepicker" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px; flex: 1 1 auto; width: 1%; min-width: 0;">
                         </div>
                     </div>
 
@@ -72,13 +72,13 @@
                         <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
                             {{ __('Status') }} <span class="text-danger">*</span>
                         </label>
-                        <div class="input-group" style="height: 44px;">
+                        <div class="input-group flex-nowrap" style="height: 44px;">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-light text-success font-weight-bold px-3" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
+                                <span class="input-group-text bg-light text-success font-weight-bold px-3 d-flex align-items-center" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
                                     <i class="fa-solid fa-toggle-on"></i>
                                 </span>
                             </div>
-                            <select name="campaign_status" class="form-control custom-select font-weight-600" id="campaign_status" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px;">
+                            <select name="campaign_status" class="form-control font-weight-600" id="campaign_status" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px; flex: 1 1 auto; width: 1%; min-width: 0;">
                                 <option value="1" {{ $setting->campaign_status == 1 ? 'selected' : '' }}>{{ __('Publish') }}</option>
                                 <option value="2" {{ $setting->campaign_status == 2 ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
                             </select>
