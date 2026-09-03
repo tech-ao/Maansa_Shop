@@ -5,12 +5,11 @@
     <aside class="user-info-wrapper">
       <div class="user-info">
         <div class="user-avatar">
-
-          <img id="avater_photo_view" src="{{$user->photo ? url('/core/public/storage/images/'.$user->photo) : url('/core/public/storage/images/placeholder.png')}}" alt="User">
+          <img id="avater_photo_view" src="{{ $user->photo_url }}" alt="{{ $user->displayName() }}">
         </div>
 
         <div class="user-data">
-          <h4 class="h5">{{$user->first_name}} {{$user->last_name}}</h4><span>{{__('Joined')}} {{$user->created_at->format('M D Y')}}</span>
+          <h4 class="h5">{{$user->first_name}} {{$user->last_name}}</h4><span>{{__('Joined')}} {{$user->created_at->format('M d, Y')}}</span>
         </div>
       </div>
       <nav class="list-group">
@@ -44,4 +43,30 @@
       </div>
     </div>
 
-  </div>
+</div>
+
+<style>
+.user-info-wrapper .user-avatar {
+    width: 90px !important;
+    height: 90px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    margin: 0 auto 12px auto !important;
+    border: 3px solid #059669 !important;
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.2) !important;
+    background: #f8fafc !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.user-info-wrapper .user-avatar img,
+#avater_photo_view {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    display: block !important;
+}
+</style>
+

@@ -90,6 +90,27 @@ class User extends Authenticatable
     }
 
 
+    public function getPhotoUrlAttribute()
+    {
+        if (!$this->photo) {
+            return url('/core/public/storage/images/placeholder.png');
+        }
+
+        if (file_exists(public_path('storage/assets/images/' . $this->photo))) {
+            return url('/core/public/storage/assets/images/' . $this->photo);
+        }
+
+        if (file_exists(public_path('storage/images/' . $this->photo))) {
+            return url('/core/public/storage/images/' . $this->photo);
+        }
+
+        if (file_exists(base_path('../assets/images/' . $this->photo))) {
+            return url('/assets/images/' . $this->photo);
+        }
+
+        return url('/core/public/storage/assets/images/' . $this->photo);
+    }
+
     public function wishlistCount()
     {
         return $this->wishlists()->whereHas('item', function($query) {

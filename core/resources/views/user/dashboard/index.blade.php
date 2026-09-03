@@ -30,7 +30,7 @@
                             @csrf
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="avater" class="form-label">Default file input example</label>
+                                    <label for="avater" class="form-label">{{ __('Profile Picture') }}</label>
                                     <input class="form-control" type="file" name="photo" id="avater">
                                 @error('photo')
                                 <p class="text-danger">{{$message}}</p>

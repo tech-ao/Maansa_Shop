@@ -79,6 +79,13 @@ class UserRepository
 
         if ($file = $request->file('photo')) {
             $input['photo'] = ImageHelper::handleUpdatedUploadedImage($file, '/assets/images', $user, '/assets/images/', 'photo');
+            try {
+                $src = public_path('storage/assets/images/' . $input['photo']);
+                $dest = public_path('storage/images/' . $input['photo']);
+                if (file_exists($src)) {
+                    @copy($src, $dest);
+                }
+            } catch (\Throwable $e) {}
         }
 
         if ($request->newsletter) {
