@@ -1090,7 +1090,7 @@
                     var placeholder = $select.find('option[disabled][selected], option[value=""]').first().text() || 'Select an option...';
                     $select.select2({
                         width: '100%',
-                        dropdownAutoWidth: true,
+                        dropdownAutoWidth: false,
                         placeholder: placeholder,
                         minimumResultsForSearch: 6
                     });
