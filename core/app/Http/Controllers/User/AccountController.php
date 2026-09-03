@@ -42,7 +42,8 @@ class AccountController extends Controller
             'pending' => Order::whereUserId($user->id)->whereOrderStatus('Pending')->count(),
             'progress' => Order::whereUserId($user->id)->whereOrderStatus('In Progress')->count(),
             'delivered' => Order::whereUserId($user->id)->whereOrderStatus('Delivered')->count(),
-            'canceled' => Order::whereUserId($user->id)->whereOrderStatus('Canceled')->count()
+            'canceled' => Order::whereUserId($user->id)->whereOrderStatus('Canceled')->count(),
+            'recent_orders' => Order::whereUserId($user->id)->latest('id')->take(5)->get()
         ]);
     }
 
