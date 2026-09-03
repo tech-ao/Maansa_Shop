@@ -402,7 +402,16 @@
                     <div class="col-6 col-md-3">
                         <div class="meta-stat-item">
                             <span class="meta-stat-label">{{ __('Total Amount') }}</span>
-                            <span class="meta-stat-price">{{ PriceHelper::setCurrencyPrice($order->pay_amount) }}</span>
+                            <span class="meta-stat-price">
+                                @php
+                                    $setting = App\Models\Setting::first();
+                                @endphp
+                                @if ($setting && $setting->currency_direction == 1)
+                                    {{ $order->currency_sign }}{{ PriceHelper::OrderTotal($order) }}
+                                @else
+                                    {{ PriceHelper::OrderTotal($order) }}{{ $order->currency_sign }}
+                                @endif
+                            </span>
                         </div>
                     </div>
                 </div>
