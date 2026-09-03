@@ -2343,6 +2343,16 @@ table.dataTable thead th.no-sort::after {
   -webkit-overflow-scrolling: touch;
 }
 
+.table-modern td .dropdown-toggle,
+.table-modern td .btn,
+.table-modern td .badge {
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+}
+
 /* Settings & Form Section Block Card */
 .settings-section-card {
   background: #f8fafc;

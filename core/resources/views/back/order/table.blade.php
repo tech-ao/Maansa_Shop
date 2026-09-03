@@ -36,15 +36,15 @@
             </span>
         </td>
 
-        <td class="text-center" style="min-width: 115px;">
+        <td class="text-center" style="min-width: 120px;">
             <div class="dropdown d-inline-block">
                 <button
-                    class="btn btn-sm dropdown-toggle"
+                    class="btn btn-sm dropdown-toggle d-inline-flex align-items-center justify-content-center"
                     type="button" id="dropdownPayment-{{ $data->id }}" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false"
-                    style="border-radius: 20px; font-size: 11.5px; font-weight: 700; padding: 4px 12px; {{ $data->payment_status == 'Paid' ? 'background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0;' : 'background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;' }}">
-                    <i class="fa-solid {{ $data->payment_status == 'Paid' ? 'fa-circle-check' : 'fa-circle-xmark' }} mr-1"></i>
-                    {{ $data->payment_status == 'Paid' ? __('Paid') : __('Unpaid') }}
+                    style="border-radius: 20px; font-size: 11.5px; font-weight: 700; padding: 4px 12px; white-space: nowrap; gap: 4px; {{ $data->payment_status == 'Paid' ? 'background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0;' : 'background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;' }}">
+                    <i class="fa-solid {{ $data->payment_status == 'Paid' ? 'fa-circle-check' : 'fa-circle-xmark' }}"></i>
+                    <span>{{ $data->payment_status == 'Paid' ? __('Paid') : __('Unpaid') }}</span>
                 </button>
                 <div class="dropdown-menu animated--fade-in shadow border-0" aria-labelledby="dropdownPayment-{{ $data->id }}" style="border-radius: 12px; min-width: 150px;">
                     <h6 class="dropdown-header text-muted font-weight-bold" style="font-size: 11px; text-transform: uppercase;">{{ __('Payment Status') }}</h6>
@@ -60,7 +60,7 @@
             </div>
         </td>
 
-        <td class="text-center" style="min-width: 130px;">
+        <td class="text-center" style="min-width: 140px;">
             @php
                 $statusBg = '#f1f5f9';
                 $statusColor = '#475569';
@@ -78,10 +78,10 @@
                     $statusBorder = '#bae6fd';
                     $statusIcon = 'fa-truck-fast';
                 } elseif ($data->order_status == 'In Progress') {
-                    $statusBg = '#f0fdf4';
-                    $statusColor = '#166534';
-                    $statusBorder = '#bbf7d0';
-                    $statusIcon = 'fa-box-open';
+                    $statusBg = '#e0f2fe';
+                    $statusColor = '#0369a1';
+                    $statusBorder = '#bae6fd';
+                    $statusIcon = 'fa-arrows-rotate';
                 } elseif ($data->order_status == 'Canceled') {
                     $statusBg = '#fee2e2';
                     $statusColor = '#b91c1c';
@@ -95,11 +95,11 @@
                 }
             @endphp
             <div class="dropdown d-inline-block">
-                <button class="btn btn-sm dropdown-toggle" type="button"
+                <button class="btn btn-sm dropdown-toggle d-inline-flex align-items-center justify-content-center" type="button"
                     id="dropdownOrder-{{ $data->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    style="border-radius: 20px; font-size: 11.5px; font-weight: 700; padding: 4px 12px; background: {{ $statusBg }}; color: {{ $statusColor }}; border: 1px solid {{ $statusBorder }};">
-                    <i class="fa-solid {{ $statusIcon }} mr-1"></i>
-                    {{ $data->order_status }}
+                    style="border-radius: 20px; font-size: 11.5px; font-weight: 700; padding: 4px 12px; white-space: nowrap; gap: 4px; background: {{ $statusBg }}; color: {{ $statusColor }}; border: 1px solid {{ $statusBorder }};">
+                    <i class="fa-solid {{ $statusIcon }}"></i>
+                    <span>{{ $data->order_status }}</span>
                 </button>
                 <div class="dropdown-menu animated--fade-in shadow border-0" aria-labelledby="dropdownOrder-{{ $data->id }}" style="border-radius: 12px; min-width: 175px;">
                     <h6 class="dropdown-header text-muted font-weight-bold" style="font-size: 11px; text-transform: uppercase;">{{ __('Fulfillment State') }}</h6>
