@@ -108,7 +108,7 @@ body_theme4 @endif
 
     <header class="site-header navbar-sticky">
         <div class="menu-top-area">
-            <div class="container px-2 px-sm-3">
+            <div class="container">
                 <div class="top-nav-flex-wrapper">
                     <!-- Left: Track Order & Compare -->
                     <div class="top-nav-left">
@@ -118,25 +118,13 @@ body_theme4 @endif
                         <a class="top-nav-link compare-mobile d-none d-md-inline-flex" href="{{ route('fornt.compare.index') }}">
                             <i class="icon-repeat"></i> <span>{{ __('Compare') }}</span>
                         </a>
-                        <a class="top-nav-link wishlist-mobile d-none d-lg-inline-flex" href="{{ route('user.wishlist.index') }}">
-                            <i class="icon-heart"></i> <span>{{ __('Wishlist') }}</span>
-                        </a>
                     </div>
 
-                    <!-- Right: Wishlist, Currency & User Login -->
+                    <!-- Right: Wishlist & User Login -->
                     <div class="top-nav-right">
-                        <div class="t-h-dropdown">
-                            <a class="main-link top-nav-link" href="javascript:;">
-                                <i class="fa-solid fa-coins"></i> <span>{{ __('Currency') }}</span> <i class="icon-chevron-down ml-1"></i>
-                            </a>
-                            <div class="t-h-dropdown-menu">
-                                @foreach (DB::table('currencies')->get() as $currency)
-                                    <a class="{{ Session::get('currency') == $currency->id ? 'active' : ($currency->is_default == 1 && !Session::has('currency') ? 'active' : '') }}"
-                                        href="{{ route('front.currency.setup', $currency->id) }}"><i
-                                            class="icon-chevron-right pr-2"></i>{{ $currency->name }}</a>
-                                @endforeach
-                            </div>
-                        </div>
+                        <a class="top-nav-link wishlist-mobile d-none d-md-inline-flex" href="{{ route('user.wishlist.index') }}">
+                            <i class="icon-heart"></i> <span>{{ __('Wishlist') }}</span>
+                        </a>
 
                         <div class="login-register">
                             @if (!Auth::user())
@@ -163,7 +151,7 @@ body_theme4 @endif
         <style>
         .menu-top-area {
             background: linear-gradient(135deg, #064e3b 0%, #047857 60%, #059669 100%) !important;
-            padding: 6px 0 !important;
+            padding: 7px 0 !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
             width: 100% !important;
         }
@@ -173,14 +161,13 @@ body_theme4 @endif
             align-items: center !important;
             justify-content: space-between !important;
             width: 100% !important;
-            gap: 8px !important;
         }
 
         .top-nav-left,
         .top-nav-right {
             display: flex !important;
             align-items: center !important;
-            gap: 12px !important;
+            gap: 18px !important;
         }
 
         .top-nav-link,
@@ -207,7 +194,7 @@ body_theme4 @endif
 
         .top-nav-link i,
         .menu-top-area i {
-            font-size: 12.5px !important;
+            font-size: 13px !important;
             color: #a7f3d0 !important;
             vertical-align: middle !important;
         }
@@ -216,19 +203,21 @@ body_theme4 @endif
             background: rgba(255, 255, 255, 0.2) !important;
             color: #ffffff !important;
             border: 1px solid rgba(255, 255, 255, 0.35) !important;
-            padding: 4px 14px !important;
+            padding: 5px 16px !important;
             border-radius: 999px !important;
             font-size: 12.5px !important;
             font-weight: 700 !important;
             display: inline-flex !important;
             align-items: center !important;
-            gap: 5px !important;
+            gap: 6px !important;
             white-space: nowrap !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
         }
 
         .top-nav-login-pill:hover {
             background: #ffffff !important;
             color: #065f46 !important;
+            border-color: #ffffff !important;
         }
 
         .top-nav-login-pill:hover i {
@@ -248,6 +237,8 @@ body_theme4 @endif
             min-width: 140px !important;
             background: #ffffff !important;
             top: 100% !important;
+            right: 0 !important;
+            left: auto !important;
             z-index: 9999 !important;
         }
 
@@ -272,32 +263,31 @@ body_theme4 @endif
                 padding: 6px 0 !important;
             }
             .menu-top-area .container {
-                padding-left: 10px !important;
-                padding-right: 10px !important;
+                padding-left: 14px !important;
+                padding-right: 14px !important;
             }
             .top-nav-flex-wrapper {
                 justify-content: space-between !important;
                 align-items: center !important;
-                gap: 6px !important;
                 width: 100% !important;
             }
             .top-nav-left,
             .top-nav-right {
-                gap: 8px !important;
+                gap: 10px !important;
                 align-items: center !important;
             }
             .top-nav-link,
             .menu-top-area .main-link {
-                font-size: 12px !important;
+                font-size: 12.5px !important;
                 padding: 4px 6px !important;
-                gap: 4px !important;
+                gap: 5px !important;
             }
             .top-nav-link i,
             .menu-top-area i {
-                font-size: 12px !important;
+                font-size: 12.5px !important;
             }
             .top-nav-login-pill {
-                padding: 4px 11px !important;
+                padding: 4px 13px !important;
                 font-size: 12px !important;
             }
         }
@@ -307,28 +297,17 @@ body_theme4 @endif
                 padding: 5px 0 !important;
             }
             .menu-top-area .container {
-                padding-left: 8px !important;
-                padding-right: 8px !important;
-            }
-            .top-nav-flex-wrapper {
-                gap: 4px !important;
-            }
-            .top-nav-left,
-            .top-nav-right {
-                gap: 6px !important;
+                padding-left: 10px !important;
+                padding-right: 10px !important;
             }
             .top-nav-link,
             .menu-top-area .main-link {
-                font-size: 11.5px !important;
-                padding: 3px 5px !important;
-                gap: 3px !important;
-            }
-            .top-nav-link i,
-            .menu-top-area i {
-                font-size: 11.5px !important;
+                font-size: 12px !important;
+                padding: 3px 4px !important;
+                gap: 4px !important;
             }
             .top-nav-login-pill {
-                padding: 3px 9px !important;
+                padding: 4px 11px !important;
                 font-size: 11.5px !important;
             }
         }
