@@ -17,6 +17,7 @@ use App\{
 use App\Helpers\PriceHelper;
 use App\Helpers\SmsHelper;
 use App\Models\Currency;
+use App\Models\FailedTransaction;
 use App\Models\Item;
 use App\Models\Setting;
 use App\Models\ShippingService;
@@ -767,9 +768,43 @@ class CheckoutController extends Controller
         if (Session::has('message')) {
             $message = Session::get('message');
             Session::forget('message');
+        } elseif (Session::has('error')) {
+            $message = Session::get('error');
+        } elseif (request()->has('error')) {
+            $message = request()->input('error');
         } else {
-            $message = __('Payment Failed!');
+            $message = __('Payment Failed / Cancelled!');
         }
+
+        try {
+            $bill = Session::get('billing_address', []);
+            $user = Auth::user();
+            $cart = Session::get('cart', []);
+            $cartTotal = 0;
+            if (is_array($cart)) {
+                foreach ($cart as $item) {
+                    $cartTotal += (($item['main_price'] ?? 0) + ($item['attribute_price'] ?? 0)) * ($item['qty'] ?? 1);
+                }
+            }
+
+            $gateway = Session::get('payment_method') ?: (Session::get('requestData')['payment_method'] ?? 'Online Gateway');
+
+            FailedTransaction::record([
+                'user_id' => $user ? $user->id : 0,
+                'email' => $bill['bill_email'] ?? ($user ? $user->email : null),
+                'phone' => $bill['bill_phone'] ?? ($user ? $user->phone : null),
+                'user_name' => trim(($bill['bill_first_name'] ?? '') . ' ' . ($bill['bill_last_name'] ?? '')) ?: ($user ? $user->displayName() : 'Customer'),
+                'gateway' => $gateway,
+                'amount' => $cartTotal,
+                'currency_sign' => PriceHelper::setCurrencySign(),
+                'currency_value' => PriceHelper::setCurrencyValue(),
+                'error_message' => $message,
+                'ip_address' => request()->ip(),
+            ]);
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('FailedTransaction recording error: ' . $e->getMessage());
+        }
+
         Session::flash('error', $message);
         return redirect()->route('front.checkout.billing');
     }

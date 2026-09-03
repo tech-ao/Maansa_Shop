@@ -191,6 +191,7 @@ Route::group(['middleware' => ['adminlocalize', 'demo']], function () {
             Route::get('/transactions/payment', 'Back\TranactionController@payment')->name('back.transaction.payment');
             Route::get('/transactions/failed', 'Back\TranactionController@failed')->name('back.transaction.failed');
             Route::delete('/transaction/delete/{id}', 'Back\TranactionController@delete')->name('back.transaction.delete');
+            Route::delete('/transactions/failed/delete/{id}', 'Back\TranactionController@deleteFailed')->name('back.transaction.failed.delete');
         });
 
         Route::group(['middleware' => 'permissions:Manage Faqs Contents'], function () {

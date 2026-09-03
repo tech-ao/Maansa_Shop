@@ -11,6 +11,7 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\Subcategory;
 use App\Models\Transaction;
+use App\Models\FailedTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -76,18 +77,11 @@ class CsvProductController extends Controller
         ];
 
         if ($type === 'failed') {
-            $query = Transaction::whereHas('order', function ($q) {
-                $q->where('payment_status', '!=', 'Paid');
-            })->get();
+            $lists = FailedTransaction::latest()->get()->toArray();
         } else {
-            $query = Transaction::where(function ($q) {
-                $q->whereHas('order', function ($sq) {
-                    $sq->where('payment_status', 'Paid');
-                })->orWhereDoesntHave('order');
-            })->get();
+            $lists = Transaction::with(['order', 'user'])->latest()->get()->toArray();
         }
 
-        $lists = $query->toArray();
         $new_list = [];
         foreach ($lists as $list) {
             $new_list[] = $list;

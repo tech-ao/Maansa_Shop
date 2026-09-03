@@ -40,17 +40,33 @@
             <div class="table-responsive">
                 <table class="table-modern" id="admin-table" width="100%" cellspacing="0">
                     <thead>
-                        <tr>
-                            <th width="5%">
-                                <input type="checkbox" data-target="transaction-bulk-delete" class="bulk_all_delete" style="cursor: pointer; width: 16px; height: 16px;">
-                            </th>
-                            <th width="25%">{{ __('Customer') }}</th>
-                            <th width="20%">{{ __('Transaction ID') }}</th>
-                            <th width="15%">{{ __('Order Status') }}</th>
-                            <th width="15%">{{ __('Payment') }}</th>
-                            <th width="12%">{{ __('Amount') }}</th>
-                            <th width="8%" class="text-right">{{ __('Action') }}</th>
-                        </tr>
+                        @if(isset($activeType) && $activeType === 'failed')
+                            <tr>
+                                <th width="4%">
+                                    <input type="checkbox" data-target="transaction-bulk-delete" class="bulk_all_delete" style="cursor: pointer; width: 16px; height: 16px;">
+                                </th>
+                                <th width="20%">{{ __('Customer') }}</th>
+                                <th width="12%">{{ __('Gateway') }}</th>
+                                <th width="26%">{{ __('Failure Reason') }}</th>
+                                <th width="12%">{{ __('Attempts') }}</th>
+                                <th width="10%">{{ __('Amount') }}</th>
+                                <th width="11%">{{ __('Last Attempt') }}</th>
+                                <th width="5%" class="text-right">{{ __('Action') }}</th>
+                            </tr>
+                        @else
+                            <tr>
+                                <th width="4%">
+                                    <input type="checkbox" data-target="transaction-bulk-delete" class="bulk_all_delete" style="cursor: pointer; width: 16px; height: 16px;">
+                                </th>
+                                <th width="22%">{{ __('Customer') }}</th>
+                                <th width="18%">{{ __('Transaction ID') }}</th>
+                                <th width="14%">{{ __('Payment Method') }}</th>
+                                <th width="13%">{{ __('Order Status') }}</th>
+                                <th width="12%">{{ __('Payment Status') }}</th>
+                                <th width="12%">{{ __('Amount') }}</th>
+                                <th width="5%" class="text-right">{{ __('Action') }}</th>
+                            </tr>
+                        @endif
                     </thead>
 
                     <tbody>

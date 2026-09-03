@@ -11,6 +11,7 @@ use App\Helpers\SmsHelper;
 use App\Http\Controllers\Controller;
 use App\Jobs\EmailSendJob;
 use App\Models\Currency;
+use App\Models\FailedTransaction;
 use App\Models\Item;
 use App\Models\Notification;
 use App\Models\PaymentSetting;
@@ -356,6 +357,30 @@ class RazorpayController extends Controller
         }
         else
         {
+            try {
+                $bill = Session::get('billing_address', []);
+                $user = Auth::user();
+                $cart = Session::get('cart', []);
+                $cartTotal = 0;
+                if (is_array($cart)) {
+                    foreach ($cart as $item) {
+                        $cartTotal += (($item['main_price'] ?? 0) + ($item['attribute_price'] ?? 0)) * ($item['qty'] ?? 1);
+                    }
+                }
+                FailedTransaction::record([
+                    'user_id' => $user ? $user->id : 0,
+                    'email' => $bill['bill_email'] ?? ($user ? $user->email : null),
+                    'phone' => $bill['bill_phone'] ?? ($user ? $user->phone : null),
+                    'user_name' => trim(($bill['bill_first_name'] ?? '') . ' ' . ($bill['bill_last_name'] ?? '')) ?: ($user ? $user->displayName() : 'Customer'),
+                    'gateway' => 'Razorpay',
+                    'amount' => $cartTotal,
+                    'currency_sign' => PriceHelper::setCurrencySign(),
+                    'currency_value' => PriceHelper::setCurrencyValue(),
+                    'error_message' => $error ?: 'Razorpay payment verification failed / cancelled',
+                    'ip_address' => $request->ip(),
+                ]);
+            } catch (\Throwable $ex) {}
+
             return redirect()->route('front.checkout.cancle')->withError($error);
         }
         

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
-use App\Models\Order;
+use App\Models\FailedTransaction;
 
 class TranactionController extends Controller
 {
@@ -26,57 +26,49 @@ class TranactionController extends Controller
         return $this->payment();
     }
 
-    // ------- Payment Transactions (Successful) -------//
+    // ------- Payment Transactions (All Placed Orders & Gateways) -------//
     public function payment()
     {
         $datas = Transaction::with(['order', 'user'])
-            ->where(function ($query) {
-                $query->whereHas('order', function ($q) {
-                    $q->where('payment_status', 'Paid');
-                })->orWhereDoesntHave('order');
-            })
             ->orderBy('id', 'desc')
             ->get();
 
         return view('back.transactions.index', [
             'datas' => $datas,
             'title' => __('Payment Transactions'),
-            'subtitle' => __('Monitor customer gateway payments, transaction identifiers, invoice billing, and settlement logs.'),
+            'subtitle' => __('Monitor customer gateway payments, transaction identifiers, Cash on Delivery bookings, and settlement logs.'),
             'activeType' => 'payment'
         ]);
     }
 
-    // ------- Failed Transactions -------//
+    // ------- Failed Transactions (Gateway Errors & Failed Attempts) -------//
     public function failed()
     {
-        $datas = Transaction::with(['order', 'user'])
-            ->whereHas('order', function ($q) {
-                $q->where('payment_status', '!=', 'Paid');
-            })
-            ->orderBy('id', 'desc')
-            ->get();
-
-        $existingOrderIds = Transaction::pluck('order_id')->filter()->toArray();
-        $failedOrders = Order::with('user')
-            ->where('payment_status', '!=', 'Paid')
-            ->whereNotIn('id', $existingOrderIds)
-            ->orderBy('id', 'desc')
+        $datas = FailedTransaction::with('user')
+            ->orderBy('attempts', 'desc')
+            ->orderBy('last_attempt_at', 'desc')
             ->get();
 
         return view('back.transactions.index', [
             'datas' => $datas,
-            'failedOrders' => $failedOrders,
             'title' => __('Failed Transactions'),
-            'subtitle' => __('Review rejected, cancelled, unpaid, or unsuccessful payment attempts and gateway failures.'),
+            'subtitle' => __('Review rejected, cancelled, or unsuccessful payment gateway attempts, error messages, and customer frequency.'),
             'activeType' => 'failed'
         ]);
     }
 
-    // ------- Delete -------//
-    public function Delete($id)
+    // ------- Delete Payment Transaction -------//
+    public function delete($id)
     {
         Transaction::findOrFail($id)->delete();
         return redirect()->back()->withSuccess(__('Transaction Deleted Successfully.'));
+    }
+
+    // ------- Delete Failed Transaction -------//
+    public function deleteFailed($id)
+    {
+        FailedTransaction::findOrFail($id)->delete();
+        return redirect()->back()->withSuccess(__('Failed Transaction Record Deleted Successfully.'));
     }
 }
 
