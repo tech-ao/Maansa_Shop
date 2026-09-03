@@ -108,27 +108,26 @@ body_theme4 @endif
 
     <header class="site-header navbar-sticky">
         <div class="menu-top-area">
-            <div class="container">
+            <div class="container px-2 px-sm-3">
                 <div class="top-nav-flex-wrapper">
                     <!-- Left: Track Order & Compare -->
                     <div class="top-nav-left">
                         <a class="top-nav-link" href="{{ route('front.order.track') }}">
                             <i class="icon-map-pin"></i> <span>{{ __('Track Order') }}</span>
                         </a>
-                        <a class="top-nav-link compare-mobile d-none d-sm-inline-flex" href="{{ route('fornt.compare.index') }}">
+                        <a class="top-nav-link compare-mobile d-none d-md-inline-flex" href="{{ route('fornt.compare.index') }}">
                             <i class="icon-repeat"></i> <span>{{ __('Compare') }}</span>
+                        </a>
+                        <a class="top-nav-link wishlist-mobile d-none d-lg-inline-flex" href="{{ route('user.wishlist.index') }}">
+                            <i class="icon-heart"></i> <span>{{ __('Wishlist') }}</span>
                         </a>
                     </div>
 
                     <!-- Right: Wishlist, Currency & User Login -->
                     <div class="top-nav-right">
-                        <a class="top-nav-link wishlist-mobile d-none d-md-inline-flex" href="{{ route('user.wishlist.index') }}">
-                            <i class="icon-heart"></i> <span>{{ __('Wishlist') }}</span>
-                        </a>
-
                         <div class="t-h-dropdown">
-                            <a class="main-link top-nav-link" href="#">
-                                <span>{{ __('Currency') }}</span> <i class="icon-chevron-down ml-1"></i>
+                            <a class="main-link top-nav-link" href="javascript:;">
+                                <i class="fa-solid fa-coins"></i> <span>{{ __('Currency') }}</span> <i class="icon-chevron-down ml-1"></i>
                             </a>
                             <div class="t-h-dropdown-menu">
                                 @foreach (DB::table('currencies')->get() as $currency)
@@ -166,6 +165,7 @@ body_theme4 @endif
             background: linear-gradient(135deg, #064e3b 0%, #047857 60%, #059669 100%) !important;
             padding: 6px 0 !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+            width: 100% !important;
         }
 
         .top-nav-flex-wrapper {
@@ -173,18 +173,18 @@ body_theme4 @endif
             align-items: center !important;
             justify-content: space-between !important;
             width: 100% !important;
+            gap: 8px !important;
         }
 
         .top-nav-left,
         .top-nav-right {
             display: flex !important;
             align-items: center !important;
-            gap: 16px !important;
+            gap: 12px !important;
         }
 
         .top-nav-link,
-        .menu-top-area .main-link,
-        .menu-top-area a {
+        .menu-top-area .main-link {
             color: rgba(255, 255, 255, 0.95) !important;
             font-size: 13px !important;
             font-weight: 600 !important;
@@ -196,19 +196,20 @@ body_theme4 @endif
             padding: 4px 8px !important;
             border-radius: 6px !important;
             line-height: 1.2 !important;
+            white-space: nowrap !important;
         }
 
         .top-nav-link:hover,
-        .menu-top-area .main-link:hover,
-        .menu-top-area a:hover {
+        .menu-top-area .main-link:hover {
             color: #ffffff !important;
             background: rgba(255, 255, 255, 0.18) !important;
         }
 
         .top-nav-link i,
         .menu-top-area i {
-            font-size: 13px !important;
+            font-size: 12.5px !important;
             color: #a7f3d0 !important;
+            vertical-align: middle !important;
         }
 
         .top-nav-login-pill {
@@ -219,6 +220,10 @@ body_theme4 @endif
             border-radius: 999px !important;
             font-size: 12.5px !important;
             font-weight: 700 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            white-space: nowrap !important;
         }
 
         .top-nav-login-pill:hover {
@@ -264,46 +269,67 @@ body_theme4 @endif
 
         @media (max-width: 767px) {
             .menu-top-area {
-                padding: 5px 0 !important;
+                padding: 6px 0 !important;
+            }
+            .menu-top-area .container {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
             }
             .top-nav-flex-wrapper {
                 justify-content: space-between !important;
+                align-items: center !important;
                 gap: 6px !important;
+                width: 100% !important;
             }
             .top-nav-left,
             .top-nav-right {
                 gap: 8px !important;
+                align-items: center !important;
             }
             .top-nav-link,
-            .menu-top-area .main-link,
-            .menu-top-area a {
-                font-size: 11.5px !important;
-                padding: 3px 6px !important;
+            .menu-top-area .main-link {
+                font-size: 12px !important;
+                padding: 4px 6px !important;
                 gap: 4px !important;
             }
+            .top-nav-link i,
+            .menu-top-area i {
+                font-size: 12px !important;
+            }
             .top-nav-login-pill {
-                padding: 3px 10px !important;
-                font-size: 11.5px !important;
+                padding: 4px 11px !important;
+                font-size: 12px !important;
             }
         }
 
         @media (max-width: 420px) {
+            .menu-top-area {
+                padding: 5px 0 !important;
+            }
+            .menu-top-area .container {
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+            }
             .top-nav-flex-wrapper {
                 gap: 4px !important;
             }
             .top-nav-left,
             .top-nav-right {
-                gap: 4px !important;
+                gap: 6px !important;
             }
             .top-nav-link,
-            .menu-top-area .main-link,
-            .menu-top-area a {
-                font-size: 11px !important;
-                padding: 2px 4px !important;
+            .menu-top-area .main-link {
+                font-size: 11.5px !important;
+                padding: 3px 5px !important;
+                gap: 3px !important;
+            }
+            .top-nav-link i,
+            .menu-top-area i {
+                font-size: 11.5px !important;
             }
             .top-nav-login-pill {
-                padding: 2px 8px !important;
-                font-size: 11px !important;
+                padding: 3px 9px !important;
+                font-size: 11.5px !important;
             }
         }
         </style>
