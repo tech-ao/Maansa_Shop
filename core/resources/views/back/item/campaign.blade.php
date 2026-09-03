@@ -213,7 +213,7 @@
                                     <i class="fa-solid fa-toggle-on" style="color: #10b981; font-size: 16px;"></i>
                                 </span>
                             </div>
-                            <select name="campaign_status" class="form-control" id="campaign_status">
+                            <select name="campaign_status" class="form-control no-select2" id="campaign_status" style="cursor: pointer;">
                                 <option value="1" {{ $setting->campaign_status == 1 ? 'selected' : '' }}>{{ __('Publish') }}</option>
                                 <option value="2" {{ $setting->campaign_status == 2 ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
                             </select>

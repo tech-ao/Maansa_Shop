@@ -844,8 +844,76 @@
     })
 
 
-    $(document).on('change', '#gallery_file', function () {
+    $('#datepicker').datetimepicker({
+        format: 'MM/DD/YYYY',
+        widgetPositioning: {
+            horizontal: 'auto',
+            vertical: 'bottom'
+        }
+    });
+    $('#datepicker1').datetimepicker({
+        format: 'MM/DD/YYYY',
+        widgetPositioning: {
+            horizontal: 'auto',
+            vertical: 'bottom'
+        }
+    });
 
+    $('.timepicker').datetimepicker({
+        format: 'h:mm A',
+        widgetPositioning: {
+            horizontal: 'auto',
+            vertical: 'bottom'
+        }
+    });
+
+    // IMAGE UPLOADING :)
+    $(document).on("change", ".upload-photo", function (e) {
+        var path = $(this).closest('.row, .settings-section-card, .form-group').find('.admin-img');
+        if (!path.length) {
+            path = $(this).parent().parent().prev().find('img');
+        }
+        readURL(this, path);
+    });
+
+    function readURL(input, path) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                path.attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#confirm-delete').on('show.bs.modal', function (e) {
+        $(this).find('.btn-ok').attr('action', $(e.relatedTarget).data('href'));
+    });
+
+    $(document).on('show.bs.modal', '#statusModal', function (e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+
+    $(document).on('change', 'input.switch, input.switch-bootstrap, .radio-check', function () {
+        var target = $(this).closest('.settings-section-card, .form-group').next('.image-show, .radio-show');
+        if (!target.length) {
+            target = $(this).closest('form').find('.image-show, .radio-show');
+        }
+        if (!target.length) {
+            target = $(this).parent().parent().next('.image-show, .radio-show');
+        }
+        if ($(this).is(':checked')) {
+            target.removeClass('d-none');
+        } else {
+            target.addClass('d-none');
+        }
+    });
+
+    // Universal multiple gallery image live preview
+    $(document).on('change', '#admin-gallery', function () {
+
+        var total_file = $("input[id='admin-gallery']")[0].files.length;
+        $('.gallery_image_view').empty();
 
         for (let i = 0; i < this.files.length; ++i) {
             let filereader = new FileReader();
@@ -856,7 +924,7 @@
                     <div class="single-g-item d-inline-block m-2">
                             <span 
                              class="remove-gallery-img">
-                                <i class="fas fa-trash reader_file_remove"></i>
+                                 <i class="fas fa-trash reader_file_remove"></i>
                             </span>
                             <a class="popup-link" href="${this.result}">
                                 <img class="admin-gallery-img" src="${this.result}"
@@ -928,7 +996,7 @@
     // Modern Select2 Initialization
     function initCustomSelects() {
         if (typeof $.fn.select2 !== 'undefined') {
-            $('select.form-control:not(.no-select2, .custom-select-native)').each(function() {
+            $('select.form-control:not(.no-select2, .custom-select-native, #campaign_status, .campaign-select)').each(function() {
                 var $select = $(this);
                 if (!$select.hasClass('select2-hidden-accessible')) {
                     var placeholder = $select.find('option[disabled][selected], option[value=""]').first().text() || 'Select an option...';
