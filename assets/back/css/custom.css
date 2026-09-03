@@ -5693,7 +5693,10 @@ select.form-control:not(.select2-hidden-accessible):focus {
 }
 
 /* 2. Select2 Container & Single Selection */
-.select2-container {
+select + .select2-container,
+.form-group > .select2-container,
+.input-group > .select2-container,
+.select2-container:not(.select2-container--open) {
   width: 100% !important;
 }
 
@@ -5850,15 +5853,22 @@ select.form-control:not(.select2-hidden-accessible):focus {
   padding-right: 4px !important;
 }
 
-.select2-container {
+select + .select2-container,
+.form-group > .select2-container,
+.input-group > .select2-container {
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
 }
 
-.select2-dropdown {
+.select2-container--open {
+  box-sizing: border-box !important;
+}
+
+.select2-container--open .select2-dropdown {
+  width: 100% !important;
   min-width: 100% !important;
-  width: auto !important;
+  box-sizing: border-box !important;
 }
 
 .select2-results__option {
