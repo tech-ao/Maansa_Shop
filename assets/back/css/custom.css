@@ -5693,11 +5693,11 @@ select.form-control:not(.select2-hidden-accessible):focus {
 }
 
 /* 2. Select2 Container & Single Selection */
-select + .select2-container,
-.form-group > .select2-container,
-.input-group > .select2-container,
-.select2-container:not(.select2-container--open) {
+select + .select2.select2-container,
+.form-group > .select2.select2-container,
+.input-group > .select2.select2-container {
   width: 100% !important;
+  display: block;
 }
 
 .select2-container--default .select2-selection--single {
@@ -5853,22 +5853,8 @@ select + .select2-container,
   padding-right: 4px !important;
 }
 
-select + .select2-container,
-.form-group > .select2-container,
-.input-group > .select2-container {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
-
 .select2-container--open {
-  box-sizing: border-box !important;
-}
-
-.select2-container--open .select2-dropdown {
-  width: 100% !important;
-  min-width: 100% !important;
-  box-sizing: border-box !important;
+  z-index: 999999 !important;
 }
 
 .select2-results__option {
