@@ -54,20 +54,26 @@
     .btn-clear-cart {
         display: inline-flex;
         align-items: center;
-        padding: 7px 14px;
+        gap: 6px;
+        padding: 8px 16px;
         border-radius: 999px;
         background: #fff1f2;
         color: #e11d48 !important;
-        font-size: 12.5px;
+        font-size: 13px;
         font-weight: 600;
         border: 1px solid #ffe4e6;
         text-decoration: none !important;
         transition: all 0.2s ease;
     }
+    .btn-clear-cart i {
+        margin-right: 6px;
+        font-size: 13px;
+    }
     .btn-clear-cart:hover {
         background: #ffe4e6;
         color: #be123c !important;
         transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(225, 29, 72, 0.15);
     }
 
     /* Desktop Cart Table */
@@ -265,20 +271,32 @@
     .btn-continue-shopping {
         display: inline-flex;
         align-items: center;
+        gap: 8px;
         font-size: 13.5px;
         font-weight: 600;
-        color: #475569 !important;
+        color: #334155 !important;
         text-decoration: none !important;
-        padding: 8px 16px;
-        border-radius: 10px;
+        padding: 9px 18px;
+        border-radius: 12px;
         background: #ffffff;
-        border: 1px solid #cbd5e1;
+        border: 1.5px solid #cbd5e1;
         transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .btn-continue-shopping i {
+        margin-right: 8px;
+        font-size: 13px;
+        color: #64748b;
+        transition: transform 0.2s ease;
     }
     .btn-continue-shopping:hover {
-        background: #f1f5f9;
+        background: #f8fafc;
         color: #0f172a !important;
         border-color: #94a3b8;
+    }
+    .btn-continue-shopping:hover i {
+        transform: translateX(-3px);
+        color: #0f172a;
     }
 
     /* Mobile Card Layout */
