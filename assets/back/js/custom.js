@@ -1,28 +1,8 @@
 (function ($) {
     "use strict"; // Start of use strict
 
-    // 1. Ensure current URL matches are properly marked active and parents expanded
     $(document).ready(function () {
-        var currentUrl = window.location.href.split(/[?#]/)[0];
-
-        $(".sidebar .nav li.nav-item a").each(function () {
-            var linkUrl = this.href.split(/[?#]/)[0];
-            if (linkUrl === currentUrl) {
-                var check = currentUrl.split("/");
-                if (check.slice(-1)[0] !== 'orders') {
-                    $(this).closest('li').addClass("active");
-                }
-                if ($(this).hasClass('sub-link')) {
-                    var $parentCollapse = $(this).closest('.collapse');
-                    var $parentNavItem = $(this).closest('.nav-item');
-                    $parentNavItem.addClass('active submenu');
-                    $parentCollapse.addClass('show');
-                    $parentNavItem.find('> a[data-toggle="collapse"]').attr('aria-expanded', 'true');
-                }
-            }
-        });
-
-        // 2. Auto-scroll sidebar so the active menu item is always visible upon page load
+        // 1. Auto-scroll sidebar so the active menu item is always visible upon page load
         function scrollToActiveSidebar() {
             var $activeEl = $('.sidebar .nav-collapse li.active a, .sidebar .nav > li.nav-item.active > a').first();
             if ($activeEl.length) {
