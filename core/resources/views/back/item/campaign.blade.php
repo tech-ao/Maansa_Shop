@@ -25,50 +25,70 @@
 
 	<!-- Campaign Settings Card -->
 	<div class="card-modern mb-4">
-		<div class="card-modern-body">
+		<div class="card-modern-body p-4">
             @include('alerts.alerts')
-            <div class="d-flex align-items-center mb-3">
-                <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 36px; height: 36px; background: #f0fdf4; color: #059669;">
-                    <i class="fa-solid fa-clock" style="font-size: 15px;"></i>
+            <div class="d-flex align-items-center mb-3 pb-2 border-bottom">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-3" style="width: 40px; height: 40px; min-width: 40px; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
+                    <i class="fa-solid fa-clock" style="font-size: 17px;"></i>
                 </div>
                 <div>
-                    <h5 class="font-weight-bold text-dark mb-0" style="font-size: 15px;">{{ __('Campaign Timer & Settings') }}</h5>
+                    <h5 class="font-weight-bold text-dark mb-0" style="font-size: 16px;">{{ __('Campaign Timer & Settings') }}</h5>
                     <p class="text-muted small mb-0">{{ __('Set campaign headline, countdown expiration date, and visibility status.') }}</p>
                 </div>
             </div>
 
             <form action="{{ route('back.setting.update') }}" method="POST">
                 @csrf
-                <div class="row align-items-end">
-                    <div class="col-lg-5 col-md-12 mb-3 mb-lg-0">
-                        <label class="form-label font-weight-bold text-dark">{{ __('Campaign Title') }} *</label>
-                        <div class="input-group">
+                <div class="row align-items-end pt-1">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-12 mb-3 mb-xl-0">
+                        <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
+                            {{ __('Campaign Title') }} <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group" style="height: 44px;">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-heading"></i></span>
+                                <span class="input-group-text bg-light text-success font-weight-bold px-3" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
+                                    <i class="fa-solid fa-heading"></i>
+                                </span>
                             </div>
-                            <input type="text" required class="form-control" name="campaign_title" value="{{ $setting->campaign_title }}" placeholder="{{ __('e.g., Deals Of The Week') }}">
+                            <input type="text" required class="form-control font-weight-600" name="campaign_title" value="{{ $setting->campaign_title }}" placeholder="{{ __('e.g., Deals Of The Week') }}" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px;">
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 mb-3 mb-lg-0">
-                        <label class="form-label font-weight-bold text-dark">{{ __('Campaign End Date & Time') }} *</label>
-                        <div class="input-group">
+
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-12 mb-3 mb-xl-0">
+                        <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
+                            {{ __('Campaign End Date') }} <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group" style="height: 44px;">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calendar-day"></i></span>
+                                <span class="input-group-text bg-light text-success font-weight-bold px-3" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </span>
                             </div>
-                            <input type="text" required class="form-control" name="campaign_end_date" value="{{ $setting->campaign_end_date }}" placeholder="{{ __('MM/DD/YYYY') }}" id="datepicker">
+                            <input type="text" required class="form-control font-weight-600" name="campaign_end_date" value="{{ $setting->campaign_end_date }}" placeholder="{{ __('MM/DD/YYYY') }}" id="datepicker" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px;">
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <label class="form-label font-weight-bold text-dark">{{ __('Status') }} *</label>
-                        <div class="d-flex align-items-center">
-                            <select name="campaign_status" class="form-control mr-2" id="campaign_status" style="border-radius: 10px; height: 42px;">
+
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-12 mb-3 mb-xl-0">
+                        <label class="form-label font-weight-bold text-dark mb-1" style="font-size: 13px;">
+                            {{ __('Status') }} <span class="text-danger">*</span>
+                        </label>
+                        <div class="input-group" style="height: 44px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-light text-success font-weight-bold px-3" style="border: 1.5px solid #e2e8f0; border-right: none; border-radius: 10px 0 0 10px;">
+                                    <i class="fa-solid fa-toggle-on"></i>
+                                </span>
+                            </div>
+                            <select name="campaign_status" class="form-control custom-select font-weight-600" id="campaign_status" style="height: 44px; border: 1.5px solid #e2e8f0; border-radius: 0 10px 10px 0; font-size: 13.5px;">
                                 <option value="1" {{ $setting->campaign_status == 1 ? 'selected' : '' }}>{{ __('Publish') }}</option>
                                 <option value="2" {{ $setting->campaign_status == 2 ? 'selected' : '' }}>{{ __('Unpublish') }}</option>
                             </select>
-                            <button type="submit" class="btn btn-primary px-4" style="border-radius: 10px; font-weight: 700; height: 42px; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); white-space: nowrap;">
-                                <i class="fa-solid fa-floppy-disk mr-1"></i> {{ __('Save') }}
-                            </button>
                         </div>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-12">
+                        <button type="submit" class="btn btn-primary w-100 d-inline-flex align-items-center justify-content-center" style="height: 44px; border-radius: 10px; font-weight: 700; font-size: 14px; background: linear-gradient(135deg, #10b981, #059669); border: none; box-shadow: 0 4px 14px -2px rgba(16, 185, 129, 0.45); transition: all 0.2s ease;">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i> {{ __('Save') }}
+                        </button>
                     </div>
                 </div>
             </form>
@@ -77,15 +97,15 @@
 
     <!-- Products in Campaign Card -->
 	<div class="card-modern">
-		<div class="card-modern-body">
+		<div class="card-modern-body p-4">
             <div class="row align-items-center mb-4 pb-3 border-bottom">
                 <div class="col-lg-6 col-md-5 mb-3 mb-md-0">
                     <div class="d-flex align-items-center">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-light rounded-circle mr-2" style="width: 36px; height: 36px; min-width: 36px; background: #f0fdf4; color: #059669;">
-                            <i class="fa-solid fa-cart-plus" style="font-size: 15px;"></i>
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle mr-3" style="width: 40px; height: 40px; min-width: 40px; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0;">
+                            <i class="fa-solid fa-cart-plus" style="font-size: 17px;"></i>
                         </div>
                         <div>
-                            <h5 class="font-weight-bold text-dark mb-0" style="font-size: 15px;">{{ __('Products Added for Campaign') }}</h5>
+                            <h5 class="font-weight-bold text-dark mb-0" style="font-size: 16px;">{{ __('Products Added for Campaign') }}</h5>
                             <p class="text-muted small mb-0">{{ __('Choose products to feature in the countdown promotional flash deal grid.') }}</p>
                         </div>
                     </div>
@@ -106,7 +126,7 @@
                                     <p class="text-danger small mb-0 mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary ml-2" style="border-radius: 10px; font-weight: 700; height: 38px; padding: 0 14px; background: linear-gradient(135deg, #10b981, #059669); border: none; white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);">
+                            <button type="submit" class="btn btn-primary ml-2" style="border-radius: 10px; font-weight: 700; height: 42px; padding: 0 18px; background: linear-gradient(135deg, #10b981, #059669); border: none; white-space: nowrap; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
                                 <i class="fa-solid fa-plus mr-1"></i> {{ __('Add') }}
                             </button>
                         </div>
