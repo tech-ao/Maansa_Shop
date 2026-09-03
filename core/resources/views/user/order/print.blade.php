@@ -1,323 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="icon" type="image/x-icon" href="{{ url('/core/public/storage/images/' . $setting->favicon) }}" />
-
-    <title>{{ $setting->title }}</title>
+    <title>{{ __('Invoice') }} - #{{ $order->transaction_number }} - {{ $setting->title }}</title>
     <link rel="stylesheet" media="screen" href="{{ asset('assets/front/css/vendor.min.css') }}">
-    <!-- Main Template Styles-->
-    <link id="mainStyles" rel="stylesheet" media="screen" href="{{ asset('assets/front/css/styles.min.css') }}">
-    <!-- Modernizr-->
-    @yield('css')
-
-    <!-- Main css -->
     <link href="{{ asset('assets/front/css/main.css') }}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #1e293b;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .invoice-print-container {
+            max-width: 850px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+        }
+        .badge-invoice {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            border: 1px solid #cbd5e1;
+        }
+        .address-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            height: 100%;
+        }
+        .table-print th {
+            background: #f1f5f9 !important;
+            color: #475569 !important;
+            font-size: 11.5px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            border-bottom: 2px solid #cbd5e1 !important;
+            padding: 10px 12px !important;
+        }
+        .table-print td {
+            padding: 10px 12px !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            font-size: 13px !important;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .invoice-print-container {
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+            }
+            body { padding: 0 !important; margin: 0 !important; }
+        }
+    </style>
 </head>
 
 <body id="invoice-print" onload="window.print()" id="page-top">
-
     @php
         if ($order->state) {
             $state = json_decode($order->state, true);
         } else {
             $state = [];
         }
+        $bill = json_decode($order->billing_info, true);
     @endphp
 
-    <!-- Start of Main Content -->
-    <div class="container   padding-bottom-3x mb-1 print_invoice">
-        <div class="card card-body p-5">
-            <div class="row">
-                <div class="col-lg-12">
-                    <a href="{{ route('user.order.index') }}"
-                        class="btn btn-sm btn-primary d-inline-block"><span>{{ __('Back') }}</span></a>
-                    <a href="{{ route('user.order.print', $order->id) }}" target="_blank"
-                        class="btn btn-sm btn-primary invoice_price d-inline-block"><span>{{ __('Print') }}</span></a>
-                </div>
-            </div> <!-- / .row -->
-            <div class="row">
-                <div class="col text-center">
+    <div class="invoice-print-container">
+        <!-- Print / Action buttons -->
+        <div class="no-print d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+            <a href="{{ route('user.order.index') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                &larr; {{ __('Back to Orders') }}
+            </a>
+            <button onclick="window.print()" class="btn btn-sm btn-success rounded-pill px-4" style="background: #059669; border-color: #059669;">
+                <i class="icon-printer mr-1"></i> {{ __('Print Invoice') }}
+            </button>
+        </div>
 
-                    <!-- Logo -->
-                    <img class="img-fluid mb-5 mh-70" alt="Logo"
-                        src="{{ url('/core/public/storage/images/' . $setting->logo) }}">
-
-                </div>
-            </div> <!-- / .row -->
-            <div class="row">
-                <div class="col-12">
-                    <h5><b>{{ __('Order Details :') }}</b></h5>
-
-                    <span class="text-muted">{{ __('Transaction Id :') }}</span>{{ $order->txnid }}<br>
-                    <span class="text-muted">{{ __('Order Id :') }}</span>{{ $order->transaction_number }}<br>
-                    <span
-                        class="text-muted">{{ __('Order Date :') }}</span>{{ $order->created_at->format('M d, Y') }}<br>
-                    <span class="text-muted">{{ __('Payment Status :') }}</span>
-                    @if ($order->payment_status == 'Paid')
-                        <div class="badge badge-success">
-                            {{ __('Paid') }}
-                        </div>
-                    @else
-                        <div class="badge badge-danger">
-                            {{ __('Unpaid') }}
-                        </div>
-                    @endif
-                    <br>
-                    <span class="text-muted">{{ __('Payment Method :') }}</span>{{ $order->payment_method }}<br>
-
-                    <br>
-                    <br>
-                </div>
+        <!-- Header -->
+        <div class="row align-items-start pb-4 border-bottom mb-4">
+            <div class="col-7">
+                <img class="img-fluid mb-2" style="max-height: 50px; width: auto;" alt="{{ $setting->title }}" src="{{ url('/core/public/storage/images/' . $setting->logo) }}">
+                <h5 class="fw-bold text-dark mb-0">{{ $setting->title }}</h5>
+                <p class="text-muted small mb-0">{{ __('Official Order Invoice & Receipt') }}</p>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <h5>{{ __('Billing Address :') }}</h5>
-                    @php
-                        $bill = json_decode($order->billing_info, true);
-
-                    @endphp
-
-                    <span class="text-muted">{{ __('Name') }}: </span>{{ $bill['bill_first_name'] }}
-                    {{ $bill['bill_last_name'] }}<br>
-                    <span class="text-muted">{{ __('Email') }}: </span>{{ $bill['bill_email'] }}<br>
-                    <span class="text-muted">{{ __('Phone') }}: </span>{{ $bill['bill_phone'] }}<br>
-                    @if (isset($bill['bill_address1']))
-                        <span class="text-muted">{{ __('Address') }}: </span>{{ $bill['bill_address1'] }},
-                        {{ isset($bill['bill_address2']) ? $bill['bill_address2'] : '' }}<br>
-                    @endif
-                    @if (isset($bill['bill_country']))
-                        <span class="text-muted">{{ __('Country') }}: </span>{{ $bill['bill_country'] }}<br>
-                    @endif
-                    @if (isset($bill['bill_city']))
-                        <span class="text-muted">{{ __('City') }}: </span>{{ $bill['bill_city'] }}<br>
-                    @endif
-                    @if (isset($state['name']))
-                        <span class="text-muted">{{ __('State') }}: </span>{{ $state['name'] }}<br>
-                    @endif
-                    @if (isset($bill['bill_zip']))
-                        <span class="text-muted">{{ __('Zip') }}: </span>{{ $bill['bill_zip'] }}<br>
-                    @endif
-                    @if (isset($bill['bill_company']))
-                        <span class="text-muted">{{ __('Company') }}: </span>{{ $bill['bill_company'] }}<br>
-                    @endif
-
-
-                </div>
-                <div class="col-12 col-md-6">
-                    <h5>{{ __('Shipping Address :') }}</h5>
-                    @php
-                        $ship = json_decode($order->shipping_info, true);
-                    @endphp
-                    <span class="text-muted">{{ __('Name') }}: </span>{{ $ship['ship_first_name'] }}
-                    {{ $ship['ship_last_name'] }} <br>
-                    <span class="text-muted">{{ __('Email') }}: </span>{{ $ship['ship_email'] }}<br>
-                    <span class="text-muted">{{ __('Phone') }}: </span>{{ $ship['ship_phone'] }}<br>
-                    @if (isset($ship['ship_address1']))
-                        <span class="text-muted">{{ __('Address') }}: </span>{{ $ship['ship_address1'] }},
-                        {{ isset($ship['ship_address2']) ? $ship['ship_address2'] : '' }}<br>
-                    @endif
-                    @if (isset($ship['ship_country']))
-                        <span class="text-muted">{{ __('Country') }}: </span>{{ $ship['ship_country'] }}<br>
-                    @endif
-                    @if (isset($ship['ship_city']))
-                        <span class="text-muted">{{ __('City') }}: </span>{{ $ship['ship_city'] }}<br>
-                    @endif
-                    @if (isset($state['name']))
-                        <span class="text-muted">{{ __('State') }}: </span>{{ $state['name'] }}<br>
-                    @endif
-                    @if (isset($ship['ship_zip']))
-                        <span class="text-muted">{{ __('Zip') }}: </span>{{ $ship['ship_zip'] }}<br>
-                    @endif
-                    @if (isset($ship['ship_company']))
-                        <span class="text-muted">{{ __('Company') }}: </span>{{ $ship['ship_company'] }}<br>
-                    @endif
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-
-                    <!-- Table -->
-                    <div class="gd-responsive-table">
-                        <table class="table my-4">
-                            <thead>
-                                <tr>
-                                    <th width="50%" class="px-0 bg-transparent border-top-0">
-                                        <span class="h6">{{ __('Products') }}</span>
-                                    </th>
-                                    <th class="px-0 bg-transparent border-top-0">
-                                        <span class="h6">{{ __('Attribute') }}</span>
-                                    </th>
-                                    <th class="px-0 bg-transparent border-top-0">
-                                        <span class="h6">{{ __('Quantity') }}</span>
-                                    </th>
-                                    <th class="px-0 bg-transparent border-top-0 text-right">
-                                        <span class="h6">{{ __('Price') }}</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $option_price = 0;
-                                    $total = 0;
-                                @endphp
-                                @foreach (json_decode($order->cart, true) as $item)
-                                    @php
-                                        $total += $item['main_price'] * $item['qty'];
-                                        $option_price += $item['attribute_price'];
-                                        $grandSubtotal = $total + $option_price;
-                                    @endphp
-                                    <tr>
-                                        <td class="px-0">
-                                            {{ $item['name'] }}
-                                        </td>
-                                        <td class="px-0">
-                                            @if ($item['attribute']['option_name'])
-                                                @foreach ($item['attribute']['option_name'] as $optionkey => $option_name)
-                                                    <span class="entry-meta"><b>{{ $option_name }}</b> :
-                                                        @if ($setting->currency_direction == 1)
-                                                            {{ $order->currency_sign }}{{ round($item['attribute']['option_price'][$optionkey] * $order->currency_value, 2) }}
-                                                        @else
-                                                            {{ round($item['attribute']['option_price'][$optionkey] * $order->currency_value, 2) }}{{ $order->currency_sign }}
-                                                        @endif
-
-                                                    </span>
-                                                @endforeach
-                                            @else
-                                                --
-                                            @endif
-                                        </td>
-                                        <td class="px-0">
-                                            {{ $item['qty'] }}
-                                        </td>
-
-                                        <td class="px-0 text-right">
-                                            @if ($setting->currency_direction == 1)
-                                                {{ $order->currency_sign }}{{ round($item['main_price'] * $order->currency_value, 2) }}
-                                            @else
-                                                {{ round($item['main_price'] * $order->currency_value, 2) }}{{ $order->currency_sign }}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <tr>
-                                    <td class="padding-top-2x" colspan="5">
-                                    </td>
-                                </tr>
-                                @if ($order->tax != 0)
-                                    <tr>
-                                        <td class="px-0 border-top border-top-2">
-                                            <span class="text-muted">{{ __('Tax') }}</span>
-                                        </td>
-                                        <td class="px-0 text-right border-top border-top-2" colspan="5">
-                                            <span>
-                                                @if ($setting->currency_direction == 1)
-                                                    {{ $order->currency_sign }}{{ round($order->tax * $order->currency_value, 2) }}
-                                                @else
-                                                    {{ round($order->tax * $order->currency_value, 2) }}{{ $order->currency_sign }}
-                                                @endif
-                                            </span>
-                                        </td>
-                                    </tr>
-                                @endif
-                                @if (json_decode($order->discount, true))
-                                    @php
-                                        $discount = json_decode($order->discount, true);
-                                    @endphp
-                                    <tr>
-                                        <td class="px-0 border-top border-top-2">
-                                            <span class="text-muted">{{ __('Coupon discount') }}
-                                                ({{ $discount['code']['code_name'] }})</span>
-                                        </td>
-                                        <td class="px-0 text-right border-top border-top-2" colspan="5">
-                                            <span class="text-danger">
-                                                @if ($setting->currency_direction == 1)
-                                                    -{{ $order->currency_sign }}{{ round($discount['discount'] * $order->currency_value, 2) }}
-                                                @else
-                                                    -{{ round($discount['discount'] * $order->currency_value, 2) }}{{ $order->currency_sign }}
-                                                @endif
-                                            </span>
-                                        </td>
-                                    </tr>
-                                @endif
-                                @if (json_decode($order->shipping, true))
-                                    @php
-                                        $shipping = json_decode($order->shipping, true);
-                                    @endphp
-                                    <tr>
-                                        <td class="px-0 border-top border-top-2">
-                                            <span class="text-muted">{{ __('Shipping') }}</span>
-                                        </td>
-                                        <td class="px-0 text-right border-top border-top-2" colspan="5">
-                                            <span>
-                                                @if ($setting->currency_direction == 1)
-                                                    {{ $order->currency_sign }}{{ round($shipping['price'] * $order->currency_value, 2) }}
-                                                @else
-                                                    {{ round($shipping['price'] * $order->currency_value, 2) }}{{ $order->currency_sign }}
-                                                @endif
-
-                                            </span>
-                                        </td>
-                                    </tr>
-                                @endif
-                                @if (json_decode($order->state_price, true))
-                                    <tr>
-                                        <td class="px-0 border-top border-top-2">
-                                            <span class="text-muted">{{ __('State Tax') }}</span>
-                                        </td>
-                                        <td class="px-0 text-right border-top border-top-2" colspan="5">
-                                            <span>
-                                                @if ($setting->currency_direction == 1)
-                                                    {{ isset($state['type']) && $state['type'] == 'percentage' ? ' (' . $state['price'] . '%) ' : '' }}
-                                                    {{ $order->currency_sign }}{{ round($order['state_price'] * $order->currency_value, 2) }}
-                                                @else
-                                                    {{ isset($state['type']) && $state['type'] == 'percentage' ? ' (' . $state['price'] . '%) ' : '' }}
-                                                    {{ round($order['state_price'] * $order->currency_value, 2) }}{{ $order->currency_sign }}
-                                                @endif
-
-                                            </span>
-                                        </td>
-                                    </tr>
-                                @endif
-                                <tr>
-                                    <td class="px-0 border-top border-top-2">
-
-                                        @if ($order->payment_method == 'Cash On Delivery')
-                                            <strong>{{ __('Total amount') }}</strong>
-                                        @else
-                                            <strong>{{ __('Total amount due') }}</strong>
-                                        @endif
-                                    </td>
-                                    <td class="px-0 text-right border-top border-top-2" colspan="5">
-                                        <span class="h3">
-                                            @if ($setting->currency_direction == 1)
-                                                {{ $order->currency_sign }}{{ PriceHelper::OrderTotal($order) }}
-                                            @else
-                                                {{ PriceHelper::OrderTotal($order) }}{{ $order->currency_sign }}
-                                            @endif
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <div class="col-5 text-end">
+                <h3 class="fw-bold text-dark mb-1 text-uppercase">{{ __('TAX INVOICE') }}</h3>
+                <div class="badge-invoice mb-2">#{{ $order->transaction_number }}</div>
+                <div class="text-muted small">
+                    <div><strong>{{ __('Date') }}:</strong> {{ $order->created_at->format('M d, Y') }}</div>
+                    <div><strong>{{ __('Transaction ID') }}:</strong> {{ $order->txnid }}</div>
+                    <div><strong>{{ __('Payment Method') }}:</strong> {{ $order->payment_method }}</div>
+                    <div>
+                        <strong>{{ __('Payment Status') }}:</strong>
+                        <span class="badge {{ $order->payment_status == 'Paid' ? 'bg-success' : 'bg-danger' }}">
+                            {{ $order->payment_status }}
+                        </span>
                     </div>
                 </div>
-            </div> <!-- / .row -->
+            </div>
+        </div>
+
+        <!-- Addresses Row: Sold By (Left) vs Bill To (Right) -->
+        <div class="row mb-4">
+            <!-- Left: Shop Address -->
+            <div class="col-6">
+                <div class="address-box">
+                    <h6 class="fw-bold text-success text-uppercase mb-2 pb-1 border-bottom" style="font-size: 12px;">
+                        {{ __('SOLD BY (STORE ADDRESS)') }}
+                    </h6>
+                    <div class="fw-bold text-dark mb-1">{{ $setting->title ?: 'Maansa Rajashahi' }}</div>
+                    <div class="text-muted small mb-1">
+                        {{ $setting->footer_address ?: 'Bhatipura, Gram Kuchera, Nagaur, Rajasthan-341024.' }}
+                    </div>
+                    @if($setting->footer_phone)
+                        <div class="text-muted small mb-1">{{ __('Phone') }}: {{ $setting->footer_phone }}</div>
+                    @endif
+                    <div class="text-muted small">{{ __('Email') }}: {{ $setting->footer_email ?: ($setting->contact_email ?: 'maansarajashahi@gmail.com') }}</div>
+                </div>
+            </div>
+
+            <!-- Right: Customer Billing Address -->
+            <div class="col-6">
+                <div class="address-box">
+                    <h6 class="fw-bold text-dark text-uppercase mb-2 pb-1 border-bottom" style="font-size: 12px;">
+                        {{ __('BILLED TO (CUSTOMER)') }}
+                    </h6>
+                    <div class="fw-bold text-dark mb-1">
+                        {{ $bill['bill_first_name'] ?? '' }} {{ $bill['bill_last_name'] ?? '' }}
+                    </div>
+                    @if(isset($bill['bill_company']) && $bill['bill_company'])
+                        <div class="text-muted small fw-bold mb-1">{{ $bill['bill_company'] }}</div>
+                    @endif
+                    <div class="text-muted small mb-1">
+                        {{ $bill['bill_address1'] ?? '' }}{{ isset($bill['bill_address2']) && $bill['bill_address2'] ? ', ' . $bill['bill_address2'] : '' }}<br>
+                        {{ $bill['bill_city'] ?? '' }}{{ isset($state['name']) ? ', ' . $state['name'] : '' }}{{ isset($bill['bill_zip']) ? ' - ' . $bill['bill_zip'] : '' }}, {{ $bill['bill_country'] ?? 'India' }}
+                    </div>
+                    <div class="text-muted small mb-1">{{ __('Phone') }}: {{ $bill['bill_phone'] ?? '' }}</div>
+                    <div class="text-muted small">{{ __('Email') }}: {{ $bill['bill_email'] ?? '' }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Table -->
+        <table class="table table-print table-bordered mb-4">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">{{ __('Product Details') }}</th>
+                    <th style="width: 20%;">{{ __('Variant / Options') }}</th>
+                    <th style="width: 10%;" class="text-center">{{ __('Qty') }}</th>
+                    <th style="width: 10%;" class="text-end">{{ __('Unit Price') }}</th>
+                    <th style="width: 10%;" class="text-end">{{ __('Total') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $option_price = 0;
+                    $total = 0;
+                @endphp
+                @foreach (json_decode($order->cart, true) as $key => $item)
+                    @php
+                        $item_total = $item['main_price'] * $item['qty'];
+                        $total += $item_total;
+                        $option_price += $item['attribute_price'];
+                    @endphp
+                    <tr>
+                        <td>
+                            <strong>{{ $item['name'] }}</strong>
+                            @if (isset($item['item_type']) && $item['item_type'] == 'license' && $order->payment_status == 'Paid')
+                                <div class="small text-muted mt-1">
+                                    {{ __('License') }}: {{ $item['item_l_n'] ?? '' }} - {{ $item['item_l_k'] ?? '' }}
+                                </div>
+                            @endif
+                        </td>
+                        <td>
+                            @if (isset($item['attribute']['option_name']) && $item['attribute']['option_name'])
+                                @foreach ($item['attribute']['option_name'] as $optionkey => $option_name)
+                                    <span class="small d-block text-muted">
+                                        {{ $option_name }}:
+                                        @if ($setting->currency_direction == 1)
+                                            {{ $order->currency_sign }}{{ round($item['attribute']['option_price'][$optionkey] * $order->currency_value, 2) }}
+                                        @else
+                                            {{ round($item['attribute']['option_price'][$optionkey] * $order->currency_value, 2) }}{{ $order->currency_sign }}
+                                        @endif
+                                    </span>
+                                @endforeach
+                            @else
+                                <span class="text-muted small">—</span>
+                            @endif
+                        </td>
+                        <td class="text-center fw-bold">{{ $item['qty'] }}</td>
+                        <td class="text-end text-muted">
+                            @if ($setting->currency_direction == 1)
+                                {{ $order->currency_sign }}{{ round($item['main_price'] * $order->currency_value, 2) }}
+                            @else
+                                {{ round($item['main_price'] * $order->currency_value, 2) }}{{ $order->currency_sign }}
+                            @endif
+                        </td>
+                        <td class="text-end fw-bold">
+                            @if ($setting->currency_direction == 1)
+                                {{ $order->currency_sign }}{{ round($item_total * $order->currency_value, 2) }}
+                            @else
+                                {{ round($item_total * $order->currency_value, 2) }}{{ $order->currency_sign }}
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <!-- Totals Section -->
+        <div class="row justify-content-end mb-4">
+            <div class="col-5">
+                <table class="table table-sm table-borderless">
+                    <tr>
+                        <td class="text-muted">{{ __('Subtotal') }}:</td>
+                        <td class="text-end fw-bold">
+                            @if ($setting->currency_direction == 1)
+                                {{ $order->currency_sign }}{{ round($total * $order->currency_value, 2) }}
+                            @else
+                                {{ round($total * $order->currency_value, 2) }}{{ $order->currency_sign }}
+                            @endif
+                        </td>
+                    </tr>
+                    @if ($order->tax != 0)
+                        <tr>
+                            <td class="text-muted">{{ __('Tax / GST') }}:</td>
+                            <td class="text-end fw-bold">
+                                @if ($setting->currency_direction == 1)
+                                    {{ $order->currency_sign }}{{ round($order->tax * $order->currency_value, 2) }}
+                                @else
+                                    {{ round($order->tax * $order->currency_value, 2) }}{{ $order->currency_sign }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endif
+                    @if (json_decode($order->discount, true))
+                        @php $discount = json_decode($order->discount, true); @endphp
+                        <tr class="text-danger">
+                            <td>{{ __('Discount') }} ({{ $discount['code']['code_name'] }}):</td>
+                            <td class="text-end fw-bold">
+                                @if ($setting->currency_direction == 1)
+                                    -{{ $order->currency_sign }}{{ round($discount['discount'] * $order->currency_value, 2) }}
+                                @else
+                                    -{{ round($discount['discount'] * $order->currency_value, 2) }}{{ $order->currency_sign }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endif
+                    @if (json_decode($order->shipping, true))
+                        @php $shipping = json_decode($order->shipping, true); @endphp
+                        <tr>
+                            <td class="text-muted">{{ __('Shipping') }}:</td>
+                            <td class="text-end fw-bold">
+                                @if ($setting->currency_direction == 1)
+                                    {{ $order->currency_sign }}{{ round($shipping['price'] * $order->currency_value, 2) }}
+                                @else
+                                    {{ round($shipping['price'] * $order->currency_value, 2) }}{{ $order->currency_sign }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endif
+                    @if (json_decode($order->state_price, true))
+                        <tr>
+                            <td class="text-muted">{{ __('State Tax') }}:</td>
+                            <td class="text-end fw-bold">
+                                @if ($setting->currency_direction == 1)
+                                    {{ $order->currency_sign }}{{ round($order['state_price'] * $order->currency_value, 2) }}
+                                @else
+                                    {{ round($order['state_price'] * $order->currency_value, 2) }}{{ $order->currency_sign }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endif
+                    <tr class="border-top border-dark border-2">
+                        <td class="fw-bold fs-6 pt-2">{{ __('Grand Total') }}:</td>
+                        <td class="text-end fw-bold fs-6 pt-2 text-success">
+                            @if ($setting->currency_direction == 1)
+                                {{ $order->currency_sign }}{{ PriceHelper::OrderTotal($order) }}
+                            @else
+                                {{ PriceHelper::OrderTotal($order) }}{{ $order->currency_sign }}
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-center pt-3 border-top text-muted small">
+            {{ __('Thank you for your purchase with') }} <strong>{{ $setting->title }}</strong>! {{ __('Support') }}: {{ $setting->footer_email ?: ($setting->contact_email ?: 'maansarajashahi@gmail.com') }}
         </div>
     </div>
-
-
-    <script type="text/javascript" src="{{ asset('assets/front/js/vendor.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/front/js/scripts.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/back/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}">
-    </script>
-    <script type="text/javascript" src="{{ asset('assets/front/js/plugin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/front/js/myscript.js') }}"></script>
 
 </body>

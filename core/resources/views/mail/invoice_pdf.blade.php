@@ -84,24 +84,27 @@
     <tr>
         <td>
             <div class="info-card">
-                <strong>BILL TO:</strong>
-                <div>{{ $bill['bill_first_name'] ?? '' }} {{ $bill['bill_last_name'] ?? '' }}</div>
-                <div>Email: {{ $bill['bill_email'] ?? '' }}</div>
-                <div>Phone: {{ $bill['bill_phone'] ?? '' }}</div>
-                <div>Address: {{ $bill['bill_address1'] ?? '' }} {{ isset($bill['bill_address2']) ? $bill['bill_address2'] : '' }}</div>
-                <div>{{ $bill['bill_city'] ?? '' }}{{ isset($state['name']) ? ', ' . $state['name'] : '' }} - {{ $bill['bill_zip'] ?? '' }}</div>
-                <div>{{ $bill['bill_country'] ?? 'India' }}</div>
+                <strong>SOLD BY (STORE DETAILS):</strong>
+                <div style="font-weight: bold; color: #047857;">{{ $setting->title ?: 'Maansa Rajashahi' }}</div>
+                <div>{{ $setting->footer_address ?: 'Bhatipura, Gram Kuchera, Nagaur, Rajasthan-341024.' }}</div>
+                @if($setting->footer_phone)
+                    <div>Phone: {{ $setting->footer_phone }}</div>
+                @endif
+                <div>Email: {{ $setting->footer_email ?: ($setting->contact_email ?: 'maansarajashahi@gmail.com') }}</div>
             </div>
         </td>
         <td>
             <div class="info-card">
-                <strong>SHIP TO:</strong>
-                <div>{{ $ship['ship_first_name'] ?? ($bill['bill_first_name'] ?? '') }} {{ $ship['ship_last_name'] ?? ($bill['bill_last_name'] ?? '') }}</div>
-                <div>Email: {{ $ship['ship_email'] ?? ($bill['bill_email'] ?? '') }}</div>
-                <div>Phone: {{ $ship['ship_phone'] ?? ($bill['bill_phone'] ?? '') }}</div>
-                <div>Address: {{ $ship['ship_address1'] ?? ($bill['bill_address1'] ?? '') }} {{ isset($ship['ship_address2']) ? $ship['ship_address2'] : (isset($bill['bill_address2']) ? $bill['bill_address2'] : '') }}</div>
-                <div>{{ $ship['ship_city'] ?? ($bill['bill_city'] ?? '') }}{{ isset($state['name']) ? ', ' . $state['name'] : '' }} - {{ $ship['ship_zip'] ?? ($bill['bill_zip'] ?? '') }}</div>
-                <div>{{ $ship['ship_country'] ?? ($bill['bill_country'] ?? 'India') }}</div>
+                <strong>BILLED TO (CUSTOMER):</strong>
+                <div style="font-weight: bold;">{{ $bill['bill_first_name'] ?? '' }} {{ $bill['bill_last_name'] ?? '' }}</div>
+                @if(isset($bill['bill_company']) && $bill['bill_company'])
+                    <div>{{ $bill['bill_company'] }}</div>
+                @endif
+                <div>{{ $bill['bill_address1'] ?? '' }}{{ isset($bill['bill_address2']) && $bill['bill_address2'] ? ', ' . $bill['bill_address2'] : '' }}</div>
+                <div>{{ $bill['bill_city'] ?? '' }}{{ isset($state['name']) ? ', ' . $state['name'] : '' }}{{ isset($bill['bill_zip']) ? ' - ' . $bill['bill_zip'] : '' }}</div>
+                <div>{{ $bill['bill_country'] ?? 'India' }}</div>
+                <div>Phone: {{ $bill['bill_phone'] ?? '' }}</div>
+                <div>Email: {{ $bill['bill_email'] ?? '' }}</div>
             </div>
         </td>
     </tr>

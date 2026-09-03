@@ -124,40 +124,36 @@
       </div>
     </div>
 
-    <!-- Addresses -->
+    <!-- Addresses: Sold By vs Billed To -->
     <div class="row mb-4">
       <div class="col-6">
         <div class="p-3 rounded" style="background: #f8fafc; border: 1px solid #e2e8f0;">
-          <h6 class="font-weight-bold mb-2 text-dark">{{ __('Billing Address') }}</h6>
+          <h6 class="font-weight-bold mb-2 text-success" style="font-size: 12px; text-transform: uppercase;">{{ __('Sold By (Store Details)') }}</h6>
           <p class="mb-0 text-muted" style="font-size: 13px; line-height: 1.6;">
-            <strong class="text-dark">{{ $bill['bill_first_name'] ?? '' }} {{ $bill['bill_last_name'] ?? '' }}</strong><br>
-            @if(isset($bill['bill_company']) && $bill['bill_company'])
-              {{ $bill['bill_company'] }}<br>
+            <strong class="text-dark">{{ $setting->title ?: 'Maansa Rajashahi' }}</strong><br>
+            {{ $setting->footer_address ?: 'Bhatipura, Gram Kuchera, Nagaur, Rajasthan-341024.' }}<br>
+            @if($setting->footer_phone)
+              {{ __('Phone') }}: {{ $setting->footer_phone }}<br>
             @endif
-            {{ $bill['bill_email'] ?? '' }} &bull; {{ $bill['bill_phone'] ?? '' }}<br>
-            @if(isset($bill['bill_address1']))
-              {{ $bill['bill_address1'] }}{{ isset($bill['bill_address2']) && $bill['bill_address2'] ? ', '.$bill['bill_address2'] : '' }}<br>
-            @endif
-            {{ $bill['bill_city'] ?? '' }}{{ isset($state['name']) ? ', '.$state['name'] : '' }} {{ $bill['bill_zip'] ?? '' }}<br>
-            {{ $bill['bill_country'] ?? '' }}
+            {{ __('Email') }}: {{ $setting->footer_email ?: ($setting->contact_email ?: 'maansarajashahi@gmail.com') }}
           </p>
         </div>
       </div>
 
       <div class="col-6">
         <div class="p-3 rounded" style="background: #f8fafc; border: 1px solid #e2e8f0;">
-          <h6 class="font-weight-bold mb-2 text-dark">{{ __('Shipping Address') }}</h6>
+          <h6 class="font-weight-bold mb-2 text-dark" style="font-size: 12px; text-transform: uppercase;">{{ __('Billed To (Customer Details)') }}</h6>
           <p class="mb-0 text-muted" style="font-size: 13px; line-height: 1.6;">
-            <strong class="text-dark">{{ $ship['ship_first_name'] ?? '' }} {{ $ship['ship_last_name'] ?? '' }}</strong><br>
-            @if(isset($ship['ship_company']) && $ship['ship_company'])
-              {{ $ship['ship_company'] }}<br>
+            <strong class="text-dark">{{ $bill['bill_first_name'] ?? '' }} {{ $bill['bill_last_name'] ?? '' }}</strong><br>
+            @if(isset($bill['bill_company']) && $bill['bill_company'])
+              {{ $bill['bill_company'] }}<br>
             @endif
-            {{ $ship['ship_email'] ?? '' }} &bull; {{ $ship['ship_phone'] ?? '' }}<br>
-            @if(isset($ship['ship_address1']))
-              {{ $ship['ship_address1'] }}{{ isset($ship['ship_address2']) && $ship['ship_address2'] ? ', '.$ship['ship_address2'] : '' }}<br>
+            @if(isset($bill['bill_address1']))
+              {{ $bill['bill_address1'] }}{{ isset($bill['bill_address2']) && $bill['bill_address2'] ? ', '.$bill['bill_address2'] : '' }}<br>
             @endif
-            {{ $ship['ship_city'] ?? '' }}{{ isset($state['name']) ? ', '.$state['name'] : '' }} {{ $ship['ship_zip'] ?? '' }}<br>
-            {{ $ship['ship_country'] ?? '' }}
+            {{ $bill['bill_city'] ?? '' }}{{ isset($state['name']) ? ', '.$state['name'] : '' }} {{ $bill['bill_zip'] ?? '' }}<br>
+            {{ $bill['bill_country'] ?? 'India' }}<br>
+            {{ __('Phone') }}: {{ $bill['bill_phone'] ?? '' }} &bull; {{ __('Email') }}: {{ $bill['bill_email'] ?? '' }}
           </p>
         </div>
       </div>
