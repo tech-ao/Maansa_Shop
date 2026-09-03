@@ -177,10 +177,10 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <span class="fw-bold text-dark">{{ PriceHelper::orderTotal($order) }}</span>
+                                                <span class="fw-bold text-dark">{{ $order->currency_sign }}{{ \App\Helpers\PriceHelper::OrderTotal($order) }}</span>
                                             </td>
                                             <td class="text-end pe-4">
-                                                <a href="{{ route('user.order.details', $order->id) }}" class="btn btn-sm btn-outline-success rounded-pill px-3 py-1">
+                                                <a href="{{ route('user.order.invoice', $order->id) }}" class="btn btn-sm btn-outline-success rounded-pill px-3 py-1">
                                                     {{ __('Invoice') }}
                                                 </a>
                                             </td>
