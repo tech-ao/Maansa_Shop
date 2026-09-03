@@ -174,6 +174,9 @@
             </div>
         </div>
     </div>
+</div>
+{{-- DELETE MODAL ENDS --}}
+
 {{-- SHIPPING / DISPATCH MODAL --}}
 <div class="modal fade" id="shippingModal" tabindex="-1" role="dialog" aria-labelledby="shippingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

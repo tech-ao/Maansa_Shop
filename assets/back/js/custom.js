@@ -118,6 +118,27 @@
         $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
     });
 
+    $(document).on('show.bs.modal', '#shippingModal', function (e) {
+        var $btn = $(e.relatedTarget);
+        if ($btn.length) {
+            var formAction = $btn.data('action');
+            var txn = $btn.data('txn');
+            var courier = $btn.data('courier');
+            var tracking = $btn.data('tracking');
+            var link = $btn.data('link');
+
+            $('#shippingStatusForm').attr('action', formAction);
+            $('.shipping-modal-txn').text('#' + (txn || ''));
+            $('#modal_courier_name').val(courier || '');
+            $('#modal_tracking_number').val(tracking || '');
+            $('#modal_tracking_link').val(link || '');
+        }
+    });
+
+    $(document).on('click', '.courier-preset', function () {
+        $('#modal_courier_name').val($(this).text().trim());
+    });
+
     $(document).on('change', 'input.switch, input.switch-bootstrap, .radio-check', function () {
         var target = $(this).closest('.settings-section-card, .form-group').next('.image-show, .radio-show');
         if (!target.length) {
