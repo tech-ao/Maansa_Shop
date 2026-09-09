@@ -273,31 +273,33 @@
                 <input type="hidden" name="type" value="{{ request()->input('type') }}">
                 <div class="row align-items-end">
                     <div class="col-md-5 col-sm-6 mb-3 mb-md-0">
-                        <label class="form-label font-weight-bold text-dark small">{{ __('Start Date') }} *</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calendar-day"></i></span>
-                            </div>
-                            <input type="text" name="start_date" id="datepicker" class="form-control datepicker"
-                                placeholder="{{ __('Start Date') }}" value="{{ request()->input('start_date') }}">
+                        <label class="form-label font-weight-bold text-dark small mb-1.5 d-flex align-items-center">
+                            <i class="fa-solid fa-calendar-day text-success mr-2" style="font-size: 13px;"></i>
+                            <span>{{ __('Start Date') }} *</span>
+                        </label>
+                        <div class="custom-date-input-wrap">
+                            <i class="fa-regular fa-calendar text-success custom-date-icon"></i>
+                            <input type="text" name="start_date" id="datepicker" class="form-control datepicker custom-date-control"
+                                placeholder="{{ __('Start Date') }}" value="{{ request()->input('start_date') }}" style="height: 40px !important;">
                         </div>
                     </div>
                     <div class="col-md-5 col-sm-6 mb-3 mb-md-0">
-                        <label class="form-label font-weight-bold text-dark small">{{ __('End Date') }} *</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
-                            </div>
-                            <input type="text" name="end_date" id="datepicker1" class="form-control datepicker"
-                                placeholder="{{ __('End Date') }}" value="{{ request()->input('end_date') }}">
+                        <label class="form-label font-weight-bold text-dark small mb-1.5 d-flex align-items-center">
+                            <i class="fa-solid fa-calendar-check text-success mr-2" style="font-size: 13px;"></i>
+                            <span>{{ __('End Date') }} *</span>
+                        </label>
+                        <div class="custom-date-input-wrap">
+                            <i class="fa-regular fa-calendar-check text-success custom-date-icon"></i>
+                            <input type="text" name="end_date" id="datepicker1" class="form-control datepicker custom-date-control"
+                                placeholder="{{ __('End Date') }}" value="{{ request()->input('end_date') }}" style="height: 40px !important;">
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-12">
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary flex-grow-1 mr-1" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #10b981, #059669); border: none;">
-                                <i class="fa-solid fa-filter mr-1"></i> {{ __('Filter') }}
+                            <button type="submit" class="btn btn-primary flex-grow-1 mr-1" style="border-radius: 10px; font-weight: 700; height: 40px; background: linear-gradient(135deg, #10b981, #059669); border: none; display: inline-flex; align-items: center; justify-content: center;">
+                                <i class="fa-solid fa-filter mr-1.5"></i> {{ __('Filter') }}
                             </button>
-                            <a href="{{ route('back.order.index', request()->input('type') ? ['type' => request()->input('type')] : []) }}" class="btn btn-light border flex-grow-1" style="border-radius: 10px; font-weight: 700; height: 38px; display: inline-flex; align-items: center; justify-content: center;">
+                            <a href="{{ route('back.order.index', request()->input('type') ? ['type' => request()->input('type')] : []) }}" class="btn btn-light border flex-grow-1" style="border-radius: 10px; font-weight: 700; height: 40px; display: inline-flex; align-items: center; justify-content: center; color: #475569;">
                                 {{ __('Reset') }}
                             </a>
                         </div>
