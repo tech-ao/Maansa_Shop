@@ -133,10 +133,13 @@
             </div>
         </td>
 
-        <td class="text-center" style="min-width: 120px;">
+        <td class="text-center" style="min-width: 140px;">
             <div class="action-btn-group justify-content-center">
                 <a class="btn-action-icon btn-action-view" href="{{ route('back.order.invoice', $data->id) }}" title="{{ __('Invoice & Details') }}">
                     <i class="fa-solid fa-file-invoice"></i>
+                </a>
+                <a class="btn-action-icon" href="{{ route('back.order.packing_label', $data->id) }}" target="_blank" title="{{ __('Print Packing Label') }}" style="background: #f0fdf4; color: #059669; border: 1px solid #dcfce7;">
+                    <i class="fa-solid fa-box-archive"></i>
                 </a>
                 <a class="btn-action-icon btn-action-edit" href="{{ route('back.order.edit', $data->id) }}" title="{{ __('Edit Order ID') }}">
                     <i class="fa-solid fa-pen"></i>

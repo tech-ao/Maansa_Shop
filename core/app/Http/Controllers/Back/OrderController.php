@@ -121,6 +121,19 @@ class OrderController extends Controller
         return view('back.order.print',compact('order','cart'));
     }
 
+    /**
+     * Display the packing label for the specified order.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function packingLabel($id)
+    {
+        $order = Order::findOrFail($id);
+        $cart = json_decode($order->cart, true);
+        return view('back.order.packing_label', compact('order', 'cart'));
+    }
+
 
     /**
      * Change the status for editing the specified resource.

@@ -16,8 +16,11 @@
                 <a class="btn btn-hero-action btn-hero-primary" href="{{ route('back.order.index') }}" style="font-size: 13.5px; font-weight: 700; padding: 10px 20px;">
                     <i class="fa-solid fa-chevron-left mr-1"></i> {{ __('Back to Orders') }}
                 </a>
-                <a class="btn btn-hero-action" href="{{ route('back.order.print', $order->id) }}" target="_blank" style="background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.35); font-size: 13.5px; font-weight: 700; padding: 10px 20px;">
+                <a class="btn btn-hero-action" href="{{ route('back.order.print', $order->id) }}" target="_blank" style="background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.35); font-size: 13.5px; font-weight: 700; padding: 10px 20px; color: #ffffff;">
                     <i class="fa-solid fa-print mr-1"></i> {{ __('Print Invoice') }}
+                </a>
+                <a class="btn btn-hero-action" href="{{ route('back.order.packing_label', $order->id) }}" target="_blank" style="background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.35); font-size: 13.5px; font-weight: 700; padding: 10px 20px; color: #ffffff;">
+                    <i class="fa-solid fa-box-archive mr-1"></i> {{ __('Print Packing Label') }}
                 </a>
             </div>
         </div>
