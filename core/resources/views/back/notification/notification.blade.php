@@ -3,66 +3,54 @@
 @section('styles')
 <style>
     /* ==========================================================================
-       NOTIFICATIONS CENTER - MODERN ACTIVITY FEED
+       NOTIFICATIONS CENTER - REFINED MODERN ACTIVITY FEED
        ========================================================================== */
     
     /* Hero Banner */
     .notif-hero-card {
         background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
-        border-radius: 20px;
-        padding: 24px 28px;
+        border-radius: 18px;
+        padding: 22px 26px;
         color: #ffffff;
-        box-shadow: 0 16px 36px -10px rgba(6, 78, 59, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-        margin-bottom: 24px;
+        box-shadow: 0 14px 32px -10px rgba(6, 78, 59, 0.38);
+        margin-bottom: 22px;
         position: relative;
         overflow: hidden;
     }
     .notif-hero-card::before {
         content: '';
         position: absolute;
-        right: -40px;
-        top: -40px;
-        width: 220px;
-        height: 220px;
+        right: -30px;
+        top: -30px;
+        width: 180px;
+        height: 180px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-        pointer-events: none;
-    }
-    .notif-hero-card::after {
-        content: '';
-        position: absolute;
-        left: 30%;
-        bottom: -60px;
-        width: 160px;
-        height: 160px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0) 70%);
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 70%);
         pointer-events: none;
     }
     .notif-hero-icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 16px;
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
         background: rgba(255, 255, 255, 0.18);
-        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
+        font-size: 20px;
         color: #ffffff;
         flex-shrink: 0;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     }
     .notif-hero-btn {
-        border-radius: 12px;
+        border-radius: 10px;
         font-size: 13px;
         font-weight: 700;
-        padding: 9px 18px;
+        padding: 8px 16px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 7px;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         text-decoration: none !important;
         border: none;
         cursor: pointer;
@@ -70,56 +58,55 @@
     .notif-hero-btn-primary {
         background: #ffffff;
         color: #047857 !important;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
     .notif-hero-btn-primary:hover {
         background: #f0fdf4;
         color: #064e3b !important;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
     }
     .notif-hero-btn-danger {
-        background: rgba(239, 68, 68, 0.22);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(239, 68, 68, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.25);
         color: #ffffff !important;
     }
     .notif-hero-btn-danger:hover {
-        background: rgba(239, 68, 68, 0.4);
+        background: rgba(239, 68, 68, 0.45);
         color: #ffffff !important;
-        transform: translateY(-2px);
+        transform: translateY(-1px);
     }
     .notif-hero-btn-glass {
         background: rgba(255, 255, 255, 0.16);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.25);
         color: #ffffff !important;
     }
     .notif-hero-btn-glass:hover {
-        background: rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.26);
         color: #ffffff !important;
-        transform: translateY(-2px);
+        transform: translateY(-1px);
     }
 
-    /* Stat Quick Pills */
     .notif-stat-pill {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        padding: 4px 12px;
+        gap: 5px;
+        padding: 3px 10px;
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.18);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        font-size: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        font-size: 11.5px;
         font-weight: 700;
         color: #ffffff;
     }
 
-    /* Filter & Search Bar Container */
+    /* Toolbar & Tabs */
     .notif-toolbar-card {
         background: #ffffff;
         border: 1.5px solid #e2e8f0;
-        border-radius: 18px;
-        padding: 14px 18px;
-        margin-bottom: 20px;
+        border-radius: 16px;
+        padding: 12px 18px;
+        margin-bottom: 18px;
         box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
     }
     .notif-filter-tabs {
@@ -135,9 +122,9 @@
         display: none;
     }
     .notif-tab-btn {
-        padding: 8px 16px;
+        padding: 7px 15px;
         border-radius: 9999px;
-        font-size: 13px;
+        font-size: 12.5px;
         font-weight: 700;
         border: 1.5px solid #e2e8f0;
         background: #f8fafc;
@@ -160,7 +147,7 @@
         background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
         border-color: #059669 !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3) !important;
+        box-shadow: 0 3px 10px rgba(16, 185, 129, 0.28) !important;
     }
     .notif-tab-btn.active .notif-tab-badge {
         background: rgba(255, 255, 255, 0.28) !important;
@@ -174,15 +161,14 @@
         font-size: 11px;
         font-weight: 800;
         line-height: 1;
-        transition: all 0.2s;
     }
     .notif-search-wrap {
         position: relative;
-        min-width: 220px;
+        min-width: 240px;
     }
     .notif-search-icon {
         position: absolute;
-        left: 14px;
+        left: 13px;
         top: 50%;
         transform: translateY(-50%);
         color: #94a3b8;
@@ -191,11 +177,11 @@
     }
     .notif-search-input {
         width: 100%;
-        padding: 8px 14px 8px 36px;
+        padding: 7px 14px 7px 34px;
         border-radius: 9999px;
         border: 1.5px solid #e2e8f0;
         background: #f8fafc;
-        font-size: 13px;
+        font-size: 12.5px;
         color: #1e293b;
         transition: all 0.2s;
         outline: none;
@@ -203,10 +189,10 @@
     .notif-search-input:focus {
         background: #ffffff;
         border-color: #10b981;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.14);
     }
 
-    /* Notification Activity Feed Items */
+    /* Activity Feed Items */
     .notif-feed-container {
         display: flex;
         flex-direction: column;
@@ -220,51 +206,55 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 18px;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 20px;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
-        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
     }
     .notif-item-card:hover {
         border-color: #cbd5e1;
-        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
-        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.07);
+        transform: translateY(-1.5px);
     }
     .notif-item-card.is-unread {
         background: #f0fdf4 !important;
         border-color: #86efac !important;
-        border-left: 4.5px solid #10b981 !important;
-        box-shadow: 0 4px 18px rgba(16, 185, 129, 0.09);
+        border-left: 4px solid #10b981 !important;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.08);
     }
     
-    /* Left Avatar Squircles */
+    /* Left Avatar */
     .notif-avatar-box {
-        width: 48px;
-        height: 48px;
-        min-width: 48px;
-        border-radius: 14px;
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+        border-radius: 13px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 19px;
+        font-size: 18px;
         flex-shrink: 0;
         transition: transform 0.2s ease;
-    }
-    .notif-item-card:hover .notif-avatar-box {
-        transform: scale(1.05);
     }
     .notif-avatar-order {
         background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         color: #ffffff;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        box-shadow: 0 3px 10px rgba(16, 185, 129, 0.25);
     }
     .notif-avatar-user {
         background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
         color: #ffffff;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+        box-shadow: 0 3px 10px rgba(59, 130, 246, 0.25);
     }
 
-    /* Category Badges */
+    /* Meta Badges */
+    .notif-meta-bar {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
     .notif-category-chip {
         display: inline-flex;
         align-items: center;
@@ -272,9 +262,9 @@
         font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        padding: 3px 9px;
-        border-radius: 7px;
+        letter-spacing: 0.4px;
+        padding: 3px 8px;
+        border-radius: 6px;
         line-height: 1.2;
     }
     .notif-chip-order {
@@ -288,35 +278,36 @@
         border: 1px solid #bfdbfe;
     }
     .notif-unread-badge {
-        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        background: #ef4444;
         color: #ffffff;
         font-size: 10px;
         font-weight: 800;
-        padding: 3px 8px;
-        border-radius: 6px;
+        padding: 2.5px 7px;
+        border-radius: 5px;
         letter-spacing: 0.4px;
-        box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35);
         display: inline-flex;
         align-items: center;
         gap: 4px;
     }
-    .notif-unread-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #ffffff;
-        display: inline-block;
-        animation: notifPulse 1.8s infinite;
-    }
-    @keyframes notifPulse {
-        0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.4; transform: scale(0.85); }
+    .notif-time-badge {
+        font-size: 12px;
+        color: #64748b;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
     }
 
-    /* Action Buttons */
+    /* Actions Right Container */
+    .notif-card-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
     .notif-btn-action {
-        padding: 8px 18px;
-        border-radius: 11px;
+        padding: 8px 16px;
+        border-radius: 10px;
         font-size: 12.5px;
         font-weight: 700;
         display: inline-flex;
@@ -329,32 +320,32 @@
         height: 38px;
     }
     .notif-btn-invoice {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        background: #059669;
         color: #ffffff !important;
-        border: none;
-        box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
+        border: 1px solid #047857;
+        box-shadow: 0 2px 6px rgba(5, 150, 105, 0.2);
     }
     .notif-btn-invoice:hover {
-        background: linear-gradient(135deg, #059669 0%, #047857 100%);
-        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        background: #047857;
+        box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
         transform: translateY(-1px);
     }
     .notif-btn-user {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        background: #2563eb;
         color: #ffffff !important;
-        border: none;
-        box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3);
+        border: 1px solid #1d4ed8;
+        box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
     }
     .notif-btn-user:hover {
-        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-        box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        background: #1d4ed8;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
         transform: translateY(-1px);
     }
     .notif-btn-delete {
         width: 38px;
         height: 38px;
         min-width: 38px;
-        border-radius: 11px;
+        border-radius: 10px;
         background: #fff1f2;
         color: #e11d48 !important;
         border: 1.5px solid #fecdd3;
@@ -366,23 +357,23 @@
         cursor: pointer;
     }
     .notif-btn-delete:hover {
-        background: #ffe4e6;
+        background: #fee2e2;
         border-color: #fda4af;
         color: #be123c !important;
-        transform: scale(1.06);
+        transform: scale(1.05);
     }
 
     /* Mobile Responsive Optimizations (< 768px) */
     @media (max-width: 767.98px) {
         .notif-hero-card {
-            padding: 18px 16px;
-            border-radius: 16px;
-            margin-bottom: 16px;
+            padding: 16px 14px;
+            border-radius: 14px;
+            margin-bottom: 14px;
         }
         .notif-hero-row {
             flex-direction: column !important;
             align-items: flex-start !important;
-            gap: 16px;
+            gap: 14px;
         }
         .notif-hero-actions {
             width: 100%;
@@ -392,13 +383,13 @@
         }
         .notif-hero-btn {
             width: 100%;
-            padding: 10px 14px;
+            padding: 9px 12px;
             font-size: 12.5px;
         }
         .notif-toolbar-card {
-            padding: 12px;
+            padding: 10px 12px;
             border-radius: 14px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .notif-toolbar-flex {
             flex-direction: column !important;
@@ -411,23 +402,22 @@
         .notif-item-card {
             flex-direction: column;
             align-items: stretch;
-            padding: 14px 15px;
+            padding: 14px;
             gap: 12px;
             border-radius: 14px;
         }
-        .notif-mobile-header {
+        .notif-card-main-row {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
             width: 100%;
-            gap: 10px;
         }
         .notif-avatar-box {
-            width: 42px;
-            height: 42px;
-            min-width: 42px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
             font-size: 16px;
-            border-radius: 12px;
+            border-radius: 11px;
         }
         .notif-card-actions {
             display: flex;
@@ -440,7 +430,7 @@
         .notif-btn-action {
             flex-grow: 1;
             width: auto;
-            font-size: 12px;
+            font-size: 12.5px;
         }
     }
 </style>
@@ -468,22 +458,22 @@
                 </div>
                 <div>
                     <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
-                        <h2 class="font-weight-bold text-white mb-0" style="font-size: 21px; letter-spacing: 0.2px;">
+                        <h2 class="font-weight-bold text-white mb-0" style="font-size: 20px; letter-spacing: 0.2px;">
                             {{ __('Notifications Center') }}
                         </h2>
                         <span class="notif-stat-pill">
-                            <i class="fa-solid fa-layer-group" style="font-size: 11px;"></i>
+                            <i class="fa-solid fa-layer-group" style="font-size: 10.5px;"></i>
                             <span id="headerTotalCount">{{ $totalCount }}</span> {{ __('Total') }}
                         </span>
                         @if($unreadCount > 0)
                             <span class="notif-stat-pill" style="background: rgba(239, 68, 68, 0.35); border-color: rgba(254, 202, 202, 0.4);" id="headerUnreadPill">
-                                <span class="notif-unread-dot"></span>
+                                <i class="fa-solid fa-circle text-danger" style="font-size: 8px;"></i>
                                 <span id="headerUnreadCount">{{ $unreadCount }}</span> {{ __('Unread') }}
                             </span>
                         @endif
                     </div>
-                    <p class="text-white small mb-0" style="font-size: 13px; opacity: 0.9;">
-                        {{ __('Review real-time store purchase orders, customer registrations, and activity logs.') }}
+                    <p class="text-white small mb-0" style="font-size: 12.5px; opacity: 0.9;">
+                        {{ __('Review real-time store purchase orders, customer registrations, and activity alerts.') }}
                     </p>
                 </div>
             </div>
@@ -513,7 +503,7 @@
         </div>
     </div>
 
-    <!-- Filter & Search Bar -->
+    <!-- Filter & Search Toolbar -->
     <div class="notif-toolbar-card">
         <div class="d-flex align-items-center justify-content-between flex-wrap notif-toolbar-flex gap-2">
             <!-- Filter Tabs -->
@@ -543,7 +533,7 @@
             <!-- Search Filter -->
             <div class="notif-search-wrap">
                 <i class="fa-solid fa-magnifying-glass notif-search-icon"></i>
-                <input type="text" id="notifSearchInput" class="notif-search-input" placeholder="{{ __('Search orders, names, dates...') }}" autocomplete="off">
+                <input type="text" id="notifSearchInput" class="notif-search-input" placeholder="{{ __('Search orders, customers, dates...') }}" autocomplete="off">
             </div>
         </div>
     </div>
@@ -565,56 +555,53 @@
                  data-unread="{{ $isUnread ? '1' : '0' }}"
                  data-search="{{ strtolower(($isOrder ? 'order #' . ($notf->order ? $notf->order->order_number : '') . ' purchase invoice' : '') . ' ' . ($isUser ? 'customer registration ' . ($notf->user ? $notf->user->name . ' ' . $notf->user->email : '') : '') . ' ' . $notf->created_at->format('M d Y h:i a') . ' ' . $notf->created_at->diffForHumans()) }}">
                 
-                <!-- Left Details Area -->
-                <div class="d-flex align-items-center flex-grow-1">
+                <!-- Main Content Row (Left Avatar + Middle Info) -->
+                <div class="notif-card-main-row d-flex align-items-center flex-grow-1">
                     <!-- Icon Avatar -->
                     <div class="notif-avatar-box {{ $isOrder ? 'notif-avatar-order' : 'notif-avatar-user' }} mr-3">
                         <i class="fa-solid {{ $isOrder ? 'fa-cart-shopping' : 'fa-user-plus' }}"></i>
                     </div>
 
-                    <!-- Main Text Info -->
+                    <!-- Main Text Details -->
                     <div class="flex-grow-1">
-                        <!-- Category Chip + Time + Unread Pill -->
-                        <div class="d-flex align-items-center justify-content-between mb-1.5 flex-wrap gap-2">
-                            <div class="d-flex align-items-center flex-wrap gap-2">
-                                <span class="notif-category-chip {{ $isOrder ? 'notif-chip-order' : 'notif-chip-user' }}">
-                                    <i class="fa-solid {{ $isOrder ? 'fa-bag-shopping' : 'fa-user' }}"></i>
-                                    {{ $isOrder ? __('Purchase Order') : __('Customer Registration') }}
+                        <!-- Top Metadata: Category Badge + NEW Badge + Timestamp -->
+                        <div class="notif-meta-bar">
+                            <span class="notif-category-chip {{ $isOrder ? 'notif-chip-order' : 'notif-chip-user' }}">
+                                <i class="fa-solid {{ $isOrder ? 'fa-bag-shopping' : 'fa-user' }}"></i>
+                                {{ $isOrder ? __('Order') : __('Customer') }}
+                            </span>
+                            @if($isUnread)
+                                <span class="notif-unread-badge">
+                                    <i class="fa-solid fa-circle" style="font-size: 6px;"></i> {{ __('NEW') }}
                                 </span>
-                                @if($isUnread)
-                                    <span class="notif-unread-badge">
-                                        <span class="notif-unread-dot"></span> {{ __('NEW') }}
-                                    </span>
-                                @endif
-                            </div>
-                            
-                            <!-- Timestamp -->
-                            <span class="text-muted small d-inline-flex align-items-center" style="font-size: 12px;" title="{{ $notf->created_at->format('M d, Y h:i A') }}">
-                                <i class="fa-regular fa-clock mr-1.5 text-muted"></i> {{ $notf->created_at->diffForHumans() }}
+                            @endif
+                            <span class="notif-time-badge" title="{{ $notf->created_at->format('M d, Y h:i A') }}">
+                                <i class="fa-regular fa-clock text-muted"></i> {{ $notf->created_at->diffForHumans() }}
                             </span>
                         </div>
 
-                        <!-- Title & Description Body -->
+                        <!-- Title -->
                         <h6 class="font-weight-bold text-dark mb-1" style="font-size: 14.5px; line-height: 1.3;">
                             @if($isOrder)
-                                {{ __('New Order') }} @if($notf->order && $notf->order->order_number)<span class="text-success">#{{ $notf->order->order_number }}</span>@endif
+                                {{ __('New Order Received') }} @if($notf->order && $notf->order->order_number)<span class="text-success font-weight-bold">#{{ $notf->order->order_number }}</span>@endif
                             @else
-                                {{ __('New Customer Signup') }}
+                                {{ __('New Customer Registration') }}
                             @endif
                         </h6>
 
+                        <!-- Description -->
                         <p class="text-muted mb-0" style="font-size: 13px; line-height: 1.45;">
                             @if($isOrder)
                                 @if($notf->order && $notf->order->order_number)
-                                    {{ __('A new purchase order') }} <strong class="text-dark">#{{ $notf->order->order_number }}</strong> {{ __('was placed successfully. Click to review invoice, items, and shipping status.') }}
+                                    {{ __('A new purchase order') }} <strong class="text-dark">#{{ $notf->order->order_number }}</strong> {{ __('was placed successfully. Click to review invoice and shipping details.') }}
                                 @else
-                                    {{ __('You have received a new purchase order. View the invoice for payment and dispatch details.') }}
+                                    {{ __('You have received a new purchase order. View invoice for billing and delivery details.') }}
                                 @endif
                             @else
                                 @if($notf->user && $notf->user->name)
-                                    <strong class="text-dark">{{ $notf->user->name }}</strong> ({{ $notf->user->email }}) {{ __('created a new account on your store.') }}
+                                    <strong class="text-dark">{{ $notf->user->name }}</strong> ({{ $notf->user->email }}) {{ __('registered a new account.') }}
                                 @else
-                                    {{ __('A new customer successfully registered an account on your store.') }}
+                                    {{ __('A new customer registered an account on your online store.') }}
                                 @endif
                             @endif
                         </p>
@@ -622,7 +609,7 @@
                 </div>
 
                 <!-- Right Action Buttons -->
-                <div class="notif-card-actions d-flex align-items-center gap-2">
+                <div class="notif-card-actions">
                     @if($isOrder)
                         <a href="{{ route('back.order.invoice', $notf->order_id) }}" class="notif-btn-action notif-btn-invoice">
                             <i class="fa-solid fa-file-invoice"></i>
@@ -644,15 +631,15 @@
             <!-- Empty State -->
             <div class="text-center py-5 bg-white rounded-xl shadow-sm border" style="border-radius: 18px;">
                 <div class="mb-3">
-                    <div style="width: 72px; height: 72px; border-radius: 50%; background: #f0fdf4; border: 2px solid #bbf7d0; display: inline-flex; align-items: center; justify-content: center; color: #16a34a; font-size: 28px; box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15);">
+                    <div style="width: 68px; height: 68px; border-radius: 50%; background: #f0fdf4; border: 2px solid #bbf7d0; display: inline-flex; align-items: center; justify-content: center; color: #16a34a; font-size: 26px; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.15);">
                         <i class="fa-solid fa-bell-slash"></i>
                     </div>
                 </div>
-                <h5 class="font-weight-bold text-dark mb-1" style="font-size: 17px;">{{ __('No Notifications Found') }}</h5>
+                <h5 class="font-weight-bold text-dark mb-1" style="font-size: 16.5px;">{{ __('No Notifications Found') }}</h5>
                 <p class="text-muted mb-4" style="max-width: 440px; margin: 0 auto; font-size: 13.5px;">
                     {{ __('You are completely caught up! New orders, customer registrations, and store activity alerts will automatically appear here.') }}
                 </p>
-                <a href="{{ route('back.dashboard') }}" class="btn btn-primary font-weight-bold" style="border-radius: 11px; padding: 10px 22px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: none; font-size: 13.5px;">
+                <a href="{{ route('back.dashboard') }}" class="btn btn-primary font-weight-bold" style="border-radius: 10px; padding: 9px 20px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: none; font-size: 13px;">
                     <i class="fa-solid fa-arrow-left mr-1.5"></i> {{ __('Return to Dashboard') }}
                 </a>
             </div>
@@ -661,7 +648,7 @@
         <!-- Filter / Search No Match State -->
         <div id="noFilterMatch" class="text-center py-5 bg-white rounded-xl shadow-sm border d-none" style="border-radius: 18px;">
             <div class="mb-3">
-                <div style="width: 60px; height: 60px; border-radius: 50%; background: #f8fafc; border: 1.5px solid #e2e8f0; display: inline-flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 22px;">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: #f8fafc; border: 1.5px solid #e2e8f0; display: inline-flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 20px;">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
@@ -675,9 +662,9 @@
 <!-- Clear All Confirmation Modal -->
 <div class="modal fade" id="confirm-clear-all" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 440px;">
-        <div class="modal-content" style="border-radius: 20px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);">
+        <div class="modal-content" style="border-radius: 18px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.25);">
             <div class="modal-header" style="background: #fef2f2; border-bottom: 1px solid #fee2e2; padding: 18px 24px;">
-                <h5 class="modal-title font-weight-bold text-danger d-flex align-items-center" style="font-size: 15.5px;">
+                <h5 class="modal-title font-weight-bold text-danger d-flex align-items-center" style="font-size: 15px;">
                     <i class="fa-solid fa-triangle-exclamation mr-2"></i> {{ __('Clear All Notifications?') }}
                 </h5>
                 <button class="close text-danger" type="button" data-dismiss="modal" aria-label="Close">
@@ -686,7 +673,7 @@
             </div>
             <div class="modal-body p-4 text-center">
                 <div class="mb-3">
-                    <div style="width: 58px; height: 58px; border-radius: 50%; background: #fee2e2; display: inline-flex; align-items: center; justify-content: center; color: #dc2626; font-size: 24px;">
+                    <div style="width: 56px; height: 56px; border-radius: 50%; background: #fee2e2; display: inline-flex; align-items: center; justify-content: center; color: #dc2626; font-size: 24px;">
                         <i class="fa-solid fa-trash-can"></i>
                     </div>
                 </div>
@@ -800,7 +787,6 @@
                     }
                 },
                 error: function() {
-                    // Fallback to direct navigation
                     window.location.href = url;
                 }
             });
