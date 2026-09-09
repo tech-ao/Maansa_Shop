@@ -423,7 +423,8 @@
         
         // Determine primary recipient address (Shipping info if present, else Billing info)
         $recipient = !empty($ship['ship_first_name']) ? $ship : $bill;
-        $isCod = (stripos($order->payment_method, 'Cash') !== false || stripos($order->payment_method, 'COD') !== false);
+        $isPaid = ($order->payment_status === 'Paid');
+        $isCodMethod = (stripos($order->payment_method, 'Cash') !== false || stripos($order->payment_method, 'COD') !== false);
         $cartItems = json_decode($order->cart, true) ?: [];
         $totalQty = 0;
         foreach($cartItems as $cItem) {
@@ -480,12 +481,24 @@
                     <div class="routing-label">{{ __('AWB / Tracking') }}</div>
                     <div class="routing-val">{{ $order->tracking_number ?: ($order->txnid ?: 'PENDING') }}</div>
                 </div>
-                <div class="routing-cell payment-cell">
-                    <div class="routing-label">{{ __('Payment Mode') }}</div>
-                    @if($isCod)
-                        <span class="badge-payment payment-cod">{{ __('COD') }} ({{ $order->currency_sign }}{{ PriceHelper::OrderTotal($order) }})</span>
+                <div class="routing-cell payment-cell" style="min-width: 145px; padding: 6px 10px;">
+                    <div class="routing-label">{{ __('Payment Status & Mode') }}</div>
+                    @if($isPaid)
+                        <span class="badge-payment payment-prepaid" style="font-size: 11px;">
+                            <svg style="width: 10px; height: 10px; margin-right: 3px; fill: currentColor; vertical-align: -1px;" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            {{ __('PAID') }} @if(!$isCodMethod && !empty($order->payment_method)) ({{ $order->payment_method }}) @endif
+                        </span>
+                        <div style="font-size: 9.5px; font-weight: 800; color: #059669; margin-top: 2px;">{{ __('COLLECT: ') }}{{ $order->currency_sign }}0.00</div>
+                    @elseif($isCodMethod)
+                        <span class="badge-payment payment-cod" style="font-size: 11px;">
+                            {{ __('COD') }}: {{ $order->currency_sign }}{{ PriceHelper::OrderTotal($order) }}
+                        </span>
+                        <div style="font-size: 9.5px; font-weight: 800; color: #dc2626; margin-top: 2px;">{{ __('COLLECT CASH ON DELIVERY') }}</div>
                     @else
-                        <span class="badge-payment payment-prepaid">{{ __('PREPAID') }}</span>
+                        <span class="badge-payment payment-unpaid" style="font-size: 11px; background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca;">
+                            {{ __('UNPAID') }} ({{ $order->payment_method ?: 'Online' }})
+                        </span>
+                        <div style="font-size: 9.5px; font-weight: 800; color: #b91c1c; margin-top: 2px;">{{ __('PAYMENT PENDING') }}</div>
                     @endif
                 </div>
             </div>
