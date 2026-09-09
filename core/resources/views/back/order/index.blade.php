@@ -61,8 +61,8 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             color: #ffffff;
             display: flex;
             align-items: center;
@@ -72,9 +72,10 @@
             font-size: 14px;
             padding: 0;
             line-height: 1;
+            flex-shrink: 0;
         }
         .bulk-modal-close-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.3);
             color: #ffffff;
         }
         
@@ -85,27 +86,39 @@
             gap: 8px;
         }
         .btn-preset-card {
-            padding: 10px 8px;
-            border-radius: 12px;
+            padding: 9px 8px;
+            min-height: 40px;
+            border-radius: 10px;
             border: 1.5px solid #e2e8f0;
             background: #ffffff;
             color: #334155;
             font-size: 12.5px;
             font-weight: 700;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: center !important;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             outline: none !important;
+            white-space: nowrap;
+            user-select: none;
+            width: 100%;
         }
         .btn-preset-card i {
-            font-size: 14px;
+            font-size: 13px;
+            margin-right: 6px;
             color: #64748b;
             transition: color 0.2s;
+            flex-shrink: 0;
+        }
+        .btn-preset-card span {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1;
+            color: inherit;
         }
         .btn-preset-card:hover {
             border-color: #cbd5e1;
@@ -118,7 +131,8 @@
             color: #ffffff !important;
             box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25) !important;
         }
-        .btn-preset-card.active i {
+        .btn-preset-card.active i,
+        .btn-preset-card.active span {
             color: #ffffff !important;
         }
 
@@ -126,7 +140,6 @@
         .range-summary-chip {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
             padding: 4px 12px;
             border-radius: 20px;
             background: #f1f5f9;
@@ -134,6 +147,40 @@
             font-size: 11.5px;
             font-weight: 700;
             border: 1px solid #e2e8f0;
+        }
+
+        /* Custom Date Field Wrapper */
+        .custom-date-input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .custom-date-input-wrap .custom-date-icon {
+            position: absolute;
+            left: 12px;
+            font-size: 13px;
+            color: #059669;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .custom-date-control {
+            padding-left: 34px !important;
+            padding-right: 10px !important;
+            height: 38px !important;
+            border-radius: 10px !important;
+            border: 1.5px solid #cbd5e1 !important;
+            background: #ffffff !important;
+            color: #0f172a !important;
+            font-weight: 700 !important;
+            font-size: 12.5px !important;
+            box-shadow: none !important;
+            width: 100% !important;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .custom-date-control:focus {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
         }
 
         /* Mobile & Small Screens (<576px) */
@@ -144,11 +191,19 @@
             }
             .presets-grid-3col {
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 6px !important;
+                gap: 7px !important;
             }
             .btn-preset-card {
-                padding: 8px 6px;
-                font-size: 12px;
+                padding: 8px 6px !important;
+                min-height: 38px !important;
+                font-size: 11.5px !important;
+            }
+            .btn-preset-card i {
+                font-size: 12px !important;
+                margin-right: 4px !important;
+            }
+            .btn-preset-card span {
+                font-size: 11.5px !important;
             }
             .bulk-modal-header {
                 padding: 14px 16px;
@@ -431,20 +486,20 @@
         <div class="modal-content bulk-modal-content">
             <!-- Modal Header -->
             <div class="bulk-modal-header" id="bulkModalHeader" style="background: linear-gradient(135deg, #064e3b 0%, #047857 100%);">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="bulk-header-icon-box" id="bulkModalIconBox">
+                <div class="d-flex align-items-center mr-2">
+                    <div class="bulk-header-icon-box mr-3" id="bulkModalIconBox">
                         <i class="fa-solid fa-file-invoice" id="bulkModalIcon"></i>
                     </div>
                     <div>
-                        <h5 class="modal-title font-weight-bold text-white mb-0" id="bulkModalHeadingText" style="font-size: 16px; letter-spacing: 0.2px;">
+                        <h5 class="modal-title font-weight-bold text-white mb-0" id="bulkModalHeadingText" style="font-size: 16px; letter-spacing: 0.2px; line-height: 1.3;">
                             {{ __('Bulk Invoices Generator') }}
                         </h5>
-                        <p class="text-white opacity-8 small mb-0 mt-0.5" id="bulkModalSubtext" style="font-size: 11.5px;">
-                            {{ __('Select a quick timeframe or date range to generate.') }}
+                        <p class="text-white small mb-0 mt-0.5" id="bulkModalSubtext" style="font-size: 11.5px; opacity: 0.85; line-height: 1.3;">
+                            {{ __('Filter orders to generate and print official tax invoices.') }}
                         </p>
                     </div>
                 </div>
-                <button type="button" class="bulk-modal-close-btn" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="bulk-modal-close-btn flex-shrink-0" data-dismiss="modal" aria-label="Close">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -458,7 +513,7 @@
                     <div id="bulkSelectedAlert" class="alert mb-3 p-3 d-none" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 14px;">
                         <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
                             <div class="d-flex align-items-center">
-                                <div class="rounded-circle mr-2.5 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 32px; height: 32px; background: #bbf7d0; color: #15803d; font-size: 14px;">
+                                <div class="rounded-circle mr-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 32px; height: 32px; background: #bbf7d0; color: #15803d; font-size: 14px;">
                                     <i class="fa-solid fa-check"></i>
                                 </div>
                                 <div>
@@ -481,13 +536,13 @@
 
                     <div id="bulkFilterControls">
                         <!-- Date Range Header with Active Summary Badge -->
-                        <div class="d-flex align-items-center justify-content-between mb-2.5 flex-wrap gap-2">
+                        <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap gap-2">
                             <label class="form-label font-weight-bold text-dark small mb-0 d-flex align-items-center">
-                                <i class="fa-solid fa-calendar-days text-success mr-1.5" style="font-size: 13px;"></i>
-                                {{ __('Quick Date Presets') }}
+                                <i class="fa-solid fa-calendar-days text-success mr-2" style="font-size: 13px;"></i>
+                                <span>{{ __('Quick Date Presets') }}</span>
                             </label>
                             <span class="range-summary-chip" id="summaryChipText">
-                                <i class="fa-solid fa-circle-check text-success" style="font-size: 11px;"></i>
+                                <i class="fa-solid fa-circle-check text-success mr-1" style="font-size: 11px;"></i>
                                 <span id="chipRangeLabel">{{ __('Today') }}</span>
                             </span>
                         </div>
@@ -521,30 +576,26 @@
                         </div>
 
                         <!-- Custom Date Range Section -->
-                        <div class="custom-date-box mb-3 p-3" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px;">
+                        <div class="custom-date-box mb-3 p-3" style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 14px;">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <span class="font-weight-bold text-dark small" style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px;">
-                                    <i class="fa-solid fa-sliders text-muted mr-1"></i> {{ __('Custom Date Range') }}
+                                <span class="font-weight-bold text-dark small d-flex align-items-center" style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px;">
+                                    <i class="fa-solid fa-sliders text-muted mr-1.5" style="font-size: 12px; margin-right: 6px;"></i> {{ __('Custom Date Range') }}
                                 </span>
                                 <small class="text-muted" style="font-size: 11px;">{{ __('Or adjust dates manually') }}</small>
                             </div>
                             <div class="row gx-2">
-                                <div class="col-6">
-                                    <label class="form-label text-muted font-weight-bold" style="font-size: 11px; margin-bottom: 3px;">{{ __('From') }}</label>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text bg-white border-right-0" style="border-radius: 8px 0 0 8px;"><i class="fa-regular fa-calendar text-success" style="font-size: 11px;"></i></span>
-                                        </div>
-                                        <input type="text" name="start_date" id="modal_start_date" class="form-control datepicker font-weight-bold text-dark" placeholder="{{ __('MM/DD/YYYY') }}" style="border-radius: 0 8px 8px 0; font-size: 12px; height: 36px;">
+                                <div class="col-6 pr-1">
+                                    <label class="form-label text-muted font-weight-bold" style="font-size: 11px; margin-bottom: 4px; display: block;">{{ __('From') }}</label>
+                                    <div class="custom-date-input-wrap">
+                                        <i class="fa-regular fa-calendar custom-date-icon"></i>
+                                        <input type="text" name="start_date" id="modal_start_date" class="form-control datepicker custom-date-control" placeholder="{{ __('MM/DD/YYYY') }}">
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <label class="form-label text-muted font-weight-bold" style="font-size: 11px; margin-bottom: 3px;">{{ __('To') }}</label>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text bg-white border-right-0" style="border-radius: 8px 0 0 8px;"><i class="fa-regular fa-calendar-check text-success" style="font-size: 11px;"></i></span>
-                                        </div>
-                                        <input type="text" name="end_date" id="modal_end_date" class="form-control datepicker font-weight-bold text-dark" placeholder="{{ __('MM/DD/YYYY') }}" style="border-radius: 0 8px 8px 0; font-size: 12px; height: 36px;">
+                                <div class="col-6 pl-1">
+                                    <label class="form-label text-muted font-weight-bold" style="font-size: 11px; margin-bottom: 4px; display: block;">{{ __('To') }}</label>
+                                    <div class="custom-date-input-wrap">
+                                        <i class="fa-regular fa-calendar-check custom-date-icon"></i>
+                                        <input type="text" name="end_date" id="modal_end_date" class="form-control datepicker custom-date-control" placeholder="{{ __('MM/DD/YYYY') }}">
                                     </div>
                                 </div>
                             </div>
@@ -552,12 +603,12 @@
 
                         <!-- Order Fulfillment Status Dropdown -->
                         <div class="form-group mb-0">
-                            <label class="form-label font-weight-bold text-dark small mb-1.5 d-flex align-items-center">
-                                <i class="fa-solid fa-truck-ramp-box text-primary mr-1.5" style="font-size: 12px;"></i>
-                                {{ __('Filter by Order Status') }}
+                            <label class="form-label font-weight-bold text-dark small mb-2 d-flex align-items-center">
+                                <i class="fa-solid fa-truck-ramp-box text-primary mr-2" style="font-size: 13px;"></i>
+                                <span>{{ __('Filter by Order Status') }}</span>
                             </label>
-                            <div class="input-group">
-                                <select name="type" id="modal_order_status" class="form-control" style="border-radius: 10px; font-weight: 600; font-size: 12.5px; height: 40px; border: 1.5px solid #cbd5e1;">
+                            <div class="status-select-wrap">
+                                <select name="type" id="modal_order_status" class="form-control" style="border-radius: 10px !important; font-weight: 600 !important; font-size: 12.5px !important; height: 42px !important; border: 1.5px solid #cbd5e1 !important; background: #ffffff !important; color: #0f172a !important; padding: 0 14px !important;">
                                     <option value="all">{{ __('All Statuses (Pending, In Progress, Shipped, Delivered)') }}</option>
                                     <option value="Pending" {{ request()->input('type') == 'Pending' ? 'selected' : '' }}>{{ __('Pending Only') }}</option>
                                     <option value="In Progress" {{ request()->input('type') == 'In Progress' ? 'selected' : '' }}>{{ __('In Progress Only') }}</option>
@@ -576,7 +627,7 @@
                         {{ __('Cancel') }}
                     </button>
                     <button type="submit" class="btn btn-primary px-4 font-weight-bold d-inline-flex align-items-center shadow-sm" id="bulkSubmitBtn" style="border-radius: 12px; font-size: 13px; height: 42px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: none;">
-                        <i class="fa-solid fa-print mr-1.5"></i> <span id="bulkSubmitBtnText">{{ __('Download / Print Invoices') }}</span>
+                        <i class="fa-solid fa-print mr-2"></i> <span id="bulkSubmitBtnText">{{ __('Download / Print Invoices') }}</span>
                     </button>
                 </div>
             </form>
