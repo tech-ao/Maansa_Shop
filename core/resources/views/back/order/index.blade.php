@@ -24,43 +24,147 @@
             z-index: 999999 !important;
             position: absolute !important;
         }
-        .btn-date-preset {
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 9px 12px;
-            border: 1.5px solid #cbd5e1;
+
+        /* Bulk Print Modern Pop-up Modal */
+        .bulk-modal-dialog {
+            max-width: 560px;
+            margin: 1.75rem auto;
+        }
+        .bulk-modal-content {
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+            overflow: hidden;
             background: #ffffff;
-            color: #334155;
-            transition: all 0.2s ease;
-            display: inline-flex;
+        }
+        .bulk-modal-header {
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        .bulk-header-icon-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            cursor: pointer;
+            font-size: 18px;
+            color: #ffffff;
+            flex-shrink: 0;
         }
-        .btn-date-preset:hover {
+        .bulk-modal-close-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            padding: 0;
+            line-height: 1;
+        }
+        .bulk-modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+        
+        /* 6-Grid Date Preset Buttons */
+        .presets-grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .btn-preset-card {
+            padding: 10px 8px;
+            border-radius: 12px;
+            border: 1.5px solid #e2e8f0;
+            background: #ffffff;
+            color: #334155;
+            font-size: 12.5px;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            outline: none !important;
+        }
+        .btn-preset-card i {
+            font-size: 14px;
+            color: #64748b;
+            transition: color 0.2s;
+        }
+        .btn-preset-card:hover {
+            border-color: #cbd5e1;
             background: #f8fafc;
-            border-color: #94a3b8;
             color: #0f172a;
         }
-        .btn-date-preset.active {
-            background: #f0fdf4 !important;
-            border-color: #10b981 !important;
-            color: #047857 !important;
-            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25) !important;
+        .btn-preset-card.active {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+            border-color: #059669 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25) !important;
         }
-        .btn-date-preset.active.preset-blue {
-            background: #eff6ff !important;
-            border-color: #0284c7 !important;
-            color: #0369a1 !important;
-            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25) !important;
+        .btn-preset-card.active i {
+            color: #ffffff !important;
         }
-        .btn-date-preset.active.preset-dark {
-            background: #f1f5f9 !important;
-            border-color: #0f172a !important;
-            color: #0f172a !important;
-            box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.25) !important;
+
+        /* Range Summary Chip */
+        .range-summary-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #f1f5f9;
+            color: #334155;
+            font-size: 11.5px;
+            font-weight: 700;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Mobile & Small Screens (<576px) */
+        @media (max-width: 576px) {
+            .bulk-modal-dialog {
+                margin: 0.5rem;
+                max-width: calc(100% - 1rem);
+            }
+            .presets-grid-3col {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 6px !important;
+            }
+            .btn-preset-card {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            .bulk-modal-header {
+                padding: 14px 16px;
+            }
+            .bulk-modal-content .modal-body {
+                padding: 16px !important;
+            }
+            .bulk-modal-content .modal-footer {
+                padding: 12px 16px !important;
+                flex-direction: column-reverse !important;
+                gap: 8px;
+            }
+            .bulk-modal-content .modal-footer .btn {
+                width: 100% !important;
+                justify-content: center;
+            }
         }
     </style>
 @endsection
@@ -323,126 +427,156 @@
 </div>
 {{-- BULK PRINT POP-UP MODAL --}}
 <div class="modal fade" id="bulkPrintModal" tabindex="-1" role="dialog" aria-labelledby="bulkPrintModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 18px; overflow: hidden;">
-            <div class="modal-header text-white border-0 py-3" id="bulkModalHeader" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
-                <div>
-                    <h5 class="modal-title d-flex align-items-center font-weight-bold" id="bulkPrintModalTitle">
-                        <i class="fa-solid fa-receipt mr-2" id="bulkModalIcon"></i> <span id="bulkModalHeadingText">{{ __('Bulk Invoices Generator') }}</span>
-                    </h5>
-                    <small class="text-white opacity-9 d-block mt-0.5" id="bulkModalSubtext">
-                        {{ __('Filter orders by preset dates (Today, This Week, etc.) or custom range.') }}
-                    </small>
+    <div class="modal-dialog modal-dialog-centered bulk-modal-dialog" role="document">
+        <div class="modal-content bulk-modal-content">
+            <!-- Modal Header -->
+            <div class="bulk-modal-header" id="bulkModalHeader" style="background: linear-gradient(135deg, #064e3b 0%, #047857 100%);">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bulk-header-icon-box" id="bulkModalIconBox">
+                        <i class="fa-solid fa-file-invoice" id="bulkModalIcon"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title font-weight-bold text-white mb-0" id="bulkModalHeadingText" style="font-size: 16px; letter-spacing: 0.2px;">
+                            {{ __('Bulk Invoices Generator') }}
+                        </h5>
+                        <p class="text-white opacity-8 small mb-0 mt-0.5" id="bulkModalSubtext" style="font-size: 11.5px;">
+                            {{ __('Select a quick timeframe or date range to generate.') }}
+                        </p>
+                    </div>
                 </div>
-                <button class="close text-white opacity-8" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="bulk-modal-close-btn" data-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
+
             <form id="bulkPrintForm" action="{{ route('back.order.bulk.invoices') }}" method="GET" target="_blank">
                 <input type="hidden" name="time_frame" id="modal_time_frame" value="today">
                 <input type="hidden" name="ids" id="modal_selected_ids" value="">
 
                 <div class="modal-body p-4">
-                    <!-- Selected Orders Banner (Visible only when checkboxes are selected) -->
-                    <div id="bulkSelectedAlert" class="alert mb-3 p-3 d-none" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px;">
+                    <!-- Selected Items Banner (shown only when table checkboxes are checked) -->
+                    <div id="bulkSelectedAlert" class="alert mb-3 p-3 d-none" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 14px;">
                         <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
                             <div class="d-flex align-items-center">
-                                <div class="rounded-circle mr-2.5 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #bbf7d0; color: #15803d; font-size: 16px;">
-                                    <i class="fa-solid fa-circle-check"></i>
+                                <div class="rounded-circle mr-2.5 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 32px; height: 32px; background: #bbf7d0; color: #15803d; font-size: 14px;">
+                                    <i class="fa-solid fa-check"></i>
                                 </div>
                                 <div>
-                                    <div class="font-weight-bold text-dark" style="font-size: 13.5px;" id="bulkSelectedCountText">
-                                        {{ __('You have selected 0 order(s) in the table.') }}
+                                    <div class="font-weight-bold text-dark" style="font-size: 13px;" id="bulkSelectedCountText">
+                                        {{ __('0 order(s) selected from table') }}
                                     </div>
-                                    <small class="text-muted">{{ __('Choose whether to print only these checked items or use the date filters below.') }}</small>
+                                    <small class="text-muted" style="font-size: 11px;">{{ __('Print checked orders or switch to date filters.') }}</small>
                                 </div>
                             </div>
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-sm btn-outline-success active font-weight-bold" style="border-radius: 8px 0 0 8px; font-size: 12px;" id="optSelectedOnlyLabel">
+                                <label class="btn btn-sm btn-outline-success active font-weight-bold" style="border-radius: 8px 0 0 8px; font-size: 11.5px; padding: 4px 10px;" id="optSelectedOnlyLabel">
                                     <input type="radio" name="scope_selection" id="scope_selected" value="selected" checked> {{ __('Selected Only') }}
                                 </label>
-                                <label class="btn btn-sm btn-outline-secondary font-weight-bold" style="border-radius: 0 8px 8px 0; font-size: 12px;" id="optUseFiltersLabel">
-                                    <input type="radio" name="scope_selection" id="scope_filter" value="filter"> {{ __('Use Date Filters') }}
+                                <label class="btn btn-sm btn-outline-secondary font-weight-bold" style="border-radius: 0 8px 8px 0; font-size: 11.5px; padding: 4px 10px;" id="optUseFiltersLabel">
+                                    <input type="radio" name="scope_selection" id="scope_filter" value="filter"> {{ __('Use Filters') }}
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Date Range Presets Section -->
                     <div id="bulkFilterControls">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <label class="form-label font-weight-bold text-dark small mb-0">
-                                <i class="fa-solid fa-calendar-days text-primary mr-1"></i> {{ __('Choose Date Filter Preset') }}
+                        <!-- Date Range Header with Active Summary Badge -->
+                        <div class="d-flex align-items-center justify-content-between mb-2.5 flex-wrap gap-2">
+                            <label class="form-label font-weight-bold text-dark small mb-0 d-flex align-items-center">
+                                <i class="fa-solid fa-calendar-days text-success mr-1.5" style="font-size: 13px;"></i>
+                                {{ __('Quick Date Presets') }}
                             </label>
-                            <span class="badge badge-light border text-dark font-weight-bold px-2 py-1" id="activePresetBadge" style="border-radius: 6px; font-size: 11.5px;">{{ __('Preset: Today') }}</span>
+                            <span class="range-summary-chip" id="summaryChipText">
+                                <i class="fa-solid fa-circle-check text-success" style="font-size: 11px;"></i>
+                                <span id="chipRangeLabel">{{ __('Today') }}</span>
+                            </span>
                         </div>
-                        
-                        <!-- Quick Filter Buttons: Today, Yesterday, This Week, Last 7 Days, This Month, All Time, Custom -->
-                        <div class="date-presets-grid mb-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 8px;">
-                            <button type="button" class="btn btn-date-preset active" data-preset="today">
-                                <i class="fa-solid fa-sun mr-1"></i> {{ __('Today') }}
+
+                        <!-- 6 Balanced Preset Cards (3x2 on desktop, 2x3 on mobile) -->
+                        <div class="presets-grid-3col mb-3">
+                            <button type="button" class="btn-preset-card active" data-preset="today">
+                                <i class="fa-solid fa-sun"></i>
+                                <span>{{ __('Today') }}</span>
                             </button>
-                            <button type="button" class="btn btn-date-preset" data-preset="yesterday">
-                                <i class="fa-solid fa-clock-rotate-left mr-1"></i> {{ __('Yesterday') }}
+                            <button type="button" class="btn-preset-card" data-preset="yesterday">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <span>{{ __('Yesterday') }}</span>
                             </button>
-                            <button type="button" class="btn btn-date-preset" data-preset="this_week">
-                                <i class="fa-solid fa-calendar-week mr-1"></i> {{ __('This Week') }}
+                            <button type="button" class="btn-preset-card" data-preset="this_week">
+                                <i class="fa-solid fa-calendar-week"></i>
+                                <span>{{ __('This Week') }}</span>
                             </button>
-                            <button type="button" class="btn btn-date-preset" data-preset="last_7_days">
-                                <i class="fa-solid fa-calendar-minus mr-1"></i> {{ __('Last 7 Days') }}
+                            <button type="button" class="btn-preset-card" data-preset="last_7_days">
+                                <i class="fa-solid fa-calendar-check"></i>
+                                <span>{{ __('Last 7 Days') }}</span>
                             </button>
-                            <button type="button" class="btn btn-date-preset" data-preset="this_month">
-                                <i class="fa-solid fa-calendar mr-1"></i> {{ __('This Month') }}
+                            <button type="button" class="btn-preset-card" data-preset="this_month">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span>{{ __('This Month') }}</span>
                             </button>
-                            <button type="button" class="btn btn-date-preset" data-preset="all">
-                                <i class="fa-solid fa-infinity mr-1"></i> {{ __('All Time') }}
-                            </button>
-                            <button type="button" class="btn btn-date-preset" data-preset="custom">
-                                <i class="fa-solid fa-sliders mr-1"></i> {{ __('Custom') }}
+                            <button type="button" class="btn-preset-card" data-preset="all">
+                                <i class="fa-solid fa-infinity"></i>
+                                <span>{{ __('All Time') }}</span>
                             </button>
                         </div>
 
-                        <!-- Custom Date Pickers -->
-                        <div class="row custom-dates-row mb-3" id="bulkModalCustomDates">
-                            <div class="col-md-6 mb-2 mb-md-0">
-                                <label class="form-label font-weight-bold text-dark small">{{ __('Start Date') }}</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa-solid fa-calendar-day"></i></span>
-                                    </div>
-                                    <input type="text" name="start_date" id="modal_start_date" class="form-control datepicker" placeholder="{{ __('Start Date (MM/DD/YYYY)') }}" style="border-radius: 0 10px 10px 0; font-weight: 600;">
-                                </div>
+                        <!-- Custom Date Range Section -->
+                        <div class="custom-date-box mb-3 p-3" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px;">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="font-weight-bold text-dark small" style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px;">
+                                    <i class="fa-solid fa-sliders text-muted mr-1"></i> {{ __('Custom Date Range') }}
+                                </span>
+                                <small class="text-muted" style="font-size: 11px;">{{ __('Or adjust dates manually') }}</small>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label font-weight-bold text-dark small">{{ __('End Date') }}</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
+                            <div class="row gx-2">
+                                <div class="col-6">
+                                    <label class="form-label text-muted font-weight-bold" style="font-size: 11px; margin-bottom: 3px;">{{ __('From') }}</label>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-white border-right-0" style="border-radius: 8px 0 0 8px;"><i class="fa-regular fa-calendar text-success" style="font-size: 11px;"></i></span>
+                                        </div>
+                                        <input type="text" name="start_date" id="modal_start_date" class="form-control datepicker font-weight-bold text-dark" placeholder="{{ __('MM/DD/YYYY') }}" style="border-radius: 0 8px 8px 0; font-size: 12px; height: 36px;">
                                     </div>
-                                    <input type="text" name="end_date" id="modal_end_date" class="form-control datepicker" placeholder="{{ __('End Date (MM/DD/YYYY)') }}" style="border-radius: 0 10px 10px 0; font-weight: 600;">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label text-muted font-weight-bold" style="font-size: 11px; margin-bottom: 3px;">{{ __('To') }}</label>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-white border-right-0" style="border-radius: 8px 0 0 8px;"><i class="fa-regular fa-calendar-check text-success" style="font-size: 11px;"></i></span>
+                                        </div>
+                                        <input type="text" name="end_date" id="modal_end_date" class="form-control datepicker font-weight-bold text-dark" placeholder="{{ __('MM/DD/YYYY') }}" style="border-radius: 0 8px 8px 0; font-size: 12px; height: 36px;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Order Fulfillment Status Filter -->
+                        <!-- Order Fulfillment Status Dropdown -->
                         <div class="form-group mb-0">
-                            <label class="form-label font-weight-bold text-dark small">{{ __('Order Fulfillment Status') }}</label>
-                            <select name="type" id="modal_order_status" class="form-control" style="border-radius: 10px; font-weight: 600;">
-                                <option value="all">{{ __('All Statuses (Pending, In Progress, Shipped, Delivered)') }}</option>
-                                <option value="Pending" {{ request()->input('type') == 'Pending' ? 'selected' : '' }}>{{ __('Pending Only') }}</option>
-                                <option value="In Progress" {{ request()->input('type') == 'In Progress' ? 'selected' : '' }}>{{ __('In Progress Only') }}</option>
-                                <option value="Shipped" {{ request()->input('type') == 'Shipped' ? 'selected' : '' }}>{{ __('Shipped Only') }}</option>
-                                <option value="Delivered" {{ request()->input('type') == 'Delivered' ? 'selected' : '' }}>{{ __('Delivered Only') }}</option>
-                                <option value="Canceled" {{ request()->input('type') == 'Canceled' ? 'selected' : '' }}>{{ __('Canceled Only') }}</option>
-                            </select>
+                            <label class="form-label font-weight-bold text-dark small mb-1.5 d-flex align-items-center">
+                                <i class="fa-solid fa-truck-ramp-box text-primary mr-1.5" style="font-size: 12px;"></i>
+                                {{ __('Filter by Order Status') }}
+                            </label>
+                            <div class="input-group">
+                                <select name="type" id="modal_order_status" class="form-control" style="border-radius: 10px; font-weight: 600; font-size: 12.5px; height: 40px; border: 1.5px solid #cbd5e1;">
+                                    <option value="all">{{ __('All Statuses (Pending, In Progress, Shipped, Delivered)') }}</option>
+                                    <option value="Pending" {{ request()->input('type') == 'Pending' ? 'selected' : '' }}>{{ __('Pending Only') }}</option>
+                                    <option value="In Progress" {{ request()->input('type') == 'In Progress' ? 'selected' : '' }}>{{ __('In Progress Only') }}</option>
+                                    <option value="Shipped" {{ request()->input('type') == 'Shipped' ? 'selected' : '' }}>{{ __('Shipped Only') }}</option>
+                                    <option value="Delivered" {{ request()->input('type') == 'Delivered' ? 'selected' : '' }}>{{ __('Delivered Only') }}</option>
+                                    <option value="Canceled" {{ request()->input('type') == 'Canceled' ? 'selected' : '' }}>{{ __('Canceled Only') }}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal-footer bg-light border-0 py-3 d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-secondary px-4" style="border-radius: 10px; font-weight: 700;" data-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="submit" class="btn btn-primary px-4" id="bulkSubmitBtn" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #0284c7, #0369a1); border: none;">
-                        <i class="fa-solid fa-print mr-1"></i> <span id="bulkSubmitBtnText">{{ __('Download / Print Invoices') }}</span>
+                <!-- Modal Footer with Cancel & Submit -->
+                <div class="modal-footer bg-light border-0 py-3 px-4 d-flex justify-content-between align-items-center" style="border-top: 1px solid #e2e8f0 !important;">
+                    <button type="button" class="btn btn-light border px-4 font-weight-bold" style="border-radius: 12px; color: #475569; font-size: 13px; height: 42px;" data-dismiss="modal">
+                        {{ __('Cancel') }}
+                    </button>
+                    <button type="submit" class="btn btn-primary px-4 font-weight-bold d-inline-flex align-items-center shadow-sm" id="bulkSubmitBtn" style="border-radius: 12px; font-size: 13px; height: 42px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: none;">
+                        <i class="fa-solid fa-print mr-1.5"></i> <span id="bulkSubmitBtnText">{{ __('Download / Print Invoices') }}</span>
                     </button>
                 </div>
             </form>
@@ -489,54 +623,61 @@
         return [month, day, year].join('/');
     }
 
+    function formatDisplayDate(d) {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return ('0' + d.getDate()).slice(-2) + ' ' + months[d.getMonth()] + ', ' + d.getFullYear();
+    }
+
     function applyDatePreset(preset) {
         $('#modal_time_frame').val(preset);
-        $('.btn-date-preset').removeClass('active');
-        $('.btn-date-preset[data-preset="' + preset + '"]').addClass('active');
+        $('.btn-preset-card').removeClass('active');
+        $('.btn-preset-card[data-preset="' + preset + '"]').addClass('active');
 
         var now = new Date();
-        var todayStr = formatUsDate(now);
-        var badgeText = 'Preset: ' + preset.replace('_', ' ').toUpperCase();
+        var todayInput = formatUsDate(now);
+        var todayDisplay = formatDisplayDate(now);
+        var chipText = '';
 
         if (preset === 'today') {
-            $('#modal_start_date').val(todayStr);
-            $('#modal_end_date').val(todayStr);
-            badgeText = 'Preset: Today';
+            $('#modal_start_date').val(todayInput);
+            $('#modal_end_date').val(todayInput);
+            chipText = 'Today: ' + todayDisplay;
         } else if (preset === 'yesterday') {
             var yest = new Date();
             yest.setDate(yest.getDate() - 1);
-            var yestStr = formatUsDate(yest);
-            $('#modal_start_date').val(yestStr);
-            $('#modal_end_date').val(yestStr);
-            badgeText = 'Preset: Yesterday';
+            $('#modal_start_date').val(formatUsDate(yest));
+            $('#modal_end_date').val(formatUsDate(yest));
+            chipText = 'Yesterday: ' + formatDisplayDate(yest);
         } else if (preset === 'this_week') {
             var d = new Date();
             var day = d.getDay();
             var diff = d.getDate() - day + (day === 0 ? -6 : 1); // Monday
             var monday = new Date(d.setDate(diff));
             $('#modal_start_date').val(formatUsDate(monday));
-            $('#modal_end_date').val(todayStr);
-            badgeText = 'Preset: This Week';
+            $('#modal_end_date').val(todayInput);
+            chipText = 'This Week: ' + formatDisplayDate(monday) + ' – ' + todayDisplay;
         } else if (preset === 'last_7_days') {
             var d7 = new Date();
             d7.setDate(d7.getDate() - 6);
             $('#modal_start_date').val(formatUsDate(d7));
-            $('#modal_end_date').val(todayStr);
-            badgeText = 'Preset: Last 7 Days';
+            $('#modal_end_date').val(todayInput);
+            chipText = 'Last 7 Days: ' + formatDisplayDate(d7) + ' – ' + todayDisplay;
         } else if (preset === 'this_month') {
             var firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
             $('#modal_start_date').val(formatUsDate(firstDay));
-            $('#modal_end_date').val(todayStr);
-            badgeText = 'Preset: This Month';
+            $('#modal_end_date').val(todayInput);
+            chipText = 'This Month: ' + formatDisplayDate(firstDay) + ' – ' + todayDisplay;
         } else if (preset === 'all') {
             $('#modal_start_date').val('');
             $('#modal_end_date').val('');
-            badgeText = 'Preset: All Time';
+            chipText = 'All Time (No Date Filter)';
         } else if (preset === 'custom') {
-            badgeText = 'Preset: Custom Range';
+            var s = $('#modal_start_date').val();
+            var e = $('#modal_end_date').val();
+            chipText = 'Custom: ' + (s || 'Start') + ' – ' + (e || 'End');
         }
 
-        $('#activePresetBadge').text(badgeText);
+        $('#chipRangeLabel').text(chipText);
     }
 
     $(document).ready(function() {
@@ -610,26 +751,26 @@
             var selectedCount = selectedVal ? selectedVal.split(',').filter(function(x) { return x.trim() !== ''; }).length : 0;
 
             if (mode === 'invoices') {
-                $('#bulkModalHeader').css('background', 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)');
-                $('#bulkModalIcon').attr('class', 'fa-solid fa-receipt mr-2');
+                $('#bulkModalHeader').css('background', 'linear-gradient(135deg, #064e3b 0%, #047857 100%)');
+                $('#bulkModalIcon').attr('class', 'fa-solid fa-file-invoice');
                 $('#bulkModalHeadingText').text("{{ __('Bulk Invoices Generator') }}");
                 $('#bulkModalSubtext').text("{{ __('Filter orders to generate and print official tax invoices.') }}");
                 $('#bulkPrintForm').attr('action', "{{ route('back.order.bulk.invoices') }}");
-                $('#bulkSubmitBtn').css('background', 'linear-gradient(135deg, #0284c7, #0369a1)');
+                $('#bulkSubmitBtn').css('background', 'linear-gradient(135deg, #10b981 0%, #059669 100%)');
                 $('#bulkSubmitBtnText').text("{{ __('Download / Print Invoices') }}");
             } else {
                 $('#bulkModalHeader').css('background', 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)');
-                $('#bulkModalIcon').attr('class', 'fa-solid fa-tags mr-2');
+                $('#bulkModalIcon').attr('class', 'fa-solid fa-tags');
                 $('#bulkModalHeadingText').text("{{ __('Bulk Packing Labels Generator') }}");
                 $('#bulkModalSubtext').text("{{ __('Filter orders to generate and print 4x6 / thermal packing labels.') }}");
                 $('#bulkPrintForm').attr('action', "{{ route('back.order.bulk.packing_labels') }}");
-                $('#bulkSubmitBtn').css('background', 'linear-gradient(135deg, #1e293b, #0f172a)');
+                $('#bulkSubmitBtn').css('background', 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)');
                 $('#bulkSubmitBtnText').text("{{ __('Download / Print Packing Labels') }}");
             }
 
             if (selectedCount > 0) {
                 $('#bulkSelectedAlert').removeClass('d-none');
-                $('#bulkSelectedCountText').text("{{ __('You have selected') }} " + selectedCount + " {{ __('order(s) in the table.') }}");
+                $('#bulkSelectedCountText').text(selectedCount + " {{ __('order(s) selected from table') }}");
                 $('#modal_selected_ids').val(selectedVal);
                 $('#scope_selected').prop('checked', true);
                 $('#optSelectedOnlyLabel').addClass('active');
@@ -670,7 +811,7 @@
         });
 
         // Click Preset Date Buttons inside Bulk Modal
-        $(document).on('click', '.btn-date-preset', function(e) {
+        $(document).on('click', '.btn-preset-card', function(e) {
             e.preventDefault();
             var preset = $(this).data('preset');
             applyDatePreset(preset);
@@ -688,9 +829,10 @@
         // When user manually edits date inputs, switch preset to custom
         $(document).on('input change dp.change', '#modal_start_date, #modal_end_date', function() {
             $('#modal_time_frame').val('custom');
-            $('.btn-date-preset').removeClass('active');
-            $('.btn-date-preset[data-preset="custom"]').addClass('active');
-            $('#activePresetBadge').text("{{ __('Preset: Custom Range') }}");
+            $('.btn-preset-card').removeClass('active');
+            var s = $('#modal_start_date').val();
+            var e = $('#modal_end_date').val();
+            $('#chipRangeLabel').text('Custom: ' + (s || 'Start') + ' – ' + (e || 'End'));
         });
     });
 </script>
