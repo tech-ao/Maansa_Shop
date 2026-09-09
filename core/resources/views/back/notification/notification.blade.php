@@ -15,7 +15,13 @@
             <div class="dash-hero-actions">
                 @php
                     $allNotifications = App\Models\Notification::orderby('id','desc')->get();
+                    $unreadCount = $allNotifications->where('is_read', 0)->count();
                 @endphp
+                @if($unreadCount > 0)
+                    <a href="{{ route('back.notifications.read') }}" class="btn btn-hero-action btn-hero-secondary" style="font-size: 13.5px; font-weight: 700; padding: 10px 18px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #047857;">
+                        <i class="fa-solid fa-check-double mr-1"></i> {{ __('Mark as Read') }}
+                    </a>
+                @endif
                 @if($allNotifications->count() > 0)
                     <a href="javascript:;" data-toggle="modal" data-target="#confirm-clear-all" class="btn btn-hero-action btn-hero-secondary" style="font-size: 13.5px; font-weight: 700; padding: 10px 18px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #dc2626;">
                         <i class="fa-solid fa-trash-can mr-1"></i> {{ __('Clear All') }}

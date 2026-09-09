@@ -1058,7 +1058,22 @@
                         <p class="text-muted mb-0 font-weight-bold" style="font-size: 13px;">No new notifications</p>
                     </div>
                 `);
-                $('.topbar-notif-badge').remove();
+                $('#alertsDropdown .topbar-notif-badge').fadeOut(200, function() { $(this).remove(); });
+            });
+        }
+    });
+
+    // Instant notification mark as read
+    $(document).on('click', '#mark-read-notf', function (e) {
+        e.preventDefault();
+        var url = $(this).data('href');
+        var $btn = $(this);
+        if (url) {
+            $.get(url, function () {
+                $('#alertsDropdown .topbar-notif-badge').fadeOut(200, function() { $(this).remove(); });
+                $('.notif-header-unread-badge').fadeOut(200, function() { $(this).remove(); });
+                $('.notif-item-unread').removeClass('notif-item-unread');
+                $btn.html('<i class="fa-solid fa-check text-success mr-1.5" style="font-size: 13px;"></i> <span class="text-success">' + ($btn.text().includes('Mark as read') ? 'Marked as read' : 'Read') + '</span>');
             });
         }
     });

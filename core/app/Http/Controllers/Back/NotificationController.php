@@ -33,10 +33,19 @@ class NotificationController extends Controller
 
     public function view_notification()
     {
+        Notification::where('is_read', 0)->update(['is_read' => 1]);
         return view('back.notification.notification',[
-            'data'=>Notification::orderby('id','desc')
+            'data'=>Notification::orderby('id','desc')->get()
         ]);
+    }
 
+    public function mark_as_read()
+    {
+        Notification::where('is_read', 0)->update(['is_read' => 1]);
+        if (request()->ajax()) {
+            return response()->json(['status' => 'success']);
+        }
+        return back()->withSuccess(__('All notifications marked as read.'));
     }
 
     public function delete($id)
@@ -52,7 +61,11 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function clear_notf(){
-        Notification::truncate();
+        try {
+            Notification::truncate();
+        } catch (\Throwable $e) {
+            Notification::query()->delete();
+        }
         if (request()->ajax()) {
             return response()->json(['status' => 'success']);
         }

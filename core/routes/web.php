@@ -109,6 +109,7 @@ Route::group(['middleware' => ['adminlocalize', 'demo']], function () {
         //------------ NOTIFICATIONS ------------
         Route::get('/notifications', 'Back\NotificationController@notifications')->name('back.notifications');
         Route::get('/notifications/view', 'Back\NotificationController@view_notification')->name('back.view.notification');
+        Route::get('/notifications/read', 'Back\NotificationController@mark_as_read')->name('back.notifications.read');
         Route::get('/notification/delete/{id}', 'Back\NotificationController@delete')->name('back.notification.delete');
         Route::get('/notifications/clear', 'Back\NotificationController@clear_notf')->name('back.notifications.clear');
 
