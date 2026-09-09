@@ -184,16 +184,47 @@ class OrderController extends Controller
             }
         }
 
-        if ($request->type) {
+        if ($request->type && $request->type != 'all') {
             if (in_array($request->type, ['Pending', 'In Progress', 'Shipped', 'Delivered', 'Canceled'])) {
                 $query->whereOrderStatus($request->type);
             }
         }
 
-        if ($request->start_date && $request->end_date) {
+        // Handle preset time frames or custom date ranges
+        if ($request->has('time_frame') && !empty($request->time_frame)) {
+            if ($request->time_frame == 'today') {
+                $query->whereDate('created_at', Carbon::today());
+            } elseif ($request->time_frame == 'yesterday') {
+                $query->whereDate('created_at', Carbon::yesterday());
+            } elseif ($request->time_frame == 'this_week') {
+                $query->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+            } elseif ($request->time_frame == 'last_7_days') {
+                $query->whereDate('created_at', '>=', Carbon::now()->subDays(7)->startOfDay());
+            } elseif ($request->time_frame == 'this_month') {
+                $query->whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year);
+            } elseif ($request->time_frame == 'custom') {
+                if ($request->start_date && $request->end_date) {
+                    $start_date = Carbon::parse($request->start_date);
+                    $end_date = Carbon::parse($request->end_date);
+                    $query->whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<=', $end_date);
+                } elseif ($request->start_date) {
+                    $start_date = Carbon::parse($request->start_date);
+                    $query->whereDate('created_at', '>=', $start_date);
+                } elseif ($request->end_date) {
+                    $end_date = Carbon::parse($request->end_date);
+                    $query->whereDate('created_at', '<=', $end_date);
+                }
+            }
+        } elseif ($request->start_date && $request->end_date) {
             $start_date = Carbon::parse($request->start_date);
             $end_date = Carbon::parse($request->end_date);
             $query->whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<=', $end_date);
+        } elseif ($request->start_date) {
+            $start_date = Carbon::parse($request->start_date);
+            $query->whereDate('created_at', '>=', $start_date);
+        } elseif ($request->end_date) {
+            $end_date = Carbon::parse($request->end_date);
+            $query->whereDate('created_at', '<=', $end_date);
         }
 
         return $query->get();

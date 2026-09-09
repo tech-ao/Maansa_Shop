@@ -24,6 +24,44 @@
             z-index: 999999 !important;
             position: absolute !important;
         }
+        .btn-date-preset {
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 9px 12px;
+            border: 1.5px solid #cbd5e1;
+            background: #ffffff;
+            color: #334155;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn-date-preset:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+            color: #0f172a;
+        }
+        .btn-date-preset.active {
+            background: #f0fdf4 !important;
+            border-color: #10b981 !important;
+            color: #047857 !important;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25) !important;
+        }
+        .btn-date-preset.active.preset-blue {
+            background: #eff6ff !important;
+            border-color: #0284c7 !important;
+            color: #0369a1 !important;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.25) !important;
+        }
+        .btn-date-preset.active.preset-dark {
+            background: #f1f5f9 !important;
+            border-color: #0f172a !important;
+            color: #0f172a !important;
+            box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.25) !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -39,10 +77,10 @@
                 <p>{{ __('Review customer purchases, track fulfillment states, manage payment transactions, and print tax invoices.') }}</p>
             </div>
             <div class="dash-hero-actions d-flex flex-wrap gap-2">
-                <button type="button" class="btn btn-hero-action btn-hero-secondary bulk-print-trigger" data-url="{{ route('back.order.bulk.invoices') }}" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
+                <button type="button" class="btn btn-hero-action btn-hero-secondary open-bulk-modal" data-mode="invoices" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
                     <i class="fa-solid fa-receipt mr-1 text-info"></i> {{ __('Bulk Invoices') }}
                 </button>
-                <button type="button" class="btn btn-hero-action btn-hero-secondary bulk-print-trigger" data-url="{{ route('back.order.bulk.packing_labels') }}" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
+                <button type="button" class="btn btn-hero-action btn-hero-secondary open-bulk-modal" data-mode="labels" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
                     <i class="fa-solid fa-tags mr-1 text-primary"></i> {{ __('Bulk Packing Labels') }}
                 </button>
                 <a href="{{ route('back.csv.order.export') }}" class="btn btn-hero-action btn-hero-secondary" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
@@ -103,10 +141,10 @@
                             <a href="{{ route('back.order.index', request()->input('type') ? ['type' => request()->input('type')] : []) }}" class="btn btn-light border" style="border-radius: 10px; font-weight: 700; height: 38px; display: inline-flex; align-items: center; justify-content: center; padding: 0 14px;">
                                 {{ __('Reset') }}
                             </a>
-                            <button type="submit" formaction="{{ route('back.order.bulk.invoices') }}" formtarget="_blank" class="btn btn-info text-white" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #0284c7, #0369a1); border: none; padding: 0 14px;">
+                            <button type="button" class="btn btn-info text-white open-bulk-modal" data-mode="invoices" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #0284c7, #0369a1); border: none; padding: 0 14px;">
                                 <i class="fa-solid fa-receipt mr-1"></i> {{ __('Print Invoices') }}
                             </button>
-                            <button type="submit" formaction="{{ route('back.order.bulk.packing_labels') }}" formtarget="_blank" class="btn btn-dark text-white" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #1e293b, #0f172a); border: none; padding: 0 14px;">
+                            <button type="button" class="btn btn-dark text-white open-bulk-modal" data-mode="labels" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #1e293b, #0f172a); border: none; padding: 0 14px;">
                                 <i class="fa-solid fa-tags mr-1"></i> {{ __('Print Packing Labels') }}
                             </button>
                         </div>
@@ -289,7 +327,135 @@
         </div>
     </div>
 </div>
-{{-- SHIPPING MODAL ENDS --}}
+{{-- BULK PRINT POP-UP MODAL --}}
+<div class="modal fade" id="bulkPrintModal" tabindex="-1" role="dialog" aria-labelledby="bulkPrintModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 18px; overflow: hidden;">
+            <div class="modal-header text-white border-0 py-3" id="bulkModalHeader" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+                <div>
+                    <h5 class="modal-title d-flex align-items-center font-weight-bold" id="bulkPrintModalTitle">
+                        <i class="fa-solid fa-receipt mr-2" id="bulkModalIcon"></i> <span id="bulkModalHeadingText">{{ __('Bulk Invoices Generator') }}</span>
+                    </h5>
+                    <small class="text-white opacity-9 d-block mt-0.5" id="bulkModalSubtext">
+                        {{ __('Filter orders by preset dates (Today, This Week, etc.) or custom range.') }}
+                    </small>
+                </div>
+                <button class="close text-white opacity-8" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="bulkPrintForm" action="{{ route('back.order.bulk.invoices') }}" method="GET" target="_blank">
+                <input type="hidden" name="time_frame" id="modal_time_frame" value="today">
+                <input type="hidden" name="ids" id="modal_selected_ids" value="">
+
+                <div class="modal-body p-4">
+                    <!-- Selected Orders Banner (Visible only when checkboxes are selected) -->
+                    <div id="bulkSelectedAlert" class="alert mb-3 p-3 d-none" style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px;">
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle mr-2.5 d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; background: #bbf7d0; color: #15803d; font-size: 16px;">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                                <div>
+                                    <div class="font-weight-bold text-dark" style="font-size: 13.5px;" id="bulkSelectedCountText">
+                                        {{ __('You have selected 0 order(s) in the table.') }}
+                                    </div>
+                                    <small class="text-muted">{{ __('Choose whether to print only these checked items or use the date filters below.') }}</small>
+                                </div>
+                            </div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-sm btn-outline-success active font-weight-bold" style="border-radius: 8px 0 0 8px; font-size: 12px;" id="optSelectedOnlyLabel">
+                                    <input type="radio" name="scope_selection" id="scope_selected" value="selected" checked> {{ __('Selected Only') }}
+                                </label>
+                                <label class="btn btn-sm btn-outline-secondary font-weight-bold" style="border-radius: 0 8px 8px 0; font-size: 12px;" id="optUseFiltersLabel">
+                                    <input type="radio" name="scope_selection" id="scope_filter" value="filter"> {{ __('Use Date Filters') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date Range Presets Section -->
+                    <div id="bulkFilterControls">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <label class="form-label font-weight-bold text-dark small mb-0">
+                                <i class="fa-solid fa-calendar-days text-primary mr-1"></i> {{ __('Choose Date Filter Preset') }}
+                            </label>
+                            <span class="badge badge-light border text-dark font-weight-bold px-2 py-1" id="activePresetBadge" style="border-radius: 6px; font-size: 11.5px;">{{ __('Preset: Today') }}</span>
+                        </div>
+                        
+                        <!-- Quick Filter Buttons: Today, Yesterday, This Week, Last 7 Days, This Month, All Time, Custom -->
+                        <div class="date-presets-grid mb-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 8px;">
+                            <button type="button" class="btn btn-date-preset active" data-preset="today">
+                                <i class="fa-solid fa-sun mr-1"></i> {{ __('Today') }}
+                            </button>
+                            <button type="button" class="btn btn-date-preset" data-preset="yesterday">
+                                <i class="fa-solid fa-clock-rotate-left mr-1"></i> {{ __('Yesterday') }}
+                            </button>
+                            <button type="button" class="btn btn-date-preset" data-preset="this_week">
+                                <i class="fa-solid fa-calendar-week mr-1"></i> {{ __('This Week') }}
+                            </button>
+                            <button type="button" class="btn btn-date-preset" data-preset="last_7_days">
+                                <i class="fa-solid fa-calendar-minus mr-1"></i> {{ __('Last 7 Days') }}
+                            </button>
+                            <button type="button" class="btn btn-date-preset" data-preset="this_month">
+                                <i class="fa-solid fa-calendar mr-1"></i> {{ __('This Month') }}
+                            </button>
+                            <button type="button" class="btn btn-date-preset" data-preset="all">
+                                <i class="fa-solid fa-infinity mr-1"></i> {{ __('All Time') }}
+                            </button>
+                            <button type="button" class="btn btn-date-preset" data-preset="custom">
+                                <i class="fa-solid fa-sliders mr-1"></i> {{ __('Custom') }}
+                            </button>
+                        </div>
+
+                        <!-- Custom Date Pickers -->
+                        <div class="row custom-dates-row mb-3" id="bulkModalCustomDates">
+                            <div class="col-md-6 mb-2 mb-md-0">
+                                <label class="form-label font-weight-bold text-dark small">{{ __('Start Date') }}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa-solid fa-calendar-day"></i></span>
+                                    </div>
+                                    <input type="text" name="start_date" id="modal_start_date" class="form-control datepicker" placeholder="{{ __('Start Date (MM/DD/YYYY)') }}" style="border-radius: 0 10px 10px 0; font-weight: 600;">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label font-weight-bold text-dark small">{{ __('End Date') }}</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
+                                    </div>
+                                    <input type="text" name="end_date" id="modal_end_date" class="form-control datepicker" placeholder="{{ __('End Date (MM/DD/YYYY)') }}" style="border-radius: 0 10px 10px 0; font-weight: 600;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Fulfillment Status Filter -->
+                        <div class="form-group mb-0">
+                            <label class="form-label font-weight-bold text-dark small">{{ __('Order Fulfillment Status') }}</label>
+                            <select name="type" id="modal_order_status" class="form-control" style="border-radius: 10px; font-weight: 600;">
+                                <option value="all">{{ __('All Statuses (Pending, In Progress, Shipped, Delivered)') }}</option>
+                                <option value="Pending" {{ request()->input('type') == 'Pending' ? 'selected' : '' }}>{{ __('Pending Only') }}</option>
+                                <option value="In Progress" {{ request()->input('type') == 'In Progress' ? 'selected' : '' }}>{{ __('In Progress Only') }}</option>
+                                <option value="Shipped" {{ request()->input('type') == 'Shipped' ? 'selected' : '' }}>{{ __('Shipped Only') }}</option>
+                                <option value="Delivered" {{ request()->input('type') == 'Delivered' ? 'selected' : '' }}>{{ __('Delivered Only') }}</option>
+                                <option value="Canceled" {{ request()->input('type') == 'Canceled' ? 'selected' : '' }}>{{ __('Canceled Only') }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-light border-0 py-3 d-flex justify-content-between align-items-center">
+                    <button type="button" class="btn btn-secondary px-4" style="border-radius: 10px; font-weight: 700;" data-dismiss="modal">{{ __('Cancel') }}</button>
+                    <button type="submit" class="btn btn-primary px-4" id="bulkSubmitBtn" style="border-radius: 10px; font-weight: 700; background: linear-gradient(135deg, #0284c7, #0369a1); border: none;">
+                        <i class="fa-solid fa-print mr-1"></i> <span id="bulkSubmitBtnText">{{ __('Download / Print Invoices') }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- BULK PRINT POP-UP MODAL ENDS --}}
 
 @endsection
 
@@ -320,7 +486,69 @@
         }
     }
 
+    function formatUsDate(d) {
+        var month = '' + (d.getMonth() + 1);
+        var day = '' + d.getDate();
+        var year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [month, day, year].join('/');
+    }
+
+    function applyDatePreset(preset) {
+        $('#modal_time_frame').val(preset);
+        $('.btn-date-preset').removeClass('active');
+        $('.btn-date-preset[data-preset="' + preset + '"]').addClass('active');
+
+        var now = new Date();
+        var todayStr = formatUsDate(now);
+        var badgeText = 'Preset: ' + preset.replace('_', ' ').toUpperCase();
+
+        if (preset === 'today') {
+            $('#modal_start_date').val(todayStr);
+            $('#modal_end_date').val(todayStr);
+            badgeText = 'Preset: Today';
+        } else if (preset === 'yesterday') {
+            var yest = new Date();
+            yest.setDate(yest.getDate() - 1);
+            var yestStr = formatUsDate(yest);
+            $('#modal_start_date').val(yestStr);
+            $('#modal_end_date').val(yestStr);
+            badgeText = 'Preset: Yesterday';
+        } else if (preset === 'this_week') {
+            var d = new Date();
+            var day = d.getDay();
+            var diff = d.getDate() - day + (day === 0 ? -6 : 1); // Monday
+            var monday = new Date(d.setDate(diff));
+            $('#modal_start_date').val(formatUsDate(monday));
+            $('#modal_end_date').val(todayStr);
+            badgeText = 'Preset: This Week';
+        } else if (preset === 'last_7_days') {
+            var d7 = new Date();
+            d7.setDate(d7.getDate() - 6);
+            $('#modal_start_date').val(formatUsDate(d7));
+            $('#modal_end_date').val(todayStr);
+            badgeText = 'Preset: Last 7 Days';
+        } else if (preset === 'this_month') {
+            var firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
+            $('#modal_start_date').val(formatUsDate(firstDay));
+            $('#modal_end_date').val(todayStr);
+            badgeText = 'Preset: This Month';
+        } else if (preset === 'all') {
+            $('#modal_start_date').val('');
+            $('#modal_end_date').val('');
+            badgeText = 'Preset: All Time';
+        } else if (preset === 'custom') {
+            badgeText = 'Preset: Custom Range';
+        }
+
+        $('#activePresetBadge').text(badgeText);
+    }
+
     $(document).ready(function() {
+        $('#modal_start_date').datetimepicker({ format: 'MM/DD/YYYY' });
+        $('#modal_end_date').datetimepicker({ format: 'MM/DD/YYYY' });
+
         $(document).on('click', '.open-shipping-modal', function() {
             var formAction = $(this).data('action');
             var txn = $(this).data('txn');
@@ -380,27 +608,95 @@
             });
         }
 
-        $(document).on('click', '.bulk-print-trigger', function(e) {
+        // Open Bulk Print Modal & Configure for Invoices or Packing Labels
+        $(document).on('click', '.open-bulk-modal', function(e) {
             e.preventDefault();
-            var baseUrl = $(this).data('url');
-            var selectedIds = $('#bulk_delete').val();
-            
-            if (selectedIds && selectedIds.trim() !== '') {
-                var url = baseUrl + '?ids=' + encodeURIComponent(selectedIds);
-                window.open(url, '_blank');
+            var mode = $(this).data('mode'); // 'invoices' or 'labels'
+            var selectedVal = $('#bulk_delete').val();
+            var selectedCount = selectedVal ? selectedVal.split(',').filter(function(x) { return x.trim() !== ''; }).length : 0;
+
+            if (mode === 'invoices') {
+                $('#bulkModalHeader').css('background', 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)');
+                $('#bulkModalIcon').attr('class', 'fa-solid fa-receipt mr-2');
+                $('#bulkModalHeadingText').text("{{ __('Bulk Invoices Generator') }}");
+                $('#bulkModalSubtext').text("{{ __('Filter orders to generate and print official tax invoices.') }}");
+                $('#bulkPrintForm').attr('action', "{{ route('back.order.bulk.invoices') }}");
+                $('#bulkSubmitBtn').css('background', 'linear-gradient(135deg, #0284c7, #0369a1)');
+                $('#bulkSubmitBtnText').text("{{ __('Download / Print Invoices') }}");
             } else {
-                var startDate = $('#datepicker').val();
-                var endDate = $('#datepicker1').val();
-                var type = "{{ request()->input('type') }}";
-                
-                var params = [];
-                if (type) params.push('type=' + encodeURIComponent(type));
-                if (startDate) params.push('start_date=' + encodeURIComponent(startDate));
-                if (endDate) params.push('end_date=' + encodeURIComponent(endDate));
-                
-                var queryString = params.length > 0 ? '?' + params.join('&') : '';
-                window.open(baseUrl + queryString, '_blank');
+                $('#bulkModalHeader').css('background', 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)');
+                $('#bulkModalIcon').attr('class', 'fa-solid fa-tags mr-2');
+                $('#bulkModalHeadingText').text("{{ __('Bulk Packing Labels Generator') }}");
+                $('#bulkModalSubtext').text("{{ __('Filter orders to generate and print 4x6 / thermal packing labels.') }}");
+                $('#bulkPrintForm').attr('action', "{{ route('back.order.bulk.packing_labels') }}");
+                $('#bulkSubmitBtn').css('background', 'linear-gradient(135deg, #1e293b, #0f172a)');
+                $('#bulkSubmitBtnText').text("{{ __('Download / Print Packing Labels') }}");
             }
+
+            if (selectedCount > 0) {
+                $('#bulkSelectedAlert').removeClass('d-none');
+                $('#bulkSelectedCountText').text("{{ __('You have selected') }} " + selectedCount + " {{ __('order(s) in the table.') }}");
+                $('#modal_selected_ids').val(selectedVal);
+                $('#scope_selected').prop('checked', true);
+                $('#optSelectedOnlyLabel').addClass('active');
+                $('#optUseFiltersLabel').removeClass('active');
+                $('#bulkFilterControls').css('opacity', '0.45');
+            } else {
+                $('#bulkSelectedAlert').addClass('d-none');
+                $('#modal_selected_ids').val('');
+                $('#scope_filter').prop('checked', true);
+                $('#optUseFiltersLabel').addClass('active');
+                $('#optSelectedOnlyLabel').removeClass('active');
+                $('#bulkFilterControls').css('opacity', '1');
+            }
+
+            // Sync with page filters if present, otherwise default to Today
+            var pageStartDate = $('#datepicker').val();
+            var pageEndDate = $('#datepicker1').val();
+            if (pageStartDate || pageEndDate) {
+                $('#modal_start_date').val(pageStartDate || '');
+                $('#modal_end_date').val(pageEndDate || '');
+                applyDatePreset('custom');
+            } else {
+                applyDatePreset('today');
+            }
+
+            $('#bulkPrintModal').modal('show');
+        });
+
+        // Toggle Selected Only vs Filter controls in Bulk Modal
+        $(document).on('change', 'input[name="scope_selection"]', function() {
+            if ($(this).val() === 'selected') {
+                $('#modal_selected_ids').val($('#bulk_delete').val());
+                $('#bulkFilterControls').css('opacity', '0.45');
+            } else {
+                $('#modal_selected_ids').val('');
+                $('#bulkFilterControls').css('opacity', '1');
+            }
+        });
+
+        // Click Preset Date Buttons inside Bulk Modal
+        $(document).on('click', '.btn-date-preset', function(e) {
+            e.preventDefault();
+            var preset = $(this).data('preset');
+            applyDatePreset(preset);
+
+            // Automatically switch radio to filters if selected only was checked
+            if ($('#scope_selected').is(':checked')) {
+                $('#scope_filter').prop('checked', true);
+                $('#optUseFiltersLabel').addClass('active');
+                $('#optSelectedOnlyLabel').removeClass('active');
+                $('#modal_selected_ids').val('');
+                $('#bulkFilterControls').css('opacity', '1');
+            }
+        });
+
+        // When user manually edits date inputs, switch preset to custom
+        $(document).on('input change dp.change', '#modal_start_date, #modal_end_date', function() {
+            $('#modal_time_frame').val('custom');
+            $('.btn-date-preset').removeClass('active');
+            $('.btn-date-preset[data-preset="custom"]').addClass('active');
+            $('#activePresetBadge').text("{{ __('Preset: Custom Range') }}");
         });
     });
 </script>
