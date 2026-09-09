@@ -105,16 +105,16 @@
                     <i class="fa-solid fa-filter" style="font-size: 14px;"></i>
                 </div>
                 <div>
-                    <h6 class="font-weight-bold text-dark mb-0">{{ __('Filter Orders by Date Range & Quick Print') }}</h6>
-                    <p class="text-muted small mb-0">{{ __('Select a date range to filter orders or directly print invoices and packing labels in bulk.') }}</p>
+                    <h6 class="font-weight-bold text-dark mb-0">{{ __('Filter Orders by Date Range') }}</h6>
+                    <p class="text-muted small mb-0">{{ __('Select a date range to filter orders by creation date.') }}</p>
                 </div>
             </div>
 
             <form action="{{ route('back.order.index') }}" method="GET" id="orderFilterForm">
                 <input type="hidden" name="type" value="{{ request()->input('type') }}">
                 <div class="row align-items-end">
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3 mb-lg-0">
-                        <label class="form-label font-weight-bold text-dark small">{{ __('Start Date') }}</label>
+                    <div class="col-md-5 col-sm-6 mb-3 mb-md-0">
+                        <label class="form-label font-weight-bold text-dark small">{{ __('Start Date') }} *</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-calendar-day"></i></span>
@@ -123,8 +123,8 @@
                                 placeholder="{{ __('Start Date') }}" value="{{ request()->input('start_date') }}">
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3 mb-lg-0">
-                        <label class="form-label font-weight-bold text-dark small">{{ __('End Date') }}</label>
+                    <div class="col-md-5 col-sm-6 mb-3 mb-md-0">
+                        <label class="form-label font-weight-bold text-dark small">{{ __('End Date') }} *</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
@@ -133,20 +133,14 @@
                                 placeholder="{{ __('End Date') }}" value="{{ request()->input('end_date') }}">
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
-                            <button type="submit" class="btn btn-primary" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #10b981, #059669); border: none; padding: 0 16px;">
+                    <div class="col-md-2 col-sm-12">
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary flex-grow-1 mr-1" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #10b981, #059669); border: none;">
                                 <i class="fa-solid fa-filter mr-1"></i> {{ __('Filter') }}
                             </button>
-                            <a href="{{ route('back.order.index', request()->input('type') ? ['type' => request()->input('type')] : []) }}" class="btn btn-light border" style="border-radius: 10px; font-weight: 700; height: 38px; display: inline-flex; align-items: center; justify-content: center; padding: 0 14px;">
+                            <a href="{{ route('back.order.index', request()->input('type') ? ['type' => request()->input('type')] : []) }}" class="btn btn-light border flex-grow-1" style="border-radius: 10px; font-weight: 700; height: 38px; display: inline-flex; align-items: center; justify-content: center;">
                                 {{ __('Reset') }}
                             </a>
-                            <button type="button" class="btn btn-info text-white open-bulk-modal" data-mode="invoices" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #0284c7, #0369a1); border: none; padding: 0 14px;">
-                                <i class="fa-solid fa-receipt mr-1"></i> {{ __('Print Invoices') }}
-                            </button>
-                            <button type="button" class="btn btn-dark text-white open-bulk-modal" data-mode="labels" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #1e293b, #0f172a); border: none; padding: 0 14px;">
-                                <i class="fa-solid fa-tags mr-1"></i> {{ __('Print Packing Labels') }}
-                            </button>
                         </div>
                     </div>
                 </div>
