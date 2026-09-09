@@ -10,19 +10,68 @@
         .filter-date-card .card-modern-body {
             overflow: visible !important;
         }
+        /* Datepicker / Calendar Popup Styling & Z-Index Fix */
         .bootstrap-datetimepicker-widget {
-            z-index: 999999 !important;
+            z-index: 9999999 !important;
             background: #ffffff !important;
-            border: 1.5px solid #cbd5e1 !important;
+            border: 1.5px solid #e2e8f0 !important;
             border-radius: 14px !important;
-            box-shadow: 0 20px 45px -5px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+            box-shadow: 0 20px 45px -5px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
             padding: 12px 14px !important;
             margin-top: 8px !important;
-            min-width: 280px !important;
+            min-width: 290px !important;
         }
         .bootstrap-datetimepicker-widget.dropdown-menu {
-            z-index: 999999 !important;
+            z-index: 9999999 !important;
             position: absolute !important;
+        }
+        .bootstrap-datetimepicker-widget table th {
+            color: #475569 !important;
+            font-weight: 700 !important;
+            font-size: 12px !important;
+            padding: 6px !important;
+        }
+        .bootstrap-datetimepicker-widget table th.picker-switch {
+            color: #0f172a !important;
+            font-size: 13.5px !important;
+            font-weight: 800 !important;
+            cursor: pointer !important;
+        }
+        .bootstrap-datetimepicker-widget table th.prev,
+        .bootstrap-datetimepicker-widget table th.next {
+            color: #059669 !important;
+            font-size: 14px !important;
+            cursor: pointer !important;
+        }
+        .bootstrap-datetimepicker-widget table td.day {
+            height: 32px !important;
+            line-height: 32px !important;
+            width: 32px !important;
+            font-size: 12.5px !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+        }
+        .bootstrap-datetimepicker-widget table td.day:hover {
+            background-color: #ecfdf5 !important;
+            color: #047857 !important;
+        }
+        .bootstrap-datetimepicker-widget table td.active,
+        .bootstrap-datetimepicker-widget table td.active:hover {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35) !important;
+        }
+        .bootstrap-datetimepicker-widget table td.today:before {
+            border-bottom-color: #10b981 !important;
+        }
+        .custom-date-input-wrap {
+            cursor: pointer !important;
+        }
+        .custom-date-control {
+            cursor: pointer !important;
         }
 
         /* Bulk Print Modern Pop-up Modal */
@@ -734,8 +783,44 @@
     }
 
     $(document).ready(function() {
-        $('#modal_start_date').datetimepicker({ format: 'MM/DD/YYYY' });
-        $('#modal_end_date').datetimepicker({ format: 'MM/DD/YYYY' });
+        var dpOptions = {
+            format: 'MM/DD/YYYY',
+            allowInputToggle: true,
+            showTodayButton: true,
+            showClose: true,
+            icons: {
+                time: 'fa-regular fa-clock',
+                date: 'fa-regular fa-calendar-alt',
+                up: 'fa-solid fa-chevron-up',
+                down: 'fa-solid fa-chevron-down',
+                previous: 'fa-solid fa-chevron-left',
+                next: 'fa-solid fa-chevron-right',
+                today: 'fa-solid fa-calendar-day',
+                clear: 'fa-solid fa-trash-can',
+                close: 'fa-solid fa-xmark'
+            }
+        };
+
+        // Initialize datepickers with allowInputToggle for both main page and modal
+        $('#datepicker, #datepicker1, #modal_start_date, #modal_end_date').each(function() {
+            if ($(this).data('DateTimePicker')) {
+                $(this).data('DateTimePicker').destroy();
+            }
+            $(this).datetimepicker(dpOptions);
+        });
+
+        // Click anywhere in the date container or input opens the calendar
+        $(document).on('click', '.custom-date-input-wrap', function(e) {
+            var $inp = $(this).find('input.datepicker');
+            if ($inp.length && $inp.data('DateTimePicker')) {
+                $inp.data('DateTimePicker').show();
+            }
+        });
+        $(document).on('click', '#datepicker, #datepicker1, #modal_start_date, #modal_end_date', function(e) {
+            if ($(this).data('DateTimePicker')) {
+                $(this).data('DateTimePicker').show();
+            }
+        });
 
         $(document).on('click', '.open-shipping-modal', function() {
             var formAction = $(this).data('action');
