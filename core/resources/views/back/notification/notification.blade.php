@@ -9,10 +9,10 @@
     /* Hero Banner */
     .notif-hero-card {
         background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
-        border-radius: 18px;
-        padding: 22px 26px;
+        border-radius: 20px;
+        padding: 24px 28px;
         color: #ffffff;
-        box-shadow: 0 14px 32px -10px rgba(6, 78, 59, 0.38);
+        box-shadow: 0 16px 36px -10px rgba(6, 78, 59, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
         margin-bottom: 22px;
         position: relative;
         overflow: hidden;
@@ -25,76 +25,93 @@
         width: 180px;
         height: 180px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 70%);
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
         pointer-events: none;
     }
     .notif-hero-icon {
-        width: 48px;
-        height: 48px;
+        width: 50px;
+        height: 50px;
         border-radius: 14px;
         background: rgba(255, 255, 255, 0.18);
-        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
+        font-size: 22px;
         color: #ffffff;
         flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Hero Action Buttons */
+    .notif-hero-actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
     }
     .notif-hero-btn {
-        border-radius: 10px;
+        border-radius: 12px;
         font-size: 13px;
         font-weight: 700;
-        padding: 8px 16px;
+        padding: 9px 18px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 7px;
+        gap: 8px;
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         text-decoration: none !important;
-        border: none;
         cursor: pointer;
+        margin: 4px;
+        white-space: nowrap;
     }
     .notif-hero-btn-primary {
         background: #ffffff;
         color: #047857 !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        border: 1.5px solid #ffffff;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
     }
     .notif-hero-btn-primary:hover {
         background: #f0fdf4;
         color: #064e3b !important;
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
     }
     .notif-hero-btn-danger {
-        background: rgba(239, 68, 68, 0.25);
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(239, 68, 68, 0.28);
+        border: 1.5px solid rgba(255, 255, 255, 0.4);
         color: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     .notif-hero-btn-danger:hover {
-        background: rgba(239, 68, 68, 0.45);
+        background: rgba(239, 68, 68, 0.5);
+        border-color: #ffffff;
         color: #ffffff !important;
-        transform: translateY(-1px);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
     }
     .notif-hero-btn-glass {
-        background: rgba(255, 255, 255, 0.16);
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.18);
+        border: 1.5px solid rgba(255, 255, 255, 0.4);
         color: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
     .notif-hero-btn-glass:hover {
-        background: rgba(255, 255, 255, 0.26);
+        background: rgba(255, 255, 255, 0.32);
+        border-color: #ffffff;
         color: #ffffff !important;
-        transform: translateY(-1px);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
     }
 
     .notif-stat-pill {
         display: inline-flex;
         align-items: center;
-        gap: 5px;
-        padding: 3px 10px;
+        gap: 6px;
+        padding: 4px 12px;
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.18);
-        border: 1px solid rgba(255, 255, 255, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.25);
         font-size: 11.5px;
         font-weight: 700;
         color: #ffffff;
@@ -104,7 +121,7 @@
     .notif-toolbar-card {
         background: #ffffff;
         border: 1.5px solid #e2e8f0;
-        border-radius: 16px;
+        border-radius: 18px;
         padding: 12px 18px;
         margin-bottom: 18px;
         box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
@@ -122,7 +139,7 @@
         display: none;
     }
     .notif-tab-btn {
-        padding: 7px 15px;
+        padding: 8px 16px;
         border-radius: 9999px;
         font-size: 12.5px;
         font-weight: 700;
@@ -137,6 +154,7 @@
         white-space: nowrap;
         text-decoration: none !important;
         outline: none !important;
+        margin: 2px;
     }
     .notif-tab-btn:hover {
         background: #f1f5f9;
@@ -177,7 +195,7 @@
     }
     .notif-search-input {
         width: 100%;
-        padding: 7px 14px 7px 34px;
+        padding: 8px 14px 8px 34px;
         border-radius: 9999px;
         border: 1.5px solid #e2e8f0;
         background: #f8fafc;
@@ -318,6 +336,7 @@
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         white-space: nowrap;
         height: 38px;
+        margin: 0 2px;
     }
     .notif-btn-invoice {
         background: #059669;
@@ -355,6 +374,7 @@
         transition: all 0.2s ease;
         text-decoration: none !important;
         cursor: pointer;
+        margin: 0 2px;
     }
     .notif-btn-delete:hover {
         background: #fee2e2;
@@ -385,6 +405,7 @@
             width: 100%;
             padding: 9px 12px;
             font-size: 12.5px;
+            margin: 0;
         }
         .notif-toolbar-card {
             padding: 10px 12px;
@@ -478,7 +499,7 @@
                 </div>
             </div>
             
-            <div class="notif-hero-actions d-flex align-items-center gap-2 flex-wrap">
+            <div class="notif-hero-actions">
                 <button type="button" id="btnMarkAllRead" class="notif-hero-btn notif-hero-btn-primary" data-url="{{ route('back.notifications.read') }}">
                     <i class="fa-solid fa-check-double text-success"></i>
                     <span>{{ __('Mark All as Read') }}</span>
