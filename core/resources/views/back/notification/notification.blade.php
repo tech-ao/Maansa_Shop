@@ -3,7 +3,7 @@
 @section('styles')
 <style>
     /* ==========================================================================
-       NOTIFICATIONS CENTER - REFINED MODERN ACTIVITY FEED
+       NOTIFICATIONS CENTER - REFINED RESPONSIVE ACTIVITY FEED
        ========================================================================== */
     
     /* Hero Banner */
@@ -29,15 +29,16 @@
         pointer-events: none;
     }
     .notif-hero-icon {
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
         border-radius: 14px;
         background: rgba(255, 255, 255, 0.18);
         border: 1.5px solid rgba(255, 255, 255, 0.35);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
+        font-size: 20px;
         color: #ffffff;
         flex-shrink: 0;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -48,7 +49,7 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
     }
     .notif-hero-btn {
         border-radius: 12px;
@@ -62,7 +63,7 @@
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         text-decoration: none !important;
         cursor: pointer;
-        margin: 4px;
+        margin: 0;
         white-space: nowrap;
     }
     .notif-hero-btn-primary {
@@ -107,8 +108,8 @@
     .notif-stat-pill {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        padding: 4px 12px;
+        gap: 5px;
+        padding: 3px 10px;
         border-radius: 9999px;
         background: rgba(255, 255, 255, 0.18);
         border: 1px solid rgba(255, 255, 255, 0.25);
@@ -139,7 +140,7 @@
         display: none;
     }
     .notif-tab-btn {
-        padding: 8px 16px;
+        padding: 7px 15px;
         border-radius: 9999px;
         font-size: 12.5px;
         font-weight: 700;
@@ -154,7 +155,7 @@
         white-space: nowrap;
         text-decoration: none !important;
         outline: none !important;
-        margin: 2px;
+        margin: 0;
     }
     .notif-tab-btn:hover {
         background: #f1f5f9;
@@ -195,7 +196,7 @@
     }
     .notif-search-input {
         width: 100%;
-        padding: 8px 14px 8px 34px;
+        padding: 7px 14px 7px 34px;
         border-radius: 9999px;
         border: 1.5px solid #e2e8f0;
         background: #f8fafc;
@@ -336,7 +337,6 @@
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         white-space: nowrap;
         height: 38px;
-        margin: 0 2px;
     }
     .notif-btn-invoice {
         background: #059669;
@@ -374,7 +374,6 @@
         transition: all 0.2s ease;
         text-decoration: none !important;
         cursor: pointer;
-        margin: 0 2px;
     }
     .notif-btn-delete:hover {
         background: #fee2e2;
@@ -386,27 +385,50 @@
     /* Mobile Responsive Optimizations (< 768px) */
     @media (max-width: 767.98px) {
         .notif-hero-card {
-            padding: 16px 14px;
-            border-radius: 14px;
+            padding: 16px 16px;
+            border-radius: 16px;
             margin-bottom: 14px;
         }
-        .notif-hero-row {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 14px;
+        .notif-hero-header-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .notif-hero-icon {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            font-size: 18px;
+            border-radius: 12px;
+        }
+        .notif-hero-title-box h2 {
+            font-size: 17.5px !important;
+        }
+        .notif-hero-subtitle {
+            font-size: 12px !important;
+            margin-bottom: 14px !important;
+            line-height: 1.4 !important;
         }
         .notif-hero-actions {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 8px;
-        }
-        .notif-hero-btn {
             width: 100%;
-            padding: 9px 12px;
-            font-size: 12.5px;
-            margin: 0;
         }
+        .notif-hero-actions .notif-hero-btn-primary {
+            grid-column: 1 / -1;
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 13px;
+        }
+        .notif-hero-actions .notif-hero-btn-danger,
+        .notif-hero-actions .notif-hero-btn-glass {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+
         .notif-toolbar-card {
             padding: 10px 12px;
             border-radius: 14px;
@@ -420,6 +442,11 @@
         .notif-search-wrap {
             min-width: 100%;
         }
+        .notif-tab-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
         .notif-item-card {
             flex-direction: column;
             align-items: stretch;
@@ -430,7 +457,7 @@
         .notif-card-main-row {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
         }
         .notif-avatar-box {
@@ -449,9 +476,9 @@
             width: 100%;
         }
         .notif-btn-action {
-            flex-grow: 1;
+            flex: 1;
             width: auto;
-            font-size: 12.5px;
+            font-size: 12px;
         }
     }
 </style>
@@ -472,31 +499,34 @@
 
 	<!-- Hero Header Banner -->
     <div class="notif-hero-card">
-        <div class="d-flex align-items-center justify-content-between notif-hero-row flex-wrap gap-3">
-            <div class="d-flex align-items-center">
-                <div class="notif-hero-icon mr-3">
-                    <i class="fa-solid fa-bell"></i>
-                </div>
-                <div>
-                    <div class="d-flex align-items-center flex-wrap gap-2 mb-1">
-                        <h2 class="font-weight-bold text-white mb-0" style="font-size: 20px; letter-spacing: 0.2px;">
-                            {{ __('Notifications Center') }}
-                        </h2>
-                        <span class="notif-stat-pill">
-                            <i class="fa-solid fa-layer-group" style="font-size: 10.5px;"></i>
-                            <span id="headerTotalCount">{{ $totalCount }}</span> {{ __('Total') }}
-                        </span>
-                        @if($unreadCount > 0)
-                            <span class="notif-stat-pill" style="background: rgba(239, 68, 68, 0.35); border-color: rgba(254, 202, 202, 0.4);" id="headerUnreadPill">
-                                <i class="fa-solid fa-circle text-danger" style="font-size: 8px;"></i>
-                                <span id="headerUnreadCount">{{ $unreadCount }}</span> {{ __('Unread') }}
-                            </span>
-                        @endif
+        <div class="d-flex align-items-center justify-content-between flex-wrap notif-hero-desktop-row" style="gap: 16px;">
+            <div>
+                <!-- Icon + Title Header -->
+                <div class="notif-hero-header-row d-flex align-items-center mb-2" style="gap: 12px;">
+                    <div class="notif-hero-icon">
+                        <i class="fa-solid fa-bell"></i>
                     </div>
-                    <p class="text-white small mb-0" style="font-size: 12.5px; opacity: 0.9;">
-                        {{ __('Review real-time store purchase orders, customer registrations, and activity alerts.') }}
-                    </p>
+                    <div class="notif-hero-title-box">
+                        <div class="d-flex align-items-center flex-wrap" style="gap: 8px;">
+                            <h2 class="font-weight-bold text-white mb-0" style="font-size: 20px; letter-spacing: 0.2px;">
+                                {{ __('Notifications Center') }}
+                            </h2>
+                            <span class="notif-stat-pill">
+                                <i class="fa-solid fa-layer-group" style="font-size: 10px;"></i>
+                                <span id="headerTotalCount">{{ $totalCount }}</span> {{ __('Total') }}
+                            </span>
+                            @if($unreadCount > 0)
+                                <span class="notif-stat-pill" style="background: rgba(239, 68, 68, 0.35); border-color: rgba(254, 202, 202, 0.4);" id="headerUnreadPill">
+                                    <i class="fa-solid fa-circle text-danger" style="font-size: 7px;"></i>
+                                    <span id="headerUnreadCount">{{ $unreadCount }}</span> {{ __('Unread') }}
+                                </span>
+                            @endif
+                        </div>
+                    </div>
                 </div>
+                <p class="text-white small mb-0 notif-hero-subtitle" style="font-size: 12.5px; opacity: 0.9;">
+                    {{ __('Review real-time store purchase orders, customer registrations, and activity alerts.') }}
+                </p>
             </div>
             
             <div class="notif-hero-actions">
