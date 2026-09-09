@@ -13,7 +13,7 @@
         padding: 24px 28px;
         color: #ffffff;
         box-shadow: 0 16px 36px -10px rgba(6, 78, 59, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-        margin-bottom: 22px;
+        margin-bottom: 20px;
         position: relative;
         overflow: hidden;
     }
@@ -123,7 +123,7 @@
         background: #ffffff;
         border: 1.5px solid #e2e8f0;
         border-radius: 18px;
-        padding: 12px 18px;
+        padding: 12px 16px;
         margin-bottom: 18px;
         box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
     }
@@ -135,12 +135,13 @@
         padding-bottom: 2px;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
+        flex-wrap: nowrap;
     }
     .notif-filter-tabs::-webkit-scrollbar {
         display: none;
     }
     .notif-tab-btn {
-        padding: 7px 15px;
+        padding: 7px 14px;
         border-radius: 9999px;
         font-size: 12.5px;
         font-weight: 700;
@@ -155,7 +156,7 @@
         white-space: nowrap;
         text-decoration: none !important;
         outline: none !important;
-        margin: 0;
+        flex-shrink: 0;
     }
     .notif-tab-btn:hover {
         background: #f1f5f9;
@@ -430,8 +431,8 @@
         }
 
         .notif-toolbar-card {
-            padding: 10px 12px;
-            border-radius: 14px;
+            padding: 12px 14px;
+            border-radius: 16px;
             margin-bottom: 14px;
         }
         .notif-toolbar-flex {
@@ -439,11 +440,25 @@
             align-items: stretch !important;
             gap: 10px;
         }
-        .notif-search-wrap {
-            min-width: 100%;
+        .notif-filter-tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
         }
         .notif-tab-btn {
             padding: 6px 12px;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .notif-search-wrap {
+            min-width: 100%;
+            width: 100%;
+        }
+        .notif-search-input {
+            padding: 8px 14px 8px 34px;
             font-size: 12px;
         }
 
@@ -561,7 +576,7 @@
             <div class="notif-filter-tabs">
                 <button type="button" class="notif-tab-btn active" data-filter="all">
                     <i class="fa-solid fa-list-ul"></i>
-                    <span>{{ __('All Alerts') }}</span>
+                    <span>{{ __('All') }}</span>
                     <span class="notif-tab-badge" id="tabCountAll">{{ $totalCount }}</span>
                 </button>
                 <button type="button" class="notif-tab-btn" data-filter="order">
