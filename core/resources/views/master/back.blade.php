@@ -112,7 +112,7 @@
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in notif-dropdown-box"
                                 aria-labelledby="alertsDropdown" id="display-notf"
-                                data-href={{ route('back.notifications') }}>
+                                data-href="{{ route('back.notifications') }}">
                                 @include('back.notification.index')
                             </div>
                         </li>
@@ -293,7 +293,7 @@
     <!-- Custom JS -->
 
     @yield('scripts')
-    <script src="{{ asset('assets/back/js/custom.js') }}?v=2.2"></script>
+    <script src="{{ asset('assets/back/js/custom.js') }}?v=2.5"></script>
 
 </body>
 

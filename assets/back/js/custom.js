@@ -822,17 +822,6 @@
     });
 
 
-    // Notification
-
-    $('#alertsDropdown').on('click', function () {
-        $('#display-notf').load($('#display-notf').data('href'));
-    });
-
-    $(document).on('click', '#clear-notf', function () {
-        $.get($(this).data('href'));
-    });
-
-
     // bulk delete start 
 
     $(document).on('change', '.bulk_all_delete', function () {
@@ -1039,26 +1028,43 @@
         }
     });
 
+    // Notification Dropdown Reload on Open
+    $(document).on('click', '#alertsDropdown', function () {
+        var href = $('#display-notf').attr('data-href') || $('#display-notf').data('href');
+        if (href) {
+            $('#display-notf').load(href);
+        }
+    });
+
     // Instant notification clearing
     $(document).on('click', '#clear-notf', function (e) {
         e.preventDefault();
-        var url = $(this).data('href');
+        e.stopPropagation();
+        var url = $(this).attr('data-href') || $(this).data('href');
         if (url) {
-            $.get(url, function () {
-                $('#display-notf').html(`
-                    <div class="notif-dropdown-header">
-                        <span class="notif-dropdown-title">
-                            <i class="fa-solid fa-bell text-primary mr-1"></i> Notifications
-                        </span>
-                    </div>
-                    <div class="notif-dropdown-empty text-center py-4 px-3">
-                        <div style="width: 44px; height: 44px; border-radius: 50%; background: #f1f5f9; display: inline-flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 18px; margin-bottom: 8px;">
-                            <i class="fa-regular fa-bell-slash"></i>
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function () {
+                    $('#display-notf').html(`
+                        <div class="notif-dropdown-header">
+                            <span class="notif-dropdown-title">
+                                <i class="fa-solid fa-bell text-primary mr-1"></i> Notifications
+                            </span>
                         </div>
-                        <p class="text-muted mb-0 font-weight-bold" style="font-size: 13px;">No new notifications</p>
-                    </div>
-                `);
-                $('#alertsDropdown .topbar-notif-badge').fadeOut(200, function() { $(this).remove(); });
+                        <div class="notif-dropdown-empty text-center py-4 px-3">
+                            <div style="width: 44px; height: 44px; border-radius: 50%; background: #f1f5f9; display: inline-flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 18px; margin-bottom: 8px;">
+                                <i class="fa-regular fa-bell-slash"></i>
+                            </div>
+                            <p class="text-muted mb-0 font-weight-bold" style="font-size: 13px;">No new notifications</p>
+                        </div>
+                    `);
+                    $('#alertsDropdown .topbar-notif-badge').fadeOut(200, function() { $(this).remove(); });
+                },
+                error: function () {
+                    window.location.href = url;
+                }
             });
         }
     });
@@ -1066,14 +1072,24 @@
     // Instant notification mark as read
     $(document).on('click', '#mark-read-notf', function (e) {
         e.preventDefault();
-        var url = $(this).data('href');
+        e.stopPropagation();
+        var url = $(this).attr('data-href') || $(this).data('href');
         var $btn = $(this);
         if (url) {
-            $.get(url, function () {
-                $('#alertsDropdown .topbar-notif-badge').fadeOut(200, function() { $(this).remove(); });
-                $('.notif-header-unread-badge').fadeOut(200, function() { $(this).remove(); });
-                $('.notif-item-unread').removeClass('notif-item-unread');
-                $btn.html('<i class="fa-solid fa-check text-success mr-1.5" style="font-size: 13px;"></i> <span class="text-success">' + ($btn.text().includes('Mark as read') ? 'Marked as read' : 'Read') + '</span>');
+            $btn.css('opacity', '0.6').html('<i class="fa-solid fa-spinner fa-spin mr-1"></i> <span>Updating...</span>');
+            $.ajax({
+                url: url,
+                type: 'GET',
+                cache: false,
+                success: function () {
+                    $('#alertsDropdown .topbar-notif-badge').fadeOut(200, function() { $(this).remove(); });
+                    $('.notif-header-unread-badge').fadeOut(200, function() { $(this).remove(); });
+                    $('.notif-item-unread').removeClass('notif-item-unread');
+                    $btn.css('opacity', '1').html('<i class="fa-solid fa-check text-success mr-1.5" style="font-size: 13px;"></i> <span class="text-success font-weight-bold">Marked as read</span>');
+                },
+                error: function () {
+                    window.location.href = url;
+                }
             });
         }
     });
