@@ -33,9 +33,8 @@ class NotificationController extends Controller
 
     public function view_notification()
     {
-        Notification::where('is_read', 0)->update(['is_read' => 1]);
         return view('back.notification.notification',[
-            'data'=>Notification::orderby('id','desc')->get()
+            'data'=>Notification::with(['order', 'user'])->orderby('id','desc')->get()
         ]);
     }
 
@@ -43,14 +42,20 @@ class NotificationController extends Controller
     {
         Notification::where('is_read', 0)->update(['is_read' => 1]);
         if (request()->ajax()) {
-            return response()->json(['status' => 'success']);
+            return response()->json(['status' => 'success', 'message' => __('All notifications marked as read.')]);
         }
         return back()->withSuccess(__('All notifications marked as read.'));
     }
 
     public function delete($id)
     {
-        Notification::findOrFail($id)->delete();
+        $notf = Notification::find($id);
+        if ($notf) {
+            $notf->delete();
+        }
+        if (request()->ajax()) {
+            return response()->json(['status' => 'success', 'message' => __('Notification Deleted Successfully.')]);
+        }
         return back()->withSuccess(__('Notification Delete Successfully.'));
     }
 
@@ -67,7 +72,7 @@ class NotificationController extends Controller
             Notification::query()->delete();
         }
         if (request()->ajax()) {
-            return response()->json(['status' => 'success']);
+            return response()->json(['status' => 'success', 'message' => __('All notifications cleared successfully.')]);
         }
         return back()->withSuccess(__('All notifications cleared successfully.'));
     }
