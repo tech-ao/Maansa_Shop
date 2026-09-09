@@ -39,6 +39,8 @@ Route::group(['middleware' => ['adminlocalize', 'demo']], function () {
             Route::get('/order/print/{id}', 'Back\OrderController@printOrder')->name('back.order.print');
             Route::get('/order/packing-label/{id}', 'Back\OrderController@packingLabel')->name('back.order.packing_label');
             Route::get('/order/invoice/{id}', 'Back\OrderController@invoice')->name('back.order.invoice');
+            Route::get('/orders/bulk/invoices', 'Back\OrderController@bulkInvoices')->name('back.order.bulk.invoices');
+            Route::get('/orders/bulk/packing-labels', 'Back\OrderController@bulkPackingLabels')->name('back.order.bulk.packing_labels');
             Route::get('/order/status/{id}/{field}/{value}', 'Back\OrderController@status')->name('back.order.status');
             Route::post('/order/shipping-status/{id}', 'Back\OrderController@shippingStatus')->name('back.order.shipping.status');
         });

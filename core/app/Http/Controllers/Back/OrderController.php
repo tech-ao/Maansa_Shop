@@ -134,6 +134,71 @@ class OrderController extends Controller
         return view('back.order.packing_label', compact('order', 'cart'));
     }
 
+    /**
+     * Display bulk invoices filtered by IDs or date range & status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkInvoices(Request $request)
+    {
+        $orders = $this->getFilteredOrders($request);
+
+        if ($orders->isEmpty()) {
+            return redirect()->route('back.order.index')->withErrors(__('No orders found matching the selected criteria.'));
+        }
+
+        return view('back.order.bulk_invoices', compact('orders'));
+    }
+
+    /**
+     * Display bulk packing labels filtered by IDs or date range & status.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkPackingLabels(Request $request)
+    {
+        $orders = $this->getFilteredOrders($request);
+
+        if ($orders->isEmpty()) {
+            return redirect()->route('back.order.index')->withErrors(__('No orders found matching the selected criteria.'));
+        }
+
+        return view('back.order.bulk_packing_labels', compact('orders'));
+    }
+
+    /**
+     * Helper to get orders collection based on filters / ids.
+     */
+    private function getFilteredOrders(Request $request)
+    {
+        $query = Order::latest('id');
+
+        // Check for specific IDs (from checkboxes or comma-separated list or array)
+        if ($request->has('ids') && !empty($request->ids)) {
+            $ids = is_array($request->ids) ? $request->ids : explode(',', $request->ids);
+            $ids = array_filter(array_map('trim', $ids));
+            if (!empty($ids)) {
+                return $query->whereIn('id', $ids)->get();
+            }
+        }
+
+        if ($request->type) {
+            if (in_array($request->type, ['Pending', 'In Progress', 'Shipped', 'Delivered', 'Canceled'])) {
+                $query->whereOrderStatus($request->type);
+            }
+        }
+
+        if ($request->start_date && $request->end_date) {
+            $start_date = Carbon::parse($request->start_date);
+            $end_date = Carbon::parse($request->end_date);
+            $query->whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<=', $end_date);
+        }
+
+        return $query->get();
+    }
+
 
     /**
      * Change the status for editing the specified resource.

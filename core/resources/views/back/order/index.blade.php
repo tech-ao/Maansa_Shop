@@ -39,13 +39,19 @@
                 <p>{{ __('Review customer purchases, track fulfillment states, manage payment transactions, and print tax invoices.') }}</p>
             </div>
             <div class="dash-hero-actions d-flex flex-wrap gap-2">
-                <a href="{{ route('back.csv.order.export') }}" class="btn btn-hero-action btn-hero-secondary" style="font-size: 13px; font-weight: 700; padding: 9px 18px;">
+                <button type="button" class="btn btn-hero-action btn-hero-secondary bulk-print-trigger" data-url="{{ route('back.order.bulk.invoices') }}" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
+                    <i class="fa-solid fa-receipt mr-1 text-info"></i> {{ __('Bulk Invoices') }}
+                </button>
+                <button type="button" class="btn btn-hero-action btn-hero-secondary bulk-print-trigger" data-url="{{ route('back.order.bulk.packing_labels') }}" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
+                    <i class="fa-solid fa-tags mr-1 text-primary"></i> {{ __('Bulk Packing Labels') }}
+                </button>
+                <a href="{{ route('back.csv.order.export') }}" class="btn btn-hero-action btn-hero-secondary" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
                     <i class="fa-solid fa-file-export mr-1"></i> {{ __('CSV Export') }}
                 </a>
                 <form class="d-inline-block" action="{{ route('back.bulk.delete') }}" method="get">
                     <input type="hidden" value="" name="ids[]" id="bulk_delete">
                     <input type="hidden" value="orders" name="table">
-                    <button class="btn btn-hero-action btn-hero-danger" style="font-size: 13px; font-weight: 700; padding: 9px 18px;">
+                    <button class="btn btn-hero-action btn-hero-danger" style="font-size: 13px; font-weight: 700; padding: 9px 16px;">
                         <i class="fa-solid fa-trash-can mr-1"></i> {{ __('Bulk Delete') }}
                     </button>
                 </form>
@@ -61,15 +67,16 @@
                     <i class="fa-solid fa-filter" style="font-size: 14px;"></i>
                 </div>
                 <div>
-                    <h6 class="font-weight-bold text-dark mb-0">{{ __('Filter Orders by Date Range') }}</h6>
-                    <p class="text-muted small mb-0">{{ __('Select a date range to filter orders by creation date.') }}</p>
+                    <h6 class="font-weight-bold text-dark mb-0">{{ __('Filter Orders by Date Range & Quick Print') }}</h6>
+                    <p class="text-muted small mb-0">{{ __('Select a date range to filter orders or directly print invoices and packing labels in bulk.') }}</p>
                 </div>
             </div>
 
-            <form action="{{ route('back.order.index') }}" method="GET">
+            <form action="{{ route('back.order.index') }}" method="GET" id="orderFilterForm">
+                <input type="hidden" name="type" value="{{ request()->input('type') }}">
                 <div class="row align-items-end">
-                    <div class="col-md-5 col-sm-6 mb-3 mb-md-0">
-                        <label class="form-label font-weight-bold text-dark small">{{ __('Start Date') }} *</label>
+                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3 mb-lg-0">
+                        <label class="form-label font-weight-bold text-dark small">{{ __('Start Date') }}</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-calendar-day"></i></span>
@@ -78,8 +85,8 @@
                                 placeholder="{{ __('Start Date') }}" value="{{ request()->input('start_date') }}">
                         </div>
                     </div>
-                    <div class="col-md-5 col-sm-6 mb-3 mb-md-0">
-                        <label class="form-label font-weight-bold text-dark small">{{ __('End Date') }} *</label>
+                    <div class="col-lg-3 col-md-6 col-sm-6 mb-3 mb-lg-0">
+                        <label class="form-label font-weight-bold text-dark small">{{ __('End Date') }}</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa-solid fa-calendar-check"></i></span>
@@ -88,14 +95,20 @@
                                 placeholder="{{ __('End Date') }}" value="{{ request()->input('end_date') }}">
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-12">
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-primary flex-grow-1 mr-1" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #10b981, #059669); border: none;">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+                            <button type="submit" class="btn btn-primary" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #10b981, #059669); border: none; padding: 0 16px;">
                                 <i class="fa-solid fa-filter mr-1"></i> {{ __('Filter') }}
                             </button>
-                            <a href="{{ route('back.order.index') }}" class="btn btn-light border flex-grow-1" style="border-radius: 10px; font-weight: 700; height: 38px; display: inline-flex; align-items: center; justify-content: center;">
+                            <a href="{{ route('back.order.index', request()->input('type') ? ['type' => request()->input('type')] : []) }}" class="btn btn-light border" style="border-radius: 10px; font-weight: 700; height: 38px; display: inline-flex; align-items: center; justify-content: center; padding: 0 14px;">
                                 {{ __('Reset') }}
                             </a>
+                            <button type="submit" formaction="{{ route('back.order.bulk.invoices') }}" formtarget="_blank" class="btn btn-info text-white" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #0284c7, #0369a1); border: none; padding: 0 14px;">
+                                <i class="fa-solid fa-receipt mr-1"></i> {{ __('Print Invoices') }}
+                            </button>
+                            <button type="submit" formaction="{{ route('back.order.bulk.packing_labels') }}" formtarget="_blank" class="btn btn-dark text-white" style="border-radius: 10px; font-weight: 700; height: 38px; background: linear-gradient(135deg, #1e293b, #0f172a); border: none; padding: 0 14px;">
+                                <i class="fa-solid fa-tags mr-1"></i> {{ __('Print Packing Labels') }}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -366,6 +379,29 @@
                 }
             });
         }
+
+        $(document).on('click', '.bulk-print-trigger', function(e) {
+            e.preventDefault();
+            var baseUrl = $(this).data('url');
+            var selectedIds = $('#bulk_delete').val();
+            
+            if (selectedIds && selectedIds.trim() !== '') {
+                var url = baseUrl + '?ids=' + encodeURIComponent(selectedIds);
+                window.open(url, '_blank');
+            } else {
+                var startDate = $('#datepicker').val();
+                var endDate = $('#datepicker1').val();
+                var type = "{{ request()->input('type') }}";
+                
+                var params = [];
+                if (type) params.push('type=' + encodeURIComponent(type));
+                if (startDate) params.push('start_date=' + encodeURIComponent(startDate));
+                if (endDate) params.push('end_date=' + encodeURIComponent(endDate));
+                
+                var queryString = params.length > 0 ? '?' + params.join('&') : '';
+                window.open(baseUrl + queryString, '_blank');
+            }
+        });
     });
 </script>
 @endsection
