@@ -1,12 +1,18 @@
-﻿@extends('master.back-login')
+@extends('master.back-login')
 
 @section('content')
 <div class="auth-card">
     <div class="auth-header">
-        <div class="brand-badge" style="background: linear-gradient(135deg, #10b981, #059669);">
-            <i class="fa-solid fa-lock-open"></i>
-        </div>
-        <h2>Change Password</h2>
+        @if(isset($setting->logo) && $setting->logo)
+            <div class="auth-brand-logo-wrap">
+                <img src="{{ url('/core/public/storage/images/' . $setting->logo) }}" alt="{{ $setting->title ?? 'Maansa' }}" class="auth-brand-logo">
+            </div>
+        @else
+            <div class="brand-badge-emerald">
+                <i class="fa-solid fa-lock-open"></i>
+            </div>
+        @endif
+        <h2>{{ __('Change Password') }}</h2>
         <p>{{ __('Enter your new password below.') }}</p>
     </div>
 
@@ -33,9 +39,9 @@
 
         <input type="hidden" name="file_token" value="{{ $token }}">
 
-        <button type="submit" class="btn-auth-submit" style="background: linear-gradient(135deg, #10b981, #059669); margin-top: 10px;">
+        <button type="submit" class="btn-auth-submit" style="margin-top: 10px;">
             <span>{{ __('Update Password') }}</span>
-            <i class="fa-solid fa-check"></i>
+            <i class="fa-solid fa-check ml-1"></i>
         </button>
     </form>
 </div>

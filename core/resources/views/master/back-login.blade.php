@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{ $setting->title ?? 'Maansa Admin' }}</title>
+    <title>{{ $setting->title ?? 'Maansa Admin Portal' }}</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     
     @if(isset($setting->favicon) && $setting->favicon)
@@ -12,7 +12,7 @@
         <link rel="icon" type="image/png" href="{{ asset('installer/img/favicon/favicon-32x32.png') }}" sizes="32x32"/>
     @endif
 
-    <link rel="stylesheet" href="{{ asset('assets/back/css/admin-auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/back/css/admin-auth.css') }}?v={{ time() }}">
 
     @php
         $dashLang = null;
@@ -34,7 +34,10 @@
         @yield('content')
         
         <div class="auth-footer">
-            <span>&copy; {{ date('Y') }} Maansa. All rights reserved.</span>
+            <span class="auth-security-pill">
+                <i class="fa-solid fa-shield-halved text-success"></i> {{ __('Secured Admin Management Portal') }}
+            </span>
+            <span style="opacity: 0.85;">&copy; {{ date('Y') }} {{ $setting->title ?? 'Maansa' }}. {{ __('All rights reserved.') }}</span>
         </div>
     </div>
 

@@ -3,10 +3,16 @@
 @section('content')
 <div class="auth-card">
     <div class="auth-header">
-        <div class="brand-badge">
-            <i class="fa-solid fa-shield-halved"></i>
-        </div>
-        <h2>Maan<span class="gradient-text">sa</span> Admin</h2>
+        @if(isset($setting->logo) && $setting->logo)
+            <div class="auth-brand-logo-wrap">
+                <img src="{{ url('/core/public/storage/images/' . $setting->logo) }}" alt="{{ $setting->title ?? 'Maansa' }}" class="auth-brand-logo">
+            </div>
+        @else
+            <div class="brand-badge-emerald">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+        @endif
+        <h2>{{ __('Maansa Admin') }}</h2>
         <p>{{ __('Sign in to access your administrative dashboard') }}</p>
     </div>
 
@@ -49,11 +55,11 @@
 
         <div class="demo-credentials-box">
             <div class="demo-credentials-info">
-                <strong>Default Credentials:</strong><br>
+                <strong>{{ __('Default Credentials') }}:</strong><br>
                 <span>admin@gmail.com &bull; password</span>
             </div>
             <button type="button" class="btn-fill-demo" id="fillDemoBtn">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Auto Fill
+                <i class="fa-solid fa-wand-magic-sparkles text-success"></i> {{ __('Auto Fill') }}
             </button>
         </div>
     </form>
