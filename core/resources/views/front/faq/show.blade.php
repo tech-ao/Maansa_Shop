@@ -731,7 +731,7 @@
                     <span>{{ __('All Categories') }}</span>
                 </a>
                 @foreach($allCategories as $cat)
-                    <a href="{{ route('front.faq.show', $cat->slug) }}" class="faq-cat-pill-item {{ $cat->id == $category->id ? 'active' : '' }}">
+                    <a href="{{ route('front.faq.details', $cat->slug) }}" class="faq-cat-pill-item {{ (isset($category) && $cat->id == $category->id) ? 'active' : '' }}">
                         <span>{{ $cat->name }}</span>
                         <span class="badge-count">{{ $cat->faqs_count ?? count($cat->faqs) }}</span>
                     </a>

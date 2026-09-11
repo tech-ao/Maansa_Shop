@@ -380,7 +380,13 @@ class FrontendController extends Controller
         if (Setting::first()->is_faq == 0) {
             return back();
         }
-        $category =  Fcategory::whereSlug($slug)->first();
+        $category = Fcategory::whereSlug($slug)->first();
+        if (!$category) {
+            $category = Fcategory::where('slug', 'LIKE', rtrim($slug, '-') . '%')->first();
+        }
+        if (!$category) {
+            return redirect()->route('front.faq');
+        }
         return view('front.faq.show', ['category' => $category]);
     }
 
