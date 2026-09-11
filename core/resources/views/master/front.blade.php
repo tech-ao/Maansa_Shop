@@ -61,6 +61,45 @@
     @endif
     <style>
         {{ $setting->custom_css }}
+
+        @media print {
+            header,
+            footer,
+            nav,
+            aside,
+            .site-header,
+            .site-footer,
+            .top-header,
+            .menu-top-area,
+            .main-menu,
+            .mobile-menu,
+            .mobile-menu-wrapper,
+            #announcement-modal,
+            .announcement-banner,
+            .announcement-with-content,
+            .mfp-hide,
+            .mfp-bg,
+            .mfp-wrap,
+            .modal,
+            .modal-backdrop,
+            .cookie-consent-modal,
+            .cookie-alert,
+            #cookie-alert,
+            .scroll-to-top-btn,
+            .sidebar-toggle,
+            .whatsapp-btn,
+            .floating-btn,
+            #preloader {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                height: 0 !important;
+                width: 0 !important;
+                overflow: hidden !important;
+                position: absolute !important;
+                left: -9999px !important;
+            }
+        }
     </style>
     {{-- Google AdSense Start --}}
     @if ($setting->is_google_adsense == '1')

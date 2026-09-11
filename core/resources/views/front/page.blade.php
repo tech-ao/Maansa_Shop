@@ -505,25 +505,69 @@
 
     /* Print Optimization */
     @media print {
+        @page {
+            margin: 1.5cm;
+            size: auto;
+        }
+
+        body, html, .custom-page-wrapper {
+            background: #ffffff !important;
+            color: #000000 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            min-height: auto !important;
+        }
+
         .site-header,
         .site-footer,
         .custom-page-hero::before,
         .custom-page-hero::after,
         .hero-print-btn,
+        .hero-meta-bar,
         .page-support-card,
-        .custom-breadcrumb-pill {
+        .custom-breadcrumb-pill,
+        #announcement-modal,
+        .announcement-banner,
+        .announcement-with-content,
+        .mfp-hide,
+        .mfp-bg,
+        .mfp-wrap,
+        .cookie-consent-modal,
+        .cookie-alert,
+        #cookie-alert,
+        .scroll-to-top-btn,
+        .sidebar-toggle,
+        .whatsapp-btn,
+        .floating-btn,
+        #preloader {
             display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
         }
 
         .custom-page-hero {
             background: none !important;
             color: #000000 !important;
-            padding: 0 0 20px 0 !important;
+            padding: 0 0 16px 0 !important;
+            border-bottom: 2px solid #333333 !important;
+            margin-bottom: 20px !important;
+        }
+
+        .hero-inner-content {
+            max-width: 100% !important;
+            margin: 0 !important;
         }
 
         .hero-page-title {
             color: #000000 !important;
-            font-size: 24px !important;
+            font-size: 22pt !important;
+            font-weight: 700 !important;
+            margin: 0 !important;
+            text-shadow: none !important;
         }
 
         .custom-page-container {
@@ -536,6 +580,27 @@
             box-shadow: none !important;
             border: none !important;
             padding: 0 !important;
+            background: transparent !important;
+        }
+
+        .custom-page-article {
+            font-size: 11pt !important;
+            line-height: 1.6 !important;
+            color: #111111 !important;
+        }
+
+        .custom-page-article p,
+        .custom-page-article li {
+            color: #111111 !important;
+            font-size: 11pt !important;
+        }
+
+        .custom-page-article h1,
+        .custom-page-article h2,
+        .custom-page-article h3,
+        .custom-page-article h4 {
+            color: #000000 !important;
+            page-break-after: avoid;
         }
     }
 </style>
