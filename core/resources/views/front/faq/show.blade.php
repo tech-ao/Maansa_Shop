@@ -143,7 +143,7 @@
         color: #ffffff;
     }
 
-    /* Main Accordion Container */
+    /* Main Container Overlap */
     .faq-accordion-container {
         max-width: 960px;
         margin: -48px auto 0 auto;
@@ -152,33 +152,42 @@
         padding: 0 16px;
     }
 
-    /* Modern Accordion Items */
-    .modern-accordion-item {
+    /* Suppress default Bootstrap & Theme pseudo arrows */
+    .faq-accordion-container [data-toggle="collapse"]::before,
+    .faq-accordion-container [data-toggle="collapse"]::after,
+    .modern-faq-btn::before,
+    .modern-faq-btn::after {
+        content: none !important;
+        display: none !important;
+    }
+
+    /* Modern Accordion Cards */
+    .modern-faq-card {
         background: #ffffff;
         border-radius: 18px;
         border: 1px solid #edf2f7;
-        box-shadow: 0 14px 30px -10px rgba(6, 78, 59, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-        margin-bottom: 18px;
+        box-shadow: 0 10px 25px -8px rgba(6, 78, 59, 0.06), 0 1px 2px rgba(0, 0, 0, 0.03);
+        margin-bottom: 16px;
         overflow: hidden;
         transition: all 0.25s ease;
     }
 
-    .modern-accordion-item:hover {
+    .modern-faq-card:hover {
         border-color: #bbf7d0;
-        box-shadow: 0 18px 36px -10px rgba(6, 78, 59, 0.1);
+        box-shadow: 0 16px 32px -8px rgba(6, 78, 59, 0.1);
     }
 
-    .modern-accordion-header {
+    .modern-faq-header {
         margin: 0;
         padding: 0;
     }
 
-    .modern-accordion-btn {
+    .modern-faq-btn {
         width: 100%;
         background: #ffffff;
         border: none;
-        outline: none;
-        padding: 22px 26px;
+        outline: none !important;
+        padding: 20px 24px;
         text-align: left;
         display: flex;
         align-items: center;
@@ -189,39 +198,45 @@
         transition: all 0.2s ease;
     }
 
-    .modern-accordion-btn .question-title {
-        font-size: 16.5px;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0;
-        line-height: 1.45;
+    .faq-q-left {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
+        flex: 1;
     }
 
-    .modern-accordion-btn .question-icon {
+    .faq-q-badge {
         width: 32px;
         height: 32px;
         min-width: 32px;
         border-radius: 10px;
         background: #f0fdf4;
         color: #059669;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         font-size: 14px;
         font-weight: 800;
+        transition: all 0.2s ease;
     }
 
-    .modern-accordion-btn .chevron-indicator {
+    .faq-q-text {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.45;
+        margin: 0;
+        transition: color 0.2s ease;
+    }
+
+    .faq-arrow-circle {
         width: 32px;
         height: 32px;
         min-width: 32px;
         border-radius: 50%;
         background: #f8fafc;
         border: 1px solid #e2e8f0;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         color: #64748b;
@@ -229,41 +244,44 @@
         transition: all 0.25s ease;
     }
 
-    /* Active / Expanded Accordion State */
-    .modern-accordion-btn[aria-expanded="true"] {
+    /* Active / Expanded State */
+    .modern-faq-btn[aria-expanded="true"]:not(.collapsed) {
         background: #f0fdf4;
         border-bottom: 1.5px solid #dcfce7;
     }
 
-    .modern-accordion-btn[aria-expanded="true"] .question-title {
-        color: #064e3b;
-    }
-
-    .modern-accordion-btn[aria-expanded="true"] .question-icon {
+    .modern-faq-btn[aria-expanded="true"]:not(.collapsed) .faq-q-badge {
         background: #059669;
         color: #ffffff;
     }
 
-    .modern-accordion-btn[aria-expanded="true"] .chevron-indicator {
+    .modern-faq-btn[aria-expanded="true"]:not(.collapsed) .faq-q-text {
+        color: #064e3b;
+    }
+
+    .modern-faq-btn[aria-expanded="true"]:not(.collapsed) .faq-arrow-circle {
         background: #059669;
         color: #ffffff;
         border-color: #059669;
         transform: rotate(180deg);
     }
 
-    .modern-accordion-body {
-        padding: 24px 28px 28px 28px;
+    .modern-faq-answer {
+        padding: 22px 26px 26px 26px;
         background: #ffffff;
+    }
+
+    .faq-answer-inner {
         font-size: 15px;
         line-height: 1.8;
         color: #334155;
     }
 
-    .modern-accordion-body p:last-child {
+    .faq-answer-inner p:last-child {
         margin-bottom: 0;
     }
 
-    /* Empty FAQs State */
+    /* Empty State */
     .empty-faq-card {
         background: #ffffff;
         border-radius: 20px;
@@ -299,7 +317,7 @@
         margin-bottom: 24px;
     }
 
-    /* Navigation & Support Actions */
+    /* Navigation & Support */
     .faq-nav-card {
         margin-top: 35px;
         padding: 24px 28px;
@@ -395,31 +413,33 @@
             padding: 0 12px;
         }
 
-        .modern-accordion-btn {
-            padding: 18px 16px;
+        .modern-faq-btn {
+            padding: 16px 14px;
         }
 
-        .modern-accordion-btn .question-title {
-            font-size: 15px;
-            gap: 10px;
+        .faq-q-text {
+            font-size: 14.5px;
         }
 
-        .modern-accordion-btn .question-icon {
+        .faq-q-badge {
             width: 28px;
             height: 28px;
             min-width: 28px;
             font-size: 12px;
         }
 
-        .modern-accordion-btn .chevron-indicator {
+        .faq-arrow-circle {
             width: 28px;
             height: 28px;
             min-width: 28px;
             font-size: 11px;
         }
 
-        .modern-accordion-body {
-            padding: 18px 18px 22px 18px;
+        .modern-faq-answer {
+            padding: 16px 16px 20px 16px;
+        }
+
+        .faq-answer-inner {
             font-size: 14px;
             line-height: 1.7;
         }
@@ -427,7 +447,7 @@
         .faq-nav-card {
             flex-direction: column;
             align-items: stretch;
-            padding: 20px 16px;
+            padding: 18px 14px;
         }
 
         .btn-back-categories,
@@ -477,31 +497,33 @@
     <!-- Main Accordion List Container -->
     <div class="faq-accordion-container">
         @if(count($category->faqs) > 0)
-            <div class="accordion" id="faqAccordion">
+            <div id="faqAccordion">
                 @foreach ($category->faqs as $key => $faq)
-                    <div class="modern-accordion-item">
-                        <div class="modern-accordion-header" id="heading{{ $key }}">
-                            <a class="modern-accordion-btn {{ $key == 0 ? '' : 'collapsed' }}"
-                               data-toggle="collapse"
-                               href="#collapse{{ $key }}"
-                               role="button"
-                               aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
-                               aria-controls="collapse{{ $key }}">
-                                <h6 class="question-title">
-                                    <span class="question-icon">Q</span>
-                                    <span>{{ $faq->title }}</span>
-                                </h6>
-                                <span class="chevron-indicator">
+                    <div class="modern-faq-card">
+                        <div class="modern-faq-header" id="heading{{ $key }}">
+                            <button class="modern-faq-btn {{ $key == 0 ? '' : 'collapsed' }}"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapse{{ $key }}"
+                                    aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
+                                    aria-controls="collapse{{ $key }}">
+                                <div class="faq-q-left">
+                                    <span class="faq-q-badge">Q</span>
+                                    <h6 class="faq-q-text">{{ $faq->title }}</h6>
+                                </div>
+                                <span class="faq-arrow-circle">
                                     <i class="icon-chevron-down"></i>
                                 </span>
-                            </a>
+                            </button>
                         </div>
                         <div id="collapse{{ $key }}"
                              class="collapse {{ $key == 0 ? 'show' : '' }}"
                              aria-labelledby="heading{{ $key }}"
                              data-parent="#faqAccordion">
-                            <div class="modern-accordion-body">
-                                {!! nl2br(e($faq->details)) !!}
+                            <div class="modern-faq-answer">
+                                <div class="faq-answer-inner">
+                                    {!! nl2br(e($faq->details)) !!}
+                                </div>
                             </div>
                         </div>
                     </div>
