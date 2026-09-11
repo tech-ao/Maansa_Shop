@@ -98,26 +98,36 @@ class PageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int|Page  $id
+     * @param  int|Page|null  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id = null)
     {
-        $page = ($id instanceof Page) ? $id : Page::findOrFail($id);
-        $page->delete();
-        return redirect()->route('back.page.index')->withSuccess(__('Page Deleted Successfully.'));
+        $pageId = $id ?? request('id') ?? request('page_id') ?? request('page');
+        if ($pageId instanceof Page) {
+            $page = $pageId;
+        } elseif ($pageId) {
+            $page = Page::find($pageId);
+        } else {
+            $page = null;
+        }
+
+        if ($page) {
+            $page->delete();
+            return redirect()->route('back.page.index')->withSuccess(__('Page Deleted Successfully.'));
+        }
+
+        return redirect()->route('back.page.index')->withErrors(__('Page not found or unable to delete.'));
     }
 
     /**
      * Delete page fallback route.
      *
-     * @param  int|Page  $id
+     * @param  int|Page|null  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function delete($id = null)
     {
-        $page = ($id instanceof Page) ? $id : Page::findOrFail($id);
-        $page->delete();
-        return redirect()->route('back.page.index')->withSuccess(__('Page Deleted Successfully.'));
+        return $this->destroy($id);
     }
 }

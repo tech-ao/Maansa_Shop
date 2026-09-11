@@ -98,16 +98,24 @@
 
     $(document).on('click', '[data-target="#confirm-delete"], [data-toggle="modal"][data-target="#confirm-delete"]', function () {
         var href = $(this).attr('data-href') || $(this).data('href') || $(this).closest('[data-href]').attr('data-href') || $(this).closest('[data-href]').data('href');
+        var id = $(this).attr('data-id') || $(this).data('id') || $(this).closest('[data-id]').attr('data-id') || $(this).closest('[data-id]').data('id');
         if (href) {
             $('#confirm-delete').find('.btn-ok').attr('action', href);
+        }
+        if (id) {
+            $('#confirm-delete').find('[name="id"]').val(id);
         }
     });
 
     $(document).on('show.bs.modal', '#confirm-delete', function (e) {
         var related = $(e.relatedTarget);
         var href = related.attr('data-href') || related.data('href') || related.closest('[data-href]').attr('data-href') || related.closest('[data-href]').data('href');
+        var id = related.attr('data-id') || related.data('id') || related.closest('[data-id]').attr('data-id') || related.closest('[data-id]').data('id');
         if (href) {
             $(this).find('.btn-ok').attr('action', href);
+        }
+        if (id) {
+            $(this).find('[name="id"]').val(id);
         }
     });
 
@@ -958,16 +966,24 @@
 
     $(document).on('click', '[data-target="#confirm-delete"], [data-toggle="modal"][data-target="#confirm-delete"]', function () {
         var href = $(this).attr('data-href') || $(this).data('href') || $(this).closest('[data-href]').attr('data-href') || $(this).closest('[data-href]').data('href');
+        var id = $(this).attr('data-id') || $(this).data('id') || $(this).closest('[data-id]').attr('data-id') || $(this).closest('[data-id]').data('id');
         if (href) {
             $('#confirm-delete').find('.btn-ok').attr('action', href);
+        }
+        if (id) {
+            $('#confirm-delete').find('[name="id"]').val(id);
         }
     });
 
     $(document).on('show.bs.modal', '#confirm-delete', function (e) {
         var related = $(e.relatedTarget);
         var href = related.attr('data-href') || related.data('href') || related.closest('[data-href]').attr('data-href') || related.closest('[data-href]').data('href');
+        var id = related.attr('data-id') || related.data('id') || related.closest('[data-id]').attr('data-id') || related.closest('[data-id]').data('id');
         if (href) {
             $(this).find('.btn-ok').attr('action', href);
+        }
+        if (id) {
+            $(this).find('[name="id"]').val(id);
         }
     });
 

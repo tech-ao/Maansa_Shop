@@ -291,9 +291,9 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Custom JS -->
+    <script src="{{ asset('assets/back/js/custom.js') }}?v=3.0"></script>
 
     @yield('scripts')
-    <script src="{{ asset('assets/back/js/custom.js') }}?v=2.5"></script>
 
 </body>
 
