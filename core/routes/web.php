@@ -222,6 +222,8 @@ Route::group(['middleware' => ['adminlocalize', 'demo']], function () {
 
             //------------ PAGE ------------
             Route::get('page/pos/{id}/{pos}', 'Back\PageController@pos')->name('back.page.pos');
+            Route::delete('page/delete/{id}', 'Back\PageController@destroy')->name('back.page.destroy.custom');
+            Route::get('page/delete/{id}', 'Back\PageController@delete')->name('back.page.delete');
             Route::resource('page', 'Back\PageController', ['as' => 'back', 'except' => 'show']);
         });
 

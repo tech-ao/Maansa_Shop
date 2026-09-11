@@ -96,8 +96,19 @@
         }
     }
 
-    $('#confirm-delete').on('show.bs.modal', function (e) {
-        $(this).find('.btn-ok').attr('action', $(e.relatedTarget).data('href'));
+    $(document).on('click', '[data-target="#confirm-delete"], [data-toggle="modal"][data-target="#confirm-delete"]', function () {
+        var href = $(this).attr('data-href') || $(this).data('href') || $(this).closest('[data-href]').attr('data-href') || $(this).closest('[data-href]').data('href');
+        if (href) {
+            $('#confirm-delete').find('.btn-ok').attr('action', href);
+        }
+    });
+
+    $(document).on('show.bs.modal', '#confirm-delete', function (e) {
+        var related = $(e.relatedTarget);
+        var href = related.attr('data-href') || related.data('href') || related.closest('[data-href]').attr('data-href') || related.closest('[data-href]').data('href');
+        if (href) {
+            $(this).find('.btn-ok').attr('action', href);
+        }
     });
 
     $(document).on('show.bs.modal', '#statusModal', function (e) {
@@ -945,8 +956,19 @@
         }
     }
 
-    $('#confirm-delete').on('show.bs.modal', function (e) {
-        $(this).find('.btn-ok').attr('action', $(e.relatedTarget).data('href'));
+    $(document).on('click', '[data-target="#confirm-delete"], [data-toggle="modal"][data-target="#confirm-delete"]', function () {
+        var href = $(this).attr('data-href') || $(this).data('href') || $(this).closest('[data-href]').attr('data-href') || $(this).closest('[data-href]').data('href');
+        if (href) {
+            $('#confirm-delete').find('.btn-ok').attr('action', href);
+        }
+    });
+
+    $(document).on('show.bs.modal', '#confirm-delete', function (e) {
+        var related = $(e.relatedTarget);
+        var href = related.attr('data-href') || related.data('href') || related.closest('[data-href]').attr('data-href') || related.closest('[data-href]').data('href');
+        if (href) {
+            $(this).find('.btn-ok').attr('action', href);
+        }
     });
 
     $(document).on('show.bs.modal', '#statusModal', function (e) {

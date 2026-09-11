@@ -85,3 +85,31 @@
 {{-- DELETE MODAL ENDS --}}
 
 @endsection
+
+@section('scripts')
+<script>
+    $(document).on('click', '.btn-action-delete, [data-target="#confirm-delete"]', function(e) {
+        var href = $(this).attr('data-href') || $(this).data('href') || $(this).closest('[data-href]').attr('data-href');
+        if (href) {
+            $('#confirm-delete form.btn-ok').attr('action', href);
+        }
+    });
+
+    $('#confirm-delete').on('show.bs.modal', function (e) {
+        var related = $(e.relatedTarget);
+        var href = related.attr('data-href') || related.data('href') || related.closest('[data-href]').attr('data-href') || related.closest('[data-href]').data('href');
+        if (href) {
+            $(this).find('.btn-ok').attr('action', href);
+        }
+    });
+
+    $('#confirm-delete form.btn-ok').on('submit', function(e) {
+        var action = $(this).attr('action');
+        if (!action || action === '' || action === window.location.href) {
+            e.preventDefault();
+            console.error('Delete form action is missing or invalid.');
+            return false;
+        }
+    });
+</script>
+@endsection

@@ -52,7 +52,7 @@
                 </a>
                 <a class="btn-action-icon btn-action-delete" data-toggle="modal" data-target="#confirm-delete"
                     href="javascript:;" data-href="{{ route('back.page.destroy', [$data->id]) }}" title="{{ __('Delete Page') }}">
-                    <i class="fa-solid fa-trash-can"></i>
+                    <i class="fa-solid fa-trash-can" style="pointer-events: none;"></i>
                 </a>
             </div>
         </td>
