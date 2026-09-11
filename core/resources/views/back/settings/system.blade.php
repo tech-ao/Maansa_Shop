@@ -3,6 +3,39 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('assets/back/js/plugin/codemirror/codemirror.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/back/js/plugin/codemirror/monokai.css') }}">
+    <style>
+        .modern-input-box textarea.modern-input-textarea {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #0f172a;
+            background: #f8fafc;
+            transition: all 0.2s ease;
+            resize: vertical;
+            min-height: 70px;
+            line-height: 1.5;
+        }
+
+        .modern-input-box textarea.modern-input-textarea:focus {
+            background: #ffffff;
+            border-color: #059669;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+            outline: none;
+        }
+
+        .modern-input-box input[data-jscolor] {
+            padding-left: 54px !important;
+            height: 44px !important;
+            font-weight: 600 !important;
+        }
+
+        .modern-input-box.align-items-start .input-icon-prefix {
+            top: 15px;
+        }
+    </style>
 @endsection
 
 
@@ -110,8 +143,7 @@
                                                     <div class="modern-form-group">
                                                         <label for="primary_color">{{ __('Primary Theme Color Code') }} <span class="required-asterisk">*</span></label>
                                                         <div class="modern-input-box">
-                                                            <i class="fa-solid fa-eye-dropper input-icon-prefix"></i>
-                                                            <input type="text" data-jscolor="" name="primary_color" id="primary_color" placeholder="{{ __('e.g. #FF6A00') }}" value="{{ $setting->primary_color }}" required>
+                                                            <input type="text" data-jscolor="" name="primary_color" id="primary_color" placeholder="{{ __('e.g. #FF6A00') }}" value="{{ $setting->primary_color }}" required style="padding-left: 54px !important; font-weight: 600;">
                                                         </div>
                                                     </div>
 
@@ -859,22 +891,18 @@
                                             <div class="row mt-3">
                                                 <div class="col-md-6 mb-3">
                                                     <label for="policy_link" class="form-label font-weight-bold">{{ __('Privacy Policy URL') }} *</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fa-solid fa-shield-halved"></i></span>
-                                                        </div>
-                                                        <input type="text" name="policy_link" class="form-control" id="policy_link"
+                                                    <div class="modern-input-box">
+                                                        <i class="fa-solid fa-shield-halved input-icon-prefix text-primary"></i>
+                                                        <input type="text" name="policy_link" id="policy_link"
                                                             placeholder="{{ __('https://yourstore.com/privacy-policy') }}" value="{{ $setting->policy_link }}">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 mb-3">
                                                     <label for="terms_link" class="form-label font-weight-bold">{{ __('Terms of Service URL') }} *</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fa-solid fa-file-contract"></i></span>
-                                                        </div>
-                                                        <input type="text" name="terms_link" class="form-control" id="terms_link"
+                                                    <div class="modern-input-box">
+                                                        <i class="fa-solid fa-file-contract input-icon-prefix text-primary"></i>
+                                                        <input type="text" name="terms_link" id="terms_link"
                                                             placeholder="{{ __('https://yourstore.com/terms-and-conditions') }}" value="{{ $setting->terms_link }}">
                                                     </div>
                                                 </div>
@@ -911,33 +939,27 @@
                                                     <div class="row">
                                                         <div class="col-md-12 mb-3">
                                                             <label for="footer_address" class="form-label font-weight-bold">{{ __('Store Physical Address') }} *</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-location-dot text-danger"></i></span>
-                                                                </div>
-                                                                <input type="text" name="footer_address" class="form-control" id="footer_address"
+                                                            <div class="modern-input-box">
+                                                                <i class="fa-solid fa-location-dot input-icon-prefix text-danger"></i>
+                                                                <input type="text" name="footer_address" id="footer_address"
                                                                     placeholder="{{ __('123 Commerce Way, New York, NY') }}" value="{{ $setting->footer_address }}">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-6 mb-3">
                                                             <label for="footer_phone" class="form-label font-weight-bold">{{ __('Store Phone Number') }} *</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-phone text-success"></i></span>
-                                                                </div>
-                                                                <input type="text" name="footer_phone" class="form-control" id="footer_phone"
+                                                            <div class="modern-input-box">
+                                                                <i class="fa-solid fa-phone input-icon-prefix text-success"></i>
+                                                                <input type="text" name="footer_phone" id="footer_phone"
                                                                     placeholder="{{ __('+1 (555) 123-4567') }}" value="{{ $setting->footer_phone }}">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-6 mb-3">
                                                             <label for="footer_email" class="form-label font-weight-bold">{{ __('Store Support Email') }} *</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text bg-light"><i class="fa-solid fa-envelope text-primary"></i></span>
-                                                                </div>
-                                                                <input type="email" name="footer_email" class="form-control" id="footer_email"
+                                                            <div class="modern-input-box">
+                                                                <i class="fa-solid fa-envelope input-icon-prefix text-primary"></i>
+                                                                <input type="email" name="footer_email" id="footer_email"
                                                                     placeholder="{{ __('support@yourstore.com') }}" value="{{ $setting->footer_email }}">
                                                             </div>
                                                         </div>
@@ -964,11 +986,9 @@
 
                                                         <div class="col-12 mb-3">
                                                             <label for="copy_right" class="form-label font-weight-bold">{{ __('Footer Copyright Text') }} *</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="fa-regular fa-copyright"></i></span>
-                                                                </div>
-                                                                <textarea name="copy_right" id="copy_right" class="form-control" rows="2"
+                                                            <div class="modern-input-box align-items-start">
+                                                                <i class="fa-regular fa-copyright input-icon-prefix" style="top: 15px;"></i>
+                                                                <textarea name="copy_right" id="copy_right" class="modern-input-textarea" rows="2"
                                                                     placeholder="{{ __('© 2026 OmniMart. All Rights Reserved.') }}">{{ $setting->copy_right }}</textarea>
                                                             </div>
                                                         </div>
